@@ -20,22 +20,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm6.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A1-WenigerKrummeTouren/wenigerkrumm7.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Allgemeines.tex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation.tex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aufgaben412.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/bwinf41.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bwinf41.iml" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="Init">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Allgemeines.tex" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Allgemeines.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation.tex" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +36,9 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -77,6 +68,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
@@ -126,11 +122,23 @@
       <option name="presentableId" value="Default" />
       <updated>1672870160258</updated>
       <workItem from="1672870161630" duration="533000" />
-      <workItem from="1672870702704" duration="240000" />
+      <workItem from="1672870702704" duration="1647000" />
     </task>
+    <task id="LOCAL-00001" summary="Init">
+      <created>1672871021303</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672871021303</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Init" />
+    <option name="LAST_COMMIT_MESSAGE" value="Init" />
   </component>
 </project>
