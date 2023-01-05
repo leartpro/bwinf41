@@ -1,4 +1,20 @@
-0 0 45 30.9638 
-0 0 90 50.1944 
-45 90 0 11.3099 
-30.9638 50.1944 11.3099 0 
+Knoten 0: (0, 0)
+Kanten:
+  - Knoten 1: Winkel 0
+  - Knoten 2: Winkel 45
+  - Knoten 3: Winkel 30.9638
+Knoten 1: (100, 0)
+Kanten:
+  - Knoten 0: Winkel 180
+  - Knoten 2: Winkel 90
+  - Knoten 3: Winkel 50.1944
+Knoten 2: (100, 100)
+Kanten:
+  - Knoten 0: Winkel -135
+  - Knoten 1: Winkel -90
+  - Knoten 3: Winkel 11.3099
+Knoten 3: (200, 120)
+Kanten:
+  - Knoten 0: Winkel -149.036
+  - Knoten 1: Winkel -129.806
+  - Knoten 2: Winkel -168.69

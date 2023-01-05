@@ -1,26 +1,650 @@
-0 -111.612 -52.9978 -115.643 -56.4394 -102.349 -150.466 -166.766 -52.5694 -58.0071 -104.293 -156.001 -138.977 -84.8903 -131.804 -71.5164 167.186 -167.668 -116.581 174.894 -78.4163 -84.2128 -159.277 -141.955 -76.7343 -97.3818 
--111.612 0 19.5523 -132.272 36.7475 54.1339 144.29 108.001 25.1568 14.9263 57.8662 137.272 145.144 55.5387 122.945 11.7914 94.9626 123.251 125.358 97.5558 39.3947 19.3321 134.265 152.721 60.3649 51.4998 
--52.9978 19.5523 0 -154.49 133.798 177.414 175.775 156.218 123.601 -109.746 175.166 171.197 -178.671 147.524 179.958 -141.308 141.793 161.572 -166.299 145.248 165.647 -160.2 168.818 -178.087 134.816 172.426 
--115.643 -132.272 -154.49 0 39.2671 51.7103 124.076 95.2855 30.0363 22.1594 54.1044 119.437 116.301 53.5246 93.4841 21.4467 86.4484 109.189 67.5039 88.2156 41.7597 28.949 117.64 126.993 57.5157 50.2156 
--56.4394 36.7475 133.798 39.2671 0 -158.666 -175.842 162.306 -41.2257 -60.6175 -162.285 178.833 -168.09 160.843 -167.343 -93.8164 144.092 167.651 -150.078 148.532 -151.237 -122.326 175.994 -168.38 135.613 -161.742 
--102.349 54.1339 177.414 51.7103 -158.666 0 174.531 137.086 4.73035 -10.7891 121.063 166.584 -174.883 57.4106 -176.461 -26.004 114.762 150.105 -139.9 119.456 15.2449 -38.9798 162.593 -174.364 66.06 37.1913 
--150.466 144.29 175.775 124.076 -175.842 174.531 0 51.1179 -1.27445 -7.72 -3.74024 89.2166 -37.5744 10.5446 -15.6991 -12.7562 53.2377 77.7096 -32.6612 52.9047 -0.571606 -13.748 90.6122 -65.7629 18.513 -2.07055 
--166.766 108.001 156.218 95.2855 162.306 137.086 51.1179 0 -21.3584 -27.9341 -42.1897 -138.839 -104.705 -17.1068 -82.9273 -36.1938 56.689 -170.115 -74.2968 56.7266 -28.0438 -41.7831 -146.275 -114.393 -4.53258 -36.7403 
--52.5694 25.1568 123.601 30.0363 -41.2257 4.73035 -1.27445 -21.3584 0 -82.9751 -177.904 173.944 -175.065 152.123 -175.788 -123.558 143.224 163.908 -161.004 146.943 176.418 -148.107 171.437 -174.756 136.707 -179.904 
--58.0071 14.9263 -109.746 22.1594 -60.6175 -10.7891 -7.72 -27.9341 -82.9751 0 167.144 167.682 177.428 138.606 175.273 -154.741 137.874 157.986 -171.066 141.229 152.306 -170.686 165.321 178.339 127.809 163.291 
--104.293 57.8662 175.166 54.1044 -162.285 121.063 -3.74024 -42.1897 -177.904 167.144 0 168.092 -172.419 52.2111 -172.891 -27.9611 114.515 151.117 -135.616 119.39 9.00489 -40.9083 163.963 -172.255 62.8095 15.0456 
--156.001 137.272 171.197 119.437 178.833 166.584 89.2166 -138.839 173.944 167.682 168.092 0 -55.2626 3.89575 -30.6807 -17.8332 47.7615 72.2365 -40.9836 46.7613 -6.80521 -19.6886 93.2161 -76.0066 12.3512 -9.58447 
--138.977 145.144 -178.671 116.301 -168.09 -174.883 -37.5744 -104.705 -175.065 177.428 -172.419 -55.2626 0 21.5341 8.58602 -7.69803 68.5895 101.736 -29.8805 69.729 8.00401 -7.78203 119.559 -171.303 29.7248 8.41469 
--84.8903 55.5387 147.524 53.5246 160.843 57.4106 10.5446 -17.1068 152.123 138.606 52.2111 3.89575 21.5341 0 -154.624 -62.3585 137.267 169.721 -132.268 143.429 -67.3431 -83.66 -179.729 -159.889 83.8521 -116.223 
--131.804 122.945 179.958 93.4841 -167.343 -176.461 -15.6991 -82.9273 -175.788 175.273 -172.891 -30.6807 8.58602 -154.624 0 -11.4331 81.8706 123.458 -57.9664 84.4606 7.83558 -12.6182 143.029 -171.375 35.1764 8.34677 
--71.5164 11.7914 -141.308 21.4467 -93.8164 -26.004 -12.7562 -36.1938 -123.558 -154.741 -27.9611 -17.8332 -7.69803 -62.3585 -11.4331 0 128.794 151.455 -175.662 132.232 121.003 172.675 159.62 173.817 110.162 144.711 
-167.186 94.9626 141.793 86.4484 144.092 114.762 53.2377 56.689 143.224 137.874 114.515 47.7615 68.5895 137.267 81.8706 128.794 0 -143.756 -88.0201 -123.431 -48.4511 -58.553 -136.02 -117.429 -31.0208 -59.7504 
--167.668 123.251 161.572 109.189 167.651 150.105 77.7096 -170.115 163.908 157.986 151.117 72.2365 101.736 169.721 123.458 151.455 -143.756 0 -57.0105 32.8985 -19.9226 -32.1158 -114.643 -90.8397 -0.799526 -25.3202 
--116.581 125.358 -166.299 67.5039 -150.078 -139.9 -32.6612 -74.2968 -161.004 -171.066 -135.616 -40.9836 -29.8805 -132.268 -57.9664 -175.662 -88.0201 -57.0105 0 94.6303 30.3064 8.65641 135.492 158.218 54.0085 39.6237 
-174.894 97.5558 145.248 88.2156 148.532 119.456 52.9047 56.7266 146.943 141.229 119.39 46.7613 69.729 143.429 84.4606 132.232 -123.431 32.8985 94.6303 0 -43.7344 -54.8364 -137.542 -116.898 -24.1369 -54.7557 
--78.4163 39.3947 165.647 41.7597 -151.237 15.2449 -0.571606 -28.0438 176.418 152.306 9.00489 -6.80521 8.00401 -67.3431 7.83558 121.003 -48.4511 -19.9226 30.3064 -43.7344 0 -97.6444 169.947 -171.921 100.579 -173.547 
--84.2128 19.3321 -160.2 28.949 -122.326 -38.9798 -13.748 -41.7831 -148.107 -170.686 -40.9083 -19.6886 -7.78203 -83.66 -12.6182 172.675 -58.553 -32.1158 8.65641 -54.8364 -97.6444 0 157.374 174.046 93.1238 124.937 
--159.277 134.265 168.818 117.64 175.994 162.593 90.6122 -146.275 171.437 165.321 163.963 93.2161 119.559 -179.729 143.029 159.62 -136.02 -114.643 135.492 -137.542 169.947 157.374 0 -77.983 8.87286 -13.4366 
--141.955 152.721 -178.087 126.993 -168.38 -174.364 -65.7629 -114.393 -174.756 178.339 -172.255 -76.0066 -171.303 -159.889 -171.375 173.817 -117.429 -90.8397 158.218 -116.898 -171.921 174.046 -77.983 0 27.5927 8.45222 
--76.7343 60.3649 134.816 57.5157 135.613 66.06 18.513 -4.53258 136.707 127.809 62.8095 12.3512 29.7248 83.8521 35.1764 110.162 -31.0208 -0.799526 54.0085 -24.1369 100.579 93.1238 8.87286 27.5927 0 -108.431 
--97.3818 51.4998 172.426 50.2156 -161.742 37.1913 -2.07055 -36.7403 -179.904 163.291 15.0456 -9.58447 8.41469 -116.223 8.34677 144.711 -59.7504 -25.3202 39.6237 -54.7557 -173.547 124.937 -13.4366 8.45222 -108.431 0 
+Knoten 0: (20.2122, 156.013)
+Kanten:
+  - Knoten 1: Winkel -111.612
+  - Knoten 2: Winkel -52.9978
+  - Knoten 3: Winkel -115.643
+  - Knoten 4: Winkel -56.4394
+  - Knoten 5: Winkel -102.349
+  - Knoten 6: Winkel -150.466
+  - Knoten 7: Winkel -166.766
+  - Knoten 8: Winkel -52.5694
+  - Knoten 9: Winkel -58.0071
+  - Knoten 10: Winkel -104.293
+  - Knoten 11: Winkel -156.001
+  - Knoten 12: Winkel -138.977
+  - Knoten 13: Winkel -84.8903
+  - Knoten 14: Winkel -131.804
+  - Knoten 15: Winkel -71.5164
+  - Knoten 16: Winkel 167.186
+  - Knoten 17: Winkel -167.668
+  - Knoten 18: Winkel -116.581
+  - Knoten 19: Winkel 174.894
+  - Knoten 20: Winkel -78.4163
+  - Knoten 21: Winkel -84.2128
+  - Knoten 22: Winkel -159.277
+  - Knoten 23: Winkel -141.955
+  - Knoten 24: Winkel -76.7343
+Knoten 1: (-82.8641, -104.174)
+Kanten:
+  - Knoten 0: Winkel 68.3884
+  - Knoten 2: Winkel 19.5523
+  - Knoten 3: Winkel -132.272
+  - Knoten 4: Winkel 36.7475
+  - Knoten 5: Winkel 54.1339
+  - Knoten 6: Winkel 144.29
+  - Knoten 7: Winkel 108.001
+  - Knoten 8: Winkel 25.1568
+  - Knoten 9: Winkel 14.9263
+  - Knoten 10: Winkel 57.8662
+  - Knoten 11: Winkel 137.272
+  - Knoten 12: Winkel 145.144
+  - Knoten 13: Winkel 55.5387
+  - Knoten 14: Winkel 122.945
+  - Knoten 15: Winkel 11.7914
+  - Knoten 16: Winkel 94.9626
+  - Knoten 17: Winkel 123.251
+  - Knoten 18: Winkel 125.358
+  - Knoten 19: Winkel 97.5558
+  - Knoten 20: Winkel 39.3947
+  - Knoten 21: Winkel 19.3321
+  - Knoten 22: Winkel 134.265
+  - Knoten 23: Winkel 152.721
+  - Knoten 24: Winkel 60.3649
+Knoten 2: (153.13, -20.3609)
+Kanten:
+  - Knoten 0: Winkel 127.002
+  - Knoten 1: Winkel -160.448
+  - Knoten 3: Winkel -154.49
+  - Knoten 4: Winkel 133.798
+  - Knoten 5: Winkel 177.414
+  - Knoten 6: Winkel 175.775
+  - Knoten 7: Winkel 156.218
+  - Knoten 8: Winkel 123.601
+  - Knoten 9: Winkel -109.746
+  - Knoten 10: Winkel 175.166
+  - Knoten 11: Winkel 171.197
+  - Knoten 12: Winkel -178.671
+  - Knoten 13: Winkel 147.524
+  - Knoten 14: Winkel 179.958
+  - Knoten 15: Winkel -141.308
+  - Knoten 16: Winkel 141.793
+  - Knoten 17: Winkel 161.572
+  - Knoten 18: Winkel -166.299
+  - Knoten 19: Winkel 145.248
+  - Knoten 20: Winkel 165.647
+  - Knoten 21: Winkel -160.2
+  - Knoten 22: Winkel 168.818
+  - Knoten 23: Winkel -178.087
+  - Knoten 24: Winkel 134.816
+Knoten 3: (-129.104, -155.042)
+Kanten:
+  - Knoten 0: Winkel 64.3575
+  - Knoten 1: Winkel 47.7284
+  - Knoten 2: Winkel 25.5102
+  - Knoten 4: Winkel 39.2671
+  - Knoten 5: Winkel 51.7103
+  - Knoten 6: Winkel 124.076
+  - Knoten 7: Winkel 95.2855
+  - Knoten 8: Winkel 30.0363
+  - Knoten 9: Winkel 22.1594
+  - Knoten 10: Winkel 54.1044
+  - Knoten 11: Winkel 119.437
+  - Knoten 12: Winkel 116.301
+  - Knoten 13: Winkel 53.5246
+  - Knoten 14: Winkel 93.4841
+  - Knoten 15: Winkel 21.4467
+  - Knoten 16: Winkel 86.4484
+  - Knoten 17: Winkel 109.189
+  - Knoten 18: Winkel 67.5039
+  - Knoten 19: Winkel 88.2156
+  - Knoten 20: Winkel 41.7597
+  - Knoten 21: Winkel 28.949
+  - Knoten 22: Winkel 117.64
+  - Knoten 23: Winkel 126.993
+  - Knoten 24: Winkel 57.5157
+Knoten 4: (101.499, 33.4842)
+Kanten:
+  - Knoten 0: Winkel 123.561
+  - Knoten 1: Winkel -143.252
+  - Knoten 2: Winkel -46.2023
+  - Knoten 3: Winkel -140.733
+  - Knoten 5: Winkel -158.666
+  - Knoten 6: Winkel -175.842
+  - Knoten 7: Winkel 162.306
+  - Knoten 8: Winkel -41.2257
+  - Knoten 9: Winkel -60.6175
+  - Knoten 10: Winkel -162.285
+  - Knoten 11: Winkel 178.833
+  - Knoten 12: Winkel -168.09
+  - Knoten 13: Winkel 160.843
+  - Knoten 14: Winkel -167.343
+  - Knoten 15: Winkel -93.8164
+  - Knoten 16: Winkel 144.092
+  - Knoten 17: Winkel 167.651
+  - Knoten 18: Winkel -150.078
+  - Knoten 19: Winkel 148.532
+  - Knoten 20: Winkel -151.237
+  - Knoten 21: Winkel -122.326
+  - Knoten 22: Winkel 175.994
+  - Knoten 23: Winkel -168.38
+  - Knoten 24: Winkel 135.613
+Knoten 5: (-16.7231, -12.6895)
+Kanten:
+  - Knoten 0: Winkel 77.6507
+  - Knoten 1: Winkel -125.866
+  - Knoten 2: Winkel -2.58599
+  - Knoten 3: Winkel -128.29
+  - Knoten 4: Winkel 21.334
+  - Knoten 6: Winkel 174.531
+  - Knoten 7: Winkel 137.086
+  - Knoten 8: Winkel 4.73035
+  - Knoten 9: Winkel -10.7891
+  - Knoten 10: Winkel 121.063
+  - Knoten 11: Winkel 166.584
+  - Knoten 12: Winkel -174.883
+  - Knoten 13: Winkel 57.4106
+  - Knoten 14: Winkel -176.461
+  - Knoten 15: Winkel -26.004
+  - Knoten 16: Winkel 114.762
+  - Knoten 17: Winkel 150.105
+  - Knoten 18: Winkel -139.9
+  - Knoten 19: Winkel 119.456
+  - Knoten 20: Winkel 15.2449
+  - Knoten 21: Winkel -38.9798
+  - Knoten 22: Winkel 162.593
+  - Knoten 23: Winkel -174.364
+  - Knoten 24: Winkel 66.06
+Knoten 6: (-239.848, 8.6714)
+Kanten:
+  - Knoten 0: Winkel 29.5345
+  - Knoten 1: Winkel -35.7097
+  - Knoten 2: Winkel -4.2252
+  - Knoten 3: Winkel -55.9236
+  - Knoten 4: Winkel 4.15757
+  - Knoten 5: Winkel -5.46856
+  - Knoten 7: Winkel 51.1179
+  - Knoten 8: Winkel -1.27445
+  - Knoten 9: Winkel -7.72
+  - Knoten 10: Winkel -3.74024
+  - Knoten 11: Winkel 89.2166
+  - Knoten 12: Winkel -37.5744
+  - Knoten 13: Winkel 10.5446
+  - Knoten 14: Winkel -15.6991
+  - Knoten 15: Winkel -12.7562
+  - Knoten 16: Winkel 53.2377
+  - Knoten 17: Winkel 77.7096
+  - Knoten 18: Winkel -32.6612
+  - Knoten 19: Winkel 52.9047
+  - Knoten 20: Winkel -0.571606
+  - Knoten 21: Winkel -13.748
+  - Knoten 22: Winkel 90.6122
+  - Knoten 23: Winkel -65.7629
+  - Knoten 24: Winkel 18.513
+Knoten 7: (-154.088, 115.023)
+Kanten:
+  - Knoten 0: Winkel 13.2339
+  - Knoten 1: Winkel -71.9992
+  - Knoten 2: Winkel -23.7819
+  - Knoten 3: Winkel -84.7145
+  - Knoten 4: Winkel -17.6939
+  - Knoten 5: Winkel -42.9144
+  - Knoten 6: Winkel -128.882
+  - Knoten 8: Winkel -21.3584
+  - Knoten 9: Winkel -27.9341
+  - Knoten 10: Winkel -42.1897
+  - Knoten 11: Winkel -138.839
+  - Knoten 12: Winkel -104.705
+  - Knoten 13: Winkel -17.1068
+  - Knoten 14: Winkel -82.9273
+  - Knoten 15: Winkel -36.1938
+  - Knoten 16: Winkel 56.689
+  - Knoten 17: Winkel -170.115
+  - Knoten 18: Winkel -74.2968
+  - Knoten 19: Winkel 56.7266
+  - Knoten 20: Winkel -28.0438
+  - Knoten 21: Winkel -41.7831
+  - Knoten 22: Winkel -146.275
+  - Knoten 23: Winkel -114.393
+  - Knoten 24: Winkel -4.53258
+Knoten 8: (139.447, 0.233238)
+Kanten:
+  - Knoten 0: Winkel 127.431
+  - Knoten 1: Winkel -154.843
+  - Knoten 2: Winkel -56.3986
+  - Knoten 3: Winkel -149.964
+  - Knoten 4: Winkel 138.774
+  - Knoten 5: Winkel -175.27
+  - Knoten 6: Winkel 178.726
+  - Knoten 7: Winkel 158.642
+  - Knoten 9: Winkel -82.9751
+  - Knoten 10: Winkel -177.904
+  - Knoten 11: Winkel 173.944
+  - Knoten 12: Winkel -175.065
+  - Knoten 13: Winkel 152.123
+  - Knoten 14: Winkel -175.788
+  - Knoten 15: Winkel -123.558
+  - Knoten 16: Winkel 143.224
+  - Knoten 17: Winkel 163.908
+  - Knoten 18: Winkel -161.004
+  - Knoten 19: Winkel 146.943
+  - Knoten 20: Winkel 176.418
+  - Knoten 21: Winkel -148.107
+  - Knoten 22: Winkel 171.437
+  - Knoten 23: Winkel -174.756
+  - Knoten 24: Winkel 136.707
+Knoten 9: (144.833, -43.4763)
+Kanten:
+  - Knoten 0: Winkel 121.993
+  - Knoten 1: Winkel -165.074
+  - Knoten 2: Winkel 70.2543
+  - Knoten 3: Winkel -157.841
+  - Knoten 4: Winkel 119.383
+  - Knoten 5: Winkel 169.211
+  - Knoten 6: Winkel 172.28
+  - Knoten 7: Winkel 152.066
+  - Knoten 8: Winkel 97.0249
+  - Knoten 10: Winkel 167.144
+  - Knoten 11: Winkel 167.682
+  - Knoten 12: Winkel 177.428
+  - Knoten 13: Winkel 138.606
+  - Knoten 14: Winkel 175.273
+  - Knoten 15: Winkel -154.741
+  - Knoten 16: Winkel 137.874
+  - Knoten 17: Winkel 157.986
+  - Knoten 18: Winkel -171.066
+  - Knoten 19: Winkel 141.229
+  - Knoten 20: Winkel 152.306
+  - Knoten 21: Winkel -170.686
+  - Knoten 22: Winkel 165.321
+  - Knoten 23: Winkel 178.339
+  - Knoten 24: Winkel 127.809
+Knoten 10: (-20.9712, -5.63711)
+Kanten:
+  - Knoten 0: Winkel 75.7069
+  - Knoten 1: Winkel -122.134
+  - Knoten 2: Winkel -4.83402
+  - Knoten 3: Winkel -125.896
+  - Knoten 4: Winkel 17.7153
+  - Knoten 5: Winkel -58.9371
+  - Knoten 6: Winkel 176.26
+  - Knoten 7: Winkel 137.81
+  - Knoten 8: Winkel 2.09575
+  - Knoten 9: Winkel -12.8557
+  - Knoten 11: Winkel 168.092
+  - Knoten 12: Winkel -172.419
+  - Knoten 13: Winkel 52.2111
+  - Knoten 14: Winkel -172.891
+  - Knoten 15: Winkel -27.9611
+  - Knoten 16: Winkel 114.515
+  - Knoten 17: Winkel 151.117
+  - Knoten 18: Winkel -135.616
+  - Knoten 19: Winkel 119.39
+  - Knoten 20: Winkel 9.00489
+  - Knoten 21: Winkel -40.9083
+  - Knoten 22: Winkel 163.963
+  - Knoten 23: Winkel -172.255
+  - Knoten 24: Winkel 62.8095
+Knoten 11: (-239.414, 40.4271)
+Kanten:
+  - Knoten 0: Winkel 23.9987
+  - Knoten 1: Winkel -42.7278
+  - Knoten 2: Winkel -8.80271
+  - Knoten 3: Winkel -60.5625
+  - Knoten 4: Winkel -1.16671
+  - Knoten 5: Winkel -13.4156
+  - Knoten 6: Winkel -90.7834
+  - Knoten 7: Winkel 41.1614
+  - Knoten 8: Winkel -6.05594
+  - Knoten 9: Winkel -12.3177
+  - Knoten 10: Winkel -11.9078
+  - Knoten 12: Winkel -55.2626
+  - Knoten 13: Winkel 3.89575
+  - Knoten 14: Winkel -30.6807
+  - Knoten 15: Winkel -17.8332
+  - Knoten 16: Winkel 47.7615
+  - Knoten 17: Winkel 72.2365
+  - Knoten 18: Winkel -40.9836
+  - Knoten 19: Winkel 46.7613
+  - Knoten 20: Winkel -6.80521
+  - Knoten 21: Winkel -19.6886
+  - Knoten 22: Winkel 93.2161
+  - Knoten 23: Winkel -76.0066
+  - Knoten 24: Winkel 12.3512
+Knoten 12: (-191.717, -28.3605)
+Kanten:
+  - Knoten 0: Winkel 41.0226
+  - Knoten 1: Winkel -34.8562
+  - Knoten 2: Winkel 1.32888
+  - Knoten 3: Winkel -63.699
+  - Knoten 4: Winkel 11.9102
+  - Knoten 5: Winkel 5.11727
+  - Knoten 6: Winkel 142.426
+  - Knoten 7: Winkel 75.2953
+  - Knoten 8: Winkel 4.93486
+  - Knoten 9: Winkel -2.57165
+  - Knoten 10: Winkel 7.58057
+  - Knoten 11: Winkel 124.737
+  - Knoten 13: Winkel 21.5341
+  - Knoten 14: Winkel 8.58602
+  - Knoten 15: Winkel -7.69803
+  - Knoten 16: Winkel 68.5895
+  - Knoten 17: Winkel 101.736
+  - Knoten 18: Winkel -29.8805
+  - Knoten 19: Winkel 69.729
+  - Knoten 20: Winkel 8.00401
+  - Knoten 21: Winkel -7.78203
+  - Knoten 22: Winkel 119.559
+  - Knoten 23: Winkel -171.303
+  - Knoten 24: Winkel 29.7248
+Knoten 13: (28.9137, 58.6999)
+Kanten:
+  - Knoten 0: Winkel 95.1097
+  - Knoten 1: Winkel -124.461
+  - Knoten 2: Winkel -32.4758
+  - Knoten 3: Winkel -126.475
+  - Knoten 4: Winkel -19.157
+  - Knoten 5: Winkel -122.589
+  - Knoten 6: Winkel -169.455
+  - Knoten 7: Winkel 162.893
+  - Knoten 8: Winkel -27.8767
+  - Knoten 9: Winkel -41.3944
+  - Knoten 10: Winkel -127.789
+  - Knoten 11: Winkel -176.104
+  - Knoten 12: Winkel -158.466
+  - Knoten 14: Winkel -154.624
+  - Knoten 15: Winkel -62.3585
+  - Knoten 16: Winkel 137.267
+  - Knoten 17: Winkel 169.721
+  - Knoten 18: Winkel -132.268
+  - Knoten 19: Winkel 143.429
+  - Knoten 20: Winkel -67.3431
+  - Knoten 21: Winkel -83.66
+  - Knoten 22: Winkel -179.729
+  - Knoten 23: Winkel -159.889
+  - Knoten 24: Winkel 83.8521
+Knoten 14: (-137.318, -20.1469)
+Kanten:
+  - Knoten 0: Winkel 48.1956
+  - Knoten 1: Winkel -57.0548
+  - Knoten 2: Winkel -0.0422094
+  - Knoten 3: Winkel -86.5159
+  - Knoten 4: Winkel 12.657
+  - Knoten 5: Winkel 3.53859
+  - Knoten 6: Winkel 164.301
+  - Knoten 7: Winkel 97.0727
+  - Knoten 8: Winkel 4.21151
+  - Knoten 9: Winkel -4.7267
+  - Knoten 10: Winkel 7.10879
+  - Knoten 11: Winkel 149.319
+  - Knoten 12: Winkel -171.414
+  - Knoten 13: Winkel 25.3759
+  - Knoten 15: Winkel -11.4331
+  - Knoten 16: Winkel 81.8706
+  - Knoten 17: Winkel 123.458
+  - Knoten 18: Winkel -57.9664
+  - Knoten 19: Winkel 84.4606
+  - Knoten 20: Winkel 7.83558
+  - Knoten 21: Winkel -12.6182
+  - Knoten 22: Winkel 143.029
+  - Knoten 23: Winkel -171.375
+  - Knoten 24: Winkel 35.1764
+Knoten 15: (94.7899, -67.0877)
+Kanten:
+  - Knoten 0: Winkel 108.484
+  - Knoten 1: Winkel -168.209
+  - Knoten 2: Winkel 38.6925
+  - Knoten 3: Winkel -158.553
+  - Knoten 4: Winkel 86.1836
+  - Knoten 5: Winkel 153.996
+  - Knoten 6: Winkel 167.244
+  - Knoten 7: Winkel 143.806
+  - Knoten 8: Winkel 56.442
+  - Knoten 9: Winkel 25.259
+  - Knoten 10: Winkel 152.039
+  - Knoten 11: Winkel 162.167
+  - Knoten 12: Winkel 172.302
+  - Knoten 13: Winkel 117.641
+  - Knoten 14: Winkel 168.567
+  - Knoten 16: Winkel 128.794
+  - Knoten 17: Winkel 151.455
+  - Knoten 18: Winkel -175.662
+  - Knoten 19: Winkel 132.232
+  - Knoten 20: Winkel 121.003
+  - Knoten 21: Winkel 172.675
+  - Knoten 22: Winkel 159.62
+  - Knoten 23: Winkel 173.817
+  - Knoten 24: Winkel 110.162
+Knoten 16: (-107.989, 185.174)
+Kanten:
+  - Knoten 0: Winkel -12.8144
+  - Knoten 1: Winkel -85.0374
+  - Knoten 2: Winkel -38.2074
+  - Knoten 3: Winkel -93.5516
+  - Knoten 4: Winkel -35.9082
+  - Knoten 5: Winkel -65.2383
+  - Knoten 6: Winkel -126.762
+  - Knoten 7: Winkel -123.311
+  - Knoten 8: Winkel -36.7755
+  - Knoten 9: Winkel -42.126
+  - Knoten 10: Winkel -65.4851
+  - Knoten 11: Winkel -132.239
+  - Knoten 12: Winkel -111.411
+  - Knoten 13: Winkel -42.7325
+  - Knoten 14: Winkel -98.1294
+  - Knoten 15: Winkel -51.2062
+  - Knoten 17: Winkel -143.756
+  - Knoten 18: Winkel -88.0201
+  - Knoten 19: Winkel -123.431
+  - Knoten 20: Winkel -48.4511
+  - Knoten 21: Winkel -58.553
+  - Knoten 22: Winkel -136.02
+  - Knoten 23: Winkel -117.429
+  - Knoten 24: Winkel -31.0208
+Knoten 17: (-219.149, 103.685)
+Kanten:
+  - Knoten 0: Winkel 12.3317
+  - Knoten 1: Winkel -56.7488
+  - Knoten 2: Winkel -18.4285
+  - Knoten 3: Winkel -70.8107
+  - Knoten 4: Winkel -12.3492
+  - Knoten 5: Winkel -29.8947
+  - Knoten 6: Winkel -102.29
+  - Knoten 7: Winkel 9.88497
+  - Knoten 8: Winkel -16.0925
+  - Knoten 9: Winkel -22.014
+  - Knoten 10: Winkel -28.8829
+  - Knoten 11: Winkel -107.763
+  - Knoten 12: Winkel -78.2641
+  - Knoten 13: Winkel -10.2787
+  - Knoten 14: Winkel -56.5424
+  - Knoten 15: Winkel -28.5449
+  - Knoten 16: Winkel 36.2441
+  - Knoten 18: Winkel -57.0105
+  - Knoten 19: Winkel 32.8985
+  - Knoten 20: Winkel -19.9226
+  - Knoten 21: Winkel -32.1158
+  - Knoten 22: Winkel -114.643
+  - Knoten 23: Winkel -90.8397
+  - Knoten 24: Winkel -0.799526
+Knoten 18: (-98.7604, -81.7706)
+Kanten:
+  - Knoten 0: Winkel 63.4194
+  - Knoten 1: Winkel -54.6419
+  - Knoten 2: Winkel 13.7012
+  - Knoten 3: Winkel -112.496
+  - Knoten 4: Winkel 29.9216
+  - Knoten 5: Winkel 40.0997
+  - Knoten 6: Winkel 147.339
+  - Knoten 7: Winkel 105.703
+  - Knoten 8: Winkel 18.9962
+  - Knoten 9: Winkel 8.93412
+  - Knoten 10: Winkel 44.3837
+  - Knoten 11: Winkel 139.016
+  - Knoten 12: Winkel 150.12
+  - Knoten 13: Winkel 47.7322
+  - Knoten 14: Winkel 122.034
+  - Knoten 15: Winkel 4.33821
+  - Knoten 16: Winkel 91.9799
+  - Knoten 17: Winkel 122.989
+  - Knoten 19: Winkel 94.6303
+  - Knoten 20: Winkel 30.3064
+  - Knoten 21: Winkel 8.65641
+  - Knoten 22: Winkel 135.492
+  - Knoten 23: Winkel 158.218
+  - Knoten 24: Winkel 54.0085
+Knoten 19: (-119.026, 168.454)
+Kanten:
+  - Knoten 0: Winkel -5.10557
+  - Knoten 1: Winkel -82.4442
+  - Knoten 2: Winkel -34.7518
+  - Knoten 3: Winkel -91.7844
+  - Knoten 4: Winkel -31.4682
+  - Knoten 5: Winkel -60.5438
+  - Knoten 6: Winkel -127.095
+  - Knoten 7: Winkel -123.273
+  - Knoten 8: Winkel -33.057
+  - Knoten 9: Winkel -38.7712
+  - Knoten 10: Winkel -60.61
+  - Knoten 11: Winkel -133.239
+  - Knoten 12: Winkel -110.271
+  - Knoten 13: Winkel -36.571
+  - Knoten 14: Winkel -95.5394
+  - Knoten 15: Winkel -47.7679
+  - Knoten 16: Winkel 56.5691
+  - Knoten 17: Winkel -147.101
+  - Knoten 18: Winkel -85.3697
+  - Knoten 20: Winkel -43.7344
+  - Knoten 21: Winkel -54.8364
+  - Knoten 22: Winkel -137.542
+  - Knoten 23: Winkel -116.898
+  - Knoten 24: Winkel -24.1369
+Knoten 20: (51.0081, 5.7696)
+Kanten:
+  - Knoten 0: Winkel 101.584
+  - Knoten 1: Winkel -140.605
+  - Knoten 2: Winkel -14.3526
+  - Knoten 3: Winkel -138.24
+  - Knoten 4: Winkel 28.7626
+  - Knoten 5: Winkel -164.755
+  - Knoten 6: Winkel 179.428
+  - Knoten 7: Winkel 151.956
+  - Knoten 8: Winkel -3.58211
+  - Knoten 9: Winkel -27.6937
+  - Knoten 10: Winkel -170.995
+  - Knoten 11: Winkel 173.195
+  - Knoten 12: Winkel -171.996
+  - Knoten 13: Winkel 112.657
+  - Knoten 14: Winkel -172.164
+  - Knoten 15: Winkel -58.9973
+  - Knoten 16: Winkel 131.549
+  - Knoten 17: Winkel 160.077
+  - Knoten 18: Winkel -149.694
+  - Knoten 19: Winkel 136.266
+  - Knoten 21: Winkel -97.6444
+  - Knoten 22: Winkel 169.947
+  - Knoten 23: Winkel -171.921
+  - Knoten 24: Winkel 100.579
+Knoten 21: (42.1378, -60.3199)
+Kanten:
+  - Knoten 0: Winkel 95.7872
+  - Knoten 1: Winkel -160.668
+  - Knoten 2: Winkel 19.7996
+  - Knoten 3: Winkel -151.051
+  - Knoten 4: Winkel 57.6736
+  - Knoten 5: Winkel 141.02
+  - Knoten 6: Winkel 166.252
+  - Knoten 7: Winkel 138.217
+  - Knoten 8: Winkel 31.893
+  - Knoten 9: Winkel 9.31446
+  - Knoten 10: Winkel 139.092
+  - Knoten 11: Winkel 160.311
+  - Knoten 12: Winkel 172.218
+  - Knoten 13: Winkel 96.34
+  - Knoten 14: Winkel 167.382
+  - Knoten 15: Winkel -7.32455
+  - Knoten 16: Winkel 121.447
+  - Knoten 17: Winkel 147.884
+  - Knoten 18: Winkel -171.344
+  - Knoten 19: Winkel 125.164
+  - Knoten 20: Winkel 82.3556
+  - Knoten 22: Winkel 157.374
+  - Knoten 23: Winkel 174.046
+  - Knoten 24: Winkel 93.1238
+Knoten 22: (-240.369, 57.4261)
+Kanten:
+  - Knoten 0: Winkel 20.7234
+  - Knoten 1: Winkel -45.7352
+  - Knoten 2: Winkel -11.1821
+  - Knoten 3: Winkel -62.3599
+  - Knoten 4: Winkel -4.00604
+  - Knoten 5: Winkel -17.4068
+  - Knoten 6: Winkel -89.3878
+  - Knoten 7: Winkel 33.725
+  - Knoten 8: Winkel -8.56329
+  - Knoten 9: Winkel -14.6786
+  - Knoten 10: Winkel -16.0366
+  - Knoten 11: Winkel -86.7839
+  - Knoten 12: Winkel -60.441
+  - Knoten 13: Winkel 0.271016
+  - Knoten 14: Winkel -36.9709
+  - Knoten 15: Winkel -20.3804
+  - Knoten 16: Winkel 43.9796
+  - Knoten 17: Winkel 65.3574
+  - Knoten 18: Winkel -44.5079
+  - Knoten 19: Winkel 42.4582
+  - Knoten 20: Winkel -10.0532
+  - Knoten 21: Winkel -22.6259
+  - Knoten 23: Winkel -77.983
+  - Knoten 24: Winkel 8.87286
+Knoten 23: (-221.15, -32.8625)
+Kanten:
+  - Knoten 0: Winkel 38.0447
+  - Knoten 1: Winkel -27.2792
+  - Knoten 2: Winkel 1.91307
+  - Knoten 3: Winkel -53.007
+  - Knoten 4: Winkel 11.6198
+  - Knoten 5: Winkel 5.63575
+  - Knoten 6: Winkel 114.237
+  - Knoten 7: Winkel 65.6072
+  - Knoten 8: Winkel 5.24395
+  - Knoten 9: Winkel -1.66115
+  - Knoten 10: Winkel 7.74503
+  - Knoten 11: Winkel 103.993
+  - Knoten 12: Winkel 8.69652
+  - Knoten 13: Winkel 20.1105
+  - Knoten 14: Winkel 8.62483
+  - Knoten 15: Winkel -6.18263
+  - Knoten 16: Winkel 62.5706
+  - Knoten 17: Winkel 89.1603
+  - Knoten 18: Winkel -21.7822
+  - Knoten 19: Winkel 63.1023
+  - Knoten 20: Winkel 8.07902
+  - Knoten 21: Winkel -5.95365
+  - Knoten 22: Winkel 102.017
+  - Knoten 24: Winkel 27.5927
+Knoten 24: (33.3797, 100.161)
+Kanten:
+  - Knoten 0: Winkel 103.266
+  - Knoten 1: Winkel -119.635
+  - Knoten 2: Winkel -45.184
+  - Knoten 3: Winkel -122.484
+  - Knoten 4: Winkel -44.3871
+  - Knoten 5: Winkel -113.94
+  - Knoten 6: Winkel -161.487
+  - Knoten 7: Winkel 175.467
+  - Knoten 8: Winkel -43.293
+  - Knoten 9: Winkel -52.1909
+  - Knoten 10: Winkel -117.191
+  - Knoten 11: Winkel -167.649
+  - Knoten 12: Winkel -150.275
+  - Knoten 13: Winkel -96.1479
+  - Knoten 14: Winkel -144.824
+  - Knoten 15: Winkel -69.8378
+  - Knoten 16: Winkel 148.979
+  - Knoten 17: Winkel 179.2
+  - Knoten 18: Winkel -125.992
+  - Knoten 19: Winkel 155.863
+  - Knoten 20: Winkel -79.4214
+  - Knoten 21: Winkel -86.8762
+  - Knoten 22: Winkel -171.127
+  - Knoten 23: Winkel -152.407

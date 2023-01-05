@@ -20,12 +20,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="Output V1">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/simplegraph.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/simplegraph2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien/simplegraph.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien/simplegraph2.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="Output V2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/simplegraph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/simplegraph.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/simplegraph2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/simplegraph2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm7.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +157,7 @@
       <updated>1672870160258</updated>
       <workItem from="1672870161630" duration="533000" />
       <workItem from="1672870702704" duration="5786000" />
-      <workItem from="1672912362671" duration="5854000" />
+      <workItem from="1672912362671" duration="7178000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -196,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672916942119</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Output V2">
+      <created>1672919418076</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672919418076</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +233,7 @@
     <MESSAGE value="V2 of the algorithm" />
     <MESSAGE value="V3 of the algorithm" />
     <MESSAGE value="Output V1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Output V1" />
+    <MESSAGE value="Output V2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Output V2" />
   </component>
 </project>

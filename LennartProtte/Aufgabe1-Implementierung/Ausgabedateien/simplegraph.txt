@@ -1,3 +1,12 @@
-0 0 45 
-0 0 90 
-45 90 0 
+Knoten 0: (0, 0)
+Kanten:
+  - Knoten 1: Winkel 0
+  - Knoten 2: Winkel 45
+Knoten 1: (100, 0)
+Kanten:
+  - Knoten 0: Winkel 180
+  - Knoten 2: Winkel 90
+Knoten 2: (100, 100)
+Kanten:
+  - Knoten 0: Winkel -135
+  - Knoten 1: Winkel -90
