@@ -1,88 +1,80 @@
 #include <iostream>
 #include <fstream>
-#include <filesystem>
-#include <string>
+#include <sstream>
+#include <vector>
 #include <cmath>
-#include <queue>
-#include <unordered_map>
 
-using namespace std;
+struct Node {
+    double x{};
+    double y{};
+    std::vector<std::pair<Node*, double>> edges;
+};
 
-double calculate_angle(pair<double, double> node1, pair<double, double> node2) {
-    double x1 = node1.first;
-    double y1 = node1.second;
-    double x2 = node2.first;
-    double y2 = node2.second;
-    double angle = atan2(y2 - y1, x2 - x1);
-    angle = angle * 180 / M_PI;
+double distance(Node* a, Node* b) {
+    double dx = a->x - b->x;
+    double dy = a->y - b->y;
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+double angle(Node* a, Node* b, Node* c) {
+    double dx1 = b->x - a->x;
+    double dy1 = b->y - a->y;
+    double dx2 = c->x - a->x;
+    double dy2 = c->y - a->y;
+    double dot = dx1 * dx2 + dy1 * dy2;
+    double det = dx1 * dy2 - dx2 * dy1;
+    double angle = std::atan2(det, dot) * 180 / M_PI;
     return angle;
 }
 
-vector<pair<pair<double, double>, vector<pair<int, double>>>> read_and_store_coordinates(
-        std::vector<std::pair<double, double>>& coordinate_list) {
-    vector<pair<pair<double, double>, vector<pair<int, double>>>> graph;
-    // Iteriere über jede Koordinate in der Liste
-    for (const auto & i : coordinate_list) {
-        // Splitte die Koordinaten in x und y
-        // Füge die Koordinate als Knoten zum Graphen hinzu
-        graph.push_back({{i.first, i.second}, {}});
-    }
-    // Iteriere über jeden Knoten im Graphen
-    for (int i = 0; i < graph.size(); i++) {
-        // Iteriere über jeden anderen Knoten im Graphen
-        for (int j = 0; j < graph.size(); j++) {
-            if (i == j) continue;
-            // Berechne den Winkel zwischen dem aktuellen Knoten und dem anderen Knoten
-            double angle = calculate_angle(graph[i].first, graph[j].first);
-            // Füge eine Kante von dem aktuellen Knoten zu dem anderen Knoten hinzu
-            graph[i].second.emplace_back(j, angle);
-        }
-    }
-    return graph;
-}
-
-
-void process_files(const std::string &input_dir, const std::string &output_dir) {
-    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
-    for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
-        // Dateiname und -pfad aus dem Iterator auslesen
-        std::string input_file = entry.path();
-        std::string output_file = output_dir + "/" + entry.path().filename().string();
-        // Eingabedatei öffnen
-        std::ifstream fin(input_file);
-        // Ausgabedatei öffnen
-        std::ofstream fout(output_file);
-        // Vector, um die Koordinaten zu speichern
-        std::vector<std::pair<double, double>> coordinate_list;
-        // Solange es noch Koordinaten in der Datei gibt
-        double x, y;
-        while (fin >> x >> y) {
-            coordinate_list.emplace_back(x, y);
-        }
-        auto graph = read_and_store_coordinates(coordinate_list);
-        // Graph in Ausgabedatei schreiben
-        for (int i = 0; i < graph.size(); i++) {
-            fout << "Knoten " << i << ": (" << graph[i].first.first << ", " << graph[i].first.second << ")" << endl;
-            fout << "Kanten:" << endl;
-            for (auto & j : graph[i].second) {
-                fout << "  - Knoten " << j.first << ": Winkel " << j.second << endl;
-            }
-        }
-        // Dateien schließen
-        fin.close();
-        fout.close();
-    }
-}
-
 int main() {
-    // Aktuelles Arbeitsverzeichnis ermitteln
-    std::string current_path = std::filesystem::current_path();
-    std::cout << "Aktuelles Arbeitsverzeichnis: " << current_path << std::endl;
-    // Pfade zu den Ordnern angeben
-    std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
-    std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
+    std::vector<Node> nodes;
 
-    process_files(input_dir, output_dir);
+    // Lies die Datei ein
+    std::ifstream file("../LennartProtte/Aufgabe1-Implementierung/Eingabedateien/simplegraph.txt");
+    std::string line;
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        Node node;
+        if (!(iss >> node.x >> node.y)) {
+            break; // Error beim Parsen der Koordinaten
+        }
+        nodes.push_back(node);
+    }
+
+    // Erstelle den Graphen
+    for (int i = 0; i < nodes.size(); i++) {
+        for (int j = i + 1; j < nodes.size(); j++) {
+            double dist = distance(&nodes[i], &nodes[j]);
+            nodes[i].edges.emplace_back(&nodes[j], dist);
+            nodes[j].edges.emplace_back(&nodes[i], dist);
+        }
+    }
+
+    // Berechne den Winkel an den Knoten
+    for (auto& node : nodes) {
+        for (auto& edge : node.edges) {
+            Node* other = edge.first;
+            double angleSum = 0;
+            for (auto& otherEdge : other->edges) {
+                if (otherEdge.first != &node) {
+                    angleSum += angle(&node, other, otherEdge.first);
+                }
+            }
+            edge.second = angleSum;
+        }
+    }
+
+    for (int i = 0; i < nodes.size(); i++) {
+        std::cout << "Knoten " << i << ": (" << nodes[i].x << ", " << nodes[i].y << ")" << std::endl;
+        std::cout << "Kanten:" << std::endl;
+        for (auto& edge : nodes[i].edges) {
+            int otherIndex = edge.first - &nodes[0];
+            double angle = edge.second;
+            std::cout << "  - Knoten " << otherIndex << ": Winkel " << angle << std::endl;
+        }
+    }
+
 
     return 0;
 }
