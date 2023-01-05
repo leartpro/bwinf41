@@ -12,6 +12,8 @@ struct Coordinate {
     double y;
 };
 
+unordered_map<int, int> cost_so_far;
+
 // Funktion, um den Winkel zwischen zwei Koordinaten in Grad zu berechnen
 double calculate_angle(Coordinate c1, Coordinate c2) {
     double x_diff = c2.x - c1.x;
@@ -24,7 +26,7 @@ vector<vector<double>> create_weighted_graph(vector<Coordinate> coordinate_list)
     int num_nodes = coordinate_list.size();
     vector<vector<double>> graph(num_nodes, vector<double>(num_nodes, 0));
     for (int i = 0; i < num_nodes; i++) {
-        for (int j = i+1; j < num_nodes; j++) {
+        for (int j = i + 1; j < num_nodes; j++) {
             double edge_weight = calculate_angle(coordinate_list[i], coordinate_list[j]);
             graph[i][j] = edge_weight;
             graph[j][i] = edge_weight;
@@ -41,22 +43,21 @@ struct State {
 
 // Vergleichsfunktion für States, um sie in der Prioritätswarteschlange sortieren zu können
 struct CompareState {
-    bool operator()(const State& s1, const State& s2) {
+    bool operator()(const State &s1, const State &s2) {
         return s1.cost > s2.cost;
     }
 };
 
 // Funktion, um den Weg durch den Graphen zu finden
-vector<int> find_path(vector<vector<double>>& graph, int start, int end) {
+vector<int> find_path(vector<vector<double>> &graph, int start, int end) {
     // Prioritätswarteschlange, um die Knoten nach Kosten sortiert zu speichern
     priority_queue<State, vector<State>, CompareState> pq;
     // Hash-Tabelle, um den günstigsten bisher gefundenen Kosten für jeden Knoten zu speichern
-    unordered_map<int, int> cost_so_far;
+
     // Hash-Tabelle, um den Vorgängerknoten für jeden Knoten zu speichern
     unordered_map<int, int> came_from;
     // Füge den Startknoten zur Prioritätswarteschlange hinzu
-    pq.push({start, 0});
-    //
+    pq.push({start});
     // Initialisiere die Kosten für den Startknoten auf 0
     cost_so_far[start] = 0;
     // Solange es noch Knoten in der Prioritätswarteschlange gibt
@@ -95,11 +96,6 @@ vector<int> find_path(vector<vector<double>>& graph, int start, int end) {
     path.push_back(start);
     // Kehre den Weg um, damit er von start nach end verläuft
     reverse(path.begin(), path.end());
-    // Wenn kein Weg gefunden wurde, gib eine leere Liste zurück
-    if (path.empty()) {
-        cout << "No path found" << endl;
-        return {};
-    }
     return path;
 }
 
@@ -110,26 +106,46 @@ int main() {
     vector<Coordinate> coordinate_list;
     // Solange es noch Koordinaten in der Datei gibt
     while (input_file.good()) {
-        Coordinate coord{};
+        Coordinate coord;
         // Lese die x- und y-Koordinate aus der Datei ein
         input_file >> coord.x >> coord.y;
         // Füge die Koordinate zur Liste hinzu
         coordinate_list.push_back(coord);
     }
     vector<vector<double>> graph = create_weighted_graph(coordinate_list);
-    // Frage den Benutzer nach dem Start- und Endknoten ab
-    int start, end;
-    cout << "Enter start node: ";
-    cin >> start;
-    cout << "Enter end node: ";
-    cin >> end;
-    vector<int> path = find_path(graph, start, end);
+    // Initialisiere den günstigsten Start- und Endknoten auf -1
+    int best_start = -1;
+    int best_end = -1;
+    int lowest_cost = INT_MAX;
+    // Durchlaufe alle möglichen Start-End-Kombinationen
+    for (int start = 0; start < graph.size(); start++) {
+        for (int end = 0; end < graph.size(); end++) {
+            // Wenn der Startknoten gleich dem Endknoten ist, überspringe diese Kombination
+            if (start == end) {
+                continue;
+            }
+            // Finde den Weg zwischen den beiden Knoten
+            vector<int> path = find_path(graph, start, end);
+            // Wenn ein Weg gefunden wurde und die Kosten kleiner als die bisher günstigsten sind, aktualisiere den Start- und Endknoten
+            if (!path.empty() && cost_so_far[end] < lowest_cost) {
+                best_start = start;
+                best_end = end;
+                lowest_cost = cost_so_far[end];
+            }
+        }
+    }
+    // Wenn kein Weg gefunden wurde, gib eine Fehlermeldung aus
+    if (best_start == -1 || best_end == -1) {
+        cout << "No path found" << endl;
+        return 1;
+    }
+    // Finde den Weg zwischen dem günstigsten Start- und Endknoten
+    vector<int> path = find_path(graph, best_start, best_end);
     // Drucke den gefundenen Weg aus
-    cout << "Path: ";
-    for (int node : path) {
+    cout << "Optimal path: ";
+    for (int node: path) {
         cout << node << " ";
     }
     cout << endl;
     return 0;
 }
-
