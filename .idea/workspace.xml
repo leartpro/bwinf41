@@ -20,8 +20,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V2 of the algorithm">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V3 of the algorithm">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm4.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm7.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +62,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
@@ -79,14 +88,14 @@
         <compiler-path />
         <compiler-arguments />
         <envs />
-        <main-file />
-        <aux-dir />
+        <main-file>/</main-file>
+        <aux-dir>/</aux-dir>
       </texify-bibtex>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
@@ -100,6 +109,27 @@
         <main-file />
         <work-dir />
       </texify-external>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file />
+        <output-path>{projectDir}/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>TEXLIVE</latex-distribution>
+        <has-been-run>false</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
       <method v="2" />
     </configuration>
     <configuration default="true" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
@@ -121,7 +151,8 @@
       <option name="presentableId" value="Default" />
       <updated>1672870160258</updated>
       <workItem from="1672870161630" duration="533000" />
-      <workItem from="1672870702704" duration="5081000" />
+      <workItem from="1672870702704" duration="5786000" />
+      <workItem from="1672912362671" duration="4358000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -151,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672878396376</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="V3 of the algorithm">
+      <created>1672882046629</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672882046629</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,10 +207,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Init" />
     <MESSAGE value="Init Latex and notes" />
     <MESSAGE value="V1 of the algorithm" />
     <MESSAGE value="V2 of the algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="V2 of the algorithm" />
+    <MESSAGE value="V3 of the algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="V3 of the algorithm" />
   </component>
 </project>

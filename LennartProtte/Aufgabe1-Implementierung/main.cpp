@@ -1,8 +1,10 @@
 #include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <string>
+#include <cmath>
 #include <queue>
 #include <unordered_map>
-#include <cmath>
-#include <fstream>
 
 using namespace std;
 
@@ -12,16 +14,15 @@ struct Coordinate {
     double y;
 };
 
-unordered_map<int, int> cost_so_far;
+// Funktionsprototyp
+void process_files(const std::string &input_dir, const std::string &output_dir);
 
-// Funktion, um den Winkel zwischen zwei Koordinaten in Grad zu berechnen
 double calculate_angle(Coordinate c1, Coordinate c2) {
     double x_diff = c2.x - c1.x;
     double y_diff = c2.y - c1.y;
     return atan2(y_diff, x_diff) * 180 / M_PI;
 }
 
-// Funktion, um den gewichteten Graphen in Matrixform zu erstellen
 vector<vector<double>> create_weighted_graph(vector<Coordinate> coordinate_list) {
     int num_nodes = coordinate_list.size();
     vector<vector<double>> graph(num_nodes, vector<double>(num_nodes, 0));
@@ -35,119 +36,49 @@ vector<vector<double>> create_weighted_graph(vector<Coordinate> coordinate_list)
     return graph;
 }
 
-// Struktur, um die Informationen über den aktuellen Zustand beim Durchlaufen des Graphen zu speichern
-struct State {
-    int node;
-    int cost;
-    State(int n, int c) : node(n), cost(c) {}
-};
-
-// Vergleichsfunktion für States, um sie in der Prioritätswarteschlange sortieren zu können
-struct CompareState {
-    bool operator()(const State &s1, const State &s2) {
-        return s1.cost < s2.cost;
-    }
-};
-
-// Funktion, um den Weg durch den Graphen zu finden
-vector<int> find_path(vector<vector<double>> &graph, int start, int end) {
-    // Prioritätswarteschlange, um die Knoten nach Kosten sortiert zu speichern
-    priority_queue<State, vector<State>, CompareState> pq;
-    // Hash-Tabelle, um den günstigsten bisher gefundenen Kosten für jeden Knoten zu speichern
-
-    // Hash-Tabelle, um den Vorgängerknoten für jeden Knoten zu speichern
-    unordered_map<int, int> came_from;
-    // Füge den Startknoten zur Prioritätswarteschlange hinzu
-    pq.emplace(start, 0);
-    // Initialisiere die Kosten für den Startknoten auf 0
-    cost_so_far[start] = 0;
-    // Solange es noch Knoten in der Prioritätswarteschlange gibt
-    while (!pq.empty()) {
-        // Hole den Knoten mit den geringsten Kosten aus der Warteschlange
-        State current = pq.top();
-        cost_so_far[current.node] = current.cost;
-        pq.pop();
-        // Wenn der aktuelle Knoten der Zielknoten ist, breche die Suche ab
-        if (current.node == end) {
-            break;
+void process_files(const std::string &input_dir, const std::string &output_dir) {
+    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
+    for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
+        // Dateiname und -pfad aus dem Iterator auslesen
+        std::string input_file = entry.path();
+        std::string output_file = output_dir + "/" + entry.path().filename().string();
+        // Eingabedatei öffnen
+        std::ifstream fin(input_file);
+        // Ausgabedatei öffnen
+        std::ofstream fout(output_file);
+        // Vector, um die Koordinaten zu speichern
+        vector<Coordinate> coordinate_list;
+        // Solange es noch Koordinaten in der Datei gibt
+        while (fin.good()) {
+            Coordinate coord{};
+            // Lese die x- und y-Koordinate aus der Datei ein
+            fin >> coord.x >> coord.y;
+            // Füge die Koordinate zur Liste hinzu
+            coordinate_list.push_back(coord);
         }
-        // Durchlaufe alle Nachbarknoten des aktuellen Knotens
-        for (int i = 0; i < graph.size(); i++) {
-            // Wenn es keine Kante zwischen den Knoten gibt oder das Kantengewicht größer als 90 ist, überspringe diesen Nachbarknoten
-            if (graph[current.node][i] == 0 || graph[current.node][i] > 90) {
-                continue;
-            }
-            // Berechne die Kosten, um zu diesem Nachbarknoten zu gelangen
-            int new_cost = cost_so_far[current.node] + graph[current.node][i];
-            // Wenn die bisherigen Kosten größer sind als die Kosten, um zu diesem Knoten zu gelangen, aktualisiere die Kosten und merke den aktuellen Knoten als Vorgänger
-            if (!cost_so_far.count(i) || new_cost < cost_so_far[i]) {
-                cost_so_far[i] = new_cost;
-                came_from[i] = current.node;
-                // Füge den Knoten zur Prioritätswarteschlange hinzu
-                pq.push({i, new_cost});
-            }
+        vector<vector<double>> graph = create_weighted_graph(coordinate_list);
+        // Graph in Ausgabedatei schreiben
+        for ( const auto &row : graph )
+        {
+            for ( const auto &s : row )
+                fout << s << ' ';
+            fout << std::endl;
         }
+        // Dateien schließen
+        fin.close();
+        fout.close();
     }
-    // Erstelle den Weg durch den Graphen, indem der Vorgängerknoten für jeden Knoten verfolgt wird
-    vector<int> path;
-    int current = end;
-    while (current != start) {
-        path.push_back(current);
-        current = came_from[current];
-    }
-    path.push_back(start);
-    // Kehre den Weg um, damit er von start nach end verläuft
-    reverse(path.begin(), path.end());
-    return path;
 }
 
 int main() {
-    // Öffne die Datei "coordinates.txt" zum Lesen
-    ifstream input_file("./Eingabedateien/wenigerkrumm1.txt");
-    // Vector, um die Koordinaten zu speichern
-    vector<Coordinate> coordinate_list;
-    // Solange es noch Koordinaten in der Datei gibt
-    while (input_file.good()) {
-        Coordinate coord{};
-        // Lese die x- und y-Koordinate aus der Datei ein
-        input_file >> coord.x >> coord.y;
-        // Füge die Koordinate zur Liste hinzu
-        coordinate_list.push_back(coord);
-    }
-    vector<vector<double>> graph = create_weighted_graph(coordinate_list);
-    // Initialisiere den günstigsten Start- und Endknoten auf -1
-    int best_start = -1;
-    int best_end = -1;
-    int lowest_cost = INT_MAX;
-    // Durchlaufe alle möglichen Start-End-Kombinationen
-    for (int start = 0; start < graph.size(); start++) {
-        for (int end = 0; end < graph.size(); end++) {
-            // Wenn der Startknoten gleich dem Endknoten ist, überspringe diese Kombination
-            if (start == end) {
-                continue;
-            }
-            // Finde den Weg zwischen den beiden Knoten
-            vector<int> path = find_path(graph, start, end);
-            // Wenn ein Weg gefunden wurde und die Kosten kleiner als die bisher günstigsten sind, aktualisiere den Start- und Endknoten
-            if (!path.empty() && cost_so_far[end] < lowest_cost) {
-                best_start = start;
-                best_end = end;
-                lowest_cost = cost_so_far[end];
-            }
-        }
-    }
-    // Wenn kein Weg gefunden wurde, gib eine Fehlermeldung aus
-    if (best_start == -1 || best_end == -1) {
-        cout << "No path found" << endl;
-        return 1;
-    }
-    // Finde den Weg zwischen dem günstigsten Start- und Endknoten
-    vector<int> path = find_path(graph, best_start, best_end);
-    // Drucke den gefundenen Weg aus
-    cout << "Optimal path: ";
-    for (int node: path) {
-        cout << node << " ";
-    }
-    cout << endl;
+    // Aktuelles Arbeitsverzeichnis ermitteln
+    std::string current_path = std::filesystem::current_path();
+    std::cout << "Aktuelles Arbeitsverzeichnis: " << current_path << std::endl;
+    // Pfade zu den Ordnern angeben
+    std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
+    std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
+
+    process_files(input_dir, output_dir);
+
     return 0;
 }
