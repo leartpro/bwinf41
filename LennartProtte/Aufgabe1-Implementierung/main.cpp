@@ -67,8 +67,17 @@ int main() {
 
     // Drucke den Graphen aus
     int numNodes = nodes.size();
+    std::cout << std::setw(10) << " ";
     for (int i = 0; i < numNodes; i++) {
-        std::cout << "(" << nodes[i].x << ", " << nodes[i].y << ")";
+        if(i == 0) {
+            std::cout << std::setw(10) << "(" << nodes[i].x << ", " << nodes[i].y << ")";
+        } else {
+            std::cout << std::setw(3) << "(" << nodes[i].x << ", " << nodes[i].y << ")";
+        }
+    }
+    std::cout << std::endl;
+    for (int i = 0; i < numNodes; i++) {
+        std::cout << std::setw(10) << "(" << nodes[i].x << ", " << nodes[i].y << ")";
         for (int j = 0; j < numNodes; j++) {
             double angle = 0;
             if (i != j) {
@@ -83,7 +92,6 @@ int main() {
         }
         std::cout << std::endl;
     }
-
     /*
     for (int i = 0; i < nodes.size(); i++) {
         std::cout << "Knoten " << i << ": (" << nodes[i].x << ", " << nodes[i].y << ")" << std::endl;
