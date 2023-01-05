@@ -39,12 +39,13 @@ vector<vector<double>> create_weighted_graph(vector<Coordinate> coordinate_list)
 struct State {
     int node;
     int cost;
+    State(int n, int c) : node(n), cost(c) {}
 };
 
 // Vergleichsfunktion für States, um sie in der Prioritätswarteschlange sortieren zu können
 struct CompareState {
     bool operator()(const State &s1, const State &s2) {
-        return s1.cost > s2.cost;
+        return s1.cost < s2.cost;
     }
 };
 
@@ -57,13 +58,14 @@ vector<int> find_path(vector<vector<double>> &graph, int start, int end) {
     // Hash-Tabelle, um den Vorgängerknoten für jeden Knoten zu speichern
     unordered_map<int, int> came_from;
     // Füge den Startknoten zur Prioritätswarteschlange hinzu
-    pq.push({start});
+    pq.emplace(start, 0);
     // Initialisiere die Kosten für den Startknoten auf 0
     cost_so_far[start] = 0;
     // Solange es noch Knoten in der Prioritätswarteschlange gibt
     while (!pq.empty()) {
         // Hole den Knoten mit den geringsten Kosten aus der Warteschlange
         State current = pq.top();
+        cost_so_far[current.node] = current.cost;
         pq.pop();
         // Wenn der aktuelle Knoten der Zielknoten ist, breche die Suche ab
         if (current.node == end) {
@@ -101,12 +103,12 @@ vector<int> find_path(vector<vector<double>> &graph, int start, int end) {
 
 int main() {
     // Öffne die Datei "coordinates.txt" zum Lesen
-    ifstream input_file("coordinates.txt");
+    ifstream input_file("./Eingabedateien/wenigerkrumm1.txt");
     // Vector, um die Koordinaten zu speichern
     vector<Coordinate> coordinate_list;
     // Solange es noch Koordinaten in der Datei gibt
     while (input_file.good()) {
-        Coordinate coord;
+        Coordinate coord{};
         // Lese die x- und y-Koordinate aus der Datei ein
         input_file >> coord.x >> coord.y;
         // Füge die Koordinate zur Liste hinzu
