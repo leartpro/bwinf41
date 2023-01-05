@@ -31,7 +31,7 @@ int main() {
     std::vector<Node> nodes;
 
     // Lies die Datei ein
-    std::ifstream file("../LennartProtte/Aufgabe1-Implementierung/Eingabedateien/simplegraph.txt");
+    std::ifstream file("../LennartProtte/Aufgabe1-Implementierung/Eingabedateien/wenigerkrumm1.txt");
     std::string line;
     while (std::getline(file, line)) {
         std::istringstream iss(line);
@@ -65,6 +65,26 @@ int main() {
         }
     }
 
+    // Drucke den Graphen aus
+    int numNodes = nodes.size();
+    for (int i = 0; i < numNodes; i++) {
+        std::cout << "(" << nodes[i].x << ", " << nodes[i].y << ")";
+        for (int j = 0; j < numNodes; j++) {
+            double angle = 0;
+            if (i != j) {
+                for (auto& edge : nodes[i].edges) {
+                    if (edge.first == &nodes[j]) {
+                        angle = edge.second;
+                        break;
+                    }
+                }
+            }
+            std::cout << std::setw(10) << angle;
+        }
+        std::cout << std::endl;
+    }
+
+    /*
     for (int i = 0; i < nodes.size(); i++) {
         std::cout << "Knoten " << i << ": (" << nodes[i].x << ", " << nodes[i].y << ")" << std::endl;
         std::cout << "Kanten:" << std::endl;
@@ -74,6 +94,7 @@ int main() {
             std::cout << "  - Knoten " << otherIndex << ": Winkel " << angle << std::endl;
         }
     }
+     */
 
 
     return 0;

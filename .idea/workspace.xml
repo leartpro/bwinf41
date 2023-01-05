@@ -20,7 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="Output V3">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="Output V4 (only Console)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
@@ -77,7 +77,7 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Debug.bwinf41">
+  <component name="RunManager" selected="CMake Application.bwinf41">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -160,7 +160,7 @@
       <updated>1672870160258</updated>
       <workItem from="1672870161630" duration="533000" />
       <workItem from="1672870702704" duration="5786000" />
-      <workItem from="1672912362671" duration="8961000" />
+      <workItem from="1672912362671" duration="11460000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -218,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672921400546</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Output V4 (only Console)">
+      <created>1672927130574</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1672927130574</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +252,7 @@
     <MESSAGE value="Output V1" />
     <MESSAGE value="Output V2" />
     <MESSAGE value="Output V3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Output V3" />
+    <MESSAGE value="Output V4 (only Console)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Output V4 (only Console)" />
   </component>
 </project>
