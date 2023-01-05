@@ -58,11 +58,11 @@ void process_files(const std::string &input_dir, const std::string &output_dir) 
         }
         vector<vector<double>> graph = create_weighted_graph(coordinate_list);
         // Graph in Ausgabedatei schreiben
-        for ( const auto &row : graph )
-        {
-            for ( const auto &s : row )
-                fout << s << ' ';
-            fout << std::endl;
+        for (auto & row : graph) {
+            for (double val : row) {
+                fout << val << ' ';
+            }
+            fout << endl;
         }
         // Dateien schließen
         fin.close();
