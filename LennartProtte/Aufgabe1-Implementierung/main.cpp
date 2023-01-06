@@ -86,31 +86,43 @@ int main() {
 
     // Drucke den Graphen
     for (const auto& node : graph) {
-        for (auto edge : node.edges) {
-            /*
-            // Ausgabe der ersten Kante
-            cout << "(" << node.x << "," << node.y << ")-" << edge->distance << "->(";
+        for (auto edge: node.edges) {
+            cout << "(" << node.x << "," << node.y << ") - " << edge->distance << " -> ";
+            // Finde den anderen Knoten
+            Node *otherNode;
             if (edge->node1 == &node) {
-                cout << edge->node2->x << "," << edge->node2->y << "): ";
+                otherNode = edge->node2;
             } else {
-                cout << edge->node1->x << "," << edge->node1->y << "): ";
+                otherNode = edge->node1;
             }
-             */
 
-            // Ausgabe der Kanten zu Kanten Beziehungen
-            for (auto [otherEdge, angle] : edge->edges) {
-                // Ausgabe der zweiten Kante
-                cout << "(" << otherEdge->node1->x << "," << otherEdge->node1->y << ")-" << otherEdge->distance << "->(";
-                if (otherEdge->node1 == edge->node1 || otherEdge->node1 == edge->node2) {
-                    cout << otherEdge->node2->x << "," << otherEdge->node2->y << "), " << angle << "° zu ";
-                } else {
-                    cout << otherEdge->node1->x << "," << otherEdge->node1->y << "), " << angle << "° zu ";
+            cout << "(" << otherNode->x << "," << otherNode->y << "): ";
+
+            // Drucke die Kanten, die in dieser Kante gespeichert sind
+            bool first = true;
+            for (auto [otherEdge, angle]: edge->edges) {
+                if (!first) {
+                    cout << ", ";
                 }
+                first = false;
+
+                cout << angle << "° zu ";
+
+                // Finde den anderen Knoten
+                Node *otherNode2;
+                if (otherEdge->node1 == &node || otherEdge->node1 == otherNode) {
+                    otherNode2 = otherEdge->node2;
+                } else {
+                    otherNode2 = otherEdge->node1;
+                }
+
+                cout << "(" << otherNode2->x << "," << otherNode2->y << ")";
             }
+
             cout << endl;
         }
     }
 
-    return 0;
+        return 0;
 }
 
