@@ -93,29 +93,20 @@ int main() {
     }
 
     // Drucke den Graphen
-    for (size_t i = 0; i < graph.size(); i++) {
-        Node n1 = graph[i];
-
-        for (auto n2 : graph) {
-            // Suche die Kante zwischen den Knoten n1 und n2
-            Edge* edge = nullptr;
-            for (auto e : n1.edges) {
-                if (find(n2.edges.begin(), n2.edges.end(), e) != n2.edges.end()) {
-                    edge = e;
-                    break;
+    for (auto node : graph) {
+        for (auto edge : node.edges) {
+            cout << "(" << node.x << "," << node.y << "): ";
+            for (auto [otherEdge, angle] : edge->edges) {
+                // Prüfe, ob otherEdge und edge den gleichen Knoten teilen
+                if (find(node.edges.begin(), node.edges.end(), otherEdge) != node.edges.end()) {
+                    cout << "Winkel zu Kante von " << "(" << otherEdge->distance << ", " << otherEdge->distance << "): " << angle << ", ";
                 }
             }
 
-            // Wenn es eine Kante zwischen den Knoten gibt, drucke das Kantengewicht
-            if (edge) {
-                cout << edge->distance << '\t';
-            } else {
-                cout << "0\t";
-            }
+            cout << endl;
         }
-
-        cout << endl;
     }
+
 
     return 0;
 }
