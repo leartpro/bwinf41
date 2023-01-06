@@ -20,8 +20,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V13">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V14">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/structs.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -162,7 +164,7 @@
       <workItem from="1672870161630" duration="533000" />
       <workItem from="1672870702704" duration="5786000" />
       <workItem from="1672912362671" duration="12327000" />
-      <workItem from="1673004531119" duration="18855000" />
+      <workItem from="1673004531119" duration="23705000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -283,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673031609150</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="V14">
+      <created>1673033340986</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1673033340986</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,6 +328,7 @@
     <MESSAGE value="V11" />
     <MESSAGE value="V12" />
     <MESSAGE value="V13" />
-    <option name="LAST_COMMIT_MESSAGE" value="V13" />
+    <MESSAGE value="V14" />
+    <option name="LAST_COMMIT_MESSAGE" value="V14" />
   </component>
 </project>

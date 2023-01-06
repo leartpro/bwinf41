@@ -3,20 +3,10 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include "structs.h"
+
 
 using namespace std;
-
-
-struct Edge {
-    double distance{};
-    vector<pair<Edge*, double>> edges;
-};
-
-struct Node {
-    double x{};
-    double y{};
-    vector<Edge*> edges;
-};
 
 // Berechnet den Abstand zwischen zwei Punkten (x1, y1) und (x2, y2)
 double distance(double x1, double y1, double x2, double y2) {
@@ -26,7 +16,7 @@ double distance(double x1, double y1, double x2, double y2) {
 
 int main() {
     // Öffne Datei zum Lesen
-    ifstream file("../LennartProtte/Aufgabe1-Implementierung/Eingabedateien/circlepath.txt");
+    ifstream file("../LennartProtte/Aufgabe1-Implementierung/Eingabedateien/simplegraph.txt");
     if (!file.is_open()) {
         cerr << "Datei konnte nicht geöffnet werden." << endl;
         return 1;
@@ -63,6 +53,8 @@ int main() {
 
             // Erstelle eine neue Kante
             Edge* edge = new Edge;
+            edge->node1 = &node1;
+            edge->node2 = &node2;
             edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
 
             // Füge die Kante dem ersten Knoten hinzu
@@ -76,12 +68,18 @@ int main() {
 
             // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
             for (Edge* otherEdge : node1.edges) {
-                edge->edges.emplace_back(otherEdge, angle - atan2(node1.y - otherEdge->y, node1.x - otherEdge->x));
+                if (otherEdge == edge) {
+                    continue;
+                }
+                edge->edges.emplace_back(otherEdge, angle - atan2(otherEdge->node2->y - node1.y, otherEdge->node2->x - node1.x));
             }
 
             // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
             for (Edge* otherEdge : node2.edges) {
-                edge->edges.emplace_back(otherEdge, angle - atan2(node2.y - otherEdge->y, node2.x - otherEdge->x));
+                if (otherEdge == edge) {
+                    continue;
+                }
+                edge->edges.emplace_back(otherEdge, angle - atan2(otherEdge->node1->y - node2.y, otherEdge->node1->x - node2.x));
             }
         }
     }
@@ -89,22 +87,30 @@ int main() {
     // Drucke den Graphen
     for (const auto& node : graph) {
         for (auto edge : node.edges) {
-            cout << "(" << node.x << "," << node.y << "): ";
-            cout << edge->edges.size() << " => ";
+            /*
+            // Ausgabe der ersten Kante
+            cout << "(" << node.x << "," << node.y << ")-" << edge->distance << "->(";
+            if (edge->node1 == &node) {
+                cout << edge->node2->x << "," << edge->node2->y << "): ";
+            } else {
+                cout << edge->node1->x << "," << edge->node1->y << "): ";
+            }
+             */
+
+            // Ausgabe der Kanten zu Kanten Beziehungen
             for (auto [otherEdge, angle] : edge->edges) {
-                // Suche den Knoten, zu dem die andere Kante geht (ungleich node)
-                Node otherNode;
-                for (auto n : graph) {
-                    if (find(n.edges.begin(), n.edges.end(), otherEdge) != n.edges.end() && n.x != node.x && n.y != node.y) {
-                        otherNode = n;
-                        break;
-                    }
+                // Ausgabe der zweiten Kante
+                cout << "(" << otherEdge->node1->x << "," << otherEdge->node1->y << ")-" << otherEdge->distance << "->(";
+                if (otherEdge->node1 == edge->node1 || otherEdge->node1 == edge->node2) {
+                    cout << otherEdge->node2->x << "," << otherEdge->node2->y << "), " << angle << "° zu ";
+                } else {
+                    cout << otherEdge->node1->x << "," << otherEdge->node1->y << "), " << angle << "° zu ";
                 }
-                cout << "(" << otherNode.x << "," << otherNode.y << "): " << angle << ", ";
             }
             cout << endl;
         }
     }
+
     return 0;
 }
 

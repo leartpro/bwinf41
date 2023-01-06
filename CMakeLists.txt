@@ -3,7 +3,7 @@ project(bwinf41)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(bwinf41 LennartProtte/Aufgabe1-Implementierung/main.cpp LennartProtte/Aufgabe1-Implementierung/main.h)
+add_executable(bwinf41 LennartProtte/Aufgabe1-Implementierung/main.cpp LennartProtte/Aufgabe1-Implementierung/main.h LennartProtte/Aufgabe1-Implementierung/structs.h)
 #[===[
 add_custom_command(
         TARGET ${/bwinf41} POST_BUILD
