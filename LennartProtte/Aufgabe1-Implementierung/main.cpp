@@ -24,12 +24,16 @@ bool openListEntryCompare(const OpenListEntry &lhs, const OpenListEntry &rhs) {
     return lhs.f < rhs.f;
 }
 
-// Berechnet den geschätzten Restweg (h-Wert) zwischen zwei Knoten
 double heuristic(const Node &from, const Node &to) {
-// Berechne die euklidische Distanz zwischen den beiden Knoten als Schätzung
-// für den Restweg. Es gibt jedoch auch andere Möglichkeiten, den h-Wert zu
-// berechnen, wie z.B. die Manhattan-Distanz oder die Diagonaldistanz.
-return std::sqrt(std::pow(from.x - to.x, 2) + std::pow(from.y - to.y, 2));
+    // Berechne die gewichtete Distanz zwischen den beiden Knoten als Schätzung
+    // für den Restweg.
+    double minDistance = std::numeric_limits<double>::max();
+    for (const auto &edge : from.edges) {
+        if (edge.first == &to) {
+            minDistance = std::min(minDistance, edge.second);
+        }
+    }
+    return minDistance;
 }
 
 std::vector<Node *> aStar(Node &start, Node &goal) {
@@ -37,60 +41,56 @@ std::vector<Node *> aStar(Node &start, Node &goal) {
     std::vector<OpenListEntry> openList; // die offene Liste des Algorithmus
     std::unordered_set<Node *> closedList; // die geschlossene Liste des Algorithmus
     // Füge den Startknoten in die offene Liste ein und initialisiere seine
-    // g- und f-Werte
-    openList.push_back({&start, 0, heuristic(start, goal), nullptr});
-    // Solange die offene Liste nicht leer ist, wiederhole:
+    // Eintrags-Werte.
+    openList.push_back({&start, 0.0, heuristic(start, goal), nullptr});
     while (!openList.empty()) {
-        // Suche den Eintrag in der offenen Liste mit dem kleinsten f-Wert
-        auto minIt = std::min_element(openList.begin(), openList.end(), openListEntryCompare);
-        // Entferne den Eintrag aus der offenen Liste und füge ihn zur geschlossenen Liste hinzu
-        Node *currentNode = minIt->node;
-        openList.erase(minIt);
-        closedList.insert(currentNode);
-
-        // Wenn der aktuelle Knoten das Ziel ist, ist der Pfad gefunden
-        if (currentNode == &goal) {
-            // Erstelle den Pfad, indem du den Vorgängerknoten jedes Knotens zurückverfolgst
-            while (currentNode != nullptr) {
-                path.push_back(currentNode);
-                currentNode = minIt->predecessor;
+        // Suche den Knoten mit dem geringsten f-Wert in der offenen Liste
+        auto currentIt = std::min_element(openList.begin(), openList.end(), openListEntryCompare);
+        OpenListEntry current = *currentIt;
+        openList.erase(currentIt);
+        closedList.insert(current.node);
+        // Wurde das Ziel erreicht?
+        if (current.node == &goal) {
+            // Baue den Pfad auf
+            path.push_back(current.node);
+            while (current.node != &start) {
+                path.push_back(current.predecessor);
+                current = *std::find_if(openList.begin(), openList.end(), [&](const OpenListEntry &entry) {
+                    return entry.node == current.predecessor;
+                });
             }
             // Kehre den Pfad um, damit er von Start zu Ziel verläuft
             std::reverse(path.begin(), path.end());
             return path;
         }
-        // Für jede ausgehende Kante des aktuellen Knotens:
-        for (const auto &edge: currentNode->edges) {
-            Node *successor = edge.first;
-            // Wenn der Nachfolgeknoten bereits in der geschlossenen Liste ist, ignoriere ihn
-            if (closedList.count(successor)) continue;
-            // Berechne den g-Wert des Nachfolgeknotens aus dem g-Wert des aktuellen Knotens und
-            // der Kosten der Kante zwischen ihnen
-            double tentativeG = minIt->g + heuristic(*currentNode, *successor);
-            // Wenn der Nachfolgeknoten noch nicht in der offenen Liste ist, füge ihn ein und
-            // initialisiere seine g- und f-Werte
-            bool isNewNode = true;
-            for (auto &entry: openList) {
-                if (entry.node == successor) {
-                    isNewNode = false;
-                    break;
-                }
-            }
-            if (isNewNode) {
-                openList.push_back({successor, tentativeG, tentativeG + heuristic(*successor, goal), currentNode});
-            } else {
-                // Wenn der Nachfolgeknoten bereits in der offenen Liste ist, überprüfe, ob der aktuelle
-                // Pfad zu ihm eine kürzere Gesamtlänge hat als der bisherige Pfad. Wenn ja, aktualisiere
-                // den Eintrag in der offenen Liste entsprechend.
-                for (auto &entry: openList) {
-                    if (entry.node == successor) {
-                        if (tentativeG < entry.g) {
-                            entry.g = tentativeG;
-                            entry.f = tentativeG + heuristic(*successor, goal);
-                            entry.predecessor = currentNode;
-                        }
-                        break;
+        // Für jeden Nachbarknoten des aktuellen Knotens...
+        for (const auto &edge: current.node->edges) {
+            Node *neighbor = edge.first;
+            // ..., der noch nicht in der geschlossenen Liste ist...
+            if (closedList.find(neighbor) == closedList.end()) {
+                // ..., berechne den tatsächlich zurückgelegten Weg...
+                double g = current.g + edge.second;
+                // ... und den geschätzten Restweg...
+                double h = heuristic(*neighbor, goal);
+                // ... und die f-Summe...
+                double f = g + h;
+                // ... und suche den Knoten in der offenen Liste...
+                auto openListNeighborIt = std::find_if(openList.begin(), openList.end(),
+                                                       [&](const OpenListEntry &entry) {
+                                                           return entry.node == neighbor;
+                                                       });
+                // ..., falls er dort enthalten ist.
+                if (openListNeighborIt != openList.end()) {
+                    OpenListEntry &openListNeighbor = *openListNeighborIt;
+                    // Wurde ein besserer Weg zu diesem Knoten gefunden?
+                    if (g < openListNeighbor.g) {
+                    // Aktualisiere den Eintrag in der offenen Liste
+                        openListNeighbor.g = g;
+                        openListNeighbor.f = f;
+                        openListNeighbor.predecessor = current.node;
                     }
+                } else {
+                    openList.push_back({neighbor, g, f, current.node});
                 }
             }
             // Wenn die offene Liste leer ist, konnte kein Pfad gefunden werden
