@@ -29,23 +29,20 @@ double heuristic(const Node &from, const Node &to) {
 // Berechne die euklidische Distanz zwischen den beiden Knoten als Schätzung
 // für den Restweg. Es gibt jedoch auch andere Möglichkeiten, den h-Wert zu
 // berechnen, wie z.B. die Manhattan-Distanz oder die Diagonaldistanz.
-    return std::sqrt(std::pow(from.x - to.x, 2) + std::pow(from.y - to.y, 2));
+return std::sqrt(std::pow(from.x - to.x, 2) + std::pow(from.y - to.y, 2));
 }
 
 std::vector<Node *> aStar(Node &start, Node &goal) {
     std::vector<Node *> path; // wird am Ende den Pfad vom Start zum Ziel enthalten
     std::vector<OpenListEntry> openList; // die offene Liste des Algorithmus
     std::unordered_set<Node *> closedList; // die geschlossene Liste des Algorithmus
-
     // Füge den Startknoten in die offene Liste ein und initialisiere seine
     // g- und f-Werte
     openList.push_back({&start, 0, heuristic(start, goal), nullptr});
-
     // Solange die offene Liste nicht leer ist, wiederhole:
     while (!openList.empty()) {
         // Suche den Eintrag in der offenen Liste mit dem kleinsten f-Wert
         auto minIt = std::min_element(openList.begin(), openList.end(), openListEntryCompare);
-
         // Entferne den Eintrag aus der offenen Liste und füge ihn zur geschlossenen Liste hinzu
         Node *currentNode = minIt->node;
         openList.erase(minIt);
@@ -62,17 +59,14 @@ std::vector<Node *> aStar(Node &start, Node &goal) {
             std::reverse(path.begin(), path.end());
             return path;
         }
-
         // Für jede ausgehende Kante des aktuellen Knotens:
         for (const auto &edge: currentNode->edges) {
             Node *successor = edge.first;
             // Wenn der Nachfolgeknoten bereits in der geschlossenen Liste ist, ignoriere ihn
             if (closedList.count(successor)) continue;
-
             // Berechne den g-Wert des Nachfolgeknotens aus dem g-Wert des aktuellen Knotens und
             // der Kosten der Kante zwischen ihnen
             double tentativeG = minIt->g + heuristic(*currentNode, *successor);
-
             // Wenn der Nachfolgeknoten noch nicht in der offenen Liste ist, füge ihn ein und
             // initialisiere seine g- und f-Werte
             bool isNewNode = true;
@@ -82,7 +76,6 @@ std::vector<Node *> aStar(Node &start, Node &goal) {
                     break;
                 }
             }
-
             if (isNewNode) {
                 openList.push_back({successor, tentativeG, tentativeG + heuristic(*successor, goal), currentNode});
             } else {
