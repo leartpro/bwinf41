@@ -23,25 +23,6 @@ double distance(double x1, double y1, double x2, double y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-// Berechnet den Winkel zwischen zwei Kanten, die den gleichen Knoten teilen
-double angle(const Node &node, const Edge *e1, const Edge *e2) {
-    // Berechne die x- und y-Differenzen zwischen den Koordinaten des Knotens und den Endpunkten der Kanten e1 und e2
-    double e1dx = e1->distance * cos(e1->angle) - node.x;
-    double e1dy = e1->distance * sin(e1->angle) - node.y;
-    double e2dx = e2->distance * cos(e2->angle) - node.x;
-    double e2dy = e2->distance * sin(e2->angle) - node.y;
-
-    // Berechne den Winkel zwischen den Kanten e1 und e2
-    double angle = atan2(e2dy, e2dx) - atan2(e1dy, e1dx);
-
-    // Konvertiere den Winkel in Grad
-    angle = angle * 180 / M_PI;
-    if (angle < 0) {
-        angle += 360;
-    }
-    return angle;
-}
-
 
 int main() {
     // Öffne Datei zum Lesen
@@ -71,30 +52,36 @@ int main() {
     // Schließe die Datei
     file.close();
 
-    // Erstelle Kanten zwischen allen Knoten im Graphen
-    for (size_t i = 0; i < graph.size(); i++) {
-        Node *n1 = &graph[i];
-        for (size_t j = i + 1; j < graph.size(); j++) {
-            Node *n2 = &graph[j];
-            // Erstelle eine neue Kante zwischen den Knoten n1 und n2
-            Edge *e = new Edge;
-            e->distance = distance(n1->x, n1->y, n2->x, n2->y);
-            // Füge die Kante den Kantenlisten der Knoten hinzu
-            n1->edges.push_back(e);
-            n2->edges.push_back(e);
-        }
-    }
+    // Generiere den Graphen
+    for (int i = 0; i < graph.size(); i++) {
+        Node& node1 = graph[i];
+        for (int j = 0; j < graph.size(); j++) {
+            if (i == j) {
+                continue;
+            }
+            Node& node2 = graph[j];
 
-    // Berechne Winkel zwischen allen Kanten, die den gleichen Knoten teilen
-    for (auto &node: graph) {
-        for (size_t i = 0; i < node.edges.size(); i++) {
-            Edge *e1 = node.edges[i];
-            for (size_t j = i + 1; j < node.edges.size(); j++) {
-                Edge *e2 = node.edges[j];
-                // Berechne den Winkel am gemeinsamen Knoten von e1 und e2 und speichere ihn in der Liste der Kanten von e1
-                e1->edges.emplace_back(e2, angle(node, e1, e2));
-                // Füge den Winkel auch in der Liste der Kanten von e2 hinzu
-                e2->edges.emplace_back(e1, angle(node, e1, e2));
+            // Erstelle eine neue Kante
+            Edge* edge = new Edge;
+            edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
+
+            // Füge die Kante dem ersten Knoten hinzu
+            node1.edges.push_back(edge);
+
+            // Füge die Kante auch dem zweiten Knoten hinzu
+            node2.edges.push_back(edge);
+
+            // Berechne den Winkel zwischen den beiden Kanten
+            double angle = atan2(node2.y - node1.y, node2.x - node1.x);
+
+            // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
+            for (Edge* otherEdge : node1.edges) {
+                edge->edges.emplace_back(otherEdge, angle - atan2(node1.y - otherEdge->y, node1.x - otherEdge->x));
+            }
+
+            // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
+            for (Edge* otherEdge : node2.edges) {
+                edge->edges.emplace_back(otherEdge, angle - atan2(node2.y - otherEdge->y, node2.x - otherEdge->x));
             }
         }
     }
@@ -118,8 +105,6 @@ int main() {
             cout << endl;
         }
     }
-
-
-
     return 0;
 }
+
