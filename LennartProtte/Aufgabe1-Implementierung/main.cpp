@@ -14,23 +14,6 @@ double distance(double x1, double y1, double x2, double y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-std::vector<Edge *> printedEdges;
-
-void printEdgeIfNotPrinted(Edge *edge) {
-    // Überprüfe, ob die Kante bereits ausgegeben wurde
-    if (std::find(printedEdges.begin(), printedEdges.end(), edge) != printedEdges.end()) {
-        return;
-    }
-    // Speichere die Kante als ausgegeben
-    printedEdges.push_back(edge);
-
-    // Gebe die Kante aus
-    Node *node1 = edge->node1;
-    Node *node2 = edge->node2;
-    double angle = atan2(node2->y - node1->y, node2->x - node1->x);
-    std::cout << " - zu Knoten (" << node2->x << ", " << node2->y << "): Winkel " << angle << std::endl;
-}
-
 
 int main() {
     // Öffne Datei zum Lesen
@@ -108,10 +91,15 @@ int main() {
     for (unsigned int i = 0; i < graph.size(); ++i) {
         std::cout << "Knoten " << i << ": (" << graph[i].x << ", " << graph[i].y << ")" << std::endl;
         std::cout << "Kanten:" << std::endl;
-        for (auto edge: graph[i].edges) {
-            printEdgeIfNotPrinted(edge);
+        for (unsigned int j = 0; j < graph[i].edges.size(); ++j) {
+            Edge *edge = graph[i].edges[j];
+            Node *otherNode = (edge->node1 == &graph[i]) ? edge->node2 : edge->node1;
+            double angle = atan2(otherNode->y - graph[i].y, otherNode->x - graph[i].x);
+            std::cout << "  - zu Knoten (" << otherNode->x << ", " << otherNode->y << "): Winkel " << angle
+                      << std::endl;
         }
     }
+
     return 0;
 }
 
