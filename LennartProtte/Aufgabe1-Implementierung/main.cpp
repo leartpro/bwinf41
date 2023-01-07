@@ -12,6 +12,12 @@ struct Location {
     double y;
 };
 
+// Struktur für einen Ort und dazugehörigen Abbiegwinkel
+struct LocationWithAngle {
+    Location location;
+    double angle;
+};
+
 // Funktion zum Berechnen des Abbiegwinkels zwischen zwei Orten
 double calculateAngle(Location loc1, Location loc2) {
     double xDiff = loc1.x - loc2.x;
@@ -20,39 +26,41 @@ double calculateAngle(Location loc1, Location loc2) {
 }
 
 // Funktion zum Überprüfen, ob eine Route gültig ist (keine scharfen Abbiegungen enthält)
-bool isValidRoute(vector<Location> locations) {
-    // Gehe alle aufeinanderfolgenden Orte durch
+bool isValidRoute(vector<LocationWithAngle> locations) {
+// Gehe alle aufeinanderfolgenden Orte durch
     for (int i = 1; i < locations.size(); i++) {
-        // Berechne Abbiegwinkel zwischen aktuellem und vorherigem Ort
-        double angle = calculateAngle(locations[i-1], locations[i]);
-        // Wenn der Abbiegwinkel größer als 90 Grad ist...
-        if (abs(angle) > 90) {
-            // Gib false zurück
+// Wenn der Abbiegwinkel größer als 90 Grad ist...
+        if (abs(locations[i].angle) > 90) {
+// Gib false zurück
             return false;
         }
     }
-    // Gib true zurück (keine scharfen Abbiegungen gefunden)
+// Gib true zurück (keine scharfen Abbiegungen gefunden)
     return true;
 }
 
-void search(vector<Location> locations, vector<vector<Location>>& solutions, vector<Location> currentLocations) {
-    // Wenn es keine Orte mehr gibt, die hinzugefügt werden können...
+void search(vector<LocationWithAngle> locations, vector<vector<LocationWithAngle>> &solutions,
+            vector<LocationWithAngle> currentLocations) {
+// Wenn es keine Orte mehr gibt, die hinzugefügt werden können...
     if (locations.empty()) {
-        // Wenn die aktuelle Route gültig ist (keine scharfen Abbiegungen enthält)...
+// Wenn die aktuelle Route gültig ist (keine scharfen Abbiegungen enthält)...
         if (isValidRoute(currentLocations)) {
-            // Füge die aktuelle Route zu solutions hinzu
+// Füge die aktuelle Route zu solutions hinzu
             solutions.push_back(currentLocations);
         }
         return;
     }
-
     // Gehe alle verbleibenden Orte durch
     for (int i = 0; i < locations.size(); i++) {
+        // Berechne Abbiegwinkel zwischen aktuellem und vorherigem Ort
+        double angle = currentLocations.empty() ? 0.0 : calculateAngle(currentLocations.back().location, locations[i].location);
+        // Erstelle LocationWithAngle Objekt für aktuellen Ort mit Abbiegwinkel
+        LocationWithAngle currentLocationWithAngle = {locations[i].location, angle};
         // Füge aktuellen Ort zu aktueller Route hinzu
-        currentLocations.push_back(locations[i]);
+        currentLocations.push_back(currentLocationWithAngle);
 
         // Kopiere verbleibende Orte in neue Liste
-        vector<Location> remainingLocations = locations;
+        vector<LocationWithAngle> remainingLocations = locations;
 
         // Entferne aktuellen Ort aus verbleibenden Orten
         remainingLocations.erase(remainingLocations.begin() + i);
@@ -65,26 +73,25 @@ void search(vector<Location> locations, vector<vector<Location>>& solutions, vec
     }
 }
 
+vector<vector<LocationWithAngle>> solveProblem(vector<LocationWithAngle> locations) {
+// Erstelle leere Liste von möglichen Lösungen
+    vector<vector<LocationWithAngle>> solutions;
 
-// Funktion zur Lösung des Problems mithilfe der Brute-Force-Suche
-vector<vector<Location>> solveProblem(vector<Location> locations) {
-    // Erstelle leere Liste von möglichen Lösungen
-    vector<vector<Location>> solutions;
+// Erstelle leere Liste von aktuellen Orten
+    vector<LocationWithAngle> currentLocations;
 
-    // Erstelle leere Liste von aktuellen Orten
-    vector<Location> currentLocations;
-
-    // Führe die Brute-Force-Suche aus
+// Führe die Brute-Force-Suche aus
     search(std::move(locations), solutions, currentLocations);
 
-    // Gebe die Liste der möglichen Lösungen zurück
+// Gebe die Liste der möglichen Lösungen zurück
     return solutions;
 }
+
 
 int main() {
     std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
     std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
-    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
+        // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
         // Dateiname und -pfad aus dem Iterator auslesen
         std::string input_file = entry.path();
@@ -93,24 +100,24 @@ int main() {
         std::ifstream fin(input_file);
         // Ausgabedatei öffnen
         std::ofstream fout(output_file);
-        vector<Location> locations;
+        vector<LocationWithAngle> locations;
         // Solange es noch Koordinaten in der Datei gibt
         double x, y;
         while (fin >> x >> y) {
-            Location location{};
-            location.x = x;
-            location.y = y;
-            cout << "Added new Node (" << location.x << ", " << location.y << ")" << endl;
+            LocationWithAngle location{};
+            location.location.x = x;
+            location.location.y = y;
+            location.angle = 0;
+            cout << "Added new Node (" << location.location.x << ", " << location.location.y << ")" << endl;
             locations.push_back(location);
         }
         //Löse das Problem mithilfe der Brute-Force-Suche
-        vector<vector<Location>> solutions = solveProblem(locations);
-
+        vector<vector<LocationWithAngle>> solutions = solveProblem(locations);
         // Gebe die möglichen Lösungen aus
         for (int i = 0; i < solutions.size(); i++) {
             cout << "Lösung " << i + 1 << ": ";
             for (auto &j: solutions[i]) {
-                cout << "(" << j.x << ", " << j.y << ") ";
+                cout << "(" << j.location.x << ", " << j.location.y << ") " << j.angle << "° ";
             }
             cout << endl;
         }
