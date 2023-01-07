@@ -43,9 +43,6 @@ double distance(double x1, double y1, double x2, double y2) {
 
 // Berechnet den Winkel zwischen zwei Kanten, die den gleichen Knoten teilen
 double angle(Edge* e1, Edge* e2) {
-    // Berechne die Längen von e1 und e2
-    double length1 = e1->distance;
-    double length2 = e2->distance;
     // Berechne den Winkel zwischen den Kanten e1 und e2
     double angle = atan2(e2->node2->y - e2->node1->y, e2->node2->x - e2->node1->x) -
                    atan2(e1->node2->y - e1->node1->y, e1->node2->x - e1->node1->x);
@@ -76,25 +73,19 @@ vector<Node> generate_graph(vector<Node> graph) {
             node1.edges.push_back(edge);
             // Füge die Kante auch dem zweiten Knoten hinzu
             node2.edges.push_back(edge);
-            // Berechne den Winkel zwischen den beiden Kanten
-            double angle = atan2(node2.y - node1.y, node2.x - node1.x);
             // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
             for (Edge *otherEdge: node1.edges) {
                 if (otherEdge == edge) {
                     continue;
                 }
-                edge->edges.emplace_back(otherEdge,
-                                         angle -
-                                         atan2(otherEdge->node2->y - node1.y, otherEdge->node2->x - node1.x));
+                edge->edges.emplace_back(otherEdge,angle(edge, otherEdge));
             }
             // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
             for (Edge *otherEdge: node2.edges) {
                 if (otherEdge == edge) {
                     continue;
                 }
-                edge->edges.emplace_back(otherEdge,
-                                         angle -
-                                         atan2(otherEdge->node1->y - node2.y, otherEdge->node1->x - node2.x));
+                edge->edges.emplace_back(otherEdge,angle(edge, otherEdge));
             }
         }
     }

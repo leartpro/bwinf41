@@ -1,12 +1,12 @@
 Knoten 0: (0, 0)
 Kanten:
-  - zu Knoten (7.41098e-323, 2.15557e-314): Winkel 0.950213
-  - zu Knoten (7.41098e-323, 2.15557e-314): Winkel 0.950213
+  - zu Knoten (7.41098e-323, 2.12274e-314): Winkel 0.962542
+  - zu Knoten (7.41098e-323, 2.12274e-314): Winkel 0.962542
 Knoten 1: (100, 0)
 Kanten:
-  - zu Knoten (7.41098e-323, 2.15557e-314): Winkel 3.14159
-  - zu Knoten (7.41098e-323, 2.15557e-314): Winkel 3.14159
+  - zu Knoten (7.41098e-323, 2.12274e-314): Winkel 3.14159
+  - zu Knoten (7.41098e-323, 2.12274e-314): Winkel 3.14159
 Knoten 2: (100, 100)
 Kanten:
-  - zu Knoten (7.41098e-323, 2.15557e-314): Winkel -2.35619
-  - zu Knoten (7.41098e-323, 2.15557e-314): Winkel -2.35619
+  - zu Knoten (7.41098e-323, 2.12274e-314): Winkel -2.35619
+  - zu Knoten (7.41098e-323, 2.12274e-314): Winkel -2.35619
