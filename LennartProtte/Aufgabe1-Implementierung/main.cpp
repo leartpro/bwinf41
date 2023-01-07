@@ -38,6 +38,11 @@ using namespace std;
 
 struct Edge; // Vorwärtsdeklaration von Node
 
+/**
+ * Jeder Knoten hat Koordinaten und einen Winkel
+ * Jede Kante hat zwei Knoten
+ * Der Graph ist eine Liste aus Kanten
+ */
 struct Node {
     double x{};
     double y{};
