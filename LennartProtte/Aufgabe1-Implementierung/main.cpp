@@ -1,83 +1,87 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
 #include <cmath>
-#include <set>
-
-/**
-Ein Graph besteht aus Knoten (Node) und Kanten (Edge), die die Knoten verbinden.
-
-Die Funktion distance berechnet den Abstand zwischen zwei Punkten (x1, y1) und (x2, y2).
-
-Die Funktion angle berechnet den Winkel zwischen zwei Kanten, die den gleichen Knoten teilen.
-
-Die Funktion generate_graph erstellt einen Graph,
-indem sie zunächst zwei Knoten aus dem übergebenen Vektor graph auswählt
-und dann zwischen diesen Knoten eine Kante erstellt.
-Dazu wird zunächst der Abstand zwischen den beiden Knoten berechnet
-und dann die Kante mit diesem Abstand erstellt.
-Anschließend wird der Winkel zwischen den beiden Kanten berechnet
-und dieser Winkel jeder Kante hinzugefügt, die den gemeinsamen Knoten teilt.
-
-Anschließend wird in der main-Funktion der Pfad zu einem Eingabeordner festgelegt
-und ein Iterator erstellt, der alle Dateien im Eingabeordner durchläuft.
-Für jede Datei wird der Dateiname und -pfad ausgelesen und eine entsprechende Ausgabedatei erstellt.
-Danach wird ein ifstream-Objekt erstellt, um die Eingabedatei zu öffnen und ein ofstream-Objekt,
-um die Ausgabedatei zu öffnen.
-
-Es wird dann ein Vektor von Knoten erstellt und für jede Zeile in der Eingabedatei wird ein neuer Knoten hinzugefügt.
-Der Knoten enthält die x- und y-Koordinaten, die in der Eingabedatei gelesen werden.
-Sobald alle Knoten erstellt wurden, wird die generate_graph-Funktion aufgerufen, um den Graph zu erstellen.
-
-Schließlich wird der Graph in der Ausgabedatei gespeichert,
-indem für jeden Knoten alle dazugehörigen Kanten und deren Winkel ausgegeben werden.
- */
+#include <filesystem>
+#include <fstream>
 
 using namespace std;
 
-struct Edge; // Vorwärtsdeklaration von Node
-
-/**
- * Jeder Knoten hat Koordinaten und einen Winkel
- * Jede Kante hat zwei Knoten
- * Der Graph ist eine Liste aus Kanten
- */
-struct Node {
-    double x{};
-    double y{};
-    std::set<Edge*> edges{};
+// Struktur für einen Ort
+struct Location {
+    double x;
+    double y;
 };
 
-struct Edge {
-    double distance{};
-    Node* node1{};
-    Node* node2{};
-    std::vector<std::pair<Edge*, double>> edges{};
-};
-
-// Berechnet den Abstand zwischen zwei Punkten (x1, y1) und (x2, y2)
-double distance(double x1, double y1, double x2, double y2) {
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+// Funktion zum Berechnen des Abbiegwinkels zwischen zwei Orten
+double calculateAngle(Location loc1, Location loc2) {
+    double xDiff = loc1.x - loc2.x;
+    double yDiff = loc1.y - loc2.y;
+    return atan2(yDiff, xDiff) * 180 / M_PI;
 }
 
-// Berechnet den Winkel zwischen zwei Kanten, die den gleichen Knoten teilen
-double angle(Edge *e1, Edge *e2) {
-    // Berechne den Winkel zwischen den Kanten e1 und e2
-    double angle = atan2(e2->node2->y - e2->node1->y, e2->node2->x - e2->node1->x) -
-                   atan2(e1->node2->y - e1->node1->y, e1->node2->x - e1->node1->x);
-    // Konvertiere den Winkel in Grad
-    angle = angle * 180 / M_PI;
-    if (angle < 0) {
-        angle += 360;
+// Funktion zum Überprüfen, ob eine Route gültig ist (keine scharfen Abbiegungen enthält)
+bool isValidRoute(vector<Location> locations) {
+    // Gehe alle aufeinanderfolgenden Orte durch
+    for (int i = 1; i < locations.size(); i++) {
+        // Berechne Abbiegwinkel zwischen aktuellem und vorherigem Ort
+        double angle = calculateAngle(locations[i-1], locations[i]);
+        // Wenn der Abbiegwinkel größer als 90 Grad ist...
+        if (abs(angle) > 90) {
+            // Gib false zurück
+            return false;
+        }
     }
-    if (angle > 180) {
-        angle = 360 -angle;
-    }
-    return angle;
+    // Gib true zurück (keine scharfen Abbiegungen gefunden)
+    return true;
 }
 
-    int main() {
+void search(vector<Location> locations, vector<vector<Location>>& solutions, vector<Location> currentLocations) {
+    // Wenn es keine Orte mehr gibt, die hinzugefügt werden können...
+    if (locations.empty()) {
+        // Wenn die aktuelle Route gültig ist (keine scharfen Abbiegungen enthält)...
+        if (isValidRoute(currentLocations)) {
+            // Füge die aktuelle Route zu solutions hinzu
+            solutions.push_back(currentLocations);
+        }
+        return;
+    }
+
+    // Gehe alle verbleibenden Orte durch
+    for (int i = 0; i < locations.size(); i++) {
+        // Füge aktuellen Ort zu aktueller Route hinzu
+        currentLocations.push_back(locations[i]);
+
+        // Kopiere verbleibende Orte in neue Liste
+        vector<Location> remainingLocations = locations;
+
+        // Entferne aktuellen Ort aus verbleibenden Orten
+        remainingLocations.erase(remainingLocations.begin() + i);
+
+        // Führe die Suche mit verbleibenden Orten fort
+        search(remainingLocations, solutions, currentLocations);
+
+        // Entferne aktuellen Ort wieder aus aktueller Route
+        currentLocations.pop_back();
+    }
+}
+
+
+// Funktion zur Lösung des Problems mithilfe der Brute-Force-Suche
+vector<vector<Location>> solveProblem(vector<Location> locations) {
+    // Erstelle leere Liste von möglichen Lösungen
+    vector<vector<Location>> solutions;
+
+    // Erstelle leere Liste von aktuellen Orten
+    vector<Location> currentLocations;
+
+    // Führe die Brute-Force-Suche aus
+    search(std::move(locations), solutions, currentLocations);
+
+    // Gebe die Liste der möglichen Lösungen zurück
+    return solutions;
+}
+
+int main() {
     std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
     std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
@@ -89,94 +93,26 @@ double angle(Edge *e1, Edge *e2) {
         std::ifstream fin(input_file);
         // Ausgabedatei öffnen
         std::ofstream fout(output_file);
-        vector<Node> graph;
+        vector<Location> locations;
         // Solange es noch Koordinaten in der Datei gibt
         double x, y;
         while (fin >> x >> y) {
-            Node node;
-            node.x = x;
-            node.y = y;
-            cout << "Added new Node (" << node.x << ", " << node.y << ")" << endl;
-            graph.push_back(node);
+            Location location{};
+            location.x = x;
+            location.y = y;
+            cout << "Added new Node (" << location.x << ", " << location.y << ")" << endl;
+            locations.push_back(location);
         }
-        // Generiere den Graphen
-        for (int i = 0; i < graph.size(); i++) {
-            Node &node1 = graph[i];
-            for (int j = 0; j < graph.size(); j++) {
-                if (i == j) {
-                    continue;
-                }
-                Node &node2 = graph[j];
-                // Erstelle eine neue Kante
-                Edge *edge = new Edge;
-                edge->node1 = &node1;
-                edge->node2 = &node2;
-                edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
-                // Füge die Kante dem ersten Knoten hinzu
-                node1.edges.emplace(edge);
-                // Füge die Kante auch dem zweiten Knoten hinzu
-                node2.edges.emplace(edge);
-                // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
-                for (Edge *otherEdge: node1.edges) {
-                    if (otherEdge == edge) {
-                        continue;
-                    }
-                    edge->edges.emplace_back(otherEdge, angle(edge, otherEdge));
-                }
-                // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
-                for (Edge *otherEdge: node2.edges) {
-                    if (otherEdge == edge || node1.edges.count(otherEdge) > 0) {
-                        continue;
-                    }
-                    otherEdge->edges.emplace_back(edge, angle(otherEdge, edge));
-                }
+        //Löse das Problem mithilfe der Brute-Force-Suche
+        vector<vector<Location>> solutions = solveProblem(locations);
+
+        // Gebe die möglichen Lösungen aus
+        for (int i = 0; i < solutions.size(); i++) {
+            cout << "Lösung " << i + 1 << ": ";
+            for (auto &j: solutions[i]) {
+                cout << "(" << j.x << ", " << j.y << ") ";
             }
-        }
-        // Graph in Console schreiben
-        for (unsigned int i = 0; i < graph.size(); ++i) {
-            auto currentNode = graph[i];
-            cout << "Knoten " << i << ": (" << currentNode.x << ", " << currentNode.y << ")" << endl << "Kanten:" << endl;
-            for (Edge *edge: graph[i].edges) {
-                Node* otherNode;
-                if (edge->node1 == &graph[i]) {
-                    otherNode = edge->node2;
-                } else {
-                    otherNode = edge->node1;
-                }
-                for (auto &e : edge->edges) {
-                    cout << "Kanten zwischen ("
-                         << currentNode.x << ", " << currentNode.y << ") und ("
-                         << otherNode->x << ", " << otherNode->y << ") hat Winkel "
-                         << e.second << " zu Kante zwischen ("
-                         << e.first->node1->x << ", " << e.first->node1->y << ") und ("
-                         << e.first->node2->x << ", " << e.first->node2->y << ")"
-                         << endl;
-                }
-            }
-        }
-        std::cout << endl;
-        // Graph in Ausgabedatei schreiben
-        for (unsigned int i = 0; i < graph.size(); ++i) {
-            auto currentNode = graph[i];
-            fout << "Knoten " << i << ": (" << currentNode.x << ", " << currentNode.y << ")" << std::endl;
-            fout << "Kanten:" << endl;
-            for (Edge *edge: graph[i].edges) {
-                Node* otherNode;
-                if (edge->node1 == &graph[i]) {
-                    otherNode = edge->node2;
-                } else {
-                    otherNode = edge->node1;
-                }
-                for (auto &e : edge->edges) {
-                    fout << "Kanten zwischen ("
-                         << currentNode.x << ", " << currentNode.y << ") und ("
-                         << otherNode->x << ", " << otherNode->y << ") hat Winkel ";
-                    fout << e.second << " zu Kante zwischen ("
-                            << e.first->node1->x << ", " << e.first->node1->y << ") und ("
-                            << e.first->node2->x << ", " << e.first->node2->y << ")"
-                            << std::endl;
-                }
-            }
+            cout << endl;
         }
         // Dateien schließen
         fin.close();
@@ -184,4 +120,3 @@ double angle(Edge *e1, Edge *e2) {
     }
     return 0;
 }
-
