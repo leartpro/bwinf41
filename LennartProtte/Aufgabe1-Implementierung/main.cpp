@@ -40,16 +40,12 @@ bool isValidRoute(vector<LocationWithAngle> locations) {
 }
 
 void search(vector<LocationWithAngle> locations, vector<vector<LocationWithAngle>> &solutions,
-            vector<LocationWithAngle> currentLocations, int &counter) {
-    // Erhöhe counter um 1
-    counter++;
-    // Gebe den aktuellen Wert von counter aus
-    cout << "counter: " << counter << endl;
+            vector<LocationWithAngle> currentLocations) {
     // Wenn es keine Orte mehr gibt, die hinzugefügt werden können...
     if (locations.empty()) {
-    // Wenn die aktuelle Route gültig ist (keine scharfen Abbiegungen enthält)...
+        // Wenn die aktuelle Route gültig ist (keine scharfen Abbiegungen enthält)...
         if (isValidRoute(currentLocations)) {
-    // Füge die aktuelle Route zu solutions hinzu
+            // Füge die aktuelle Route zu solutions hinzu
             solutions.push_back(currentLocations);
         }
         return;
@@ -57,27 +53,33 @@ void search(vector<LocationWithAngle> locations, vector<vector<LocationWithAngle
     // Gehe alle verbleibenden Orte durch
     for (int i = 0; i < locations.size(); i++) {
         // Berechne Abbiegwinkel zwischen aktuellem und vorherigem Ort
-        double angle = currentLocations.empty() ? 0.0 : calculateAngle(currentLocations.back().location, locations[i].location);
+        double angle = currentLocations.empty() ? 0.0 : calculateAngle(currentLocations.back().location,
+                                                                       locations[i].location);
         // Erstelle LocationWithAngle Objekt für aktuellen Ort mit Abbiegwinkel
         LocationWithAngle currentLocationWithAngle = {locations[i].location, angle};
         // Füge aktuellen Ort zu aktueller Route hinzu
         currentLocations.push_back(currentLocationWithAngle);
 
-        // Kopiere verbleibende Orte in neue Liste
-        vector<LocationWithAngle> remainingLocations = locations;
+        // Erstelle neue Liste der verbleibenden Orte
+        vector<LocationWithAngle> remainingLocations;
 
-        // Entferne aktuellen Ort aus verbleibenden Orten
-        remainingLocations.erase(remainingLocations.begin() + i);
+        // Füge alle Orte außer dem aktuellen hinzu
+        for (int j = 0; j < locations.size(); j++) {
+            if (j != i) {
+                remainingLocations.push_back(locations[j]);
+            }
+        }
+
 
         // Führe die Suche mit verbleibenden Orten fort
-        search(remainingLocations, solutions, currentLocations, counter);
+        search(remainingLocations, solutions, currentLocations);
 
         // Entferne aktuellen Ort wieder aus aktueller Route
         currentLocations.pop_back();
     }
 }
 
-vector<vector<LocationWithAngle>> solveProblem(vector<LocationWithAngle> locations, int &counter) {
+vector<vector<LocationWithAngle>> solveProblem(vector<LocationWithAngle> locations) {
 // Erstelle leere Liste von möglichen Lösungen
     vector<vector<LocationWithAngle>> solutions;
 
@@ -85,7 +87,7 @@ vector<vector<LocationWithAngle>> solveProblem(vector<LocationWithAngle> locatio
     vector<LocationWithAngle> currentLocations;
 
 // Führe die Brute-Force-Suche aus
-    search(std::move(locations), solutions, currentLocations, counter);
+    search(std::move(locations), solutions, currentLocations);
 
 // Gebe die Liste der möglichen Lösungen zurück
     return solutions;
@@ -95,7 +97,7 @@ vector<vector<LocationWithAngle>> solveProblem(vector<LocationWithAngle> locatio
 int main() {
     std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
     std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
-        // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
+    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
         // Dateiname und -pfad aus dem Iterator auslesen
         std::string input_file = entry.path();
@@ -117,8 +119,7 @@ int main() {
         }
         cout << endl;
         //Löse das Problem mithilfe der Brute-Force-Suche
-        int counter = 0;
-        vector<vector<LocationWithAngle>> solutions = solveProblem(locations, counter);
+        vector<vector<LocationWithAngle>> solutions = solveProblem(locations);
         // Gebe die möglichen Lösungen aus
         for (int i = 0; i < solutions.size(); i++) {
             fout << "Lösung " << i + 1 << ": ";
