@@ -3,7 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
-#include "structs.h"
+#include <set>
 
 /**
 Ein Graph besteht aus Knoten (Node) und Kanten (Edge), die die Knoten verbinden.
@@ -36,6 +36,21 @@ indem für jeden Knoten alle dazugehörigen Kanten und deren Winkel ausgegeben w
 
 using namespace std;
 
+struct Edge; // Vorwärtsdeklaration von Node
+
+struct Node {
+    double x{};
+    double y{};
+    std::set<Edge*> edges{};
+};
+
+struct Edge {
+    double distance{};
+    Node* node1{};
+    Node* node2{};
+    std::vector<std::pair<Edge*, double>> edges{};
+};
+
 // Berechnet den Abstand zwischen zwei Punkten (x1, y1) und (x2, y2)
 double distance(double x1, double y1, double x2, double y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
@@ -51,48 +66,13 @@ double angle(Edge *e1, Edge *e2) {
     if (angle < 0) {
         angle += 360;
     }
+    if (angle > 180) {
+        angle = 360 -angle;
+    }
     return angle;
 }
 
-
-vector<Node> generate_graph(vector<Node> graph) {
-    for (int i = 0; i < graph.size(); i++) {
-        Node node1 = graph[i];
-        for (int j = 0; j < graph.size(); j++) {
-            if (i == j) {
-                continue;
-            }
-            Node &node2 = graph[j];
-            // Erstelle eine neue Kante
-            Edge *edge = new Edge;
-            edge->node1 = &node1;
-            edge->node2 = &node2;
-            edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
-            // Füge die Kante dem ersten Knoten hinzu
-            node1.edges.emplace(edge);
-            // Füge die Kante auch dem zweiten Knoten hinzu
-            node2.edges.emplace(edge);
-            // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
-            for (Edge *otherEdge : node1.edges) {
-                if (otherEdge == edge) {
-                    continue;
-                }
-                edge->edges.emplace_back(otherEdge, angle(edge, otherEdge));
-            }
-            // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
-            for (Edge *otherEdge: node2.edges) {
-                if (otherEdge == edge || node1.edges.count(otherEdge) > 0) {
-                    continue;
-                }
-                otherEdge->edges.emplace_back(edge, angle(otherEdge, edge));
-            }
-        }
-    }
-    return graph;
-}
-
-
-int main() {
+    int main() {
     std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
     std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
@@ -104,7 +84,6 @@ int main() {
         std::ifstream fin(input_file);
         // Ausgabedatei öffnen
         std::ofstream fout(output_file);
-
         vector<Node> graph;
         // Solange es noch Koordinaten in der Datei gibt
         double x, y;
@@ -116,17 +95,57 @@ int main() {
             graph.push_back(node);
         }
         // Generiere den Graphen
-        graph = generate_graph(graph);
+        for (int i = 0; i < graph.size(); i++) {
+            Node &node1 = graph[i];
+            for (int j = 0; j < graph.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                Node &node2 = graph[j];
+                // Erstelle eine neue Kante
+                Edge *edge = new Edge;
+                edge->node1 = &node1;
+                edge->node2 = &node2;
+                edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
+                // Füge die Kante dem ersten Knoten hinzu
+                node1.edges.emplace(edge);
+                // Füge die Kante auch dem zweiten Knoten hinzu
+                node2.edges.emplace(edge);
+                // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
+                for (Edge *otherEdge: node1.edges) {
+                    if (otherEdge == edge) {
+                        continue;
+                    }
+                    edge->edges.emplace_back(otherEdge, angle(edge, otherEdge));
+                }
+                // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
+                for (Edge *otherEdge: node2.edges) {
+                    if (otherEdge == edge || node1.edges.count(otherEdge) > 0) {
+                        continue;
+                    }
+                    otherEdge->edges.emplace_back(edge, angle(otherEdge, edge));
+                }
+            }
+        }
         // Graph in Console schreiben
         for (unsigned int i = 0; i < graph.size(); ++i) {
-            std::cout << "Knoten " << i << ": (" << graph[i].x << ", " << graph[i].y << ")" << std::endl;
-            std::cout << "Kanten:" << std::endl;
+            auto currentNode = graph[i];
+            cout << "Knoten " << i << ": (" << currentNode.x << ", " << currentNode.y << ")" << endl << "Kanten:" << endl;
             for (Edge *edge: graph[i].edges) {
-                Node *otherNode = (edge->node1 == &graph[i]) ? edge->node2 : edge->node1;
-                double angle = atan2(otherNode->y - graph[i].y, otherNode->x - graph[i].x);
-                std::cout << " - zu Knoten (" << otherNode->x << ", " << otherNode->y << "): Winkel " << angle << std::endl;
-                for (auto &e: edge->edges) {
-                    std::cout << " - Kante zwischen (" << edge->node1->x << ", " << edge->node1->y << ") und (" << edge->node2->x << ", " << edge->node2->y << ") hat Winkel " << e.second << " zu Kante von (" << e.first->node1->x << ", " << e.first->node1->y << ") zu (" << e.first->node2->x << ", " << e.first->node2->y << ")" << std::endl;
+                Node* otherNode;
+                if (edge->node1 == &graph[i]) {
+                    otherNode = edge->node2;
+                } else {
+                    otherNode = edge->node1;
+                }
+                for (auto &e : edge->edges) {
+                    cout << "Kanten zwischen ("
+                         << currentNode.x << ", " << currentNode.y << ") und ("
+                         << otherNode->x << ", " << otherNode->y << ") hat Winkel "
+                         << e.second << " zu Kante zwischen ("
+                         << e.first->node1->x << ", " << e.first->node1->y << ") und ("
+                         << e.first->node2->x << ", " << e.first->node2->y << ")"
+                         << endl;
                 }
             }
         }
@@ -154,7 +173,6 @@ int main() {
                 }
             }
         }
-
         // Dateien schließen
         fin.close();
         fout.close();
