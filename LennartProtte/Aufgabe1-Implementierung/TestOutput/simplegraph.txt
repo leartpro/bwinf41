@@ -1,0 +1,18 @@
+Knoten 0: (0, 0)
+Kanten:
+Kanten zwischen (0, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 135 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 100)
+Kanten zwischen (0, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 135 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 100)
+Kanten zwischen (0, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 180 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 0)
+Kanten zwischen (0, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 0 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (0, 0)
+Knoten 1: (100, 0)
+Kanten:
+Kanten zwischen (100, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 0 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 0)
+Kanten zwischen (100, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 315 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (0, 0)
+Kanten zwischen (100, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 90 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 100)
+Kanten zwischen (100, 0) und (3.45846e-323, 2.15729e-314) hat Winkel 90 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 100)
+Knoten 2: (100, 100)
+Kanten:
+Kanten zwischen (100, 100) und (3.45846e-323, 2.15729e-314) hat Winkel 315 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 0)
+Kanten zwischen (100, 100) und (3.45846e-323, 2.15729e-314) hat Winkel 0 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 100)
+Kanten zwischen (100, 100) und (3.45846e-323, 2.15729e-314) hat Winkel 270 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (100, 0)
+Kanten zwischen (100, 100) und (3.45846e-323, 2.15729e-314) hat Winkel 90 zu Kante zwischen (9.88131e-323, 2.15729e-314) und (0, 0)

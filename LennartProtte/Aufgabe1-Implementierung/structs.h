@@ -8,13 +8,14 @@
 #pragma once
 
 #include <vector>
+#include <set>
 
 struct Edge; // Vorwärtsdeklaration von Node
 
 struct Node {
     double x{};
     double y{};
-    std::vector<Edge*> edges{};
+    std::set<Edge*> edges{};
 };
 
 struct Edge {

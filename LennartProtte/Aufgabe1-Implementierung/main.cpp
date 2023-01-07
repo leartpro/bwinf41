@@ -42,7 +42,7 @@ double distance(double x1, double y1, double x2, double y2) {
 }
 
 // Berechnet den Winkel zwischen zwei Kanten, die den gleichen Knoten teilen
-double angle(Edge* e1, Edge* e2) {
+double angle(Edge *e1, Edge *e2) {
     // Berechne den Winkel zwischen den Kanten e1 und e2
     double angle = atan2(e2->node2->y - e2->node1->y, e2->node2->x - e2->node1->x) -
                    atan2(e1->node2->y - e1->node1->y, e1->node2->x - e1->node1->x);
@@ -53,7 +53,6 @@ double angle(Edge* e1, Edge* e2) {
     }
     return angle;
 }
-
 
 
 vector<Node> generate_graph(vector<Node> graph) {
@@ -70,22 +69,22 @@ vector<Node> generate_graph(vector<Node> graph) {
             edge->node2 = &node2;
             edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
             // Füge die Kante dem ersten Knoten hinzu
-            node1.edges.push_back(edge);
+            node1.edges.emplace(edge);
             // Füge die Kante auch dem zweiten Knoten hinzu
-            node2.edges.push_back(edge);
+            node2.edges.emplace(edge);
             // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
-            for (Edge *otherEdge: node1.edges) {
+            for (Edge *otherEdge : node1.edges) {
                 if (otherEdge == edge) {
                     continue;
                 }
-                edge->edges.emplace_back(otherEdge,angle(edge, otherEdge));
+                edge->edges.emplace_back(otherEdge, angle(edge, otherEdge));
             }
             // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
             for (Edge *otherEdge: node2.edges) {
-                if (otherEdge == edge) {
+                if (otherEdge == edge || node1.edges.count(otherEdge) > 0) {
                     continue;
                 }
-                edge->edges.emplace_back(otherEdge,angle(edge, otherEdge));
+                otherEdge->edges.emplace_back(edge, angle(otherEdge, edge));
             }
         }
     }
@@ -94,8 +93,8 @@ vector<Node> generate_graph(vector<Node> graph) {
 
 
 int main() {
-    std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
-    std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
+    std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
+    std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
         // Dateiname und -pfad aus dem Iterator auslesen
@@ -113,6 +112,7 @@ int main() {
             Node node;
             node.x = x;
             node.y = y;
+            cout << "Added new Node (" << node.x << ", " << node.y << ")" << endl;
             graph.push_back(node);
         }
         // Generiere den Graphen
@@ -121,27 +121,40 @@ int main() {
         for (unsigned int i = 0; i < graph.size(); ++i) {
             std::cout << "Knoten " << i << ": (" << graph[i].x << ", " << graph[i].y << ")" << std::endl;
             std::cout << "Kanten:" << std::endl;
-            for (unsigned int j = 0; j < graph[i].edges.size(); ++j) {
-                Edge *edge = graph[i].edges[j];
+            for (Edge *edge: graph[i].edges) {
                 Node *otherNode = (edge->node1 == &graph[i]) ? edge->node2 : edge->node1;
                 double angle = atan2(otherNode->y - graph[i].y, otherNode->x - graph[i].x);
-                std::cout << "  - zu Knoten (" << otherNode->x << ", " << otherNode->y << "): Winkel " << angle
-                          << std::endl;
+                std::cout << " - zu Knoten (" << otherNode->x << ", " << otherNode->y << "): Winkel " << angle << std::endl;
+                for (auto &e: edge->edges) {
+                    std::cout << " - Kante zwischen (" << edge->node1->x << ", " << edge->node1->y << ") und (" << edge->node2->x << ", " << edge->node2->y << ") hat Winkel " << e.second << " zu Kante von (" << e.first->node1->x << ", " << e.first->node1->y << ") zu (" << e.first->node2->x << ", " << e.first->node2->y << ")" << std::endl;
+                }
             }
         }
         std::cout << endl;
         // Graph in Ausgabedatei schreiben
         for (unsigned int i = 0; i < graph.size(); ++i) {
-            fout << "Knoten " << i << ": (" << graph[i].x << ", " << graph[i].y << ")" << endl;
+            auto currentNode = graph[i];
+            fout << "Knoten " << i << ": (" << currentNode.x << ", " << currentNode.y << ")" << std::endl;
             fout << "Kanten:" << endl;
-            for (unsigned int j = 0; j < graph[i].edges.size(); ++j) {
-                Edge *edge = graph[i].edges[j];
-                Node *otherNode = (edge->node1 == &graph[i]) ? edge->node2 : edge->node1;
-                double angle = atan2(otherNode->y - graph[i].y, otherNode->x - graph[i].x);
-                fout << "  - zu Knoten (" << otherNode->x << ", " << otherNode->y << "): Winkel " << angle
-                     << endl;
+            for (Edge *edge: graph[i].edges) {
+                Node* otherNode;
+                if (edge->node1 == &graph[i]) {
+                    otherNode = edge->node2;
+                } else {
+                    otherNode = edge->node1;
+                }
+                for (auto &e : edge->edges) {
+                    fout << "Kanten zwischen ("
+                         << currentNode.x << ", " << currentNode.y << ") und ("
+                         << otherNode->x << ", " << otherNode->y << ") hat Winkel ";
+                    fout << e.second << " zu Kante zwischen ("
+                            << e.first->node1->x << ", " << e.first->node1->y << ") und ("
+                            << e.first->node2->x << ", " << e.first->node2->y << ")"
+                            << std::endl;
+                }
             }
         }
+
         // Dateien schließen
         fin.close();
         fout.close();
