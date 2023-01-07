@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include <set>
 #include "structs.h"
 
 
@@ -11,6 +12,23 @@ using namespace std;
 // Berechnet den Abstand zwischen zwei Punkten (x1, y1) und (x2, y2)
 double distance(double x1, double y1, double x2, double y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+std::vector<Edge *> printedEdges;
+
+void printEdgeIfNotPrinted(Edge *edge) {
+    // Überprüfe, ob die Kante bereits ausgegeben wurde
+    if (std::find(printedEdges.begin(), printedEdges.end(), edge) != printedEdges.end()) {
+        return;
+    }
+    // Speichere die Kante als ausgegeben
+    printedEdges.push_back(edge);
+
+    // Gebe die Kante aus
+    Node *node1 = edge->node1;
+    Node *node2 = edge->node2;
+    double angle = atan2(node2->y - node1->y, node2->x - node1->x);
+    std::cout << " - zu Knoten (" << node2->x << ", " << node2->y << "): Winkel " << angle << std::endl;
 }
 
 
@@ -44,15 +62,15 @@ int main() {
 
     // Generiere den Graphen
     for (int i = 0; i < graph.size(); i++) {
-        Node& node1 = graph[i];
+        Node &node1 = graph[i];
         for (int j = 0; j < graph.size(); j++) {
             if (i == j) {
                 continue;
             }
-            Node& node2 = graph[j];
+            Node &node2 = graph[j];
 
             // Erstelle eine neue Kante
-            Edge* edge = new Edge;
+            Edge *edge = new Edge;
             edge->node1 = &node1;
             edge->node2 = &node2;
             edge->distance = distance(node1.x, node1.y, node2.x, node2.y);
@@ -67,62 +85,33 @@ int main() {
             double angle = atan2(node2.y - node1.y, node2.x - node1.x);
 
             // Füge den Winkel zu jeder Kante hinzu, die den gemeinsamen Knoten teilt
-            for (Edge* otherEdge : node1.edges) {
+            for (Edge *otherEdge: node1.edges) {
                 if (otherEdge == edge) {
                     continue;
                 }
-                edge->edges.emplace_back(otherEdge, angle - atan2(otherEdge->node2->y - node1.y, otherEdge->node2->x - node1.x));
+                edge->edges.emplace_back(otherEdge,
+                                         angle - atan2(otherEdge->node2->y - node1.y, otherEdge->node2->x - node1.x));
             }
 
             // Füge den Winkel auch zu jeder Kante hinzu, die den gemeinsamen Knoten am zweiten Knoten teilt
-            for (Edge* otherEdge : node2.edges) {
+            for (Edge *otherEdge: node2.edges) {
                 if (otherEdge == edge) {
                     continue;
                 }
-                edge->edges.emplace_back(otherEdge, angle - atan2(otherEdge->node1->y - node2.y, otherEdge->node1->x - node2.x));
+                edge->edges.emplace_back(otherEdge,
+                                         angle - atan2(otherEdge->node1->y - node2.y, otherEdge->node1->x - node2.x));
             }
         }
     }
 
     // Drucke den Graphen
-    for (const auto& node : graph) {
-        for (auto edge: node.edges) {
-            cout << "(" << node.x << "," << node.y << ") - " << edge->distance << " -> ";
-            // Finde den anderen Knoten
-            Node *otherNode;
-            if (edge->node1 == &node) {
-                otherNode = edge->node2;
-            } else {
-                otherNode = edge->node1;
-            }
-
-            cout << "(" << otherNode->x << "," << otherNode->y << "): ";
-
-            // Drucke die Kanten, die in dieser Kante gespeichert sind
-            bool first = true;
-            for (auto [otherEdge, angle]: edge->edges) {
-                if (!first) {
-                    cout << ", ";
-                }
-                first = false;
-
-                cout << angle << "° zu ";
-
-                // Finde den anderen Knoten
-                Node *otherNode2;
-                if (otherEdge->node1 == &node || otherEdge->node1 == otherNode) {
-                    otherNode2 = otherEdge->node2;
-                } else {
-                    otherNode2 = otherEdge->node1;
-                }
-
-                cout << "(" << otherNode2->x << "," << otherNode2->y << ")";
-            }
-
-            cout << endl;
+    for (unsigned int i = 0; i < graph.size(); ++i) {
+        std::cout << "Knoten " << i << ": (" << graph[i].x << ", " << graph[i].y << ")" << std::endl;
+        std::cout << "Kanten:" << std::endl;
+        for (auto edge: graph[i].edges) {
+            printEdgeIfNotPrinted(edge);
         }
     }
-
-        return 0;
+    return 0;
 }
 
