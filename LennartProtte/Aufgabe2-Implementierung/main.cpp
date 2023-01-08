@@ -38,6 +38,7 @@ int main() {
         // Check if the dimensions of the cheese cube are valid
         if (length * width * height != volume) {
             std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
+            fout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
             return 0;
         }
 
@@ -87,19 +88,24 @@ int main() {
             if (used_slices.size() == slices.size()) {
                 std::cout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
                           << std::endl;
+                fout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
+                          << std::endl;
                 for (const auto &index: used_slices) {
                     std::cout << "(" << slices[index].length << ", " << slices[index].width << ")" << std::endl;
+                    fout << "(" << slices[index].length << ", " << slices[index].width << ")" << std::endl;
                 }
-                return 0;
+                goto end; //TODO: improve this solution
             }
             // If not all cheese slices have been used, start a new layer
             layers = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
         }
-
+        end:
         std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
+        fout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
         // Dateien schließen
         fin.close();
         fout.close();
+        //TODO: only one file is read
     }
     return 0;
 }
