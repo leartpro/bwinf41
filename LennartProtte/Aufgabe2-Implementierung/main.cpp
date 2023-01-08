@@ -39,7 +39,7 @@ int main() {
         if (length * width * height != volume) {
             std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
             fout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
-            return 0;
+            continue; //TODO: not sure if this is correct
         }
 
         /**
