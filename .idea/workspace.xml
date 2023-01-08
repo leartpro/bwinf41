@@ -20,7 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V26 approach three&#10;looks like a success">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V26 workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,19 +94,6 @@
       </texify-bibtex>
       <method v="2" />
     </configuration>
-    <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="EXTERNAL_TOOL_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-external>
         <program>PYTHONTEX</program>
@@ -168,7 +155,8 @@
       <workItem from="1672912362671" duration="12327000" />
       <workItem from="1673004531119" duration="44708000" />
       <workItem from="1673129703169" duration="3130000" />
-      <workItem from="1673197547253" duration="1000" />
+      <workItem from="1673197547253" duration="61000" />
+      <workItem from="1673200110228" duration="48000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -394,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673133015269</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="V26 workspace.xml">
+      <created>1673197587205</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1673197587205</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +408,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Output V3" />
     <MESSAGE value="Output V4 (only Console)" />
     <MESSAGE value="Output V5 (only Console)" />
     <MESSAGE value="MindMap.pdf" />
@@ -438,6 +432,7 @@
     <MESSAGE value="V26 debug counter" />
     <MESSAGE value="V26 approach two" />
     <MESSAGE value="V26 approach three&#10;looks like a success" />
-    <option name="LAST_COMMIT_MESSAGE" value="V26 approach three&#10;looks like a success" />
+    <MESSAGE value="V26 workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="V26 workspace.xml" />
   </component>
 </project>
