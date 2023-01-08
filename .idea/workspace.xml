@@ -20,8 +20,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V27 Solution Problem 2">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien/simpleInput.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V27 Solution Problem 2 Read from File">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +169,7 @@
       <workItem from="1673004531119" duration="44708000" />
       <workItem from="1673129703169" duration="3130000" />
       <workItem from="1673197547253" duration="61000" />
-      <workItem from="1673200110228" duration="3439000" />
+      <workItem from="1673200110228" duration="4743000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -416,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673212209855</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="V27 Solution Problem 2 Read from File">
+      <created>1673212721245</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1673212721245</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +442,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="MindMap.pdf" />
     <MESSAGE value="V7" />
     <MESSAGE value="V8" />
     <MESSAGE value="V9" />
@@ -460,6 +466,7 @@
     <MESSAGE value="V26 workspace.xml" />
     <MESSAGE value="V26 runConfigurations" />
     <MESSAGE value="V27 Solution Problem 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="V27 Solution Problem 2" />
+    <MESSAGE value="V27 Solution Problem 2 Read from File" />
+    <option name="LAST_COMMIT_MESSAGE" value="V27 Solution Problem 2 Read from File" />
   </component>
 </project>

@@ -30,19 +30,31 @@ int main() {
         for (const auto &slice: slices) {
             volume += slice.length * slice.width;
         }
-
-// Calculate the dimensions of the cheese cube
+        // Calculate the dimensions of the cheese cube
         int length = std::cbrt(volume);
         int width = length;
         int height = volume / (length * width);
 
-// Check if the dimensions of the cheese cube are valid
+        // Check if the dimensions of the cheese cube are valid
         if (length * width * height != volume) {
             std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
             return 0;
         }
 
-
+        /**
+        1. Erstelle ein 2D-Array mit der Höhe und Breite des Quaders und initialisiere alle Einträge mit 0.
+           Dieses Array dient als Schicht, in der die Käsescheiben platziert werden.
+        2. Für jede Käsescheibe in der Eingabereihenfolge:
+            2.1. Versuche, die Käsescheibe in die aktuelle Schicht zu platzieren.
+                 Dazu wird die Schleife über x und y durchlaufen und jedes freie Element in der Schicht geprüft,
+                 ob die Käsescheibe an dieser Stelle passen würde.
+            2.2. Wenn die Käsescheibe passt, wird sie platziert
+                 und der Index der Käsescheibe wird in einer Liste von verwendeten Scheiben aufgezeichnet.
+            2.3. Wenn die Käsescheibe nicht passt, wird sie übersprungen und mit der nächsten Käsescheibe fortgefahren.
+        3. Wenn alle Käsescheiben verwendet wurden, wird die Liste der verwendeten Scheiben ausgegeben
+           und das Programm beendet. Andernfalls wird eine neue Schicht erstellt
+           und der Prozess mit Schritt 2 fortgesetzt.
+        */
         // Check if the cheese slices can be assembled into a complete cheese cube
         std::vector<std::vector<int>> layers(height, std::vector<int>(width, 0));
         std::vector<int> used_slices;
@@ -83,6 +95,7 @@ int main() {
             // If not all cheese slices have been used, start a new layer
             layers = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
         }
+
         std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
         // Dateien schließen
         fin.close();
