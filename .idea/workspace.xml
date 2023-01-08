@@ -20,12 +20,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V26 runConfigurations">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bwinf41.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V27 Solution Problem 2">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien/simpleInput.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +169,7 @@
       <workItem from="1673004531119" duration="44708000" />
       <workItem from="1673129703169" duration="3130000" />
       <workItem from="1673197547253" duration="61000" />
-      <workItem from="1673200110228" duration="3049000" />
+      <workItem from="1673200110228" duration="3439000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -412,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673200201099</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="V27 Solution Problem 2">
+      <created>1673212209855</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1673212209855</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +435,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Output V5 (only Console)" />
     <MESSAGE value="MindMap.pdf" />
     <MESSAGE value="V7" />
     <MESSAGE value="V8" />
@@ -456,6 +459,7 @@
     <MESSAGE value="V26 approach three&#10;looks like a success" />
     <MESSAGE value="V26 workspace.xml" />
     <MESSAGE value="V26 runConfigurations" />
-    <option name="LAST_COMMIT_MESSAGE" value="V26 runConfigurations" />
+    <MESSAGE value="V27 Solution Problem 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="V27 Solution Problem 2" />
   </component>
 </project>
