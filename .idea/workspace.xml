@@ -20,8 +20,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V26 workspace.xml">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V26 runConfigurations">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bwinf41.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,9 +81,11 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/LennartProtte" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestOutput" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.bwinf41">
@@ -93,6 +99,16 @@
         <aux-dir>/</aux-dir>
       </texify-bibtex>
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="EXTERNAL_TOOL_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-external>
@@ -156,7 +172,7 @@
       <workItem from="1673004531119" duration="44708000" />
       <workItem from="1673129703169" duration="3130000" />
       <workItem from="1673197547253" duration="61000" />
-      <workItem from="1673200110228" duration="48000" />
+      <workItem from="1673200110228" duration="3049000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -389,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673197587205</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="V26 runConfigurations">
+      <created>1673200201099</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1673200201099</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -408,7 +431,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Output V4 (only Console)" />
     <MESSAGE value="Output V5 (only Console)" />
     <MESSAGE value="MindMap.pdf" />
     <MESSAGE value="V7" />
@@ -433,6 +455,7 @@
     <MESSAGE value="V26 approach two" />
     <MESSAGE value="V26 approach three&#10;looks like a success" />
     <MESSAGE value="V26 workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="V26 workspace.xml" />
+    <MESSAGE value="V26 runConfigurations" />
+    <option name="LAST_COMMIT_MESSAGE" value="V26 runConfigurations" />
   </component>
 </project>
