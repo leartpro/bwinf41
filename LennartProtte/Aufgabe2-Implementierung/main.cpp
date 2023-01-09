@@ -1,111 +1,139 @@
 #include <iostream>
+#include <memory>
 #include <vector>
 #include <cmath>
 #include <fstream>
+#include <filesystem>
 
-struct CheeseSlice {
+
+using namespace std;
+
+struct Slice {
+    Slice(int a, int b) {
+        this->length = a;
+        this->width = b;
+    }
+
     int length, width;
 };
 
+void calculate_cube(int cube[3], vector<shared_ptr<Slice>> *unsorted, vector<shared_ptr<Slice>> *sorted);
+
 int main() {
-    std::string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
-    std::string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
+
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
-    for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
+    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+
         // Dateiname und -pfad aus dem Iterator auslesen
-        std::string input_file = entry.path();
-        std::string output_file = output_dir + "/" + entry.path().filename().string();
+        string input_file = entry.path();
+        string output_file = output_dir + "/" + entry.path().filename().string();
+
         // Eingabedatei öffnen
-        std::ifstream fin(input_file);
+        ifstream fin(input_file);
+
         // Ausgabedatei öffnen
-        std::ofstream fout(output_file);
-        std::vector<CheeseSlice> slices;
+        ofstream fout(output_file);
+        vector<shared_ptr<Slice>> slices;
         int a, b, n;
         fin >> n;
         while (fin >> a >> b) {
-            slices.push_back({a, b});
+            slices.push_back(make_shared<Slice>(a, b));
         }
+
         // Calculate the volume of the cheese cube
         int volume = 0;
         for (const auto &slice: slices) {
-            volume += slice.length * slice.width;
+            volume += slice->length * slice->width;
         }
-        // Calculate the dimensions of the cheese cube
-        int length = std::cbrt(volume);
-        int width = length;
-        int height = volume / (length * width);
+
+        // Calculate the dimensions of the cheese cube //TODO: not calculated correctly yet
+        int length = static_cast<int>(cbrt(volume)); //cubic root of volume
+        int width = length; //TODO: the length dont have to be equal to the width
+        int depth = volume / (length * width);
 
         // Check if the dimensions of the cheese cube are valid
-        if (length * width * height != volume) {
-            std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
-            fout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
+        if (length * width * depth != volume) {
+            cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
+            fout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
+            fin.close();
+            fout.close();
             continue; //TODO: not sure if this is correct
         }
 
-        /**
-        1. Erstelle ein 2D-Array mit der Höhe und Breite des Quaders und initialisiere alle Einträge mit 0.
-           Dieses Array dient als Schicht, in der die Käsescheiben platziert werden.
-        2. Für jede Käsescheibe in der Eingabereihenfolge:
-            2.1. Versuche, die Käsescheibe in die aktuelle Schicht zu platzieren.
-                 Dazu wird die Schleife über x und y durchlaufen und jedes freie Element in der Schicht geprüft,
-                 ob die Käsescheibe an dieser Stelle passen würde.
-            2.2. Wenn die Käsescheibe passt, wird sie platziert
-                 und der Index der Käsescheibe wird in einer Liste von verwendeten Scheiben aufgezeichnet.
-            2.3. Wenn die Käsescheibe nicht passt, wird sie übersprungen und mit der nächsten Käsescheibe fortgefahren.
-        3. Wenn alle Käsescheiben verwendet wurden, wird die Liste der verwendeten Scheiben ausgegeben
-           und das Programm beendet. Andernfalls wird eine neue Schicht erstellt
-           und der Prozess mit Schritt 2 fortgesetzt.
-        */
-        // Check if the cheese slices can be assembled into a complete cheese cube
-        std::vector<std::vector<int>> layers(height, std::vector<int>(width, 0));
-        std::vector<int> used_slices;
-        for (int i = 0; i < n; i++) {
-            // Check if the current cheese slice fits in the current layer
-            bool fits = false;
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    if (layers[y][x] == 0 && slices[i].length <= width - x && slices[i].width <= height - y) {
-                        // Place the cheese slice in the current layer
-                        for (int dy = 0; dy < slices[i].width; dy++) {
-                            for (int dx = 0; dx < slices[i].length; dx++) {
-                                layers[y + dy][x + dx] = 1;
-                            }
-                        }
-                        used_slices.push_back(i);
-                        fits = true;
-                        break;
-                    }
-                }
-                if (fits) {
-                    break;
-                }
+        int cube[] = {length, width, depth};
+        //get result
+        vector<shared_ptr<Slice>> order = *new vector<shared_ptr<Slice>>;
+        calculate_cube(cube, &order, &slices);
+
+        if (order.empty()) {
+            cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
+            fout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
+        } else {
+            cout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
+                 << std::endl;
+            fout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
+                 << std::endl;
+            for (const auto &current: order) {
+                cout << "(" << current->length << ", " << current->width << ")" << endl;
+                fout << "(" << current->length << ", " << current->width << ")" << endl;
             }
-            if (!fits) {
-                // If the current cheese slice doesn't fit, try the next one
-                continue;
-            }
-            // Check if all cheese slices have been used
-            if (used_slices.size() == slices.size()) {
-                std::cout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
-                          << std::endl;
-                fout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
-                          << std::endl;
-                for (const auto &index: used_slices) {
-                    std::cout << "(" << slices[index].length << ", " << slices[index].width << ")" << std::endl;
-                    fout << "(" << slices[index].length << ", " << slices[index].width << ")" << std::endl;
-                }
-                goto end; //TODO: improve this solution
-            }
-            // If not all cheese slices have been used, start a new layer
-            layers = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
         }
-        end:
-        std::cout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
-        fout << "The cheese slices cannot be assembled into a complete cheese cube." << std::endl;
+
         // Dateien schließen
         fin.close();
         fout.close();
-        //TODO: only one file is read
     }
     return 0;
+}
+
+void calculate_cube(int cube[3], vector<shared_ptr<Slice>> *sorted, vector<shared_ptr<Slice>> *unsorted) {
+    //Vergleiche jedes Stück, mit jeder Seite des Quaders
+
+    /*
+     * 1. isValid?
+     * 2. führe für jedes Stück rekursion aus, wenn Lösung gibt, gebe Lösung weiter nach oben,
+     *  wenn keine Lösung, fahre mit nächstem element fort
+     */
+    bool valid = false;
+    for (auto &slice: *unsorted) {
+        if (slice->length == cube[0] && slice->width == cube[1]) { //Wenn Seite => {laenge, breite}, dann ...
+            cube[2] -= 1; //Tiefe minus eins
+            sorted->push_back(slice);
+            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
+            valid = true;
+        } else if (slice->length == cube[0] && slice->width == cube[2]) { //Wenn Seite => {laenge, tiefe}, dann ...
+            cube[1] -= 1; //Breite minus eins
+            sorted->push_back(slice);
+            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
+            valid = true;
+        } else if (slice->length == cube[1] && slice->width == cube[2]) { //Wenn Seite => {breite, tiefe}, dann ...
+            cube[0] -= 1; //Länge minus eins
+            sorted->push_back(slice);
+            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
+            valid = true;
+
+            //Piece wird um 90° gedreht:
+        } else if (slice->width == cube[0] && slice->length == cube[1]) { //Wenn Seite => {laenge, breite}, dann ...
+            cube[2] -= 1; //Tiefe minus eins
+            sorted->push_back(slice);
+            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
+            valid = true;
+        } else if (slice->width == cube[0] && slice->length == cube[2]) { //Wenn Seite => {laenge, tiefe}, dann ...
+            cube[1] -= 1; //Breite minus eins
+            sorted->push_back(slice);
+            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
+            valid = true;
+        } else if (slice->width == cube[1] && slice->length == cube[2]) { //Wenn Seite => {breite, tiefe}, dann ...
+            cube[0] -= 1; //Länge minus eins
+            sorted->push_back(slice);
+            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
+            valid = true;
+        }
+    }
+    if (!valid) {
+        sorted->clear();
+        return;
+    }
 }
