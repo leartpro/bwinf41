@@ -19,7 +19,7 @@ struct Slice {
 
 void calculate_cube(int cube[3], vector<shared_ptr<Slice>> *unsorted, vector<shared_ptr<Slice>> *sorted);
 
-int main() {
+int main3() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
 
