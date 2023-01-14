@@ -27,7 +27,7 @@ enum Dimension {
     RIGHT = 2
 };
 
-bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector<Slice*> unsorted);
+bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector<Slice*>* unsorted);
 
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
@@ -77,7 +77,7 @@ int main() {
         cout << "cube dimensions: length=" << length << ", height=" << height << ", depth=" << depth << endl << endl;
         //get result
         vector<pair<Slice*, Dimension>> order;
-        bool success = calculate_cube(new int[3] {length, height, depth}, &order, slices);
+        bool success = calculate_cube(new int[3] {length, height, depth}, &order, &slices);
 
         if (!success) {
             cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
@@ -118,8 +118,8 @@ int main() {
  *  wenn unsorted leer und cube{x,y,z} = 0
  *      return true
  */
-bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector<Slice*> unsorted) {
-    if (unsorted.empty()) {
+bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector<Slice*>* unsorted) {
+    if (unsorted->empty()) {
         if(cube[0] == 0 || cube[1] == 0 || cube[2] == 0) {
             return true;
         } else {
@@ -127,7 +127,7 @@ bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector
         }
     }
     bool valid = false;
-    for (auto &slice: unsorted) {
+    for (Slice* slice: *unsorted) {
         for (int i = 0; i < 3; i++) {
             for (int j = i + 1; j < 3; j++) {
                 cout << "check slice {" << slice->length << "," << slice->height << "} on {" << cube[i] << "," << cube[j] << "}" <<endl;
@@ -138,7 +138,7 @@ bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector
                     cout << "cube dimensions: length=" << cube[0] << ", height=" << cube[1] << ", depth=" << cube[2] << endl;
                     cout << endl;
                     sorted->emplace_back(slice, Dimension(3 - i - j));
-                    unsorted.erase(unsorted.begin() + int(&slice - &unsorted[0]));
+                    unsorted->erase(unsorted->begin() + int(slice - unsorted->at(0)));
                     valid = true;
                     if (calculate_cube(cube, sorted, unsorted)) {
                         return true;
