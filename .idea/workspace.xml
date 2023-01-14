@@ -20,10 +20,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V27">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/CMakeLists.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V28">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/Test1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestOutput/Test1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/simpleInput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/simpleInput.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,11 +147,6 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -171,7 +168,10 @@
       <workItem from="1673129703169" duration="3130000" />
       <workItem from="1673197547253" duration="61000" />
       <workItem from="1673200110228" duration="6329000" />
-      <workItem from="1673366738476" duration="1185000" />
+      <workItem from="1673366738476" duration="1522000" />
+      <workItem from="1673373181324" duration="1257000" />
+      <workItem from="1673465932584" duration="610000" />
+      <workItem from="1673697086110" duration="9791000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -439,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673306354854</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="V28">
+      <created>1673369634728</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1673369634728</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,7 +465,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V9" />
     <MESSAGE value="V11" />
     <MESSAGE value="V12" />
     <MESSAGE value="V13" />
@@ -483,6 +489,7 @@
     <MESSAGE value="V27 Solution Problem 2 Read from File" />
     <MESSAGE value="V27 Solution Problem 2 Docu" />
     <MESSAGE value="V27" />
-    <option name="LAST_COMMIT_MESSAGE" value="V27" />
+    <MESSAGE value="V28" />
+    <option name="LAST_COMMIT_MESSAGE" value="V28" />
   </component>
 </project>

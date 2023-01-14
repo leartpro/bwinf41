@@ -1,5 +1,4 @@
 #include <iostream>
-#include <memory>
 #include <vector>
 #include <cmath>
 #include <fstream>
@@ -11,17 +10,28 @@ using namespace std;
 struct Slice {
     Slice(int a, int b) {
         this->length = a;
-        this->width = b;
+        this->height = b;
     }
 
-    int length, width;
+    Slice(Slice &slice) {
+        this->length = slice.length;
+        this->height = slice.height;
+    }
+
+    int length, height;
 };
 
-void calculate_cube(int cube[3], vector<shared_ptr<Slice>> *unsorted, vector<shared_ptr<Slice>> *sorted);
+enum Dimension {
+    FRONT = 0,
+    TOP = 1,
+    RIGHT = 2
+};
 
-int main3() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
+bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector<Slice*> unsorted);
+
+int main() {
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
 
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -35,26 +45,28 @@ int main3() {
 
         // Ausgabedatei öffnen
         ofstream fout(output_file);
-        vector<shared_ptr<Slice>> slices;
+
+        //Ausgabedatei einlesen
+        vector<Slice*> slices;
         int a, b, n;
         fin >> n;
         while (fin >> a >> b) {
-            slices.push_back(make_shared<Slice>(a, b));
+            slices.push_back(new Slice(a, b));
         }
 
         // Calculate the volume of the cheese cube
         int volume = 0;
         for (const auto &slice: slices) {
-            volume += slice->length * slice->width;
+            volume += slice->length * slice->height;
         }
 
         // Calculate the dimensions of the cheese cube //TODO: not calculated correctly yet
         int length = static_cast<int>(cbrt(volume)); //cubic root of volume
-        int width = length; //TODO: the length dont have to be equal to the width
-        int depth = volume / (length * width);
+        int height = length; //TODO: the length dont have to be equal to the height
+        int depth = volume / (length * height);
 
         // Check if the dimensions of the cheese cube are valid
-        if (length * width * depth != volume) {
+        if (length * height * depth != volume) {
             cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
             fout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
             fin.close();
@@ -62,12 +74,12 @@ int main3() {
             continue; //TODO: not sure if this is correct
         }
 
-        int cube[] = {length, width, depth};
+        cout << "cube dimensions: length=" << length << ", height=" << height << ", depth=" << depth << endl << endl;
         //get result
-        vector<shared_ptr<Slice>> order = *new vector<shared_ptr<Slice>>;
-        calculate_cube(cube, &order, &slices);
+        vector<pair<Slice*, Dimension>> order;
+        bool success = calculate_cube(new int[3] {length, height, depth}, &order, slices);
 
-        if (order.empty()) {
+        if (!success) {
             cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
             fout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
         } else {
@@ -76,8 +88,8 @@ int main3() {
             fout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
                  << std::endl;
             for (const auto &current: order) {
-                cout << "(" << current->length << ", " << current->width << ")" << endl;
-                fout << "(" << current->length << ", " << current->width << ")" << endl;
+                cout << "(" << current.first->length << ", " << current.first->height << ") " << ((current.second == 0) ? "RIGHT" : ((current.second == 1) ? "TOP" : "FRONT")) << endl;
+                fout << "(" << current.first->length << ", " << current.first->height << ") " << ((current.second == 0) ? "RIGHT" : ((current.second == 1) ? "TOP" : "FRONT")) << endl;
             }
         }
 
@@ -87,53 +99,58 @@ int main3() {
     }
     return 0;
 }
-
-void calculate_cube(int cube[3], vector<shared_ptr<Slice>> *sorted, vector<shared_ptr<Slice>> *unsorted) {
-    //Vergleiche jedes Stück, mit jeder Seite des Quaders
-
-    /*
-     * 1. isValid?
-     * 2. führe für jedes Stück rekursion aus, wenn Lösung gibt, gebe Lösung weiter nach oben,
-     *  wenn keine Lösung, fahre mit nächstem element fort
-     */
+/*
+ * Gegeben: int[3] cube, vector<pair<Slice*, Dimension>> sorted, vector<Slice> unsorted
+ * Return: bool
+ * init bool isValid mit false
+ * Für jedes Element aus unsorted:
+ *  kann an einer Seite (nicht) gedreht weggenommen werden?
+ *  ja:
+ *      verkleinere cube
+ *      push_back current in sorted mit dimension
+ *      remove von unsorted
+ *      isValid init mit true
+ *      if rekursion gleich true:
+ *          return true
+ *      else continue mit nächstem element
+ *  wenn unsorted durchlaufen und isValid gleich false:
+ *      return false
+ *  wenn unsorted leer und cube{x,y,z} = 0
+ *      return true
+ */
+bool calculate_cube(int cube[3], vector<pair<Slice*, Dimension>>* sorted, vector<Slice*> unsorted) {
+    if (unsorted.empty()) {
+        if(cube[0] == 0 || cube[1] == 0 || cube[2] == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     bool valid = false;
-    for (auto &slice: *unsorted) {
-        if (slice->length == cube[0] && slice->width == cube[1]) { //Wenn Seite => {laenge, breite}, dann ...
-            cube[2] -= 1; //Tiefe minus eins
-            sorted->push_back(slice);
-            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
-            valid = true;
-        } else if (slice->length == cube[0] && slice->width == cube[2]) { //Wenn Seite => {laenge, tiefe}, dann ...
-            cube[1] -= 1; //Breite minus eins
-            sorted->push_back(slice);
-            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
-            valid = true;
-        } else if (slice->length == cube[1] && slice->width == cube[2]) { //Wenn Seite => {breite, tiefe}, dann ...
-            cube[0] -= 1; //Länge minus eins
-            sorted->push_back(slice);
-            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
-            valid = true;
-
-            //Piece wird um 90° gedreht:
-        } else if (slice->width == cube[0] && slice->length == cube[1]) { //Wenn Seite => {laenge, breite}, dann ...
-            cube[2] -= 1; //Tiefe minus eins
-            sorted->push_back(slice);
-            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
-            valid = true;
-        } else if (slice->width == cube[0] && slice->length == cube[2]) { //Wenn Seite => {laenge, tiefe}, dann ...
-            cube[1] -= 1; //Breite minus eins
-            sorted->push_back(slice);
-            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
-            valid = true;
-        } else if (slice->width == cube[1] && slice->length == cube[2]) { //Wenn Seite => {breite, tiefe}, dann ...
-            cube[0] -= 1; //Länge minus eins
-            sorted->push_back(slice);
-            unsorted->erase(find(unsorted->begin(), unsorted->end(), slice));
-            valid = true;
+    for (auto &slice: unsorted) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = i + 1; j < 3; j++) {
+                cout << "check slice {" << slice->length << "," << slice->height << "} on {" << cube[i] << "," << cube[j] << "}" <<endl;
+                if ((slice->length == cube[i] && slice->height == cube[j]) ||
+                    (slice->height == cube[i] && slice->length == cube[j])) {
+                    cout << "piece fit on: " << ((3 - i - j == 0) ? "RIGHT" : ((3 - i - j == 1) ? "TOP" : "FRONT")) << " " <<  (3 - i - j) << endl;
+                    cube[3 - i - j] -= 1; //decrease dimension
+                    cout << "cube dimensions: length=" << cube[0] << ", height=" << cube[1] << ", depth=" << cube[2] << endl;
+                    cout << endl;
+                    sorted->emplace_back(slice, Dimension(3 - i - j));
+                    unsorted.erase(unsorted.begin() + int(&slice - &unsorted[0]));
+                    valid = true;
+                    if (calculate_cube(cube, sorted, unsorted)) {
+                        return true;
+                    }
+                }
+            }
         }
     }
     if (!valid) {
-        sorted->clear();
-        return;
+        return false;
     }
+    return false; //TODO: idk if this has to be true or false or if i can remove this
 }
+
+
