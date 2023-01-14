@@ -21,12 +21,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V28">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/Test1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestOutput/Test1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/Test2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/kaese1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestOutput/Test2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestOutput/kaese1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/simpleInput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/simpleInput.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +45,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>

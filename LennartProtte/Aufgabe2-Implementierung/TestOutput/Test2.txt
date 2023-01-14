@@ -1,0 +1,4 @@
+The cheese slices can be assembled into a complete cheese cube in the following order:
+(2, 3) TOP
+(1, 2) FRONT
+(2, 2) TOP
