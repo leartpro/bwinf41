@@ -14,11 +14,6 @@ struct Slice {
         this->height = b;
     }
 
-    Slice(Slice &slice) {
-        this->length = slice.length;
-        this->height = slice.height;
-    }
-
     int length, height;
 };
 
@@ -28,14 +23,14 @@ enum Dimension {
     RIGHT = 2
 };
 
-bool calculate_cube(int *cube, vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted);
+bool calculate_cube(int cube[], vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted);
 
 int main() {
-    //string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
-    //string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
 
-    string input_dir = "./TestInput";
-    string output_dir = "./TestOutput";
+    //string input_dir = "./TestInput";
+    //string output_dir = "./TestOutput";
 
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -151,18 +146,21 @@ bool calculate_cube(int cube[3], vector<pair<Slice *, Dimension>> *sorted, vecto
                     pair<Slice *, Dimension> pair1 = make_pair(slice, Dimension(3 - i - j));
                     sorted->emplace_back(slice, Dimension(3 - i - j));
                     unsorted.erase(unsorted.begin() + int(&slice - &unsorted[0]));
-                    if (calculate_cube(cube, sorted, unsorted)) {
+                    int pCube[] = {cube[0], cube[1], cube[2]};
+                    if (calculate_cube(pCube, sorted, unsorted)) {
                         cout << "recursion had success" << endl;
                         return true;
                     } else {
                         cube[3 - i - j] += 1; //increase dimension
-                        sorted->erase(std::remove_if(
-                                sorted->begin(),
-                                sorted->end(),
-                                [&](pair<Slice *, Dimension> &p) {
-                                    return p == pair1;
-                                }), sorted->end()
-                        );
+                        bool deleted = false;
+                        sorted->erase(std::remove_if(sorted->begin(), sorted->end(),
+                                                     [&](pair<Slice *, Dimension> &p) {
+                                                         if (p == pair1 && !deleted) {
+                                                             deleted = true;
+                                                             return true;
+                                                         }
+                                                         return false;
+                                                     }), sorted->end());
                         unsorted.push_back(slice);
                         cout << "recursion had no success" << endl;
                     }
