@@ -22,15 +22,15 @@ enum Dimension {
     TOP = 1,
     RIGHT = 2
 };
-
+bool assemble_cube_backtracking(int cube[3], vector<pair<Slice, Dimension>>& sorted, vector<Slice>& slices, int index);
 bool calculate_cube(int cube[], vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted);
 
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
+    //string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
+    //string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
 
-    //string input_dir = "./TestInput";
-    //string output_dir = "./TestOutput";
+    string input_dir = "./TestInput";
+    string output_dir = "./TestOutput";
 
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -46,17 +46,17 @@ int main() {
         ofstream fout(output_file);
 
         //Ausgabedatei einlesen
-        vector<Slice *> slices;
+        vector<Slice> slices;
         int a, b, n;
         fin >> n;
         while (fin >> a >> b) {
-            slices.push_back(new Slice(a, b));
+            slices.push_back(Slice(a, b));
         }
 
         // Calculate the volume of the cheese cube
         int volume = 0;
         for (const auto &slice: slices) {
-            volume += slice->length * slice->height;
+            volume += slice.length * slice.height;
         }
 
         // Calculate the dimensions of the cheese cube //TODO: not calculated correctly yet
@@ -76,7 +76,14 @@ int main() {
         cout << "cube dimensions: length=" << length << ", height=" << height << ", depth=" << depth << endl << endl;
         //get result
         vector<pair<Slice *, Dimension>> order;
-        bool success = calculate_cube(new int[3]{length, height, depth}, &order, slices);
+        //bool success = calculate_cube(new int[3]{length, height, depth}, &order, slices);
+        //vector<Slice> slices = {{2, 4}, {4, 6}, {6, 6}, {3, 4}, {4, 6}, {3, 6}, {2, 4}, {2, 4}, {4, 6}, {3, 3}, {3, 3}, {6, 6}};
+        vector<pair<Slice, Dimension>> sorted;
+        int cube[3] = {6, 6, 6};
+        sort(slices.begin(), slices.end(), [](const Slice &a, const Slice &b) {
+            return max(a.length, a.height) > max(b.length, b.height);
+        });
+        bool success = assemble_cube_backtracking(cube, sorted, slices, 0);
 
         if (!success) {
             cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
@@ -120,55 +127,31 @@ int main() {
  *  wenn unsorted leer und cube{x,y,z} = 0
  *      return true
  */
-bool calculate_cube(int cube[3], vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted) {
-    if (unsorted.empty()) {
-        if (cube[0] == 0 || cube[1] == 0 || cube[2] == 0) {
-            cout << "found solution" << endl;
+bool assemble_cube_backtracking(int cube[3], vector<pair<Slice, Dimension>>& sorted, vector<Slice>& slices, int index) {
+    if (index == slices.size()) {
+        if (cube[0] == 0 && cube[1] == 0 && cube[2] == 0) {
             return true;
-        } else {
-            cout << "does not found solution" << endl;
-            return false;
         }
+        return false;
     }
-    for (auto &slice: unsorted) {
-        cout << "check slice {" << slice->length << "," << slice->height << "}" << endl;
-        for (int i = 0; i < 3; i++) {
-            for (int j = i + 1; j < 3; j++) {
-                //cout << "check slice {" << slice->length << "," << slice->height << "} on {" << cube[i] << "," << cube[j] << "}" <<endl;
-                if ((slice->length == cube[i] && slice->height == cube[j]) ||
-                    (slice->height == cube[i] && slice->length == cube[j])) {
-                    cout << "piece fit on: " << ((3 - i - j == 0) ? "RIGHT" : ((3 - i - j == 1) ? "TOP" : "FRONT"))
-                         << " " << (3 - i - j) << endl;
-                    cube[3 - i - j] -= 1; //decrease dimension
-                    cout << "cube dimensions: length=" << cube[0] << ", height=" << cube[1] << ", depth=" << cube[2]
-                         << endl;
-                    cout << endl;
-                    pair<Slice *, Dimension> pair1 = make_pair(slice, Dimension(3 - i - j));
-                    sorted->emplace_back(slice, Dimension(3 - i - j));
-                    unsorted.erase(unsorted.begin() + int(&slice - &unsorted[0]));
-                    int pCube[] = {cube[0], cube[1], cube[2]};
-                    if (calculate_cube(pCube, sorted, unsorted)) {
-                        cout << "recursion had success" << endl;
-                        return true;
-                    } else {
-                        cube[3 - i - j] += 1; //increase dimension
-                        bool deleted = false;
-                        sorted->erase(std::remove_if(sorted->begin(), sorted->end(),
-                                                     [&](pair<Slice *, Dimension> &p) {
-                                                         if (p == pair1 && !deleted) {
-                                                             deleted = true;
-                                                             return true;
-                                                         }
-                                                         return false;
-                                                     }), sorted->end());
-                        unsorted.push_back(slice);
-                        cout << "recursion had no success" << endl;
-                    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = i + 1; j < 3; j++) {
+            if ((slices[index].length == cube[i] && slices[index].height == cube[j]) ||
+                (slices[index].height == cube[i] && slices[index].length == cube[j])) {
+                int previous_i = cube[i];
+                int previous_j = cube[j];
+                cube[i] -= 1;
+                cube[j] -= 1;
+                sorted.emplace_back(slices[index], static_cast<Dimension>(3 - i - j));
+                if (assemble_cube_backtracking(cube, sorted, slices, index + 1)) {
+                    return true;
                 }
+                sorted.pop_back();
+                cube[i] = previous_i;
+                cube[j] = previous_j;
             }
         }
     }
-    cout << "iterated over all pieces and no solution found" << endl;
     return false;
 }
 
