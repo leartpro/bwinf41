@@ -20,12 +20,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V28">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/Test2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/kaese1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestOutput/Test2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestOutput/kaese1.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V29 Aufgabe2 tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/Test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Dump/Test1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/TestInput/Test2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Dump/Test2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +46,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="f44b6ee8dccaca60fa3a2f05953d0ce521962eae" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -83,6 +82,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;dynamic.analysis.tools.valgrind&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -94,11 +94,11 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Dump" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/LennartProtte" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestOutput" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
     </key>
   </component>
   <component name="RunManager">
@@ -176,6 +176,7 @@
       <workItem from="1673373181324" duration="1257000" />
       <workItem from="1673465932584" duration="610000" />
       <workItem from="1673697086110" duration="9791000" />
+      <workItem from="1673779549509" duration="2235000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1672871021303</created>
@@ -450,7 +451,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673369634728</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="V29 Aufgabe2 tests">
+      <created>1673715798390</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1673715798390</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,7 +477,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V11" />
     <MESSAGE value="V12" />
     <MESSAGE value="V13" />
     <MESSAGE value="V14" />
@@ -494,6 +501,7 @@
     <MESSAGE value="V27 Solution Problem 2 Docu" />
     <MESSAGE value="V27" />
     <MESSAGE value="V28" />
-    <option name="LAST_COMMIT_MESSAGE" value="V28" />
+    <MESSAGE value="V29 Aufgabe2 tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="V29 Aufgabe2 tests" />
   </component>
 </project>
