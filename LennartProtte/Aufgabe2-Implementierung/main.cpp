@@ -3,6 +3,7 @@
 #include <cmath>
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 
 
 using namespace std;
@@ -30,8 +31,11 @@ enum Dimension {
 bool calculate_cube(int *cube, vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted);
 
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
+    //string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
+    //string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
+
+    string input_dir = "./TestInput";
+    string output_dir = "./TestOutput";
 
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
