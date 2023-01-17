@@ -79,6 +79,11 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> 
             int new_depth = depth - (dimension == 0 ? 1 : 0);
             order.emplace_back(*it, dimension);
             slices.erase(it);
+            cout << "ORDER: " << endl;
+            for (auto const &o: order) {
+                cout << "slice: (" << o.first.length << ", " << o.first.height << ") dimension: " << o.second << endl;
+            }
+            cout << endl;
             if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
                 return true;
             } else {
