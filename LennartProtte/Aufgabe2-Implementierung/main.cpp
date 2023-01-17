@@ -25,6 +25,45 @@ enum Dimension {
 
 bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices);
 
+
+int main() {
+    int length = 6, height = 6, depth = 6;
+    vector<pair<Slice, Dimension>> order;
+    /*
+    vector<Slice> slices = {
+            {2, 4},
+            {4, 6},
+            {6, 6},
+            {3, 4},
+            {4, 6},
+            {3, 6},
+            {2, 4},
+            {2, 4},
+            {4, 6},
+            {3, 3},
+            {3, 3},
+            {6, 6}
+    };
+            */
+    //vector<Slice> slices = { {6, 4}, {4, 6}, {4, 4}, {4, 2}, {2, 4} };
+    vector<Slice> slices = {
+            {2, 3},
+            {1, 2},
+            {2, 2}
+    };
+    if (calculate_cube(length, height, depth, order, slices)) {
+        cout << "Die Käsescheiben können zu einem Quader zusammengesetzt werden:" << endl;
+        for (auto const &o: order) {
+            cout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
+        }
+    } else {
+        cout << "Die Käsescheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
+    }
+
+    return 0;
+}
+
+/*
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
@@ -76,7 +115,7 @@ int main() {
         cout << "cube dimensions: length=" << length << ", height=" << height << ", depth=" << depth << endl << endl;
         //get result
         vector<pair<Slice *, Dimension>> order;
-        bool success = calculate_cube(new int[3]{length, height, depth}, &order, slices);
+        bool success = calculate_cube(length, height, depth}, order, slices);
 
         if (!success) {
             cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
@@ -99,6 +138,25 @@ int main() {
         fout.close();
     }
     return 0;
+}*/
+
+bool canRemoveSlice(int length, int height, int depth, Slice slice, Dimension &dimension) {
+    if (slice.length == length && slice.height == height) {
+        dimension = Dimension::FRONT;
+    } else if (slice.height == length && slice.length == height) {
+        dimension = Dimension::FRONT;
+    } else if (slice.length == length && slice.height == depth) {
+        dimension = Dimension::TOP;
+    } else if (slice.height == length && slice.length == depth) {
+        dimension = Dimension::TOP;
+    } else if (slice.length == height && slice.height == depth) {
+        dimension = Dimension::RIGHT;
+    } else if (slice.height == height && slice.length == depth) {
+        dimension = Dimension::RIGHT;
+    } else {
+        return false;
+    }
+    return true;
 }
 
 bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
@@ -106,36 +164,16 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
         return (length == 0 || height == 0 || depth == 0);
     }
     for (auto it = slices.begin(); it != slices.end(); ++it) {
-        if (it->length == length && it->height == height || it->height == length && it->length == height) {
-            depth--;
-            order.emplace_back(*it, Dimension(FRONT));
+        Dimension dimension;
+        if (canRemoveSlice(length, height, depth, *it, dimension)) {
+            int new_length = length - (dimension == Dimension::FRONT ? it->length : 0);
+            int new_height = height - (dimension == Dimension::TOP ? it->height : 0);
+            int new_depth = depth - (dimension == Dimension::RIGHT ? it->length : 0);
+            order.emplace_back(*it, dimension);
             slices.erase(it);
-            if (calculate_cube(length, height, depth, order, slices)) {
+            if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
                 return true;
             } else {
-                depth++;
-                order.pop_back();
-                slices.push_back(*it);
-            }
-        } else if (it->length == length && it->height == depth || it->height == length && it->length == depth) {
-            height--;
-            order.emplace_back(*it, Dimension(TOP));
-            slices.erase(it);
-            if (calculate_cube(length, height, depth, order, slices)) {
-                return true;
-            } else {
-                height++;
-                order.pop_back();
-                slices.push_back(*it);
-            }
-        } else if (it->length == height && it->height == depth || it->height == height && it->length == depth) {
-            length--;
-            order.emplace_back(*it, Dimension(FRONT));
-            slices.erase(it);
-            if (calculate_cube(length, height, depth, order, slices)) {
-                return true;
-            } else {
-                length++;
                 order.pop_back();
                 slices.push_back(*it);
             }
@@ -143,5 +181,8 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
     }
     return false;
 }
+
+
+
 
 
