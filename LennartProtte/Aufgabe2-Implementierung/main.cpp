@@ -1,10 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
-#include <fstream>
-#include <filesystem>
 #include <algorithm>
-
 
 using namespace std;
 
@@ -17,19 +13,12 @@ struct Slice {
     int length, height;
 };
 
-enum Dimension {
-    FRONT = 0,
-    TOP = 1,
-    RIGHT = 2
-};
-
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices);
-
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> &order, vector<Slice> &slices);
 
 int main() {
     int length = 6, height = 6, depth = 6;
-    vector<pair<Slice, Dimension>> order;
-    /*
+    vector<pair<Slice, int>> order;
+
     vector<Slice> slices = {
             {2, 4},
             {4, 6},
@@ -44,13 +33,12 @@ int main() {
             {3, 3},
             {6, 6}
     };
-            */
-    //vector<Slice> slices = { {6, 4}, {4, 6}, {4, 4}, {4, 2}, {2, 4} };
-    vector<Slice> slices = {
-            {2, 3},
-            {1, 2},
-            {2, 2}
-    };
+    /*
+    sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
+             return (a.length * a.height) > (b.length * b.height);
+         }
+    );
+    */
     if (calculate_cube(length, height, depth, order, slices)) {
         cout << "Die Käsescheiben können zu einem Quader zusammengesetzt werden:" << endl;
         for (auto const &o: order) {
@@ -63,112 +51,32 @@ int main() {
     return 0;
 }
 
-/*
-int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
-
-    //string input_dir = "./TestInput";
-    //string output_dir = "./TestOutput";
-
-    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
-    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
-
-        // Dateiname und -pfad aus dem Iterator auslesen
-        string input_file = entry.path();
-        string output_file = output_dir + "/" + entry.path().filename().string();
-
-        // Eingabedatei öffnen
-        ifstream fin(input_file);
-
-        // Ausgabedatei öffnen
-        ofstream fout(output_file);
-
-        //Ausgabedatei einlesen
-        vector<Slice *> slices;
-        int a, b, n;
-        fin >> n;
-        while (fin >> a >> b) {
-            slices.push_back(new Slice(a, b));
-        }
-
-        // Calculate the volume of the cheese cube
-        int volume = 0;
-        for (const auto &slice: slices) {
-            volume += slice->length * slice->height;
-        }
-
-        // Calculate the dimensions of the cheese cube //TODO: not calculated correctly yet
-        int length = static_cast<int>(cbrt(volume)); //cubic root of volume
-        int height = length; //TODO: the length dont have to be equal to the height
-        int depth = volume / (length * height);
-
-        // Check if the dimensions of the cheese cube are valid
-        if (length * height * depth != volume) {
-            cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
-            fout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
-            fin.close();
-            fout.close();
-            continue; //TODO: not sure if this is correct
-        }
-
-        cout << "cube dimensions: length=" << length << ", height=" << height << ", depth=" << depth << endl << endl;
-        //get result
-        vector<pair<Slice *, Dimension>> order;
-        bool success = calculate_cube(length, height, depth}, order, slices);
-
-        if (!success) {
-            cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
-            fout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
-        } else {
-            cout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
-                 << std::endl;
-            fout << "The cheese slices can be assembled into a complete cheese cube in the following order:"
-                 << std::endl;
-            for (const auto &current: order) {
-                cout << "(" << current.first->length << ", " << current.first->height << ") "
-                     << ((current.second == 0) ? "RIGHT" : ((current.second == 1) ? "TOP" : "FRONT")) << endl;
-                fout << "(" << current.first->length << ", " << current.first->height << ") "
-                     << ((current.second == 0) ? "RIGHT" : ((current.second == 1) ? "TOP" : "FRONT")) << endl;
-            }
-        }
-
-        // Dateien schließen
-        fin.close();
-        fout.close();
-    }
-    return 0;
-}*/
-
-bool canRemoveSlice(int length, int height, int depth, Slice slice, Dimension &dimension) {
-    if (slice.length == length && slice.height == height) {
-        dimension = Dimension::FRONT;
-    } else if (slice.height == length && slice.length == height) {
-        dimension = Dimension::FRONT;
-    } else if (slice.length == length && slice.height == depth) {
-        dimension = Dimension::TOP;
-    } else if (slice.height == length && slice.length == depth) {
-        dimension = Dimension::TOP;
-    } else if (slice.length == height && slice.height == depth) {
-        dimension = Dimension::RIGHT;
-    } else if (slice.height == height && slice.length == depth) {
-        dimension = Dimension::RIGHT;
+int canRemoveSlice(int length, int height, int depth, Slice slice) {
+    if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
+        return 0; //FRONT
+    } else if (slice.length == length && slice.height == depth || slice.height == length && slice.length == depth) {
+        return 1; //TOP
+    } else if (slice.length == height && slice.height == depth || slice.height == height && slice.length == depth) {
+        return 2; //SIDE
     } else {
-        return false;
+        return -1; //DOES NOT FIT
     }
-    return true;
 }
 
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> &order, vector<Slice> &slices) {
+    cout << "cube: " << length << "x" << height << "x" << depth << "x" << endl;
     if (slices.empty()) {
+        cout << "CUBE COMPLETED" << endl;
         return (length == 0 || height == 0 || depth == 0);
     }
     for (auto it = slices.begin(); it != slices.end(); ++it) {
-        Dimension dimension;
-        if (canRemoveSlice(length, height, depth, *it, dimension)) {
-            int new_length = length - (dimension == Dimension::FRONT ? it->length : 0);
-            int new_height = height - (dimension == Dimension::TOP ? it->height : 0);
-            int new_depth = depth - (dimension == Dimension::RIGHT ? it->length : 0);
+        int dimension = canRemoveSlice(length, height, depth, *it);
+        if (dimension >= 0) {
+            cout << "current slice: {" << it->length << ", " << it->height << "}" << endl;
+            cout << "current dimension for slice: " << dimension << endl;
+            int new_length = length - (dimension == 2 ? 1 : 0);
+            int new_height = height - (dimension == 1 ? 1 : 0);
+            int new_depth = depth - (dimension == 0 ? 1 : 0);
             order.emplace_back(*it, dimension);
             slices.erase(it);
             if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
@@ -179,6 +87,7 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
             }
         }
     }
+    cout << "ITERATION FAILED => RETURN FALSE" << endl;
     return false;
 }
 
