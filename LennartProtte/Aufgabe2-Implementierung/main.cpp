@@ -23,7 +23,7 @@ enum Dimension {
     RIGHT = 2
 };
 
-bool calculate_cube(int cube[], vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted);
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices);
 
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
@@ -101,74 +101,46 @@ int main() {
     return 0;
 }
 
-/*
- * Gegeben: int[3] cube, vector<pair<Slice*, Dimension>> sorted, vector<Slice> unsorted
- * Return: bool
- * init bool isValid mit false
- * Für jedes Element aus unsorted:
- *  kann an einer Seite (nicht) gedreht weggenommen werden?
- *  ja:
- *      verkleinere cube
- *      push_back current in sorted mit dimension
- *      remove von unsorted
- *      isValid init mit true
- *      if rekursion gleich true:
- *          return true
- *      else continue mit nächstem element
- *  wenn unsorted durchlaufen und isValid gleich false:
- *      return false
- *  wenn unsorted leer und cube{x,y,z} = 0
- *      return true
- */
-bool calculate_cube(int cube[3], vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted) {
-    if (unsorted.empty()) {
-        if (cube[0] == 0 || cube[1] == 0 || cube[2] == 0) {
-            cout << "found solution" << endl;
-            return true;
-        } else {
-            cout << "does not found solution" << endl;
-            return false;
-        }
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
+    if (slices.empty()) {
+        return (length == 0 || height == 0 || depth == 0);
     }
-    for (auto &slice: unsorted) {
-        cout << "check slice {" << slice->length << "," << slice->height << "}" << endl;
-        for (int i = 0; i < 3; i++) {
-            for (int j = i + 1; j < 3; j++) {
-                //cout << "check slice {" << slice->length << "," << slice->height << "} on {" << cube[i] << "," << cube[j] << "}" <<endl;
-                if ((slice->length == cube[i] && slice->height == cube[j]) ||
-                    (slice->height == cube[i] && slice->length == cube[j])) {
-                    cout << "piece fit on: " << ((3 - i - j == 0) ? "RIGHT" : ((3 - i - j == 1) ? "TOP" : "FRONT"))
-                         << " " << (3 - i - j) << endl;
-                    cube[3 - i - j] -= 1; //decrease dimension
-                    cout << "cube dimensions: length=" << cube[0] << ", height=" << cube[1] << ", depth=" << cube[2]
-                         << endl;
-                    cout << endl;
-                    pair<Slice *, Dimension> pair1 = make_pair(slice, Dimension(3 - i - j));
-                    sorted->emplace_back(slice, Dimension(3 - i - j));
-                    unsorted.erase(unsorted.begin() + int(&slice - &unsorted[0]));
-                    int pCube[] = {cube[0], cube[1], cube[2]};
-                    if (calculate_cube(pCube, sorted, unsorted)) {
-                        cout << "recursion had success" << endl;
-                        return true;
-                    } else {
-                        cube[3 - i - j] += 1; //increase dimension
-                        bool deleted = false;
-                        sorted->erase(std::remove_if(sorted->begin(), sorted->end(),
-                                                     [&](pair<Slice *, Dimension> &p) {
-                                                         if (p == pair1 && !deleted) {
-                                                             deleted = true;
-                                                             return true;
-                                                         }
-                                                         return false;
-                                                     }), sorted->end());
-                        unsorted.push_back(slice);
-                        cout << "recursion had no success" << endl;
-                    }
-                }
+    for (auto it = slices.begin(); it != slices.end(); ++it) {
+        if (it->length == length && it->height == height || it->height == length && it->length == height) {
+            depth--;
+            order.emplace_back(*it, Dimension(FRONT));
+            slices.erase(it);
+            if (calculate_cube(length, height, depth, order, slices)) {
+                return true;
+            } else {
+                depth++;
+                order.pop_back();
+                slices.push_back(*it);
+            }
+        } else if (it->length == length && it->height == depth || it->height == length && it->length == depth) {
+            height--;
+            order.emplace_back(*it, Dimension(TOP));
+            slices.erase(it);
+            if (calculate_cube(length, height, depth, order, slices)) {
+                return true;
+            } else {
+                height++;
+                order.pop_back();
+                slices.push_back(*it);
+            }
+        } else if (it->length == height && it->height == depth || it->height == height && it->length == depth) {
+            length--;
+            order.emplace_back(*it, Dimension(FRONT));
+            slices.erase(it);
+            if (calculate_cube(length, height, depth, order, slices)) {
+                return true;
+            } else {
+                length++;
+                order.pop_back();
+                slices.push_back(*it);
             }
         }
     }
-    cout << "iterated over all pieces and no solution found" << endl;
     return false;
 }
 
