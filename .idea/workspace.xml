@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -22,13 +25,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V33 nice debug but causes bugs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/simpleInput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/simpleInput.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V33 nice debug but probably causes bugs">
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,25 +70,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/lenni/Desktop/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;dynamic.analysis.tools.valgrind&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/home/lenni/Desktop/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "dynamic.analysis.tools.valgrind",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
@@ -190,14 +188,7 @@
       <workItem from="1673782579012" duration="1314000" />
       <workItem from="1673990225490" duration="812000" />
       <workItem from="1674056141439" duration="11102000" />
-      <workItem from="1674076752615" duration="3347000" />
-    </task>
-    <task id="LOCAL-00002" summary="Init Latex and notes">
-      <created>1672875691059</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1672875691059</updated>
+      <workItem from="1674076752615" duration="3691000" />
     </task>
     <task id="LOCAL-00003" summary="V1 of the algorithm">
       <created>1672877978632</created>
@@ -535,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674078891437</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="V33 nice debug but probably causes bugs">
+      <created>1674081560891</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1674081560891</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +552,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V21" />
     <MESSAGE value="V22 Most useful i got so far :-(" />
     <MESSAGE value="V23" />
     <MESSAGE value="V24" />
@@ -579,7 +576,8 @@
     <MESSAGE value="V33 debug print" />
     <MESSAGE value="V33 debug is working" />
     <MESSAGE value="V33 nice debug but causes bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="V33 nice debug but causes bugs" />
+    <MESSAGE value="V33 nice debug but probably causes bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="V33 nice debug but probably causes bugs" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="../../../../Documents/Projects/bwinf41/cmake-build-debug-coverage" NAME="bwinf41 Coverage Results" MODIFIED="1674057281801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

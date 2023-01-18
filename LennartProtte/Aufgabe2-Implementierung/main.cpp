@@ -69,16 +69,12 @@ int main() {
             }
         }
         //Find all possible other sides
-        vector<pair<int, int>> result;
+        vector<pair<int, int>> result; //TODO: e.g Quader 210x210x90V(9261000) is very suspicious
         for (int i = 1; i <= volume / length; i++) {
             if (volume % (length * i) == 0) {
                 result.emplace_back(length, i);
             }
         }
-
-        //cout << "Quader " << length << "x" << height << "x" << depth << " + buffer=" << buffer << endl << endl;
-        //fout << "Quader " << length << "x" << height << "x" << depth << " + buffer=" << buffer << endl << endl;
-
 
         vector<pair<Slice, int>> order;
         sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
@@ -88,11 +84,13 @@ int main() {
         auto it = result.begin();
         bool success = false;
         while (it != result.end() && !success) {
+            cout << "Quader " << length << "x" << it->first << "x" << it->second << "V(" << volume << ")" << endl << endl;
             int t_length = length;
             vector<Slice> t_slices(slices);
             order.clear();
             if (calculate_cube(t_length, it->first, it->second, order, t_slices)) {
                 success = true;
+                fout << "Quader " << length << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl << endl;
                 cout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
                 fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
                 for (auto const &o: order) {

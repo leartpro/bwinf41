@@ -1,3 +1,5 @@
+Quader 6x6x6 V(216)
+
 Die Scheiben können zu einem Quader zusammengesetzt werden:
 Slice: (6, 6) Dimension: 0
 Slice: (6, 6) Dimension: 0
