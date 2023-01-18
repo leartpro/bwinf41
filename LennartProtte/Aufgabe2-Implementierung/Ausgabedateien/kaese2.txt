@@ -1,8 +1,6 @@
-Quader 2x1000x1000 + buffer=0
-
 Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (2, 1000) Dimension: 0
-Slice: (2, 1000) Dimension: 0
-Slice: (2, 998) Dimension: 1
-Slice: (998, 999) Dimension: 2
-Slice: (998, 999) Dimension: 2
+Slice: (2, 1000) Dimension: 1
+Slice: (2, 1000) Dimension: 1
+Slice: (2, 998) Dimension: 2
+Slice: (998, 999) Dimension: 0
+Slice: (998, 999) Dimension: 0

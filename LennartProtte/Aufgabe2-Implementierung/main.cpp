@@ -18,6 +18,14 @@ struct Slice {
 
 bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> &order, vector<Slice> &slices);
 
+void calculate_cube_dimensions(int volume, int side1, vector<pair<int, int>> &result) {
+    for (int i = 1; i <= volume / side1; i++) {
+        if (volume % (side1 * i) == 0) {
+            result.emplace_back(side1, i);
+        }
+    }
+}
+
 
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
@@ -48,44 +56,28 @@ int main() {
         }
 
         // Calculate the volume of the cheese cube
-        int volume = 0, length = 0, height = 0, depth, buffer = 0;
+        int volume = 0, length = 0;
         for (const auto &slice: slices) {
             volume += slice.length * slice.height;
         }
 
-        // Calculate the dimensions of the cheese cube
+        // Find the largest side
         for (const auto &slice: slices) {
-            if ((slice.length > length && slice.length > height) || (slice.height > height && slice.height > length)) {
-                length = slice.length;
-                height = slice.height;
+            int side = (slice.length > slice.height) ? slice.length : slice.height;
+            if (side > length) {
+                length = side;
             }
         }
-        depth = volume / (length * height);
-
-        // Calculate the Buffer of the cheese cube
-        if (length * height * depth != volume) {
-            if (length * height * depth > volume) {
-                cout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
-                fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
-                fin.close();
-                fout.close();
-                continue;
-            } else {
-                while (length * height * (depth + buffer) < volume) {
-                    buffer++;
-                }
-                if (length * height * depth != volume) {
-                    cout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
-                    fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
-                    fin.close();
-                    fout.close();
-                    continue;
-                }
+        //Find all possible other sides
+        vector<pair<int, int>> result;
+        for (int i = 1; i <= volume / length; i++) {
+            if (volume % (length * i) == 0) {
+                result.emplace_back(length, i);
             }
         }
 
-        cout << "Quader " << length << "x" << height << "x" << depth << " + buffer=" << buffer << endl << endl;
-        fout << "Quader " << length << "x" << height << "x" << depth << " + buffer=" << buffer << endl << endl;
+        //cout << "Quader " << length << "x" << height << "x" << depth << " + buffer=" << buffer << endl << endl;
+        //fout << "Quader " << length << "x" << height << "x" << depth << " + buffer=" << buffer << endl << endl;
 
 
         vector<pair<Slice, int>> order;
@@ -93,20 +85,26 @@ int main() {
                  return (a.length * a.height) > (b.length * b.height);
              }
         );
-
-        if (
-                calculate_cube(length + buffer, height, depth, order, slices) ||
-                calculate_cube(length, height + buffer, depth, order, slices)
-            ) {
-            cout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
-            fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
-            for (auto const &o: order) {
-                cout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
-                fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
+        auto it = result.begin();
+        bool success = false;
+        while (it != result.end() && !success) {
+            int t_length = length;
+            vector<Slice> t_slices(slices);
+            order.clear();
+            if (calculate_cube(t_length, it->first, it->second, order, t_slices)) {
+                success = true;
+                cout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
+                fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
+                for (auto const &o: order) {
+                    cout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
+                    fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
+                }
             }
-        } else {
-            cout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
-            fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
+            it++;
+        }
+        if(!success) {
+                cout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
+                fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
         }
         // Dateien schließen
         fin.close();
