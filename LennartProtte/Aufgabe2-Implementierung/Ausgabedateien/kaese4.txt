@@ -1,552 +1,553 @@
-The cheese slices can be assembled into a complete cheese cube in the following order:
-(92, 124)
-(114, 120)
-(201, 204)
-(143, 167)
-(129, 131)
-(143, 167)
-(122, 125)
-(131, 137)
-(182, 187)
-(38, 60)
-(67, 114)
-(29, 51)
-(70, 118)
-(157, 172)
-(70, 117)
-(3, 55)
-(33, 57)
-(187, 194)
-(187, 190)
-(64, 107)
-(164, 171)
-(40, 58)
-(209, 209)
-(70, 98)
-(34, 77)
-(159, 167)
-(161, 169)
-(107, 118)
-(115, 120)
-(19, 66)
-(199, 201)
-(101, 127)
-(181, 183)
-(116, 131)
-(36, 59)
-(22, 69)
-(135, 150)
-(200, 202)
-(198, 201)
-(109, 119)
-(195, 195)
-(164, 173)
-(57, 80)
-(161, 169)
-(131, 133)
-(184, 186)
-(132, 145)
-(160, 168)
-(3, 52)
-(149, 169)
-(74, 108)
-(133, 147)
-(121, 125)
-(169, 179)
-(205, 206)
-(59, 106)
-(171, 174)
-(19, 43)
-(105, 126)
-(43, 61)
-(171, 174)
-(189, 192)
-(41, 66)
-(55, 79)
-(52, 77)
-(123, 126)
-(17, 41)
-(163, 170)
-(79, 119)
-(38, 80)
-(133, 154)
-(134, 154)
-(148, 154)
-(141, 143)
-(115, 120)
-(159, 174)
-(65, 95)
-(111, 119)
-(134, 138)
-(173, 182)
-(97, 114)
-(101, 116)
-(65, 95)
-(12, 38)
-(22, 44)
-(134, 150)
-(125, 139)
-(65, 93)
-(68, 115)
-(27, 50)
-(38, 58)
-(197, 198)
-(152, 170)
-(39, 62)
-(205, 206)
-(180, 184)
-(44, 68)
-(184, 186)
-(186, 189)
-(139, 141)
-(57, 106)
-(57, 80)
-(71, 118)
-(187, 192)
-(153, 160)
-(189, 195)
-(208, 209)
-(44, 92)
-(173, 179)
-(107, 130)
-(207, 209)
-(87, 120)
-(92, 108)
-(195, 198)
-(34, 58)
-(156, 166)
-(181, 188)
-(93, 125)
-(68, 99)
-(142, 155)
-(182, 184)
-(44, 68)
-(139, 141)
-(114, 119)
-(173, 183)
-(59, 106)
-(187, 190)
-(186, 191)
-(153, 170)
-(113, 131)
-(41, 84)
-(89, 116)
-(90, 117)
-(43, 68)
-(194, 198)
-(173, 179)
-(71, 118)
-(187, 195)
-(193, 197)
-(144, 145)
-(43, 61)
-(110, 131)
-(3, 29)
-(131, 137)
-(37, 59)
-(100, 126)
-(92, 124)
-(109, 128)
-(3, 32)
-(115, 131)
-(134, 149)
-(182, 186)
-(66, 96)
-(153, 170)
-(58, 106)
-(43, 85)
-(8, 58)
-(18, 41)
-(34, 77)
-(43, 61)
-(187, 194)
-(152, 160)
-(201, 202)
-(44, 61)
-(171, 181)
-(149, 160)
-(29, 51)
-(19, 42)
-(158, 172)
-(142, 155)
-(3, 30)
-(186, 188)
-(51, 101)
-(153, 160)
-(174, 184)
-(160, 168)
-(82, 106)
-(134, 155)
-(142, 161)
-(125, 127)
-(127, 130)
-(150, 156)
-(44, 92)
-(169, 179)
-(34, 58)
-(205, 207)
-(108, 118)
-(125, 142)
-(29, 76)
-(126, 130)
-(59, 84)
-(69, 101)
-(72, 118)
-(65, 92)
-(195, 196)
-(101, 124)
-(142, 161)
-(69, 117)
-(197, 197)
-(51, 76)
-(135, 150)
-(121, 139)
-(57, 106)
-(120, 138)
-(3, 30)
-(17, 64)
-(181, 188)
-(125, 127)
-(128, 131)
-(115, 120)
-(129, 143)
-(146, 146)
-(136, 150)
-(113, 130)
-(106, 118)
-(112, 119)
-(120, 132)
-(43, 60)
-(48, 71)
-(201, 203)
-(182, 189)
-(43, 68)
-(153, 166)
-(133, 147)
-(198, 200)
-(204, 205)
-(88, 106)
-(137, 159)
-(141, 143)
-(43, 60)
-(209, 209)
-(171, 178)
-(203, 205)
-(131, 137)
-(48, 70)
-(94, 125)
-(133, 148)
-(96, 114)
-(57, 80)
-(82, 114)
-(169, 179)
-(166, 171)
-(44, 91)
-(14, 62)
-(88, 106)
-(119, 137)
-(31, 52)
-(151, 170)
-(39, 62)
-(3, 57)
-(98, 126)
-(131, 145)
-(128, 143)
-(44, 91)
-(133, 146)
-(61, 107)
-(65, 109)
-(188, 191)
-(166, 172)
-(137, 160)
-(41, 65)
-(125, 143)
-(58, 82)
-(150, 159)
-(79, 102)
-(65, 110)
-(141, 143)
-(103, 127)
-(125, 140)
-(22, 70)
-(34, 54)
-(116, 131)
-(86, 106)
-(198, 199)
-(172, 181)
-(153, 170)
-(51, 101)
-(131, 134)
-(184, 187)
-(159, 170)
-(116, 121)
-(164, 177)
-(44, 94)
-(197, 197)
-(43, 59)
-(121, 140)
-(183, 186)
-(143, 155)
-(122, 125)
-(80, 119)
-(130, 145)
-(17, 63)
-(58, 106)
-(104, 118)
-(166, 171)
-(44, 66)
-(72, 99)
-(73, 118)
-(173, 179)
-(68, 116)
-(173, 179)
-(90, 116)
-(201, 202)
-(195, 196)
-(56, 103)
-(206, 207)
-(48, 71)
-(208, 209)
-(3, 55)
-(111, 119)
-(92, 120)
-(58, 84)
-(121, 137)
-(65, 95)
-(56, 79)
-(166, 171)
-(48, 71)
-(142, 143)
-(26, 50)
-(171, 180)
-(68, 98)
-(210, 210)
-(48, 99)
-(55, 79)
-(171, 175)
-(96, 113)
-(133, 147)
-(121, 134)
-(49, 73)
-(76, 119)
-(28, 75)
-(133, 146)
-(187, 191)
-(28, 51)
-(39, 62)
-(61, 90)
-(139, 141)
-(152, 160)
-(51, 101)
-(140, 160)
-(168, 172)
-(84, 120)
-(40, 58)
-(159, 170)
-(121, 140)
-(12, 59)
-(164, 177)
-(122, 126)
-(175, 183)
-(201, 203)
-(171, 181)
-(54, 102)
-(49, 99)
-(191, 197)
-(207, 208)
-(44, 64)
-(120, 125)
-(145, 145)
-(183, 185)
-(185, 191)
-(63, 107)
-(191, 196)
-(195, 195)
-(187, 194)
-(26, 48)
-(68, 98)
-(17, 40)
-(44, 91)
-(126, 127)
-(131, 133)
-(129, 143)
-(199, 200)
-(68, 116)
-(78, 102)
-(180, 184)
-(50, 75)
-(37, 55)
-(47, 70)
-(90, 116)
-(90, 107)
-(123, 126)
-(45, 98)
-(151, 161)
-(177, 179)
-(13, 38)
-(197, 198)
-(3, 30)
-(77, 102)
-(109, 119)
-(143, 155)
-(96, 122)
-(203, 205)
-(26, 48)
-(181, 182)
-(164, 173)
-(74, 119)
-(34, 58)
-(207, 207)
-(114, 119)
-(133, 147)
-(173, 179)
-(22, 46)
-(52, 77)
-(116, 120)
-(17, 39)
-(116, 131)
-(121, 139)
-(142, 155)
-(157, 172)
-(55, 78)
-(177, 186)
-(111, 119)
-(160, 168)
-(50, 74)
-(122, 126)
-(207, 207)
-(36, 59)
-(26, 73)
-(164, 171)
-(113, 132)
-(177, 179)
-(44, 68)
-(184, 188)
-(187, 190)
-(162, 171)
-(183, 186)
-(14, 38)
-(169, 172)
-(171, 174)
-(59, 84)
-(73, 101)
-(209, 210)
-(34, 58)
-(22, 68)
-(44, 68)
-(4, 34)
-(52, 77)
-(202, 204)
-(169, 179)
-(143, 155)
-(48, 99)
-(121, 139)
-(53, 102)
-(142, 153)
-(52, 76)
-(121, 139)
-(38, 58)
-(200, 202)
-(19, 67)
-(3, 32)
-(155, 164)
-(44, 67)
-(29, 51)
-(129, 131)
-(171, 180)
-(198, 198)
-(171, 182)
-(117, 124)
-(150, 158)
-(114, 120)
-(106, 130)
-(4, 57)
-(159, 172)
-(191, 196)
-(152, 160)
-(102, 117)
-(36, 59)
-(22, 69)
-(171, 175)
-(70, 99)
-(43, 68)
-(129, 131)
-(49, 73)
-(51, 101)
-(187, 194)
-(37, 80)
-(68, 114)
-(196, 198)
-(56, 80)
-(171, 177)
-(124, 126)
-(143, 167)
-(89, 107)
-(128, 130)
-(8, 35)
-(26, 73)
-(89, 107)
-(76, 119)
-(204, 204)
-(64, 107)
-(113, 131)
-(128, 130)
-(126, 128)
-(160, 168)
-(162, 170)
-(38, 61)
-(65, 110)
-(8, 59)
-(205, 206)
-(205, 206)
-(117, 124)
-(137, 151)
-(22, 70)
-(35, 55)
-(129, 143)
-(90, 123)
-(174, 183)
-(77, 102)
-(43, 87)
-(65, 113)
-(184, 186)
-(197, 201)
-(143, 167)
-(58, 106)
-(61, 88)
-(73, 101)
-(58, 106)
-(132, 146)
-(79, 102)
-(132, 137)
-(187, 190)
-(70, 98)
-(120, 138)
-(105, 126)
-(80, 104)
-(64, 92)
-(133, 147)
-(44, 93)
-(80, 119)
-(144, 168)
-(45, 98)
-(58, 82)
-(116, 120)
-(23, 48)
-(160, 168)
-(187, 194)
-(70, 103)
-(11, 59)
-(200, 201)
-(143, 145)
-(139, 141)
-(51, 77)
-(92, 124)
-(201, 202)
-(52, 76)
-(104, 126)
-(144, 159)
-(34, 78)
-(37, 80)
-(133, 147)
-The cheese slices cannot be assembled into a complete cheese cube.
+Quader 210x210x210 + buffer=0
+
+Die Scheiben können zu einem Quader zusammengesetzt werden:
+Slice: (210, 210) Dimension: 0
+Slice: (209, 210) Dimension: 1
+Slice: (209, 209) Dimension: 2
+Slice: (209, 209) Dimension: 0
+Slice: (208, 209) Dimension: 1
+Slice: (208, 209) Dimension: 0
+Slice: (207, 209) Dimension: 1
+Slice: (207, 207) Dimension: 2
+Slice: (207, 208) Dimension: 0
+Slice: (206, 207) Dimension: 2
+Slice: (207, 207) Dimension: 0
+Slice: (205, 207) Dimension: 1
+Slice: (205, 206) Dimension: 2
+Slice: (205, 206) Dimension: 1
+Slice: (205, 206) Dimension: 0
+Slice: (205, 206) Dimension: 0
+Slice: (203, 205) Dimension: 2
+Slice: (203, 205) Dimension: 1
+Slice: (204, 205) Dimension: 0
+Slice: (202, 204) Dimension: 2
+Slice: (204, 204) Dimension: 0
+Slice: (201, 204) Dimension: 1
+Slice: (201, 203) Dimension: 2
+Slice: (201, 203) Dimension: 1
+Slice: (201, 202) Dimension: 2
+Slice: (201, 202) Dimension: 1
+Slice: (201, 202) Dimension: 0
+Slice: (200, 202) Dimension: 1
+Slice: (200, 202) Dimension: 0
+Slice: (199, 200) Dimension: 2
+Slice: (200, 201) Dimension: 0
+Slice: (198, 201) Dimension: 1
+Slice: (199, 201) Dimension: 0
+Slice: (197, 201) Dimension: 1
+Slice: (197, 198) Dimension: 2
+Slice: (198, 200) Dimension: 0
+Slice: (196, 198) Dimension: 2
+Slice: (198, 199) Dimension: 0
+Slice: (195, 198) Dimension: 2
+Slice: (198, 198) Dimension: 0
+Slice: (194, 198) Dimension: 1
+Slice: (197, 198) Dimension: 0
+Slice: (193, 197) Dimension: 2
+Slice: (197, 197) Dimension: 0
+Slice: (197, 197) Dimension: 0
+Slice: (191, 197) Dimension: 1
+Slice: (191, 196) Dimension: 2
+Slice: (191, 196) Dimension: 1
+Slice: (195, 196) Dimension: 0
+Slice: (195, 196) Dimension: 0
+Slice: (189, 195) Dimension: 2
+Slice: (195, 195) Dimension: 0
+Slice: (195, 195) Dimension: 0
+Slice: (187, 195) Dimension: 1
+Slice: (187, 194) Dimension: 2
+Slice: (187, 194) Dimension: 1
+Slice: (187, 194) Dimension: 1
+Slice: (187, 194) Dimension: 1
+Slice: (187, 194) Dimension: 1
+Slice: (187, 190) Dimension: 2
+Slice: (187, 190) Dimension: 2
+Slice: (187, 192) Dimension: 1
+Slice: (189, 192) Dimension: 0
+Slice: (186, 189) Dimension: 2
+Slice: (186, 191) Dimension: 1
+Slice: (188, 191) Dimension: 0
+Slice: (185, 191) Dimension: 1
+Slice: (187, 191) Dimension: 0
+Slice: (184, 187) Dimension: 2
+Slice: (187, 190) Dimension: 0
+Slice: (187, 190) Dimension: 0
+Slice: (182, 187) Dimension: 2
+Slice: (182, 189) Dimension: 1
+Slice: (182, 186) Dimension: 2
+Slice: (186, 188) Dimension: 0
+Slice: (181, 188) Dimension: 1
+Slice: (181, 188) Dimension: 1
+Slice: (184, 188) Dimension: 0
+Slice: (180, 184) Dimension: 2
+Slice: (180, 184) Dimension: 2
+Slice: (184, 186) Dimension: 0
+Slice: (184, 186) Dimension: 0
+Slice: (184, 186) Dimension: 0
+Slice: (177, 186) Dimension: 1
+Slice: (183, 186) Dimension: 0
+Slice: (183, 186) Dimension: 0
+Slice: (175, 183) Dimension: 2
+Slice: (183, 185) Dimension: 0
+Slice: (174, 183) Dimension: 2
+Slice: (174, 184) Dimension: 1
+Slice: (182, 184) Dimension: 0
+Slice: (173, 182) Dimension: 2
+Slice: (173, 183) Dimension: 1
+Slice: (181, 183) Dimension: 0
+Slice: (172, 181) Dimension: 2
+Slice: (181, 182) Dimension: 0
+Slice: (171, 182) Dimension: 1
+Slice: (171, 180) Dimension: 2
+Slice: (171, 181) Dimension: 1
+Slice: (171, 181) Dimension: 1
+Slice: (171, 178) Dimension: 2
+Slice: (171, 180) Dimension: 1
+Slice: (171, 177) Dimension: 2
+Slice: (177, 179) Dimension: 0
+Slice: (177, 179) Dimension: 0
+Slice: (169, 179) Dimension: 1
+Slice: (169, 179) Dimension: 1
+Slice: (169, 179) Dimension: 1
+Slice: (169, 179) Dimension: 1
+Slice: (173, 179) Dimension: 0
+Slice: (173, 179) Dimension: 0
+Slice: (173, 179) Dimension: 0
+Slice: (173, 179) Dimension: 0
+Slice: (173, 179) Dimension: 0
+Slice: (164, 173) Dimension: 2
+Slice: (164, 173) Dimension: 2
+Slice: (164, 177) Dimension: 1
+Slice: (164, 177) Dimension: 1
+Slice: (164, 171) Dimension: 2
+Slice: (164, 171) Dimension: 2
+Slice: (171, 175) Dimension: 0
+Slice: (171, 175) Dimension: 0
+Slice: (162, 171) Dimension: 2
+Slice: (171, 174) Dimension: 0
+Slice: (171, 174) Dimension: 0
+Slice: (171, 174) Dimension: 0
+Slice: (159, 174) Dimension: 1
+Slice: (159, 170) Dimension: 2
+Slice: (159, 170) Dimension: 2
+Slice: (159, 172) Dimension: 1
+Slice: (169, 172) Dimension: 0
+Slice: (158, 172) Dimension: 1
+Slice: (168, 172) Dimension: 0
+Slice: (157, 172) Dimension: 1
+Slice: (157, 172) Dimension: 1
+Slice: (166, 172) Dimension: 0
+Slice: (156, 166) Dimension: 2
+Slice: (166, 171) Dimension: 0
+Slice: (166, 171) Dimension: 0
+Slice: (166, 171) Dimension: 0
+Slice: (153, 166) Dimension: 2
+Slice: (153, 170) Dimension: 1
+Slice: (153, 170) Dimension: 1
+Slice: (153, 170) Dimension: 1
+Slice: (163, 170) Dimension: 0
+Slice: (152, 170) Dimension: 1
+Slice: (162, 170) Dimension: 0
+Slice: (151, 170) Dimension: 1
+Slice: (151, 161) Dimension: 2
+Slice: (161, 169) Dimension: 0
+Slice: (161, 169) Dimension: 0
+Slice: (149, 169) Dimension: 1
+Slice: (149, 160) Dimension: 2
+Slice: (160, 168) Dimension: 0
+Slice: (160, 168) Dimension: 0
+Slice: (160, 168) Dimension: 0
+Slice: (160, 168) Dimension: 0
+Slice: (160, 168) Dimension: 0
+Slice: (144, 168) Dimension: 1
+Slice: (144, 159) Dimension: 2
+Slice: (159, 167) Dimension: 0
+Slice: (143, 167) Dimension: 1
+Slice: (143, 167) Dimension: 1
+Slice: (143, 167) Dimension: 1
+Slice: (143, 167) Dimension: 1
+Slice: (143, 155) Dimension: 2
+Slice: (143, 155) Dimension: 2
+Slice: (143, 155) Dimension: 2
+Slice: (155, 164) Dimension: 0
+Slice: (142, 155) Dimension: 2
+Slice: (142, 155) Dimension: 2
+Slice: (142, 155) Dimension: 2
+Slice: (142, 161) Dimension: 1
+Slice: (142, 161) Dimension: 1
+Slice: (142, 153) Dimension: 2
+Slice: (153, 160) Dimension: 0
+Slice: (153, 160) Dimension: 0
+Slice: (140, 160) Dimension: 1
+Slice: (152, 160) Dimension: 0
+Slice: (152, 160) Dimension: 0
+Slice: (152, 160) Dimension: 0
+Slice: (137, 160) Dimension: 1
+Slice: (137, 151) Dimension: 2
+Slice: (137, 159) Dimension: 1
+Slice: (150, 159) Dimension: 0
+Slice: (136, 150) Dimension: 2
+Slice: (150, 158) Dimension: 0
+Slice: (135, 150) Dimension: 2
+Slice: (135, 150) Dimension: 2
+Slice: (150, 156) Dimension: 0
+Slice: (134, 150) Dimension: 2
+Slice: (134, 155) Dimension: 1
+Slice: (134, 149) Dimension: 2
+Slice: (134, 154) Dimension: 1
+Slice: (148, 154) Dimension: 0
+Slice: (133, 154) Dimension: 1
+Slice: (133, 147) Dimension: 2
+Slice: (133, 147) Dimension: 2
+Slice: (133, 147) Dimension: 2
+Slice: (133, 147) Dimension: 2
+Slice: (133, 147) Dimension: 2
+Slice: (133, 147) Dimension: 2
+Slice: (133, 148) Dimension: 1
+Slice: (133, 146) Dimension: 2
+Slice: (133, 146) Dimension: 2
+Slice: (146, 146) Dimension: 0
+Slice: (132, 146) Dimension: 1
+Slice: (132, 145) Dimension: 2
+Slice: (145, 145) Dimension: 0
+Slice: (131, 145) Dimension: 1
+Slice: (144, 145) Dimension: 0
+Slice: (130, 145) Dimension: 1
+Slice: (143, 145) Dimension: 0
+Slice: (129, 143) Dimension: 2
+Slice: (129, 143) Dimension: 2
+Slice: (129, 143) Dimension: 1
+Slice: (142, 143) Dimension: 0
+Slice: (128, 143) Dimension: 1
+Slice: (141, 143) Dimension: 0
+Slice: (141, 143) Dimension: 0
+Slice: (141, 143) Dimension: 0
+Slice: (125, 143) Dimension: 1
+Slice: (125, 140) Dimension: 2
+Slice: (125, 142) Dimension: 1
+Slice: (125, 139) Dimension: 2
+Slice: (139, 141) Dimension: 0
+Slice: (139, 141) Dimension: 0
+Slice: (139, 141) Dimension: 0
+Slice: (139, 141) Dimension: 0
+Slice: (121, 139) Dimension: 2
+Slice: (121, 140) Dimension: 1
+Slice: (121, 140) Dimension: 1
+Slice: (121, 137) Dimension: 2
+Slice: (121, 139) Dimension: 1
+Slice: (121, 139) Dimension: 1
+Slice: (121, 139) Dimension: 1
+Slice: (121, 134) Dimension: 2
+Slice: (134, 138) Dimension: 0
+Slice: (120, 138) Dimension: 1
+Slice: (120, 138) Dimension: 1
+Slice: (120, 132) Dimension: 2
+Slice: (132, 137) Dimension: 0
+Slice: (119, 137) Dimension: 1
+Slice: (131, 137) Dimension: 0
+Slice: (131, 137) Dimension: 0
+Slice: (131, 137) Dimension: 0
+Slice: (116, 131) Dimension: 2
+Slice: (116, 131) Dimension: 2
+Slice: (116, 131) Dimension: 2
+Slice: (131, 134) Dimension: 0
+Slice: (115, 131) Dimension: 2
+Slice: (131, 133) Dimension: 0
+Slice: (131, 133) Dimension: 0
+Slice: (113, 131) Dimension: 2
+Slice: (113, 132) Dimension: 1
+Slice: (113, 130) Dimension: 2
+Slice: (113, 131) Dimension: 1
+Slice: (129, 131) Dimension: 0
+Slice: (129, 131) Dimension: 0
+Slice: (129, 131) Dimension: 0
+Slice: (110, 131) Dimension: 1
+Slice: (128, 131) Dimension: 0
+Slice: (109, 128) Dimension: 2
+Slice: (128, 130) Dimension: 0
+Slice: (128, 130) Dimension: 0
+Slice: (107, 130) Dimension: 1
+Slice: (127, 130) Dimension: 0
+Slice: (106, 130) Dimension: 1
+Slice: (126, 130) Dimension: 0
+Slice: (105, 126) Dimension: 2
+Slice: (105, 126) Dimension: 2
+Slice: (126, 128) Dimension: 0
+Slice: (104, 126) Dimension: 2
+Slice: (126, 127) Dimension: 0
+Slice: (103, 127) Dimension: 1
+Slice: (125, 127) Dimension: 0
+Slice: (125, 127) Dimension: 0
+Slice: (101, 127) Dimension: 1
+Slice: (101, 124) Dimension: 2
+Slice: (124, 126) Dimension: 0
+Slice: (100, 126) Dimension: 1
+Slice: (123, 126) Dimension: 0
+Slice: (123, 126) Dimension: 0
+Slice: (98, 126) Dimension: 1
+Slice: (122, 126) Dimension: 0
+Slice: (122, 126) Dimension: 0
+Slice: (96, 122) Dimension: 2
+Slice: (122, 125) Dimension: 0
+Slice: (122, 125) Dimension: 0
+Slice: (94, 125) Dimension: 1
+Slice: (121, 125) Dimension: 0
+Slice: (93, 125) Dimension: 1
+Slice: (120, 125) Dimension: 0
+Slice: (92, 120) Dimension: 2
+Slice: (92, 124) Dimension: 1
+Slice: (92, 124) Dimension: 1
+Slice: (92, 124) Dimension: 1
+Slice: (117, 124) Dimension: 0
+Slice: (117, 124) Dimension: 0
+Slice: (90, 117) Dimension: 2
+Slice: (90, 123) Dimension: 1
+Slice: (90, 116) Dimension: 2
+Slice: (90, 116) Dimension: 2
+Slice: (116, 121) Dimension: 0
+Slice: (89, 116) Dimension: 2
+Slice: (116, 120) Dimension: 0
+Slice: (116, 120) Dimension: 0
+Slice: (87, 120) Dimension: 1
+Slice: (115, 120) Dimension: 0
+Slice: (115, 120) Dimension: 0
+Slice: (115, 120) Dimension: 0
+Slice: (84, 120) Dimension: 1
+Slice: (114, 120) Dimension: 0
+Slice: (114, 120) Dimension: 0
+Slice: (82, 114) Dimension: 2
+Slice: (114, 119) Dimension: 0
+Slice: (114, 119) Dimension: 0
+Slice: (80, 119) Dimension: 1
+Slice: (80, 119) Dimension: 1
+Slice: (112, 119) Dimension: 0
+Slice: (79, 119) Dimension: 1
+Slice: (111, 119) Dimension: 0
+Slice: (111, 119) Dimension: 0
+Slice: (111, 119) Dimension: 0
+Slice: (76, 119) Dimension: 1
+Slice: (76, 119) Dimension: 1
+Slice: (109, 119) Dimension: 0
+Slice: (109, 119) Dimension: 0
+Slice: (74, 119) Dimension: 1
+Slice: (74, 108) Dimension: 2
+Slice: (108, 118) Dimension: 0
+Slice: (73, 118) Dimension: 1
+Slice: (107, 118) Dimension: 0
+Slice: (72, 118) Dimension: 1
+Slice: (106, 118) Dimension: 0
+Slice: (71, 118) Dimension: 1
+Slice: (71, 118) Dimension: 1
+Slice: (104, 118) Dimension: 0
+Slice: (70, 118) Dimension: 1
+Slice: (70, 103) Dimension: 2
+Slice: (70, 117) Dimension: 1
+Slice: (102, 117) Dimension: 0
+Slice: (69, 117) Dimension: 1
+Slice: (69, 101) Dimension: 2
+Slice: (101, 116) Dimension: 0
+Slice: (68, 116) Dimension: 1
+Slice: (68, 116) Dimension: 1
+Slice: (68, 99) Dimension: 2
+Slice: (68, 115) Dimension: 1
+Slice: (68, 98) Dimension: 2
+Slice: (68, 114) Dimension: 1
+Slice: (97, 114) Dimension: 0
+Slice: (67, 114) Dimension: 1
+Slice: (96, 114) Dimension: 0
+Slice: (66, 96) Dimension: 2
+Slice: (96, 113) Dimension: 0
+Slice: (65, 113) Dimension: 1
+Slice: (65, 95) Dimension: 2
+Slice: (65, 95) Dimension: 2
+Slice: (65, 95) Dimension: 2
+Slice: (65, 110) Dimension: 1
+Slice: (65, 110) Dimension: 1
+Slice: (65, 93) Dimension: 2
+Slice: (65, 109) Dimension: 1
+Slice: (65, 92) Dimension: 2
+Slice: (92, 108) Dimension: 0
+Slice: (64, 92) Dimension: 2
+Slice: (64, 107) Dimension: 1
+Slice: (64, 107) Dimension: 1
+Slice: (90, 107) Dimension: 0
+Slice: (63, 107) Dimension: 1
+Slice: (89, 107) Dimension: 0
+Slice: (89, 107) Dimension: 0
+Slice: (61, 107) Dimension: 1
+Slice: (61, 88) Dimension: 2
+Slice: (88, 106) Dimension: 0
+Slice: (88, 106) Dimension: 0
+Slice: (59, 106) Dimension: 1
+Slice: (59, 106) Dimension: 1
+Slice: (86, 106) Dimension: 0
+Slice: (58, 106) Dimension: 1
+Slice: (58, 106) Dimension: 1
+Slice: (58, 106) Dimension: 1
+Slice: (58, 106) Dimension: 1
+Slice: (82, 106) Dimension: 0
+Slice: (57, 106) Dimension: 1
+Slice: (57, 106) Dimension: 1
+Slice: (57, 80) Dimension: 2
+Slice: (57, 80) Dimension: 2
+Slice: (80, 104) Dimension: 0
+Slice: (56, 80) Dimension: 2
+Slice: (56, 103) Dimension: 1
+Slice: (56, 79) Dimension: 2
+Slice: (79, 102) Dimension: 0
+Slice: (79, 102) Dimension: 0
+Slice: (54, 102) Dimension: 1
+Slice: (78, 102) Dimension: 0
+Slice: (53, 102) Dimension: 1
+Slice: (77, 102) Dimension: 0
+Slice: (77, 102) Dimension: 0
+Slice: (51, 77) Dimension: 2
+Slice: (51, 101) Dimension: 1
+Slice: (51, 101) Dimension: 1
+Slice: (51, 101) Dimension: 1
+Slice: (51, 101) Dimension: 1
+Slice: (73, 101) Dimension: 0
+Slice: (73, 101) Dimension: 0
+Slice: (49, 73) Dimension: 2
+Slice: (49, 73) Dimension: 2
+Slice: (49, 99) Dimension: 1
+Slice: (72, 99) Dimension: 0
+Slice: (48, 99) Dimension: 1
+Slice: (48, 99) Dimension: 1
+Slice: (70, 99) Dimension: 0
+Slice: (47, 70) Dimension: 2
+Slice: (70, 98) Dimension: 0
+Slice: (70, 98) Dimension: 0
+Slice: (45, 98) Dimension: 1
+Slice: (45, 98) Dimension: 1
+Slice: (68, 98) Dimension: 0
+Slice: (44, 68) Dimension: 2
+Slice: (44, 68) Dimension: 2
+Slice: (44, 68) Dimension: 2
+Slice: (44, 68) Dimension: 2
+Slice: (44, 94) Dimension: 1
+Slice: (44, 67) Dimension: 2
+Slice: (44, 93) Dimension: 1
+Slice: (44, 66) Dimension: 2
+Slice: (44, 92) Dimension: 1
+Slice: (44, 92) Dimension: 1
+Slice: (44, 64) Dimension: 2
+Slice: (44, 91) Dimension: 1
+Slice: (44, 91) Dimension: 1
+Slice: (44, 91) Dimension: 1
+Slice: (44, 61) Dimension: 2
+Slice: (61, 90) Dimension: 0
+Slice: (43, 61) Dimension: 2
+Slice: (43, 61) Dimension: 2
+Slice: (43, 61) Dimension: 2
+Slice: (43, 87) Dimension: 1
+Slice: (43, 60) Dimension: 2
+Slice: (43, 60) Dimension: 2
+Slice: (43, 85) Dimension: 1
+Slice: (43, 59) Dimension: 2
+Slice: (59, 84) Dimension: 0
+Slice: (59, 84) Dimension: 0
+Slice: (41, 84) Dimension: 1
+Slice: (58, 84) Dimension: 0
+Slice: (40, 58) Dimension: 2
+Slice: (40, 58) Dimension: 2
+Slice: (58, 82) Dimension: 0
+Slice: (58, 82) Dimension: 0
+Slice: (38, 58) Dimension: 2
+Slice: (38, 58) Dimension: 2
+Slice: (38, 80) Dimension: 1
+Slice: (57, 80) Dimension: 0
+Slice: (37, 80) Dimension: 1
+Slice: (37, 80) Dimension: 1
+Slice: (37, 55) Dimension: 2
+Slice: (55, 79) Dimension: 0
+Slice: (55, 79) Dimension: 0
+Slice: (35, 55) Dimension: 2
+Slice: (55, 78) Dimension: 0
+Slice: (34, 78) Dimension: 1
+Slice: (34, 54) Dimension: 2
+Slice: (34, 77) Dimension: 1
+Slice: (34, 77) Dimension: 1
+Slice: (52, 77) Dimension: 0
+Slice: (52, 77) Dimension: 0
+Slice: (52, 77) Dimension: 0
+Slice: (31, 52) Dimension: 2
+Slice: (52, 76) Dimension: 0
+Slice: (52, 76) Dimension: 0
+Slice: (29, 76) Dimension: 1
+Slice: (51, 76) Dimension: 0
+Slice: (28, 51) Dimension: 2
+Slice: (28, 75) Dimension: 1
+Slice: (50, 75) Dimension: 0
+Slice: (27, 50) Dimension: 2
+Slice: (50, 74) Dimension: 0
+Slice: (26, 50) Dimension: 2
+Slice: (26, 73) Dimension: 1
+Slice: (26, 73) Dimension: 1
+Slice: (26, 48) Dimension: 2
+Slice: (26, 48) Dimension: 2
+Slice: (48, 71) Dimension: 0
+Slice: (48, 71) Dimension: 0
+Slice: (48, 71) Dimension: 0
+Slice: (23, 48) Dimension: 2
+Slice: (48, 70) Dimension: 0
+Slice: (22, 70) Dimension: 1
+Slice: (22, 70) Dimension: 1
+Slice: (22, 46) Dimension: 2
+Slice: (22, 69) Dimension: 1
+Slice: (22, 69) Dimension: 1
+Slice: (22, 44) Dimension: 2
+Slice: (22, 68) Dimension: 1
+Slice: (43, 68) Dimension: 0
+Slice: (43, 68) Dimension: 0
+Slice: (43, 68) Dimension: 0
+Slice: (19, 43) Dimension: 2
+Slice: (19, 67) Dimension: 1
+Slice: (19, 42) Dimension: 2
+Slice: (19, 66) Dimension: 1
+Slice: (41, 66) Dimension: 0
+Slice: (18, 41) Dimension: 2
+Slice: (41, 65) Dimension: 0
+Slice: (17, 41) Dimension: 2
+Slice: (17, 64) Dimension: 1
+Slice: (17, 40) Dimension: 2
+Slice: (17, 63) Dimension: 1
+Slice: (17, 39) Dimension: 2
+Slice: (39, 62) Dimension: 0
+Slice: (39, 62) Dimension: 0
+Slice: (39, 62) Dimension: 0
+Slice: (14, 62) Dimension: 1
+Slice: (14, 38) Dimension: 2
+Slice: (38, 61) Dimension: 0
+Slice: (13, 38) Dimension: 2
+Slice: (38, 60) Dimension: 0
+Slice: (12, 38) Dimension: 2
+Slice: (12, 59) Dimension: 1
+Slice: (37, 59) Dimension: 0
+Slice: (11, 59) Dimension: 1
+Slice: (36, 59) Dimension: 0
+Slice: (36, 59) Dimension: 0
+Slice: (36, 59) Dimension: 0
+Slice: (8, 59) Dimension: 1
+Slice: (8, 35) Dimension: 2
+Slice: (8, 58) Dimension: 1
+Slice: (34, 58) Dimension: 0
+Slice: (34, 58) Dimension: 0
+Slice: (34, 58) Dimension: 0
+Slice: (34, 58) Dimension: 0
+Slice: (4, 34) Dimension: 2
+Slice: (4, 57) Dimension: 1
+Slice: (33, 57) Dimension: 0
+Slice: (3, 57) Dimension: 1
+Slice: (3, 32) Dimension: 2
+Slice: (3, 32) Dimension: 2
+Slice: (3, 55) Dimension: 1
+Slice: (3, 55) Dimension: 1
+Slice: (3, 30) Dimension: 2
+Slice: (3, 30) Dimension: 2
+Slice: (3, 30) Dimension: 2
+Slice: (3, 52) Dimension: 1
+Slice: (3, 29) Dimension: 2
+Slice: (29, 51) Dimension: 0
+Slice: (29, 51) Dimension: 0
+Slice: (29, 51) Dimension: 0

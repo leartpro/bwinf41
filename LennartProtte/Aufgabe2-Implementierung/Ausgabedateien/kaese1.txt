@@ -1,14 +1,15 @@
-The cheese slices can be assembled into a complete cheese cube in the following order:
-(2, 4)
-(4, 6)
-(6, 6)
-(3, 4)
-(4, 6)
-(3, 6)
-(2, 4)
-(2, 4)
-(4, 6)
-(3, 3)
-(3, 3)
-(6, 6)
-The cheese slices cannot be assembled into a complete cheese cube.
+Quader 6x6x6 + buffer=0
+
+Die Scheiben können zu einem Quader zusammengesetzt werden:
+Slice: (6, 6) Dimension: 0
+Slice: (6, 6) Dimension: 0
+Slice: (4, 6) Dimension: 1
+Slice: (4, 6) Dimension: 1
+Slice: (4, 6) Dimension: 0
+Slice: (3, 6) Dimension: 1
+Slice: (3, 3) Dimension: 2
+Slice: (3, 3) Dimension: 2
+Slice: (3, 4) Dimension: 0
+Slice: (2, 4) Dimension: 1
+Slice: (2, 4) Dimension: 0
+Slice: (2, 4) Dimension: 0
