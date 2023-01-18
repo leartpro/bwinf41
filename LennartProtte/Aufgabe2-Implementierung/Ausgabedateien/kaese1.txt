@@ -1,15 +1,3 @@
-Quader 6x6x6 + buffer=0
+Quader 4x6x9 + buffer=0
 
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (6, 6) Dimension: 0
-Slice: (6, 6) Dimension: 0
-Slice: (4, 6) Dimension: 1
-Slice: (4, 6) Dimension: 1
-Slice: (4, 6) Dimension: 0
-Slice: (3, 6) Dimension: 1
-Slice: (3, 3) Dimension: 2
-Slice: (3, 3) Dimension: 2
-Slice: (3, 4) Dimension: 0
-Slice: (2, 4) Dimension: 1
-Slice: (2, 4) Dimension: 0
-Slice: (2, 4) Dimension: 0
+Die Scheiben können nicht zu einem Quader zusammengesetzt werden.
