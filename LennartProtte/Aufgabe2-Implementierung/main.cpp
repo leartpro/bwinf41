@@ -31,9 +31,6 @@ int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
 
-    //string input_dir = "./TestInput";
-    //string output_dir = "./TestOutput";
-
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
 
