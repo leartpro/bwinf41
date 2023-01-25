@@ -14,7 +14,8 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="bwinf41" targetName="bwinf41" />
+      <config projectName="task2" targetName="task1" />
+      <config projectName="task2" targetName="task2" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -25,25 +26,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V34 Project Structure V2">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug-coverage/CMakeFiles/clion-Debug-Coverage-log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug-event-trace/CMakeFiles/clion-Debug-event-trace-log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V35 Aufgabe1 SAT Solver Approach">
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/run.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +107,7 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestOutput" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.bwinf41">
+  <component name="RunManager" selected="CMake Application.task1">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -143,7 +127,12 @@
     <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
-    <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
+    <configuration name="task1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="task2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task2">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -201,7 +190,8 @@
     <list>
       <item itemvalue="C/C++ File.Aufgabe2" />
       <item itemvalue="C/C++ File.Aufgabe1" />
-      <item itemvalue="CMake Application.bwinf41" />
+      <item itemvalue="CMake Application.task1" />
+      <item itemvalue="CMake Application.task2" />
       <item itemvalue="CMake Debug.bwinf41" />
     </list>
     <recent_temporary>
@@ -235,14 +225,7 @@
       <workItem from="1673990225490" duration="812000" />
       <workItem from="1674056141439" duration="11102000" />
       <workItem from="1674076752615" duration="11110000" />
-      <workItem from="1674657750545" duration="4899000" />
-    </task>
-    <task id="LOCAL-00006" summary="Output V1">
-      <created>1672916942119</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1672916942119</updated>
+      <workItem from="1674657750545" duration="5153000" />
     </task>
     <task id="LOCAL-00007" summary="Output V2">
       <created>1672919418076</created>
@@ -580,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674082625634</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="V35 Aufgabe1 SAT Solver Approach">
+      <created>1674671850057</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1674671850058</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +589,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V25b First Correct result (round about 60h of work and studying computer theory)" />
     <MESSAGE value="V26 debug counter" />
     <MESSAGE value="V26 approach two" />
     <MESSAGE value="V26 approach three&#10;looks like a success" />
@@ -624,7 +613,8 @@
     <MESSAGE value="V34 results" />
     <MESSAGE value="V34 Project Structure" />
     <MESSAGE value="V34 Project Structure V2" />
-    <option name="LAST_COMMIT_MESSAGE" value="V34 Project Structure V2" />
+    <MESSAGE value="V35 Aufgabe1 SAT Solver Approach" />
+    <option name="LAST_COMMIT_MESSAGE" value="V35 Aufgabe1 SAT Solver Approach" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
