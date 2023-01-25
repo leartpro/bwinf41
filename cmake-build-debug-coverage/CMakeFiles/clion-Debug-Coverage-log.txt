@@ -1,0 +1,4 @@
+"/Users/leartpro/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/leartpro/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/CLion.app/Contents/bin/ninja/mac/ninja" -DCMAKE_CXX_COMPILER=/usr/bin/g++ "-DCMAKE_CXX_FLAGS=-fprofile-instr-generate -fcoverage-mapping" "-DCMAKE_C_FLAGS=-fprofile-instr-generate -fcoverage-mapping" -G Ninja -S /Users/leartpro/Documents/Projects/bwinf41 -B /Users/leartpro/Documents/Projects/bwinf41/cmake-build-debug-coverage
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/leartpro/Documents/Projects/bwinf41/cmake-build-debug-coverage

@@ -25,8 +25,25 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V34 results">
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/CMakeLists.txt" beforeDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V34 Project Structure V2">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug-coverage/CMakeFiles/clion-Debug-Coverage-log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug-event-trace/CMakeFiles/clion-Debug-event-trace-log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/run.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,19 +96,21 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/lenni/Desktop/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung",
+    "last_opened_file_path": "/Users/leartpro/Documents/Projects/bwinf41/LennartProtte/Aufgabe1-Implementierung",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "dynamic.analysis.tools.valgrind",
+    "settings.editor.selected.configurable": "CPPToolchains",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung" />
+      <recent name="$PROJECT_DIR$/LennartProtte" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
@@ -104,7 +123,7 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestOutput" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="CMake Application.bwinf41">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -116,14 +135,29 @@
       </texify-bibtex>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
+      <method v="2" />
     </configuration>
     <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aufgabe1" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe1">
+      <option name="sourceFile" value="LennartProtte/Aufgabe1-Implementierung/main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aufgabe2" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe2">
+      <option name="sourceFile" value="LennartProtte/Aufgabe2-Implementierung/main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="EXTERNAL_TOOL_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
@@ -164,6 +198,18 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="C/C++ File.Aufgabe2" />
+      <item itemvalue="C/C++ File.Aufgabe1" />
+      <item itemvalue="CMake Application.bwinf41" />
+      <item itemvalue="CMake Debug.bwinf41" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="CMake Debug.bwinf41" />
+        <item itemvalue="C/C++ File.Aufgabe1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -188,21 +234,8 @@
       <workItem from="1673782579012" duration="1314000" />
       <workItem from="1673990225490" duration="812000" />
       <workItem from="1674056141439" duration="11102000" />
-      <workItem from="1674076752615" duration="4260000" />
-    </task>
-    <task id="LOCAL-00004" summary="V2 of the algorithm">
-      <created>1672878396376</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1672878396376</updated>
-    </task>
-    <task id="LOCAL-00005" summary="V3 of the algorithm">
-      <created>1672882046629</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1672882046629</updated>
+      <workItem from="1674076752615" duration="11110000" />
+      <workItem from="1674657750545" duration="4899000" />
     </task>
     <task id="LOCAL-00006" summary="Output V1">
       <created>1672916942119</created>
@@ -533,7 +566,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674082027900</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="V34 Project Structure">
+      <created>1674082359550</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1674082359550</updated>
+    </task>
+    <task id="LOCAL-00054" summary="V34 Project Structure V2">
+      <created>1674082625634</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1674082625634</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,8 +599,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V23" />
-    <MESSAGE value="V24" />
     <MESSAGE value="V25b First Correct result (round about 60h of work and studying computer theory)" />
     <MESSAGE value="V26 debug counter" />
     <MESSAGE value="V26 approach two" />
@@ -577,7 +622,13 @@
     <MESSAGE value="V33 nice debug but causes bugs" />
     <MESSAGE value="V33 nice debug but probably causes bugs" />
     <MESSAGE value="V34 results" />
-    <option name="LAST_COMMIT_MESSAGE" value="V34 results" />
+    <MESSAGE value="V34 Project Structure" />
+    <MESSAGE value="V34 Project Structure V2" />
+    <option name="LAST_COMMIT_MESSAGE" value="V34 Project Structure V2" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="../../../../Documents/Projects/bwinf41/cmake-build-debug-coverage" NAME="bwinf41 Coverage Results" MODIFIED="1674057281801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

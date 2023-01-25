@@ -28,7 +28,7 @@ int canRemoveSlice(int length, int height, int depth, Slice slice) {
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "misc-no-recursion"
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> &order, vector<Slice> &slices) {
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int> > &order, vector<Slice> &slices) {
     if (slices.empty()) {
         return (length == 0 || height == 0 || depth == 0);
     }

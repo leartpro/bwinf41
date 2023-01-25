@@ -1,130 +1,112 @@
-#include <iostream>
 #include <vector>
-#include <cmath>
-#include <filesystem>
-#include <fstream>
+#include <iostream>
 
 using namespace std;
 
-// Struktur für einen Ort
-struct Location {
-    Location(double px, double py) {
-        x = px;
-        y  = py;
+void add_exactly_one_constraint(vector<int> variables);
+
+const int N = 100; // maximum number of nodes
+int n = N;
+vector<vector<bool>> x(N, vector<bool>(N)); // decision variables x_ij
+vector<vector<int>> clauses; // to store the clauses
+
+// function to add constraint that x_ij and x_kj cannot be true at the same time
+void add_turn_constraint(int i, int j, int k) {
+    clauses.push_back({x[i][j], x[k][j]});
+}
+
+
+// function to add constraint that exactly one x_ij is true for each i
+void add_visit_constraint(int i) {
+    vector<int> variables;
+    for (int j = 1; j <= n; j++) {
+        variables.push_back(x[i][j]);
     }
-    double x{};
-    double y{};
-};
-
-// Funktion zum Berechnen des Abbiegwinkels zwischen zwei Orten
-double calculateAngle(Location loc1, Location loc2) {
-    double xDiff = loc1.x - loc2.x;
-    double yDiff = loc1.y - loc2.y;
-    return atan2(yDiff, xDiff) * 180 / M_PI;
+    add_exactly_one_constraint(variables);
 }
 
-double calculateDistance(double x1, double y1, double x2, double y2) {
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+// function to add constraint that x_1i and x_i1 are both true
+void add_loop_constraint(int i) {
+    clauses.push_back({x[1][i], x[i][1]});
 }
 
-
-void search(vector<Location> locations, vector<vector<Location>> &solutions, vector<Location> currentLocations) {
-
+// function to add constraint that exactly one variable in the given vector is true
+void add_exactly_one_constraint(vector<int> variables) {
+    for (int i = 0; i < variables.size(); i++) {
+        for (int j = i+1; j < variables.size(); j++) {
+            clauses.push_back({-variables[i], -variables[j]});
+        }
+    }
+    for (int & variable : variables) {
+        clauses.push_back({variable});
+    }
 }
 
-vector<Location> calculateRoute(vector<Location> locations) {
-
-    // Erstelle leere Liste für die berechnete Route
-    vector<Location> route;
-
-    // Wähle den ersten Ort als Startpunkt aus
-    Location currentLocation = locations[0];
-
-    // Füge den Startpunkt zur Route hinzu
-    route.push_back(currentLocation);
-
-    // Entferne den Startpunkt aus der Liste der verbleibenden Orte
-    locations.erase(locations.begin());
-
-    // Solange es noch Orte gibt, die besucht werden müssen...
-    while (!locations.empty()) {
-
-        // Setze die minimale Entfernung auf den maximalen Wert
-        double minDistance = numeric_limits<double>::max();
-
-        // Setze den Index des nächsten Orts auf -1
-        int nextLocationIndex = -1;
-
-        // Gehe alle verbleibenden Orte durch
-        for (int i = 0; i < locations.size(); i++) {
-
-            // Berechne die Entfernung zwischen aktuellem Ort und dem verbleibenden Ort
-
-            double distance = calculateDistance(currentLocation.x, currentLocation.y, locations[i].x, locations[i].y);
-
-             // Wenn die Entfernung kleiner als die bisher minimale Entfernung ist...
-            if (distance < minDistance) {
-
-                // Setze die minimale Entfernung auf die aktuelle Entfernung
-                minDistance = distance;
-
-                // Setze den Index des nächsten Orts auf den Index des aktuellen Orts
-                nextLocationIndex = i;
+bool backtrack(int var, vector<int> & model) {
+    if (var == n*n) {
+        // all variables have been assigned, check if the model is a valid solution
+        for (auto & clause : clauses) {
+            bool clause_satisfied = false;
+            for (auto & variable : clause) {
+                if (model[abs(variable)-1] == variable) {
+                    clause_satisfied = true;
+                    break;
+                }
+            }
+            if (!clause_satisfied) {
+                return false;
             }
         }
-        // Wenn ein nächster Ort gefunden wurde...
-        if (nextLocationIndex != -1) {
-            // Füge den nächsten Ort zur Route hinzu
-            route.push_back(locations[nextLocationIndex]);
-             // Setze den aktuellen Ort auf den nächsten Ort
-            currentLocation = locations[nextLocationIndex];
-            // Entferne den nächsten Ort aus der Liste der verbleibenden Orte
-            locations.erase(locations.begin() + nextLocationIndex);
-        }
+        return true;
     }
-    // Gib die berechnete Route zurück
-    return route;
+    // try both possible assignments for this variable
+    model[var] = var + 1;
+    if (backtrack(var+1, model)) {
+        return true;
+    }
+    model[var] = -var - 1;
+    if (backtrack(var+1, model)) {
+        return true;
+    }
+    return false;
 }
 
-int main2() {
-    std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
-    std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
+bool solve_SAT() {
+    vector<int> model(n*n, -1); // stores the model found by the solver
+    return backtrack(0, model);
+}
 
-    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
-    for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
 
-        // Dateiname und -pfad aus dem Iterator auslesen
-        std::string input_file = entry.path();
-        std::string output_file = output_dir + "/" + entry.path().filename().string();
-        cout << "run for " << entry.path().filename().string() << endl;
+int main() {
+    cout << "starting main..." << endl;
+    // your code to read input
+    //initialize decision variables x_ij and angle_ij
+    int angle_ij[4][4] = {{0, 90, 180, 90},
+                          {270, 0, 90, 180},
+                          {90, 270, 0, 90},
+                          {180, 90, 270, 0}
+    };
 
-        // Eingabedatei öffnen
-        std::ifstream fin(input_file);
-
-        // Ausgabedatei öffnen
-        std::ofstream fout(output_file);
-        vector<Location> locations;
-
-        // Solange es noch Koordinaten in der Datei gibt
-        double x, y;
-        while (fin >> x >> y) {
-            cout << "Added new Node (" << x << ", " << y << ")" << endl;
-            locations.push_back(*new Location(x, y));
+    // add constraints
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (angle_ij[i][j] > 90) {
+                for (int k = 1; k <= n; k++) {
+                    add_turn_constraint(i, j, k);
+                }
+            }
         }
-        cout << endl;
+        add_visit_constraint(i);
+    }
+    for (int i = 1; i <= n; i++) {
+        add_loop_constraint(i);
+    }
 
-        // Berechne Route mit calculateRoute
-        vector<Location> route = calculateRoute(locations);
-
-        // Gebe die mögliche Lösung aus
-        for (auto &i: route) {
-            cout << "(" << i.x << ", " << i.y << ")" << endl;
-        }
-        cout << endl;
-
-        // Dateien schließen
-        fin.close();
-        fout.close();
+    if (solve_SAT()) {
+        cout << "solution found" << endl;
+        // your code to extract the solution and return the route
+    } else {
+        cout << "no solution found" << endl;
     }
     return 0;
 }
