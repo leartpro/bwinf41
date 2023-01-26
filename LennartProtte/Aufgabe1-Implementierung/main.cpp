@@ -1,68 +1,66 @@
 #include <vector>
-#include <unordered_map>
 #include <iostream>
 
-std::vector<std::vector<int>> clauses;
-std::unordered_map<int, bool> assignments;
-std::vector<int> route;
 
 int getVariable(int i, int j, int n) {
     // Umrechnung der 2D-Punktkoordinaten in 1D-Variablen
     return i * n + j + 1;
 }
 
-bool isSatisfiable() {
-    for (const auto &clause: clauses) {
-        bool clauseSatisfied = false;
-        for (const auto &variable: clause) {
-            if ((assignments[abs(variable)] == true && variable > 0) ||
-                (assignments[abs(variable)] == false && variable < 0)) {
-                clauseSatisfied = true;
-                break;
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "misc-no-recursion"
+bool backtracking(std::vector<std::vector<int>> &clauses, std::vector<bool> &assignment, int variableIndex) {
+    if (variableIndex == assignment.size()) {
+        // Prüfe, ob alle Klauseln erfüllt sind
+        for (const std::vector<int> &clause : clauses) {
+            bool clauseSatisfied = false;
+            for (const int &literal : clause) {
+                int variable = abs(literal);
+                bool value = (literal > 0) ? assignment[variable - 1] : !assignment[variable - 1];
+                if (value) {
+                    clauseSatisfied = true;
+                    break;
+                }
+            }
+            if (!clauseSatisfied) {
+                return false;
             }
         }
-        if (!clauseSatisfied) {
-            return false;
-        }
+        return true;
     }
-    return true;
-}
 
-void backtrack() {
-    if (route.size() == assignments.size()) {
-        return;
+    // Teste die Variable auf wahr
+    assignment[variableIndex] = true;
+    if (backtracking(clauses, assignment, variableIndex + 1)) {
+        return true;
     }
-    int variable = int(route.size());
-    for (int i = variable; i < assignments.size(); i++) {
-        if (!assignments[i]) {
-            variable = i;
-            break;
-        }
-    }
-    assignments[variable] = true;
-    route.push_back(variable);
-    if (isSatisfiable()) {
-        return;
-    }
-    assignments[variable] = false;
-    route.pop_back();
 
-    backtrack();
+    // Teste die Variable auf falsch
+    assignment[variableIndex] = false;
+    if (backtracking(clauses, assignment, variableIndex + 1)) {
+        return true;
+    }
+
+    return false;
 }
+#pragma clang diagnostic pop
+
 
 
 int main() {
     // Anzahl der Städte
     int n = 5;
-
+    std::vector<bool> assignment(n*n, -1);
+    std::vector<std::vector<int>> clauses;
     // Beispieldatensatz von 2d-Punktkoordinaten
     std::vector<std::pair<double, double>> coordinates{
+            {2.0, 4.0},
             {0.0, 1.0},
             {0.0, 3.0},
-            {2.0, 4.0},
+            {2.0, 0.0},
             {4.0, 2.0},
-            {2.0, 0.0}
     };
+
 
     // Erstellen Sie die Klauseln für jede Bedingung in der Gleichung
     // ¬x_ik ∨ ¬x_kj
@@ -86,19 +84,21 @@ int main() {
         }
         clauses.push_back(clause);
     }
-
+    for (const std::vector<int> &clause : clauses) {
+        for (const int &variable : clause) {
+            std::cout << variable << " ";
+        }
+        std::cout << std::endl;
+    }
     // Find an assignment of variables that satisfies the equation
-    backtrack();
-
+    backtracking(clauses, assignment, n);
     // Print result
-    for (int stadt: route) {
-        std::cout << stadt << " -> ";
+    std::cout << "Lösungsroute: ";
+    for (int i = 0; i < assignment.size(); i++) {
+        if (assignment[i] == 1) {
+            std::cout << " -> " << coordinates[i].first << "," << coordinates[i].second;
+        }
     }
-    std::cout << "0" << std::endl;
-    if (isSatisfiable()) {
-        std::cout << "Satisfiable" << std::endl;
-    } else {
-        std::cout << "Not satisfiable" << std::endl;
-    }
+    std::cout << std::endl;
     return 0;
 }

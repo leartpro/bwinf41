@@ -26,7 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V37 SAT Solver Approach">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V38 SAT Solver Approach">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
@@ -227,14 +227,7 @@
       <workItem from="1674056141439" duration="11102000" />
       <workItem from="1674076752615" duration="11110000" />
       <workItem from="1674657750545" duration="5416000" />
-      <workItem from="1674673208459" duration="16937000" />
-    </task>
-    <task id="LOCAL-00010" summary="Output V5 (only Console)">
-      <created>1672929304241</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1672929304241</updated>
+      <workItem from="1674673208459" duration="23015000" />
     </task>
     <task id="LOCAL-00011" summary="MindMap.pdf">
       <created>1673004646294</created>
@@ -572,7 +565,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674742616792</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="V38 SAT Solver Approach">
+      <created>1674755057070</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1674755057071</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +591,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V26 workspace.xml" />
     <MESSAGE value="V26 runConfigurations" />
     <MESSAGE value="V27 Solution Problem 2" />
     <MESSAGE value="V27 Solution Problem 2 Read from File" />
@@ -616,18 +615,8 @@
     <MESSAGE value="V35 CMakeLists.txt" />
     <MESSAGE value="V36 SAT Solver Approach" />
     <MESSAGE value="V37 SAT Solver Approach" />
-    <option name="LAST_COMMIT_MESSAGE" value="V37 SAT Solver Approach" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>14</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="V38 SAT Solver Approach" />
+    <option name="LAST_COMMIT_MESSAGE" value="V38 SAT Solver Approach" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
