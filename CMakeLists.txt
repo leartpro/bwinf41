@@ -8,11 +8,3 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
 
 add_executable(task1 LennartProtte/Aufgabe1-Implementierung/main.cpp)
 add_executable(task2 LennartProtte/Aufgabe2-Implementierung/main.cpp)
-
-#[===[
-add_custom_command(
-        TARGET ${/bwinf41} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ${LennartProtte/Aufgabe1-Implementierung/main.cpp}/input.txt
-        ${/cmake-build-debug}/input.txt)
-]===]
