@@ -1,9 +1,9 @@
 #include <vector>
 #include <iostream>
+#include <cmath>
 
-
+// Umrechnung der 2D-Punktkoordinaten in 1D-Variablen
 int getVariable(int i, int j, int n) {
-    // Umrechnung der 2D-Punktkoordinaten in 1D-Variablen
     return i * n + j + 1;
 }
 
@@ -61,20 +61,30 @@ int main() {
             {4.0, 2.0},
     };
 
-
-    // Erstellen Sie die Klauseln für jede Bedingung in der Gleichung
-    // ¬x_ik ∨ ¬x_kj
+    //(¬x_ik ∨ ¬x_kj ∨ ¬(α_ij >= 90)) ∧ ...
     for (int i = 1; i <= n; i++) {
-        for (int k = 1; k <= n; k++) {
-            for (int j = 1; j <= n; j++) {
-                if (i != k && i != j && k != j) {
-                    clauses.push_back({-getVariable(i, k, n), -getVariable(k, j, n)});
+        for (int j = 1; j <= n; j++) {
+            if (i != j) {
+                clauses.push_back({-getVariable(i, j, n), -getVariable(j, i, n)});
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 2; j <= n; j++) {
+            if (i != j) {
+                double angle = atan2(
+                        coordinates[j].second - coordinates[i].second,
+                        coordinates[j].first - coordinates[i].first
+                        );
+                if (angle >= 90) {
+                    clauses.push_back({getVariable(i, j, n)});
                 }
             }
         }
     }
 
-    // ∑(x_ij) = 1 ∀ i ∈ {1,2,3,...,n}
+
+    //(∑(x_ij) = 1 ∀ i ∈ {1,2,3,...,n}) ∧ ...
     for (int i = 1; i <= n; i++) {
         std::vector<int> clause;
         for (int j = 1; j <= n; j++) {
@@ -84,6 +94,8 @@ int main() {
         }
         clauses.push_back(clause);
     }
+
+    //print line's
     for (const std::vector<int> &clause : clauses) {
         for (const int &variable : clause) {
             std::cout << variable << " ";
@@ -91,14 +103,18 @@ int main() {
         std::cout << std::endl;
     }
     // Find an assignment of variables that satisfies the equation
-    backtracking(clauses, assignment, n);
-    // Print result
-    std::cout << "Lösungsroute: ";
-    for (int i = 0; i < assignment.size(); i++) {
-        if (assignment[i] == 1) {
-            std::cout << " -> " << coordinates[i].first << "," << coordinates[i].second;
+    if (backtracking(clauses, assignment, n)) {
+        // Print result
+        std::cout << "Lösungsroute: ";
+        for (int i = 0; i < assignment.size(); i++) {
+            if (assignment[i] == 1) {
+                std::cout << " -> " << coordinates[i].first << "," << coordinates[i].second;
+            }
         }
+        std::cout << std::endl;
+    } else {
+        std::cout << "keine Lösung gefunden" << std::endl;
     }
-    std::cout << std::endl;
+
     return 0;
 }
