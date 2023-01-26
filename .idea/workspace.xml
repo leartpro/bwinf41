@@ -26,9 +26,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V35 CMakeLists.txt">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V36 SAT Solver Approach">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -228,14 +227,7 @@
       <workItem from="1674056141439" duration="11102000" />
       <workItem from="1674076752615" duration="11110000" />
       <workItem from="1674657750545" duration="5416000" />
-      <workItem from="1674673208459" duration="8773000" />
-    </task>
-    <task id="LOCAL-00008" summary="Output V3">
-      <created>1672921400546</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1672921400546</updated>
+      <workItem from="1674673208459" duration="10066000" />
     </task>
     <task id="LOCAL-00009" summary="Output V4 (only Console)">
       <created>1672927130574</created>
@@ -573,7 +565,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674672019145</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="V36 SAT Solver Approach">
+      <created>1674740327615</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1674740327615</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +591,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V26 approach two" />
     <MESSAGE value="V26 approach three&#10;looks like a success" />
     <MESSAGE value="V26 workspace.xml" />
     <MESSAGE value="V26 runConfigurations" />
@@ -617,33 +615,8 @@
     <MESSAGE value="V34 Project Structure V2" />
     <MESSAGE value="V35 Aufgabe1 SAT Solver Approach" />
     <MESSAGE value="V35 CMakeLists.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="V35 CMakeLists.txt" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>43</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>54</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>100</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>20</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="V36 SAT Solver Approach" />
+    <option name="LAST_COMMIT_MESSAGE" value="V36 SAT Solver Approach" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
