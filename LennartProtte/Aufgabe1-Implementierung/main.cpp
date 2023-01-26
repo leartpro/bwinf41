@@ -1,71 +1,104 @@
-#include <iostream>
 #include <vector>
-using namespace std;
+#include <unordered_map>
+#include <iostream>
 
-// Datenstruktur zur Speicherung der Klauseln
-vector<vector<int>> clauses;
+std::vector<std::vector<int>> clauses;
+std::unordered_map<int, bool> assignments;
+std::vector<int> route;
 
-// Funktion zur Überprüfung, ob eine bestimmte Konfiguration der Variablen gültig ist
-bool check_satisfiability(vector<int> assignment) {
-    // Überprüfe jede Klausel
-    for (auto clause : clauses) {
-        bool clause_satisfied = false;
-        // Überprüfe jede Variable in der Klausel
-        for (auto variable : clause) {
-            // Wenn eine Variable in der Klausel negiert ist, muss der Wert der zugehörigen
-            // Variablen in der Zuweisung negiert werden
-            int variable_value = (variable > 0) ? assignment[variable - 1] : !assignment[-variable - 1];
-            if (variable_value == 1) {
-                clause_satisfied = true;
+int getVariable(int i, int j, int n) {
+    // Umrechnung der 2D-Punktkoordinaten in 1D-Variablen
+    return i * n + j + 1;
+}
+
+bool isSatisfiable() {
+    for (const auto &clause: clauses) {
+        bool clauseSatisfied = false;
+        for (const auto &variable: clause) {
+            if ((assignments[abs(variable)] == true && variable > 0) ||
+                (assignments[abs(variable)] == false && variable < 0)) {
+                clauseSatisfied = true;
                 break;
             }
         }
-        if (!clause_satisfied) {
+        if (!clauseSatisfied) {
             return false;
         }
     }
     return true;
 }
 
-// Backtracking-Suche nach einer gültigen Zuweisung der Variablen
-bool backtrack_search() {
-    // Erstelle eine Zuweisung mit allen Variablen auf unbestimmt (0)
-    vector<int> assignment(clauses.size(), 0);
-    int variable_index = 0;
-    while (variable_index >= 0) {
-        // Wenn alle Variablen zugewiesen sind, prüfe ob die Zuweisung gültig ist
-        if (variable_index == clauses.size()) {
-            if (check_satisfiability(assignment)) {
-                return true;
-            } else {
-                variable_index--;
-                continue;
-            }
-        }
-        // Versuche die nächste Variable zuzuweisen
-        assignment[variable_index]++;
-        // Wenn die Zuweisung ungültig ist, gehe zurück und versuche eine andere Zuweisung
-        if (assignment[variable_index] > 1) {
-            assignment[variable_index] = 0;
-            variable_index--;
-        } else {
-            variable_index++;
+void backtrack() {
+    if (route.size() == assignments.size()) {
+        return;
+    }
+    int variable = int(route.size());
+    for (int i = variable; i < assignments.size(); i++) {
+        if (!assignments[i]) {
+            variable = i;
+            break;
         }
     }
-    return false;
+    assignments[variable] = true;
+    route.push_back(variable);
+    if (isSatisfiable()) {
+        return;
+    }
+    assignments[variable] = false;
+    route.pop_back();
+
+    backtrack();
 }
 
+
 int main() {
-    // Beispielklauseln
-    clauses.push_back({1, -2});
-    clauses.push_back({-1, 2});
-    clauses.push_back({-2, 3});
-    clauses.push_back({3});
-    // Führe die Backtracking-Suche aus
-    if (backtrack_search()) {
-        cout << "Die Klauseln sind erfüllbar." << endl;
+    // Anzahl der Städte
+    int n = 5;
+
+    // Beispieldatensatz von 2d-Punktkoordinaten
+    std::vector<std::pair<double, double>> coordinates{
+            {0.0, 1.0},
+            {0.0, 3.0},
+            {2.0, 4.0},
+            {4.0, 2.0},
+            {2.0, 0.0}
+    };
+
+    // Erstellen Sie die Klauseln für jede Bedingung in der Gleichung
+    // ¬x_ik ∨ ¬x_kj
+    for (int i = 1; i <= n; i++) {
+        for (int k = 1; k <= n; k++) {
+            for (int j = 1; j <= n; j++) {
+                if (i != k && i != j && k != j) {
+                    clauses.push_back({-getVariable(i, k, n), -getVariable(k, j, n)});
+                }
+            }
+        }
+    }
+
+    // ∑(x_ij) = 1 ∀ i ∈ {1,2,3,...,n}
+    for (int i = 1; i <= n; i++) {
+        std::vector<int> clause;
+        for (int j = 1; j <= n; j++) {
+            if (i != j) {
+                clause.push_back(getVariable(i, j, n));
+            }
+        }
+        clauses.push_back(clause);
+    }
+
+    // Find an assignment of variables that satisfies the equation
+    backtrack();
+
+    // Print result
+    for (int stadt: route) {
+        std::cout << stadt << " -> ";
+    }
+    std::cout << "0" << std::endl;
+    if (isSatisfiable()) {
+        std::cout << "Satisfiable" << std::endl;
     } else {
-        cout << "Die Klauseln sind nicht erfüllbar." << endl;
+        std::cout << "Not satisfiable" << std::endl;
     }
     return 0;
 }
