@@ -7,30 +7,16 @@ int getVariable(int i, int j, int n) {
     return i * n + j;
 }
 
-bool backtrack(const std::vector<std::vector<int>>& clauses, std::vector<int> vertexes, std::vector<bool> assignment, int index) {
-    // Wenn alle Variablen zugewiesen sind, überprüfen Sie, ob die Klauseln erfüllt sind
-    if (index == vertexes.size()) {
-        for (const auto& clause : clauses) {
-            bool clauseSatisfied = false;
-            for (auto vertex : clause) {
-                if (assignment[vertex] == true) {
-                    clauseSatisfied = true;
-                    break;
-                }
-            }
-            if (!clauseSatisfied) {
-                return false;
-            }
-        }
-        return true;
-    }
-    // Weisen Sie der aktuellen Variable einen Wert zu
-    assignment[vertexes[index]] = true;
-    if (backtrack(clauses, vertexes, assignment, index + 1)) {
-        return true;
-    }
-    assignment[vertexes[index]] = false;
-    return backtrack(clauses, vertexes, assignment, index + 1);
+std::pair<int, int> getCoordinateIndexes(int v, int n) {
+    int i = v / n;
+    int j = v % n;
+    return std::make_pair(i, j);
+}
+
+
+bool sat_solver(const std::vector<std::vector<int>>& clauses, std::vector<int>& vertexes, std::vector<int>& route) {
+
+    return true;
 }
 
 
@@ -53,7 +39,6 @@ int main() {
     };
     int n = int(coordinates.size());
     std::vector<std::vector<int>> clauses;
-    std::vector<bool> assignment(n*n, -1);
     std::vector<int> vertexes;
     vertexes.reserve((n*(n-1))); //maximum count of vertexes (because every vertex is stored for every direction)
 
@@ -119,8 +104,17 @@ int main() {
     }
 
     // Find an assignment of variables that satisfies the equation
-    if(backtrack(clauses, vertexes, assignment, 0)) {
+    std::vector<int> route;
+    if(sat_solver(clauses, vertexes, route)) {
         std::cout << "solution" << std::endl;
+        for(int vertex : route) {
+            std::cout
+            << "("      << coordinates[getCoordinateIndexes(vertex, n).first].first
+            << ", "     << coordinates[getCoordinateIndexes(vertex, n).first].second
+            << ") -> (" << coordinates[getCoordinateIndexes(vertex, n).second].first
+            << ", "     << coordinates[getCoordinateIndexes(vertex, n).second].second
+            << ")"      << std::endl;
+        }
     } else {
         std::cout << "no solution" << std::endl;
     }

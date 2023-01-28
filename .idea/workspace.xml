@@ -26,7 +26,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V42 SAT Solver Approach Cleanup">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V43 SAT Solver Approach">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -222,14 +223,7 @@
       <workItem from="1674076752615" duration="11110000" />
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
-      <workItem from="1674823477411" duration="21827000" />
-    </task>
-    <task id="LOCAL-00015" summary="V11">
-      <created>1673027677503</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1673027677503</updated>
+      <workItem from="1674823477411" duration="22920000" />
     </task>
     <task id="LOCAL-00016" summary="V12">
       <created>1673028595267</created>
@@ -567,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674926080340</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="V43 SAT Solver Approach">
+      <created>1674926554483</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1674926554483</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V27" />
     <MESSAGE value="V28" />
     <MESSAGE value="V29 Aufgabe2 recursion" />
     <MESSAGE value="V29 Aufgabe2 tests" />
@@ -611,7 +611,8 @@
     <MESSAGE value="V40 SAT Solver Approach" />
     <MESSAGE value="V41 SAT Solver Approach" />
     <MESSAGE value="V42 SAT Solver Approach Cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="V42 SAT Solver Approach Cleanup" />
+    <MESSAGE value="V43 SAT Solver Approach" />
+    <option name="LAST_COMMIT_MESSAGE" value="V43 SAT Solver Approach" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
