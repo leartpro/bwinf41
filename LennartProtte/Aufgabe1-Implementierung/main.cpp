@@ -7,7 +7,32 @@ int getVariable(int i, int j, int n) {
     return i * n + j;
 }
 
-//TODO: backtracking Method implementation here
+bool backtrack(const std::vector<std::vector<int>>& clauses, std::vector<int> vertexes, std::vector<bool> assignment, int index) {
+    // Wenn alle Variablen zugewiesen sind, überprüfen Sie, ob die Klauseln erfüllt sind
+    if (index == vertexes.size()) {
+        for (const auto& clause : clauses) {
+            bool clauseSatisfied = false;
+            for (auto vertex : clause) {
+                if (assignment[vertex] == true) {
+                    clauseSatisfied = true;
+                    break;
+                }
+            }
+            if (!clauseSatisfied) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // Weisen Sie der aktuellen Variable einen Wert zu
+    assignment[vertexes[index]] = true;
+    if (backtrack(clauses, vertexes, assignment, index + 1)) {
+        return true;
+    }
+    assignment[vertexes[index]] = false;
+    return backtrack(clauses, vertexes, assignment, index + 1);
+}
+
 
 int main() {
     // Beispieldatensatz von 2d-Punktkoordinaten
@@ -28,6 +53,7 @@ int main() {
     };
     int n = int(coordinates.size());
     std::vector<std::vector<int>> clauses;
+    std::vector<bool> assignment(n*n, -1);
     std::vector<int> vertexes;
     vertexes.reserve((n*(n-1))); //maximum count of vertexes (because every vertex is stored for every direction)
 
@@ -36,7 +62,6 @@ int main() {
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
             if (i != j) {
-                std::cout << i << ", " << j << std::endl;
                 vertexes.push_back(getVariable(i, j, n));
                 vertexes.push_back(getVariable(j, i, n));
                 clauses.push_back({-getVariable(i, j, n), -getVariable(j, i, n)});
@@ -94,6 +119,10 @@ int main() {
     }
 
     // Find an assignment of variables that satisfies the equation
-    //TODO: call backtracking here
+    if(backtrack(clauses, vertexes, assignment, 0)) {
+        std::cout << "solution" << std::endl;
+    } else {
+        std::cout << "no solution" << std::endl;
+    }
     return 0;
 }
