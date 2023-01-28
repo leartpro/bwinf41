@@ -95,6 +95,7 @@ int main() {
                 length = side;
             }
         }
+
         //Find all possible other sides
         vector<pair<int, int>> result; //TODO: e.g Quader 210x210x90V(9261000) is very suspicious
         for (int i = 1; i <= volume / length; i++) {
@@ -108,6 +109,7 @@ int main() {
                  return (a.length * a.height) > (b.length * b.height);
              }
         );
+
         auto it = result.begin();
         bool success = false;
         while (it != result.end() && !success) {
