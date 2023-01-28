@@ -4,71 +4,12 @@
 
 // Umrechnung der 2D-Punktkoordinaten in 1D-Variablen
 int getVariable(int i, int j, int n) {
-    return i * n + j + 1;
+    return i * n + j;
 }
 
-// Funktion zur Überprüfung, ob eine bestimmte Konfiguration der Variablen gültig ist
-bool check_satisfiability(std::vector<bool> assignment, std::vector<std::vector<int>> &clauses) {
-    // Überprüfe jede Klausel
-    for (const auto& clause : clauses) {
-        bool clause_satisfied = false;
-        // Überprüfe jede Variable in der Klausel
-        for (auto variable : clause) {
-            // Wenn eine Variable in der Klausel negiert ist, muss der Wert der zugehörigen
-            // Variablen in der Zuweisung negiert werden
-            int variable_value = (variable > 0) ? assignment[variable - 1] : !assignment[-variable - 1];
-            if (variable_value == 1) {
-                clause_satisfied = true;
-                break;
-            }
-        }
-        if (!clause_satisfied) {
-            return false;
-        }
-    }
-    return true;
-}
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "misc-no-recursion"
-bool backtracking(std::vector<std::vector<int>> &clauses, std::vector<bool> &assignment, int variableIndex) {
-    if (variableIndex == assignment.size()) {
-        // Prüfe, ob alle Klauseln erfüllt sind
-        for (const std::vector<int> &clause : clauses) {
-            bool clauseSatisfied = false;
-            for (const int &literal : clause) {
-                int variable = abs(literal);
-                bool value = (literal > 0) ? assignment[variable - 1] : !assignment[variable - 1];
-                if (value) {
-                    clauseSatisfied = true;
-                    break;
-                }
-            }
-            if (!clauseSatisfied) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Teste die Variable auf wahr
-    assignment[variableIndex] = true;
-    if (backtracking(clauses, assignment, variableIndex + 1)) {
-        return true;
-    }
-
-    // Teste die Variable auf falsch
-    assignment[variableIndex] = false;
-    if (backtracking(clauses, assignment, variableIndex + 1)) {
-        return true;
-    }
-
-    return false;
-}
-#pragma clang diagnostic pop
+//TODO: backtracking Method implementation here
 
 int main() {
-    // Anzahl der Städte
     // Beispieldatensatz von 2d-Punktkoordinaten
     /*
     std::vector<std::pair<double, double>> coordinates{
@@ -86,25 +27,27 @@ int main() {
             {1.0, 1.0},
     };
     int n = int(coordinates.size());
-    std::vector<bool> assignment(n*n, -1);
     std::vector<std::vector<int>> clauses;
-    std::vector<std::pair<int, int>> vertexes((n*(n-1))/2); //size=maximum count of vertexes
+    std::vector<int> vertexes;
+    vertexes.reserve((n*(n-1))); //maximum count of vertexes (because every vertex is stored for every direction)
 
-    //(¬x_ik ∨ ¬x_kj ∨ ¬(α_ij >= 90)) ∧ ...
-    std::cout << "every vertex used once" << std::endl;
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
+    //1. clause that every edge can only used once
+    //2. creates vector with all possible edges
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
             if (i != j) {
-                std::cout << i << " -> " << j << " v " << j << " -> " << i;
-                std::cout << " ==> " << -getVariable(i, j, n) << " v " << -getVariable(j, i, n) << std::endl;
+                std::cout << i << ", " << j << std::endl;
+                vertexes.push_back(getVariable(i, j, n));
+                vertexes.push_back(getVariable(j, i, n));
                 clauses.push_back({-getVariable(i, j, n), -getVariable(j, i, n)});
             }
         }
     }
-    std::cout << "no transition between edges with angle less than 90 degree" << std::endl;
-    for (int i = 0; i < coordinates.size(); i++) {
-        for (int j = i + 1; j < coordinates.size(); j++) {
-            for (int k = j + 1; k < coordinates.size(); k++) {
+
+    //creates clauses that contains if two edges can not be behind each other
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            for (int k = j + 1; k < n; k++) {
                 if (i != j && i != k && j != k) {
                     for (int l = 0; l < 3; l++) {
                         std::pair<double, double> v1;
@@ -122,8 +65,6 @@ int main() {
                             angle += 360; // Winkel im Bereich von 0 bis 360
                         }
                         if(angle < 90) {
-                            //std::cout << " (" << v1.first << ", " << v1.second << ") - " << angle << "° -> (" << v2.first << ", " << v2.second << ") < 90°";
-                            //std::cout << " ? ==> " << -getVariable(i, j, n) << " " << -getVariable(k, j, n) << std::endl;
                             clauses.push_back({-getVariable(i, j, n), -getVariable(k, j, n)});
                         }
                         int t = i;
@@ -140,11 +81,11 @@ int main() {
         }
     }
 
-
-    //(∑(x_ij) = 1 ∀ i ∈ {1,2,3,...,n}) ∧ ...
-    for (int i = 1; i <= n; i++) {
+    //creates clauses that every edge have to be connected with at least on vertex
+    //=> at least one vertex per claus hav to be used
+    for (int i = 0; i < n; i++) {
         std::vector<int> clause;
-        for (int j = 1; j <= n; j++) {
+        for (int j = 0; j < n; j++) {
             if (i != j) {
                 clause.push_back(getVariable(i, j, n));
             }
@@ -152,28 +93,7 @@ int main() {
         clauses.push_back(clause);
     }
 
-    //print line's
-    for (const std::vector<int> &clause : clauses) {
-        for (const int &variable : clause) {
-            std::cout << variable << " ";
-        }
-        std::cout << std::endl;
-    }
-
     // Find an assignment of variables that satisfies the equation
-    if (backtracking(clauses, assignment, n)) {
-        std::cout << "valid route=" << bool(check_satisfiability(assignment, clauses));
-        // Print result
-        std::cout << "Lösungsroute: ";
-        for (int i = 0; i < assignment.size(); i++) {
-            if (assignment[i] == 1) {
-                std::cout << " -> " << coordinates[i].first << "," << coordinates[i].second;
-            }
-        }
-        std::cout << std::endl;
-    } else {
-        std::cout << "valid route=" << bool(check_satisfiability(assignment, clauses));
-        std::cout << "keine Lösung gefunden" << std::endl;
-    }
+    //TODO: call backtracking here
     return 0;
 }
