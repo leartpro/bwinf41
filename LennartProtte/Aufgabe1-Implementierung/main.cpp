@@ -14,10 +14,25 @@ std::pair<int, int> getCoordinateIndexes(int v, int n) {
     return std::make_pair(i, j);
 }
 
+//check if all clauses are completed in the given route
+
 bool clauses_completed(std::vector<int> &route,
-                       std::vector<std::pair<int, int>> not_together_clauses,
-                       std::vector<std::pair<int, int>> not_existing_clauses,
-                       std::vector<std::vector<int>> one_existing_clauses) {
+                       const std::vector<std::pair<int, int>>& not_together_clauses,
+                       const std::vector<std::pair<int, int>>& not_existing_clauses,
+                       const std::vector<std::vector<int>>& one_existing_clauses) {
+
+    if(route.empty()) {
+        return true;
+    }
+    //TODO
+    return false;
+}
+
+//check if all clauses are completed in the given route but only look around the last index
+bool local_clauses_completed(std::vector<int> &route,
+                             const std::vector<std::pair<int, int>>& not_together_clauses,
+                             const std::vector<std::pair<int, int>>& not_existing_clauses,
+                             const std::vector<std::vector<int>>& one_existing_clauses) {
     if(route.empty()) {
         return true;
     }
@@ -28,16 +43,16 @@ bool clauses_completed(std::vector<int> &route,
 bool sat_solver(std::vector<int> &vertexes,
                 std::vector<int> &route,
                 int count_of_nodes,
-                std::vector<std::pair<int, int>> not_together_clauses,
-                std::vector<std::pair<int, int>> not_existing_clauses,
-                std::vector<std::vector<int>> one_existing_clauses) {
+                const std::vector<std::pair<int, int>>& not_together_clauses,
+                const std::vector<std::pair<int, int>>& not_existing_clauses,
+                const std::vector<std::vector<int>>& one_existing_clauses) {
     if(route.size() == count_of_nodes && clauses_completed(route, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
         return true;
     }
     std::vector<int> removed_vertexes;
     for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
         route.emplace_back(*it);
-        if(!clauses_completed(route, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
+        if(!local_clauses_completed(route, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
             route.pop_back();
         } else {
             removed_vertexes.push_back(*it);
