@@ -26,9 +26,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V45 SAT Solver Approach">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V46 SAT Solver Approach bst solution so far">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,14 +223,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="8209000" />
-    </task>
-    <task id="LOCAL-00020" summary="V16">
-      <created>1673037671670</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1673037671670</updated>
+      <workItem from="1674995327877" duration="9565000" />
     </task>
     <task id="LOCAL-00021" summary="V17 each edge printed only once">
       <created>1673092223989</created>
@@ -569,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675022933025</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="V46 SAT Solver Approach bst solution so far">
+      <created>1675027660580</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1675027660580</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V29 Aufgabe2 tests" />
     <MESSAGE value="V29 Aufgabe2 runs" />
     <MESSAGE value="V32" />
     <MESSAGE value="V33" />
@@ -613,7 +611,8 @@
     <MESSAGE value="V43 SAT Solver Approach" />
     <MESSAGE value="V44 SAT Solver Approach" />
     <MESSAGE value="V45 SAT Solver Approach" />
-    <option name="LAST_COMMIT_MESSAGE" value="V45 SAT Solver Approach" />
+    <MESSAGE value="V46 SAT Solver Approach bst solution so far" />
+    <option name="LAST_COMMIT_MESSAGE" value="V46 SAT Solver Approach bst solution so far" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

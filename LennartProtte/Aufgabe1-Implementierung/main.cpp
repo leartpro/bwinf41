@@ -177,6 +177,8 @@ int main() {
     //TODO: problem ist, dass die bedingung fehlt, dass jeder knoten nur einmal besucht werden muss
     // Find an assignment of variables that satisfies the equation
 
+    //TODO: solution can not be larger than n (total count of given edges)
+
     /*
      * Solve:
      * 1. check if completed
