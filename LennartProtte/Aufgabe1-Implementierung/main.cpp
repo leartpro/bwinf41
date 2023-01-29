@@ -2,55 +2,58 @@
 #include <iostream>
 #include <cmath>
 
-// Umrechnung der 2D-Punktkoordinaten in 1D-Variablen
+// Umrechnung der 2D-Punktkoordinate in 1D-Variable
 int getVariable(int i, int j, int n) {
     return i * n + j;
 }
 
+// Umrechnung der 1D-Variable in 2D-Punktkoordinate
 std::pair<int, int> getCoordinateIndexes(int v, int n) {
     int i = v / n;
     int j = v % n;
     return std::make_pair(i, j);
 }
 
-std::vector<int> sat_solver(const std::vector<std::pair<int, int>> &not_existing_clauses,
-                const std::vector<std::pair<int, int>> &not_together_clauses,
-                std::vector<int> &vertexes) {
-
-    std::vector<int> indices;
-    for (int i = 0; i < vertexes.size(); i++) {
-        if (i % 2 == 0) indices.push_back(i);
+bool clauses_completed(std::vector<int> &route,
+                       std::vector<std::pair<int, int>> not_together_clauses,
+                       std::vector<std::pair<int, int>> not_existing_clauses,
+                       std::vector<std::vector<int>> one_existing_clauses) {
+    if(route.empty()) {
+        return true;
     }
+    //TODO
+    return false;
+}
 
-    do { //for every not_existing clauses (that every node is visited only once)
-        std::vector<int> not_existing_result;
-        not_existing_result.reserve(indices.size());
-        for (const auto &index: indices) {
-            not_existing_result.push_back(vertexes[index]);
-        }
-
-        do { //for every not_together clauses, that not illegal transmission is used (angle criteria)
-            bool satisfied = true;
-            for (const auto &not_clause: not_together_clauses) {
-                const auto it = std::find(not_existing_result.begin(), not_existing_result.end(), not_clause.first);
-                if (it != not_existing_result.end()) {
-                    auto index = std::distance(not_existing_result.begin(), it);
-                    if(index == not_existing_result.size()) index = -1;
-                    if (not_existing_result[index + 1] == not_clause.second) {
-                        satisfied = false;
-                        goto next_permutation;
-                        //invalid
-                    }
+bool sat_solver(std::vector<int> &vertexes,
+                std::vector<int> &route,
+                int count_of_nodes,
+                std::vector<std::pair<int, int>> not_together_clauses,
+                std::vector<std::pair<int, int>> not_existing_clauses,
+                std::vector<std::vector<int>> one_existing_clauses) {
+    if(route.size() == count_of_nodes && clauses_completed(route, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
+        return true;
+    }
+    std::vector<int> removed_vertexes;
+    for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
+        route.emplace_back(*it);
+        if(!clauses_completed(route, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
+            route.pop_back();
+        } else {
+            removed_vertexes.push_back(*it);
+            vertexes.erase(it);
+            if(sat_solver(vertexes, route, count_of_nodes, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
+                return true;
+            } else {
+                route.pop_back();
+                for (auto &vertex: removed_vertexes) {
+                    vertexes.push_back(vertex);
                 }
+                removed_vertexes.clear();
             }
-            next_permutation:
-            if(satisfied) {
-                return not_existing_result;
-            }
-        } while (next_permutation(not_existing_result.begin(), not_existing_result.end()));
-
-    } while (next_permutation(indices.begin(), indices.end()));
-    return *new std::vector<int>;
+        }
+    }
+    return false;
 }
 
 
@@ -185,8 +188,8 @@ int main() {
      * 2. insert next
      * 3. call recursive
      */
-    std::vector<int> result = sat_solver(not_existing_clauses, not_together_clauses, vertexes);
-    if (!result.empty()) {
+    std::vector<int> result;
+    if (sat_solver(vertexes, result, n, not_together_clauses, not_existing_clauses, one_existing_clauses)) {
         std::cout << "solution" << std::endl;
         for (int vertex: result) {
             std::cout
