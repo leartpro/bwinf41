@@ -23,19 +23,20 @@ std::vector<int> sat_solver(const std::vector<std::pair<int, int>> &not_existing
     }
 
     do { //for every not_existing clauses (that every node is visited only once)
-        std::vector<int> result;
-        result.reserve(indices.size());
+        std::vector<int> not_existing_result;
+        not_existing_result.reserve(indices.size());
         for (const auto &index: indices) {
-            result.push_back(vertexes[index]);
+            not_existing_result.push_back(vertexes[index]);
         }
 
         do { //for every not_together clauses, that not illegal transmission is used (angle criteria)
             bool satisfied = true;
             for (const auto &not_clause: not_together_clauses) {
-                const auto it = std::find(result.begin(), result.end(), not_clause.first);
-                if (it != result.end()) {
-                    const auto index = std::distance(result.begin(), it);
-                    if (result[index + 1] == not_clause.second) {
+                const auto it = std::find(not_existing_result.begin(), not_existing_result.end(), not_clause.first);
+                if (it != not_existing_result.end()) {
+                    auto index = std::distance(not_existing_result.begin(), it);
+                    if(index == not_existing_result.size()) index = -1;
+                    if (not_existing_result[index + 1] == not_clause.second) {
                         satisfied = false;
                         goto next_permutation;
                         //invalid
@@ -44,9 +45,9 @@ std::vector<int> sat_solver(const std::vector<std::pair<int, int>> &not_existing
             }
             next_permutation:
             if(satisfied) {
-                return result;
+                return not_existing_result;
             }
-        } while (next_permutation(result.begin(), result.end()));
+        } while (next_permutation(not_existing_result.begin(), not_existing_result.end()));
 
     } while (next_permutation(indices.begin(), indices.end()));
     return *new std::vector<int>;
