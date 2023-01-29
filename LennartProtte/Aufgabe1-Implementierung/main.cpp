@@ -14,9 +14,28 @@ std::pair<int, int> getCoordinateIndexes(int v, int n) {
 }
 
 
-bool sat_solver(const std::vector<std::vector<int>>& clauses, std::vector<int>& vertexes, std::vector<int>& route) {
-
-    return true;
+bool sat_solver(const std::vector<std::pair<int, int>> &not_existing_clauses,
+                const std::vector<std::pair<int, int>> &not_together_clauses,
+                std::vector<int> &vertexes) {
+    do {
+        bool satisfied = true;
+        for (const auto &not_clause: not_together_clauses) {
+            const auto it = std::find(vertexes.begin(), vertexes.end(), not_clause.first);
+            if (it != vertexes.end()) {
+                const auto index = std::distance(vertexes.begin(), it);
+                if (vertexes[index + 1] == not_clause.second) {
+                    satisfied = false;
+                    goto next_permutation;
+                    //invalid
+                }
+            }
+        }
+        next_permutation:
+        if(satisfied) {
+            return true;
+        }
+    } while (next_permutation(vertexes.begin(), vertexes.end()));
+    return false;
 }
 
 
@@ -38,9 +57,11 @@ int main() {
             {1.0, 1.0},
     };
     int n = int(coordinates.size());
-    std::vector<std::vector<int>> clauses;
+    std::vector<std::pair<int, int>> not_together_clauses;
+    std::vector<std::pair<int, int>> not_existing_clauses;
+
     std::vector<int> vertexes;
-    vertexes.reserve((n*(n-1))); //maximum count of vertexes (because every vertex is stored for every direction)
+    vertexes.reserve((n * (n - 1))); //maximum count of vertexes (because every vertex is stored for every direction)
 
     //1. clause that every edge can only used once
     //2. creates vector with all possible edges
@@ -49,12 +70,12 @@ int main() {
             if (i != j) {
                 vertexes.push_back(getVariable(i, j, n));
                 vertexes.push_back(getVariable(j, i, n));
-                clauses.push_back({-getVariable(i, j, n), -getVariable(j, i, n)});
+                not_existing_clauses.emplace_back(getVariable(i, j, n), getVariable(j, i, n));
             }
         }
     }
 
-    //creates clauses that contains if two edges can not be behind each other
+    //creates not_together_clauses that contains if two edges can not be behind each other
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
             for (int k = j + 1; k < n; k++) {
@@ -74,8 +95,8 @@ int main() {
                         if (angle < 0) {
                             angle += 360; // Winkel im Bereich von 0 bis 360
                         }
-                        if(angle < 90) {
-                            clauses.push_back({-getVariable(i, j, n), -getVariable(k, j, n)});
+                        if (angle < 90) {
+                            not_together_clauses.emplace_back(getVariable(i, j, n), getVariable(k, j, n));
                         }
                         int t = i;
                         i = j;
@@ -91,29 +112,25 @@ int main() {
         }
     }
 
-    //creates clauses that every edge have to be connected with at least on vertex
-    //=> at least one vertex per claus hav to be used
-    for (int i = 0; i < n; i++) {
-        std::vector<int> clause;
-        for (int j = 0; j < n; j++) {
-            if (i != j) {
-                clause.push_back(getVariable(i, j, n));
-            }
-        }
-        clauses.push_back(clause);
+    for (const auto &v: vertexes) {
+        std::cout << v << " ";
+    }
+    std::cout << std::endl;
+    for (const auto &clause: not_together_clauses) {
+        std::cout << clause.first << " " << clause.second;
+        std::cout << std::endl;
     }
 
     // Find an assignment of variables that satisfies the equation
-    std::vector<int> route;
-    if(sat_solver(clauses, vertexes, route)) {
+    if (sat_solver(not_existing_clauses, not_together_clauses, vertexes)) {
         std::cout << "solution" << std::endl;
-        for(int vertex : route) {
+        for (int vertex: vertexes) {
             std::cout
-            << "("      << coordinates[getCoordinateIndexes(vertex, n).first].first
-            << ", "     << coordinates[getCoordinateIndexes(vertex, n).first].second
-            << ") -> (" << coordinates[getCoordinateIndexes(vertex, n).second].first
-            << ", "     << coordinates[getCoordinateIndexes(vertex, n).second].second
-            << ")"      << std::endl;
+                    << "(" << coordinates[getCoordinateIndexes(vertex, n).first].first
+                    << ", " << coordinates[getCoordinateIndexes(vertex, n).first].second
+                    << ") -> (" << coordinates[getCoordinateIndexes(vertex, n).second].first
+                    << ", " << coordinates[getCoordinateIndexes(vertex, n).second].second
+                    << ")" << std::endl;
         }
     } else {
         std::cout << "no solution" << std::endl;
