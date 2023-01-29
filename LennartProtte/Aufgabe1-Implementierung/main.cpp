@@ -13,29 +13,43 @@ std::pair<int, int> getCoordinateIndexes(int v, int n) {
     return std::make_pair(i, j);
 }
 
-
-bool sat_solver(const std::vector<std::pair<int, int>> &not_existing_clauses,
+std::vector<int> sat_solver(const std::vector<std::pair<int, int>> &not_existing_clauses,
                 const std::vector<std::pair<int, int>> &not_together_clauses,
                 std::vector<int> &vertexes) {
-    do {
-        bool satisfied = true;
-        for (const auto &not_clause: not_together_clauses) {
-            const auto it = std::find(vertexes.begin(), vertexes.end(), not_clause.first);
-            if (it != vertexes.end()) {
-                const auto index = std::distance(vertexes.begin(), it);
-                if (vertexes[index + 1] == not_clause.second) {
-                    satisfied = false;
-                    goto next_permutation;
-                    //invalid
+
+    std::vector<int> indices;
+    for (int i = 0; i < vertexes.size(); i++) {
+        if (i % 2 == 0) indices.push_back(i);
+    }
+
+    do { //for every not_existing clauses (that every node is visited only once)
+        std::vector<int> result;
+        result.reserve(indices.size());
+        for (const auto &index: indices) {
+            result.push_back(vertexes[index]);
+        }
+
+        do { //for every not_together clauses, that not illegal transmission is used (angle criteria)
+            bool satisfied = true;
+            for (const auto &not_clause: not_together_clauses) {
+                const auto it = std::find(result.begin(), result.end(), not_clause.first);
+                if (it != result.end()) {
+                    const auto index = std::distance(result.begin(), it);
+                    if (result[index + 1] == not_clause.second) {
+                        satisfied = false;
+                        goto next_permutation;
+                        //invalid
+                    }
                 }
             }
-        }
-        next_permutation:
-        if(satisfied) {
-            return true;
-        }
-    } while (next_permutation(vertexes.begin(), vertexes.end()));
-    return false;
+            next_permutation:
+            if(satisfied) {
+                return result;
+            }
+        } while (next_permutation(result.begin(), result.end()));
+
+    } while (next_permutation(indices.begin(), indices.end()));
+    return *new std::vector<int>;
 }
 
 
@@ -112,6 +126,9 @@ int main() {
         }
     }
 
+    //TODO: create clauses entry for every node, all edges connected to him
+    // than it is only allowed to use two of them
+
     for (const auto &v: vertexes) {
         std::cout << v << " ";
     }
@@ -121,10 +138,12 @@ int main() {
         std::cout << std::endl;
     }
 
+    //TODO: problem ist, dass die bedingung fehlt, dass jeder knoten nur einmal besucht werden muss
     // Find an assignment of variables that satisfies the equation
-    if (sat_solver(not_existing_clauses, not_together_clauses, vertexes)) {
+    std::vector<int> result = sat_solver(not_existing_clauses, not_together_clauses, vertexes);
+    if (!result.empty()) {
         std::cout << "solution" << std::endl;
-        for (int vertex: vertexes) {
+        for (int vertex: result) {
             std::cout
                     << "(" << coordinates[getCoordinateIndexes(vertex, n).first].first
                     << ", " << coordinates[getCoordinateIndexes(vertex, n).first].second
