@@ -26,7 +26,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V47 SAT Solver Approach bst solution so far" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V47 SAT Solver Approach">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,14 +224,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="12984000" />
-    </task>
-    <task id="LOCAL-00023" summary="V18">
-      <created>1673097293398</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1673097293398</updated>
+      <workItem from="1674995327877" duration="17752000" />
     </task>
     <task id="LOCAL-00024" summary="V19">
       <created>1673099619153</created>
@@ -566,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675031413737</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="V47 SAT Solver Approach">
+      <created>1675032217898</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1675032217898</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,7 +588,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V32" />
     <MESSAGE value="V33" />
     <MESSAGE value="V33 works when sorted" />
     <MESSAGE value="V33 works when sorted&#10;fails because he on iteration fail, he uses the same element twice&#10;&#10;cube: 6x3x3x&#10;current slice: {3, 6}&#10;current dimension for slice: 0&#10;ORDER: &#10;slice: (6, 6) dimension: 0&#10;slice: (6, 6) dimension: 0&#10;slice: (4, 6) dimension: 1&#10;slice: (4, 6) dimension: 1&#10;slice: (4, 6) dimension: 0&#10;slice: (3, 6) dimension: 1&#10;slice: (3, 6) dimension: 0 //2. time" />
@@ -610,7 +612,8 @@
     <MESSAGE value="V45 SAT Solver Approach" />
     <MESSAGE value="V46 SAT Solver Approach bst solution so far" />
     <MESSAGE value="V47 SAT Solver Approach bst solution so far" />
-    <option name="LAST_COMMIT_MESSAGE" value="V47 SAT Solver Approach bst solution so far" />
+    <MESSAGE value="V47 SAT Solver Approach" />
+    <option name="LAST_COMMIT_MESSAGE" value="V47 SAT Solver Approach" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
