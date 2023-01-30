@@ -224,14 +224,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="17752000" />
-    </task>
-    <task id="LOCAL-00024" summary="V19">
-      <created>1673099619153</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1673099619153</updated>
+      <workItem from="1674995327877" duration="19435000" />
     </task>
     <task id="LOCAL-00025" summary="V21">
       <created>1673103843216</created>
@@ -569,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675032217898</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="V47 SAT Solver Approach">
+      <created>1675077993129</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1675077993129</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -170,6 +170,10 @@ int main() {
     // so for each vertex x_ij store all vertexes x_jk, where k is 0,1,2,...,n
     // as data_structure use an unordered_map
 
+    std::vector<std::pair<std::vector<int>, std::vector<int>>> matrix;
+    matrix.reserve(n); //total count of nodes
+    //stores for each node all ingoing edges and all outgoing edges
+
     //TODO: sort vertexes by weight
     std::cout << "Vertexes: " << std::endl;
     for (const auto &v: vertexes) {
