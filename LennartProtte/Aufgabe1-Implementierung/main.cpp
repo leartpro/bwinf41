@@ -4,32 +4,38 @@
 
 // Umrechnung der 2D-Punktkoordinate in 1D-Variable
 int getVariable(int i, int j, int n) {
-    return i * n + j;
+    return (i - 1) * n + j - 1;
 }
 
 // Umrechnung der 1D-Variable in 2D-Punktkoordinate
 std::pair<int, int> getCoordinateIndexes(int v, int n) {
-    int i = v / n;
-    int j = v % n;
+    int i = v / (n + 1);
+    int j = v % (n + 1);
     return std::make_pair(i, j);
 }
 
 //Checks if a vertex is reachable from another vertex
 bool is_reachable(const int &current,
                   std::vector<int> &route,
-                  const int& last_index,
+                  const int &last_index,
                   const int &count_of_nodes) {
     if (route.empty()) {
         return true;
     }
-    const int& last = route[last_index];
-    if (getCoordinateIndexes(last, count_of_nodes).second ==
-        getCoordinateIndexes(current, count_of_nodes).first) {
+    const int &last = route[last_index];
+    if (getCoordinateIndexes(current, count_of_nodes).first ==
+        getCoordinateIndexes(last, count_of_nodes).second
+            ) {
+        //TODO: for the given data this should be 6 for 1=last and not 8
+        std::cout << current << "(index=" << getCoordinateIndexes(current, count_of_nodes).first
+                  << ") comes after " << last << "(index=" << getCoordinateIndexes(last, count_of_nodes).second << ")"
+                  << std::endl;
         return true;
     }
     return false;
 }
 
+//Checks if current is not excluded by the clauses set by route
 bool is_not_excluded(const int &current,
                      std::vector<int> &route,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
@@ -45,7 +51,7 @@ bool is_not_excluded(const int &current,
     for (int &vertex: route) {
         for (const auto &clause: one_existing_clauses) {
             if (std::find(clause.begin(), clause.end(), vertex) != clause.end() &&
-                    std::find(clause.begin(), clause.end(), current) != clause.end()) {
+                std::find(clause.begin(), clause.end(), current) != clause.end()) {
                 return false;
             }
         }
@@ -58,12 +64,12 @@ bool route_satisfied(std::vector<int> &route,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
                      const std::vector<std::vector<int>> &one_existing_clauses) {
     for (auto it = route.begin(); it != route.end(); ++it) {
-        if(!is_reachable(*it, route, int(std::distance(route.begin(), it)), count_of_nodes) ||
-                !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
+        if (!is_reachable(*it, route, int(std::distance(route.begin(), it)), count_of_nodes) ||
+            !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
             return false;
         }
     }
-        if (route.size() == count_of_nodes) {
+    if (route.size() == count_of_nodes) {
         return true;
     } else {
         return false;
@@ -80,7 +86,7 @@ bool sat_solver(std::vector<int> &vertexes,
     std::vector<int> removed_vertexes;
     for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
         std::cout << "check for vertex: " << *it << std::endl;
-        if (is_reachable(*it, route, int(route.size()) -1, int(vertexes.size()) / 2) &&
+        if (is_reachable(*it, route, int(route.size()) - 1, int(vertexes.size()) / 2) &&
             is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
             std::cout << "is valid try in recursion for  " << *it << std::endl;
             route.emplace_back(*it);
@@ -195,9 +201,9 @@ int main() {
     for (const auto &v: vertexes) {
         std::cout << v << " | ";
         std::cout
-                << "(" << coordinates[getCoordinateIndexes(v, n).first].first
+                << "FIRST:(" << coordinates[getCoordinateIndexes(v, n).first].first
                 << ", " << coordinates[getCoordinateIndexes(v, n).first].second
-                << ") -> (" << coordinates[getCoordinateIndexes(v, n).second].first
+                << ") -> SECOND:(" << coordinates[getCoordinateIndexes(v, n).second].first
                 << ", " << coordinates[getCoordinateIndexes(v, n).second].second
                 << ")" << std::endl;
     }
