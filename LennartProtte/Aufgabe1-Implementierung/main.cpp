@@ -9,8 +9,8 @@ int getVariable(int i, int j, int n) {
 
 // Umrechnung der 1D-Variable in 2D-Punktkoordinate
 std::pair<int, int> getCoordinateIndexes(int v, int n) {
-    int i = v / (n + 1);
-    int j = v % (n + 1);
+    int i = v / n + 1;
+    int j = v % n + 1;
     return std::make_pair(i, j);
 }
 

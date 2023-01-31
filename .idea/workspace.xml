@@ -224,14 +224,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="29542000" />
-    </task>
-    <task id="LOCAL-00029" summary="V25b First Correct result (round about 60h of work and studying computer theory)">
-      <created>1673129877207</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1673129877207</updated>
+      <workItem from="1674995327877" duration="32281000" />
     </task>
     <task id="LOCAL-00030" summary="V26 debug counter">
       <created>1673131311117</created>
@@ -569,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675171036023</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="V48 SAT Solver Approach Debugging">
+      <created>1675176319648</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1675176319648</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
