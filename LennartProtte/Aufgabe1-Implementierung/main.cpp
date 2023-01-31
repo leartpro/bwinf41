@@ -14,62 +14,82 @@ std::pair<int, int> getCoordinateIndexes(int v, int n) {
     return std::make_pair(i, j);
 }
 
-//check if all clauses are completed in the given route
-
-bool clauses_completed(std::vector<int> &route,
-                       const std::vector<std::pair<int, int>>& not_together_clauses,
-                       const std::vector<std::vector<int>>& one_existing_clauses) {
-
-    if(route.empty()) {
+bool is_reachable(const int &current,
+                  std::vector<int> &route,
+                  const int& last_index,
+                  const int &count_of_nodes) {
+    if (route.empty()) {
         return true;
     }
-    //TODO
+    const int& last = route[last_index];
+    if (getCoordinateIndexes(last, count_of_nodes).second ==
+        getCoordinateIndexes(current, count_of_nodes).first) {
+        return true;
+    }
     return false;
 }
 
-//check if all clauses are completed in the given route but only look around the last index
-bool local_clauses_completed(std::vector<int> &route,
-                             const std::vector<std::pair<int, int>>& not_together_clauses,
-                             const std::vector<std::vector<int>>& one_existing_clauses) {
-    if(route.empty()) {
+bool is_not_excluded(const int &current,
+                     std::vector<int> &route,
+                     const std::vector<std::pair<int, int>> &not_together_clauses,
+                     const std::vector<std::vector<int>> &one_existing_clauses) {
+    if (route.empty()) {
         return true;
     }
-    //TODO
-    return false;
+    for (const auto &not_together_clause: not_together_clauses) {
+        if (not_together_clause.first == route.back() && not_together_clause.second == current) {
+            return false;
+        }
+    }
+    for (int &vertex: route) {
+        for (const auto &clause: one_existing_clauses) {
+            if (std::find(clause.begin(), clause.end(), vertex) != clause.end() &&
+                    std::find(clause.begin(), clause.end(), current) != clause.end()) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool route_satisfied(std::vector<int> &route,
+                     const int &count_of_nodes,
+                     const std::vector<std::pair<int, int>> &not_together_clauses,
+                     const std::vector<std::vector<int>> &one_existing_clauses) {
+    for (auto it = route.begin(); it != route.end(); ++it) {
+        if(!is_reachable(*it, route, int(std::distance(route.begin(), it)), count_of_nodes) ||
+                !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
+            return false;
+        }
+    }
+        if (route.size() == count_of_nodes) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool sat_solver(std::vector<int> &vertexes,
                 std::vector<int> &route,
-                int count_of_nodes,
-                const std::vector<std::pair<int, int>>& not_together_clauses,
-                const std::vector<std::vector<int>>& one_existing_clauses) {
-    if(route.size() == count_of_nodes && clauses_completed(route, not_together_clauses, one_existing_clauses)) {
+                const std::vector<std::pair<int, int>> &not_together_clauses,
+                const std::vector<std::vector<int>> &one_existing_clauses) {
+    if (route_satisfied(route, int(vertexes.size()) / 2, not_together_clauses, one_existing_clauses)) {
         return true;
     }
     std::vector<int> removed_vertexes;
-    for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
-        route.emplace_back(*it);
-        if(!local_clauses_completed(route, not_together_clauses, one_existing_clauses)) {
-            route.pop_back();
-        } else {
-            //TODO: find next reachable
-            // and red flag all invalid tours for this try
-            removed_vertexes.push_back(*it);
-            vertexes.erase(it);
-            if(sat_solver(vertexes, route, count_of_nodes, not_together_clauses, one_existing_clauses)) {
+    for (const int& vertex :vertexes) {
+        if (is_reachable(vertex, route, int(route.size()) -1, int(vertexes.size()) / 2) &&
+            is_not_excluded(vertex, route, not_together_clauses, one_existing_clauses)) {
+            route.emplace_back(vertex);
+            if (sat_solver(vertexes, route, not_together_clauses, one_existing_clauses)) {
                 return true;
             } else {
                 route.pop_back();
-                for (auto &vertex: removed_vertexes) {
-                    vertexes.push_back(vertex);
-                }
-                removed_vertexes.clear();
             }
         }
     }
     return false;
 }
-
 
 int main() {
     // Beispieldatensatz von 2d-Punktkoordinaten
@@ -96,7 +116,8 @@ int main() {
     // set one value as SET and check if other clauses becomes clear (only one value left)
 
     std::vector<int> vertexes;
-    vertexes.reserve((n * (n - 1))); //maximum count of vertexes (because every vertex is stored for every direction)
+    vertexes.reserve(
+            (n * (n - 1))); //maximum count of vertexes (because every vertex is stored for every direction)
 
     //1. clause that every edge can only used once
     //2. creates vector with all possible edges
@@ -152,12 +173,12 @@ int main() {
     // than it is only allowed to use two of them
     for (int i = 0; i < n; i++) {
         std::vector<int> from_node, to_node;
-        from_node.reserve(vertexes.size() -1);
-        to_node.reserve(vertexes.size() -1);
-        for(const auto& vertex: vertexes) {
-            if(getCoordinateIndexes(vertex, n).first == i) {
+        from_node.reserve(vertexes.size() - 1);
+        to_node.reserve(vertexes.size() - 1);
+        for (const auto &vertex: vertexes) {
+            if (getCoordinateIndexes(vertex, n).first == i) {
                 from_node.push_back(vertex);
-            } else if(getCoordinateIndexes(vertex, n).second == i) {
+            } else if (getCoordinateIndexes(vertex, n).second == i) {
                 to_node.push_back(vertex);
             }
         }
@@ -195,7 +216,7 @@ int main() {
 
     std::cout << "one_existing_clauses: " << std::endl;
     for (const auto &clause: one_existing_clauses) {
-        for(const auto& vertex : clause) {
+        for (const auto &vertex: clause) {
             std::cout << vertex << " ";
         }
         std::cout << std::endl;
@@ -213,7 +234,7 @@ int main() {
      * 3. call recursive
      */
     std::vector<int> result;
-    if (sat_solver(vertexes, result, n, not_together_clauses, one_existing_clauses)) {
+    if (sat_solver(vertexes, result, not_together_clauses, one_existing_clauses)) {
         std::cout << "solution" << std::endl;
         for (int vertex: result) {
             std::cout
