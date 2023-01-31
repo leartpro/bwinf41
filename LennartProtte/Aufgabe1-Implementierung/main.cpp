@@ -111,10 +111,6 @@ int main() {
     int n = int(coordinates.size());
     std::vector<std::pair<int, int>> not_together_clauses; //they cant be after each other
     std::vector<std::vector<int>> one_existing_clauses; //only one of them can exist in solution
-
-    //TODO: maybe one_existing_clauses can be solved like a sudoku
-    // set one value as SET and check if other clauses becomes clear (only one value left)
-
     std::vector<int> vertexes;
     vertexes.reserve(
             (n * (n - 1))); //maximum count of vertexes (because every vertex is stored for every direction)
@@ -169,8 +165,7 @@ int main() {
         }
     }
 
-    //TODO: create clauses entry for every node, all edges connected to him
-    // than it is only allowed to use two of them
+    //create clauses entry for every node, it is only allowed to use two of all edges connected to him
     for (int i = 0; i < n; i++) {
         std::vector<int> from_node, to_node;
         from_node.reserve(vertexes.size() - 1);
@@ -186,16 +181,6 @@ int main() {
         one_existing_clauses.push_back(to_node);
     }
 
-    //TODO: add clauses entry for every vertex: all vertexes that came after
-    // maybe store them in a 2d matrix
-    // so for each vertex x_ij store all vertexes x_jk, where k is 0,1,2,...,n
-    // as data_structure use an unordered_map
-
-    std::vector<std::pair<std::vector<int>, std::vector<int>>> matrix;
-    matrix.reserve(n); //total count of nodes
-    //stores for each node all ingoing edges and all outgoing edges
-
-    //TODO: sort vertexes by weight
     std::cout << "Vertexes: " << std::endl;
     for (const auto &v: vertexes) {
         std::cout << v << " | ";
@@ -222,17 +207,6 @@ int main() {
         std::cout << std::endl;
     }
 
-    //TODO: problem ist, dass die bedingung fehlt, dass jeder knoten nur einmal besucht werden muss
-    // Find an assignment of variables that satisfies the equation
-
-    //TODO: solution can not be larger than n (total count of given edges)
-
-    /*
-     * Solve:
-     * 1. check if completed
-     * 2. insert next
-     * 3. call recursive
-     */
     std::vector<int> result;
     if (sat_solver(vertexes, result, not_together_clauses, one_existing_clauses)) {
         std::cout << "solution" << std::endl;
