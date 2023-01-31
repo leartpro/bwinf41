@@ -14,6 +14,7 @@ std::pair<int, int> getCoordinateIndexes(int v, int n) {
     return std::make_pair(i, j);
 }
 
+//Checks if a vertex is reachable from another vertex
 bool is_reachable(const int &current,
                   std::vector<int> &route,
                   const int& last_index,
@@ -77,17 +78,26 @@ bool sat_solver(std::vector<int> &vertexes,
         return true;
     }
     std::vector<int> removed_vertexes;
-    for (const int& vertex :vertexes) {
-        if (is_reachable(vertex, route, int(route.size()) -1, int(vertexes.size()) / 2) &&
-            is_not_excluded(vertex, route, not_together_clauses, one_existing_clauses)) {
-            route.emplace_back(vertex);
+    for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
+        std::cout << "check for vertex: " << *it << std::endl;
+        if (is_reachable(*it, route, int(route.size()) -1, int(vertexes.size()) / 2) &&
+            is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
+            std::cout << "is valid try in recursion for  " << *it << std::endl;
+            route.emplace_back(*it);
+            removed_vertexes.push_back(*it);
+            vertexes.erase(it);
             if (sat_solver(vertexes, route, not_together_clauses, one_existing_clauses)) {
                 return true;
             } else {
                 route.pop_back();
+                for (auto &vertex: removed_vertexes) {
+                    vertexes.push_back(vertex);
+                }
+                removed_vertexes.clear();
             }
         }
     }
+    std::cout << "recursion FAILED " << std::endl;
     return false;
 }
 

@@ -26,8 +26,6 @@ int canRemoveSlice(int length, int height, int depth, Slice slice) {
     }
 }
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "misc-no-recursion"
 bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int> > &order, vector<Slice> &slices) {
     if (slices.empty()) {
         return (length == 0 || height == 0 || depth == 0);
@@ -55,7 +53,6 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int> >
     }
     return false;
 }
-#pragma clang diagnostic pop
 
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
