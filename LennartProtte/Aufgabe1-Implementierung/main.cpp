@@ -145,33 +145,35 @@ int main() {
     //creates not_together_clauses that contains if two edges can not be behind each other
     for (auto i = graph.begin(); i != graph.end(); i++) {
         for (auto j = graph.begin(); j != graph.end(); j++) {
-            if(i != j) {
-                if(i->second.second == j->second.first) {
-                    std::pair<double, double> v1;
-                    v1.first = i->second.second.first - i->second.first.first;
-                    v1.second = i->second.second.second - i->second.first.second;
-                    std::pair<double, double> v2;
-                    v2.first = j->second.first.first - j->second.second.first;
-                    v2.second = j->second.first.second - j->second.second.second;
-                    double dot_product = v1.first * v2.first + v1.second * v2.second;
-                    double v1_length = sqrt(v1.first * v1.first + v1.second * v1.second);
-                    double v2_length = sqrt(v2.first * v2.first + v2.second * v2.second);
-                    double angle = acos(dot_product / (v1_length * v2_length));
-                    angle = angle * 180 / M_PI; // Umrechnung in Grad des innen Winkels alpha
-                    std::cout << "(" << v1.first << "," << v1.second << ") -> (" << v2.first << "," << v2.second << ") => " << angle << "°" << std::endl;
-                    if (angle < 0) {
-                        angle += 360; // Winkel im Bereich von 0 bis 360
-                    }
-                    if (angle < 90) {
-                        not_together_clauses.emplace_back(i->first, j->first);
-                    }
+            if (i != j && i->second.second == j->second.first && i->second.first != j->second.second) {
+                std::pair<double, double> v1;
+                v1.first = i->second.second.first - i->second.first.first;
+                v1.second = i->second.second.second - i->second.first.second;
+                std::pair<double, double> v2;
+                v2.first = j->second.first.first - j->second.second.first;
+                v2.second = j->second.first.second - j->second.second.second;
+                double dot_product = v1.first * v2.first + v1.second * v2.second;
+                double v1_length = sqrt(v1.first * v1.first + v1.second * v1.second);
+                double v2_length = sqrt(v2.first * v2.first + v2.second * v2.second);
+                double angle = acos(dot_product / (v1_length * v2_length));
+                angle = angle * 180 / M_PI; // Umrechnung in Grad des innen Winkels alpha
+                std::cout << "[(" << i->second.first.first << "," << i->second.first.second << ") -> ("
+                          << i->second.second.first << "," << i->second.second.second << ")] -> "
+                                                                                         "[(" << j->second.first.first
+                          << "," << j->second.first.second << ") -> (" << j->second.second.first << ","
+                          << j->second.second.second << ")] => " << angle << "°" << std::endl;
+                if (angle < 0) { //TODO: check if necessary
+                    angle += 360; // Winkel im Bereich von 0 bis 360
+                }
+                if (angle < 90) {
+                    not_together_clauses.emplace_back(i->first, j->first);
                 }
             }
         }
     }
 
     //create clauses entry for every node, it is only allowed to use two of all edges connected to him
-    for (auto coordinate : coordinates) {
+    for (auto coordinate: coordinates) {
         std::vector<int> from_node, to_node;
         for (auto &i: graph) {
             if (i.second.first == coordinate) {
@@ -185,7 +187,7 @@ int main() {
     }
 
     std::cout << "Vertexes: " << std::endl;
-    for (auto & i : graph) {
+    for (auto &i: graph) {
         std::cout << i.first << " | ";
         std::cout
                 << "FIRST:(" << i.second.first.first
