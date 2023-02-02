@@ -12,15 +12,14 @@ bool is_reachable(const int &current,
     if (route.empty()) {
         return true;
     }
-    std::cout << "current(" << graph.find(current)->second.first.first << "," << graph.find(current)->second.first.second
-    << ") -> last(" << graph.find(last)->second.second.first << "," << graph.find(last)->second.second.second << "); ";
-    if (graph.find(current)->second.first == graph.find(last)->second.second) { //TODO: validate this statement
+    if (graph.find(current)->second.first == graph.find(last)->second.second) {
         return true;
     }
     return false;
 }
 
 //Checks if current is not excluded by the clauses set by route
+//TODO: THIS METHOD CAUsES BIG PROBLEMS
 bool is_not_excluded(const int &current,
                      std::vector<int> &route,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
@@ -33,7 +32,7 @@ bool is_not_excluded(const int &current,
             return false;
         }
     }
-    for (int &vertex: route) {
+    for (int &vertex: route) { //TODO: wrong code
         for (const auto &clause: one_existing_clauses) {
             if (std::find(clause.begin(), clause.end(), vertex) != clause.end() &&
                 std::find(clause.begin(), clause.end(), current) != clause.end()) {
@@ -48,24 +47,13 @@ bool route_satisfied(std::vector<int> &route,
                      const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
                      const std::vector<std::vector<int>> &one_existing_clauses) {
+    if(route.empty()) {
+        return false;
+    }
     for (auto it = route.begin(); it != route.end(); ++it) {
-        std::cout << " if !is_reachable[" << is_reachable(*it, route, route[int(std::distance(route.begin(), it+ 1))], graph)
-                  << "] || !is_not_excluded[" << is_not_excluded(*it, route, not_together_clauses, one_existing_clauses) << "]" << std::endl;
-        //std::cout << "current: " << *it << " , last: " << route[int(std::distance(route.begin(), it+ 1))] << std::endl;
-        //TODO: both methods doesnt seem to work properly
-        bool is_not_reachable = !is_reachable(*it, route, route[int(std::distance(route.begin(), it + 1))], graph);
+        bool is_not_reachable = !is_reachable(route[int(std::distance(route.begin(), it + 1))], route, *it, graph);
         bool is_excluded = !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses);
-        if(!is_not_reachable) {
-            std::cout << "is reachable = true" << std::endl;
-        } else {
-            std::cout << "is reachable = false" << std::endl;
-        }
-        if (!is_excluded) {
-            std::cout << "is not excluded = true" << std::endl;
-        } else {
-            std::cout << "is not excluded = false" << std::endl;
-        }
-        if (is_not_reachable || is_excluded) {
+        if (is_not_reachable || is_excluded) { //TODO: both conditions are always false
             return false;
         }
     }
@@ -86,10 +74,8 @@ bool sat_solver(std::vector<int> &vertexes,
     }
     std::vector<int> removed_vertexes;
     for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
-        std::cout << "check for vertex: " << *it << std::endl;
         if (is_reachable(*it, route, route[int(route.size()) - 1], graph) &&
             is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
-            std::cout << "is valid try in recursion for  " << *it << std::endl;
             route.emplace_back(*it);
             removed_vertexes.push_back(*it);
             vertexes.erase(it);
@@ -104,7 +90,6 @@ bool sat_solver(std::vector<int> &vertexes,
             }
         }
     }
-    std::cout << "recursion FAILED " << std::endl;
     return false;
 }
 
