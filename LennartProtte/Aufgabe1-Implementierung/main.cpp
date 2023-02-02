@@ -4,8 +4,6 @@
 #include <cmath>
 
 //Checks if a vertex is reachable from another vertex
-//TODO: this method can be replaced by graph.find()
-// because if an edge exist between both nodes, the current node is reachable from the last node of the route
 bool is_reachable(const int &current,
                   std::vector<int> &route,
                   const int &last,
@@ -14,6 +12,8 @@ bool is_reachable(const int &current,
     if (route.empty()) {
         return true;
     }
+    std::cout << "current(" << graph.find(current)->second.first.first << "," << graph.find(current)->second.first.second
+    << ") -> last(" << graph.find(last)->second.second.first << "," << graph.find(last)->second.second.second << "); ";
     if (graph.find(current)->second.first == graph.find(last)->second.second) { //TODO: validate this statement
         return true;
     }
@@ -49,12 +49,23 @@ bool route_satisfied(std::vector<int> &route,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
                      const std::vector<std::vector<int>> &one_existing_clauses) {
     for (auto it = route.begin(); it != route.end(); ++it) {
-        std::cout << "is reachable: " << is_reachable(*it, route, route[int(std::distance(route.begin(), it+ 1))], graph)
-        << " is not excluded: " << is_not_excluded(*it, route, not_together_clauses, one_existing_clauses) << std::endl;
-        std::cout << "current: " << *it << " , last: " << route[int(std::distance(route.begin(), it+ 1))] << std::endl;
+        std::cout << " if !is_reachable[" << is_reachable(*it, route, route[int(std::distance(route.begin(), it+ 1))], graph)
+                  << "] || !is_not_excluded[" << is_not_excluded(*it, route, not_together_clauses, one_existing_clauses) << "]" << std::endl;
+        //std::cout << "current: " << *it << " , last: " << route[int(std::distance(route.begin(), it+ 1))] << std::endl;
         //TODO: both methods doesnt seem to work properly
-        if (!is_reachable(*it, route, route[int(std::distance(route.begin(), it + 1))], graph) ||
-            !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
+        bool is_not_reachable = !is_reachable(*it, route, route[int(std::distance(route.begin(), it + 1))], graph);
+        bool is_excluded = !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses);
+        if(!is_not_reachable) {
+            std::cout << "is reachable = true" << std::endl;
+        } else {
+            std::cout << "is reachable = false" << std::endl;
+        }
+        if (!is_excluded) {
+            std::cout << "is not excluded = true" << std::endl;
+        } else {
+            std::cout << "is not excluded = false" << std::endl;
+        }
+        if (is_not_reachable || is_excluded) {
             return false;
         }
     }
