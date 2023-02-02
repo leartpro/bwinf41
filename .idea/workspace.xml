@@ -224,14 +224,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="37409000" />
-    </task>
-    <task id="LOCAL-00032" summary="V26 approach three&#10;looks like a success">
-      <created>1673133015269</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1673133015269</updated>
+      <workItem from="1674995327877" duration="40008000" />
     </task>
     <task id="LOCAL-00033" summary="V26 workspace.xml">
       <created>1673197587205</created>
@@ -569,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675251208262</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="V48 SAT Solver Approach re-structuring">
+      <created>1675252527890</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1675252527890</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

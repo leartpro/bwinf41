@@ -4,27 +4,23 @@
 #include <cmath>
 
 //Checks if a vertex is reachable from another vertex
-/*
+//TODO: this method can be replaced by graph.find()
+// because if an edge exist between both nodes, the current node is reachable from the last node of the route
 bool is_reachable(const int &current,
                   std::vector<int> &route,
                   const int &last_index,
-                  const int &count_of_nodes) {
+                  const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph
+                  ) {
     if (route.empty()) {
         return true;
     }
     const int &last = route[last_index];
-    if (getCoordinateIndexes(current, count_of_nodes).first ==
-        getCoordinateIndexes(last, count_of_nodes).second
-            ) {
-        //TODO: for the given data this should be 6 for 1=last and not 8
-        std::cout << current << "(index=" << getCoordinateIndexes(current, count_of_nodes).first
-                  << ") comes after " << last << "(index=" << getCoordinateIndexes(last, count_of_nodes).second << ")"
-                  << std::endl;
+    if (graph.find(current)->second.first == graph.find(last)->second.second) { //TODO: validate this statement
         return true;
     }
     return false;
 }
- */
+
 
 //Checks if current is not excluded by the clauses set by route
 bool is_not_excluded(const int &current,
@@ -50,43 +46,43 @@ bool is_not_excluded(const int &current,
     return true;
 }
 
-/*
+
 bool route_satisfied(std::vector<int> &route,
-                     const int &count_of_nodes,
+                     const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
                      const std::vector<std::vector<int>> &one_existing_clauses) {
     for (auto it = route.begin(); it != route.end(); ++it) {
-        if (!is_reachable(*it, route, int(std::distance(route.begin(), it)), count_of_nodes) ||
+        if (!is_reachable(*it, route, int(std::distance(route.begin(), it)), graph) ||
             !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
             return false;
         }
     }
-    if (route.size() == count_of_nodes) {
+    if (route.size() == graph.size() / 2) {
         return true;
     } else {
         return false;
     }
 }
- */
 
-/*
+
 bool sat_solver(std::vector<int> &vertexes,
+                const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph,
                 std::vector<int> &route,
                 const std::vector<std::pair<int, int>> &not_together_clauses,
                 const std::vector<std::vector<int>> &one_existing_clauses) {
-    if (route_satisfied(route, int(vertexes.size()) / 2, not_together_clauses, one_existing_clauses)) {
+    if (route_satisfied(route, graph, not_together_clauses, one_existing_clauses)) {
         return true;
     }
     std::vector<int> removed_vertexes;
     for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
         std::cout << "check for vertex: " << *it << std::endl;
-        if (is_reachable(*it, route, int(route.size()) - 1, int(vertexes.size()) / 2) &&
+        if (is_reachable(*it, route, int(route.size()) - 1, graph) &&
             is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
             std::cout << "is valid try in recursion for  " << *it << std::endl;
             route.emplace_back(*it);
             removed_vertexes.push_back(*it);
             vertexes.erase(it);
-            if (sat_solver(vertexes, route, not_together_clauses, one_existing_clauses)) {
+            if (sat_solver(vertexes, graph, route, not_together_clauses, one_existing_clauses)) {
                 return true;
             } else {
                 route.pop_back();
@@ -100,10 +96,11 @@ bool sat_solver(std::vector<int> &vertexes,
     std::cout << "recursion FAILED " << std::endl;
     return false;
 }
- */
+
 
 int main() {
     // Beispieldatensatz von 2d-Punktkoordinaten
+
     /*
     std::vector<std::pair<double, double>> coordinates{
             {2.0, 4.0},
@@ -157,14 +154,11 @@ int main() {
                 double v2_length = sqrt(v2.first * v2.first + v2.second * v2.second);
                 double angle = acos(dot_product / (v1_length * v2_length));
                 angle = angle * 180 / M_PI; // Umrechnung in Grad des innen Winkels alpha
-                std::cout << "[(" << i->second.first.first << "," << i->second.first.second << ") -> ("
+                std::cout << i->first << " | [(" << i->second.first.first << "," << i->second.first.second << ") -> ("
                           << i->second.second.first << "," << i->second.second.second << ")] -> "
-                                                                                         "[(" << j->second.first.first
+                          << j->first << " | [(" << j->second.first.first
                           << "," << j->second.first.second << ") -> (" << j->second.second.first << ","
                           << j->second.second.second << ")] => " << angle << "°" << std::endl;
-                if (angle < 0) { //TODO: check if necessary
-                    angle += 360; // Winkel im Bereich von 0 bis 360
-                }
                 if (angle < 90) {
                     not_together_clauses.emplace_back(i->first, j->first);
                 }
@@ -181,18 +175,18 @@ int main() {
             } else if (i.second.second == coordinate) {
                 to_node.push_back(i.first);
             }
-            one_existing_clauses.push_back(from_node);
-            one_existing_clauses.push_back(to_node);
         }
+        one_existing_clauses.push_back(from_node);
+        one_existing_clauses.push_back(to_node);
     }
 
     std::cout << "Vertexes: " << std::endl;
     for (auto &i: graph) {
         std::cout << i.first << " | ";
         std::cout
-                << "FIRST:(" << i.second.first.first
+                << "(" << i.second.first.first
                 << ", " << i.second.first.second
-                << ") -> SECOND:(" << i.second.second.first
+                << ") -> (" << i.second.second.first
                 << ", " << i.second.second.second
                 << ")" << std::endl;
     }
@@ -211,21 +205,27 @@ int main() {
         }
         std::cout << std::endl;
     }
-/*
-    std::vector<int> result;
-    if (sat_solver(vertexes, result, not_together_clauses, one_existing_clauses)) {
+
+    std::vector<int> result, vertexes;
+    for (auto & i : graph) {
+        vertexes.push_back(i.first);
+    }
+        if (sat_solver(vertexes, graph, result, not_together_clauses, one_existing_clauses)) {
         std::cout << "solution" << std::endl;
-        for (int vertex: result) {
-            std::cout
-                    << "(" << coordinates[getCoordinateIndexes(vertex, n).first].first
-                    << ", " << coordinates[getCoordinateIndexes(vertex, n).first].second
-                    << ") -> (" << coordinates[getCoordinateIndexes(vertex, n).second].first
-                    << ", " << coordinates[getCoordinateIndexes(vertex, n).second].second
-                    << ")" << std::endl;
+        for (int r : result) {
+            if (graph.find(r) == graph.end()) {
+                auto it = graph.find(r);
+                std::cout
+                        << "(" << it->second.first.first
+                        << ", " << it->second.first.second
+                        << ") -> (" << it->second.second.first
+                        << ", " << it->second.second.second
+                        << ")" << std::endl;
+            }
         }
     } else {
         std::cout << "no solution" << std::endl;
     }
-    */
+
     return 0;
 }
