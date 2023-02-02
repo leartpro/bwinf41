@@ -8,19 +8,17 @@
 // because if an edge exist between both nodes, the current node is reachable from the last node of the route
 bool is_reachable(const int &current,
                   std::vector<int> &route,
-                  const int &last_index,
+                  const int &last,
                   const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph
                   ) {
     if (route.empty()) {
         return true;
     }
-    const int &last = route[last_index];
     if (graph.find(current)->second.first == graph.find(last)->second.second) { //TODO: validate this statement
         return true;
     }
     return false;
 }
-
 
 //Checks if current is not excluded by the clauses set by route
 bool is_not_excluded(const int &current,
@@ -46,37 +44,39 @@ bool is_not_excluded(const int &current,
     return true;
 }
 
-
 bool route_satisfied(std::vector<int> &route,
                      const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
                      const std::vector<std::vector<int>> &one_existing_clauses) {
     for (auto it = route.begin(); it != route.end(); ++it) {
-        if (!is_reachable(*it, route, int(std::distance(route.begin(), it)), graph) ||
+        std::cout << "is reachable: " << is_reachable(*it, route, route[int(std::distance(route.begin(), it+ 1))], graph)
+        << " is not excluded: " << is_not_excluded(*it, route, not_together_clauses, one_existing_clauses) << std::endl;
+        std::cout << "current: " << *it << " , last: " << route[int(std::distance(route.begin(), it+ 1))] << std::endl;
+        //TODO: both methods doesnt seem to work properly
+        if (!is_reachable(*it, route, route[int(std::distance(route.begin(), it + 1))], graph) ||
             !is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
             return false;
         }
     }
-    if (route.size() == graph.size() / 2) {
+    if (route.size() == graph.size() / 2) { //TODO: total count of nodes graph.size() is 12 not 8
         return true;
     } else {
         return false;
     }
 }
 
-
 bool sat_solver(std::vector<int> &vertexes,
                 const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>>& graph,
                 std::vector<int> &route,
                 const std::vector<std::pair<int, int>> &not_together_clauses,
                 const std::vector<std::vector<int>> &one_existing_clauses) {
-    if (route_satisfied(route, graph, not_together_clauses, one_existing_clauses)) {
+    if (route_satisfied(route, graph, not_together_clauses, one_existing_clauses)) { //TODO: does not work correctly
         return true;
     }
     std::vector<int> removed_vertexes;
     for (auto it = vertexes.begin(); it != vertexes.end(); ++it) {
         std::cout << "check for vertex: " << *it << std::endl;
-        if (is_reachable(*it, route, int(route.size()) - 1, graph) &&
+        if (is_reachable(*it, route, route[int(route.size()) - 1], graph) &&
             is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
             std::cout << "is valid try in recursion for  " << *it << std::endl;
             route.emplace_back(*it);
@@ -96,7 +96,6 @@ bool sat_solver(std::vector<int> &vertexes,
     std::cout << "recursion FAILED " << std::endl;
     return false;
 }
-
 
 int main() {
     // Beispieldatensatz von 2d-Punktkoordinaten
@@ -135,7 +134,7 @@ int main() {
                 key++;
                 graph.insert(std::make_pair(key, value_2));
                 key++;
-                one_existing_clauses.push_back({key - 1, key});
+                one_existing_clauses.push_back({key - 2, key - 1});
             }
         }
     }
@@ -227,6 +226,5 @@ int main() {
     } else {
         std::cout << "no solution" << std::endl;
     }
-
     return 0;
 }
