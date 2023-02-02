@@ -122,6 +122,7 @@ int main() {
     std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>> graph;
     graph.reserve(n * (n - 1)); //maximum count of vertexes (because every vertex is stored for every direction)
 
+    //TODO: validate exclusions
     //1. clause that every edge can only used once
     //2. creates vector with all possible edges
     int key = 0;
