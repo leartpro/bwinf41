@@ -17,10 +17,7 @@ bool is_reachable(const int &to,
                   const int &from,
                   const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>> &graph
 ) {
-    if (route.empty()) {
-        return true;
-    }
-    if (graph.find(from)->second.second == graph.find(to)->second.first) {
+    if (graph.find(from)->second.second == graph.find(to)->second.first || route.empty()) {
         return true;
     }
     return false;
@@ -69,11 +66,11 @@ bool is_not_excluded(const int &current,
  * @param count_of_nodes
  * @return
  */
-bool route_satisfied(std::vector<int> &route,
-                     const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>> &graph,
-                     const std::vector<std::pair<int, int>> &not_together_clauses,
-                     const std::vector<std::vector<int>> &one_existing_clauses,
-                     const int& count_of_nodes) {
+bool is_route_satisfied(std::vector<int> &route,
+                        const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>> &graph,
+                        const std::vector<std::pair<int, int>> &not_together_clauses,
+                        const std::vector<std::vector<int>> &one_existing_clauses,
+                        const int& count_of_nodes) {
     if (route.empty()) {
         return false;
     }
@@ -110,7 +107,7 @@ bool sat_solver(std::vector<int> &vertexes,
                 const std::vector<std::pair<int, int>> &not_together_clauses,
                 const std::vector<std::vector<int>> &one_existing_clauses,
                 const int& count_of_nodes) {
-    if (route_satisfied(route, graph, not_together_clauses, one_existing_clauses, count_of_nodes)) {
+    if (is_route_satisfied(route, graph, not_together_clauses, one_existing_clauses, count_of_nodes)) {
         return true;
     }
     std::vector<int> removed_vertexes;

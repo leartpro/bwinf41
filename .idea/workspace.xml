@@ -26,10 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V49 SAT Solver Approach debugging">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V49 SAT Solver Approach documentation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -224,28 +221,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="55897000" />
-    </task>
-    <task id="LOCAL-00038" summary="V27">
-      <created>1673306354854</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1673306354854</updated>
-    </task>
-    <task id="LOCAL-00039" summary="V28">
-      <created>1673369634728</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1673369634728</updated>
-    </task>
-    <task id="LOCAL-00040" summary="V29 Aufgabe2 tests">
-      <created>1673715798390</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1673715798390</updated>
+      <workItem from="1674995327877" duration="56622000" />
     </task>
     <task id="LOCAL-00041" summary="V29 Aufgabe2 recursion">
       <created>1673782061871</created>
@@ -569,7 +545,28 @@
       <option name="project" value="LOCAL" />
       <updated>1675376386492</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="V49 SAT Solver Approach completing tsp to sat reduction">
+      <created>1675437910042</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1675437910042</updated>
+    </task>
+    <task id="LOCAL-00088" summary="V49 SAT Solver Approach remove prints">
+      <created>1675438116876</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1675438116876</updated>
+    </task>
+    <task id="LOCAL-00089" summary="V49 SAT Solver Approach documentation">
+      <created>1675438483909</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1675438483909</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,9 +585,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V34 results" />
-    <MESSAGE value="V34 Project Structure" />
-    <MESSAGE value="V34 Project Structure V2" />
     <MESSAGE value="V35 Aufgabe1 SAT Solver Approach" />
     <MESSAGE value="V35 CMakeLists.txt" />
     <MESSAGE value="V36 SAT Solver Approach" />
@@ -613,79 +607,82 @@
     <MESSAGE value="V48 SAT Solver Approach adding todo" />
     <MESSAGE value="V49 SAT Solver Approach debugging print lines" />
     <MESSAGE value="V49 SAT Solver Approach debugging" />
-    <option name="LAST_COMMIT_MESSAGE" value="V49 SAT Solver Approach debugging" />
+    <MESSAGE value="V49 SAT Solver Approach completing tsp to sat reduction" />
+    <MESSAGE value="V49 SAT Solver Approach remove prints" />
+    <MESSAGE value="V49 SAT Solver Approach documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="V49 SAT Solver Approach documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>15</line>
+          <line>23</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>30</line>
+          <line>46</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>38</line>
+          <line>54</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>12</line>
+          <line>20</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>17</line>
+          <line>25</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>43</line>
+          <line>59</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>66</line>
+          <line>90</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>68</line>
+          <line>92</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>79</line>
+          <line>113</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>99</line>
+          <line>133</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>89</line>
+          <line>123</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>52</line>
+          <line>77</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>58</line>
+          <line>83</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
-          <line>26</line>
+          <line>42</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
