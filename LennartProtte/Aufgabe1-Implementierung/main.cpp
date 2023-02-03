@@ -4,6 +4,14 @@
 #include <cmath>
 
 //Checks if a vertex is reachable from another vertex
+/**
+ *
+ * @param to
+ * @param route
+ * @param from
+ * @param graph
+ * @return
+ */
 bool is_reachable(const int &to,
                   std::vector<int> &route,
                   const int &from,
@@ -19,6 +27,14 @@ bool is_reachable(const int &to,
 }
 
 //Checks if current is not excluded by the clauses set by route
+/**
+ *
+ * @param current
+ * @param route
+ * @param not_together_clauses
+ * @param one_existing_clauses
+ * @return
+ */
 bool is_not_excluded(const int &current,
                      std::vector<int> &route,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
@@ -44,6 +60,15 @@ bool is_not_excluded(const int &current,
     return true;
 }
 
+/**
+ *
+ * @param route
+ * @param graph
+ * @param not_together_clauses
+ * @param one_existing_clauses
+ * @param count_of_nodes
+ * @return
+ */
 bool route_satisfied(std::vector<int> &route,
                      const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>> &graph,
                      const std::vector<std::pair<int, int>> &not_together_clauses,
@@ -69,6 +94,16 @@ bool route_satisfied(std::vector<int> &route,
     }
 }
 
+/**
+ *
+ * @param vertexes
+ * @param graph
+ * @param route
+ * @param not_together_clauses
+ * @param one_existing_clauses
+ * @param count_of_nodes
+ * @return
+ */
 bool sat_solver(std::vector<int> &vertexes,
                 const std::unordered_map<int, std::pair<std::pair<double, double>, std::pair<double, double>>> &graph,
                 std::vector<int> &route,
@@ -99,6 +134,10 @@ bool sat_solver(std::vector<int> &vertexes,
     return false;
 }
 
+/**
+ *
+ * @return
+ */
 int main() {
     // Beispieldatensatz von 2d-Punktkoordinaten
 
@@ -126,6 +165,7 @@ int main() {
 
     //1. clause that every edge can only used once
     //2. creates vector with all possible edges
+    //TODO: maybe separate graph_init from one_existing_clauses_init
     int key = 0;
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {

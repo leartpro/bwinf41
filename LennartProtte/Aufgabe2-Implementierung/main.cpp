@@ -6,14 +6,25 @@
 
 using namespace std;
 
+/**
+ * Repräsentiert eine Käsescheibe
+ */
 struct Slice {
-    Slice(int a, int b) {
-        this->length = a;
-        this->height = b;
+    Slice(int p_length, int p_height) {
+        this->length = p_length;
+        this->height = p_height;
     }
     int length, height;
 };
 
+/**
+ *
+ * @param length
+ * @param height
+ * @param depth
+ * @param slice
+ * @return
+ */
 int canRemoveSlice(int length, int height, int depth, Slice slice) {
     if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
         return 0; //FRONT
@@ -26,6 +37,15 @@ int canRemoveSlice(int length, int height, int depth, Slice slice) {
     }
 }
 
+/**
+ *
+ * @param length
+ * @param height
+ * @param depth
+ * @param order
+ * @param slices
+ * @return
+ */
 bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int> > &order, vector<Slice> &slices) {
     if (slices.empty()) {
         return (length == 0 || height == 0 || depth == 0);
@@ -54,6 +74,10 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int> >
     return false;
 }
 
+/**
+ *
+ * @return
+ */
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
