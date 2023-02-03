@@ -62,7 +62,6 @@ bool route_satisfied(std::vector<int> &route,
     if(!is_not_excluded(route[route.size() - 1], route, not_together_clauses, one_existing_clauses)) {
         return false;
     }
-
     if (route.size() == count_of_nodes) {
         return true;
     } else {
@@ -157,11 +156,6 @@ int main() {
                 double v2_length = sqrt(v2.first * v2.first + v2.second * v2.second);
                 double angle = acos(dot_product / (v1_length * v2_length));
                 angle = angle * 180 / M_PI; // Umrechnung in Grad des innen Winkels alpha
-                std::cout << i->first << " | [(" << i->second.first.first << "," << i->second.first.second << ") -> ("
-                          << i->second.second.first << "," << i->second.second.second << ")] -> "
-                          << j->first << " | [(" << j->second.first.first
-                          << "," << j->second.first.second << ") -> (" << j->second.second.first << ","
-                          << j->second.second.second << ")] => " << angle << "°" << std::endl;
                 if (angle < 90) {
                     not_together_clauses.emplace_back(i->first, j->first);
                 }
@@ -183,36 +177,12 @@ int main() {
         one_existing_clauses.push_back(to_node);
     }
 
-    std::cout << "Vertexes: " << std::endl;
-    for (auto &i: graph) {
-        std::cout << i.first << " | ";
-        std::cout
-                << "(" << i.second.first.first
-                << ", " << i.second.first.second
-                << ") -> (" << i.second.second.first
-                << ", " << i.second.second.second
-                << ")" << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "not_together_clauses: " << std::endl;
-    for (const auto &clause: not_together_clauses) {
-        std::cout << clause.first << " " << clause.second;
-        std::cout << std::endl;
-    }
-
-    std::cout << "one_existing_clauses: " << std::endl;
-    for (const auto &clause: one_existing_clauses) {
-        for (const auto &vertex: clause) {
-            std::cout << vertex << " ";
-        }
-        std::cout << std::endl;
-    }
-
+    //init vertexes
     std::vector<int> result, vertexes;
     for (auto &i: graph) {
         vertexes.push_back(i.first);
     }
+
     if (sat_solver(vertexes, graph, result, not_together_clauses, one_existing_clauses, int(coordinates.size()))) {
         std::cout << "solution" << std::endl;
         for (int r: result) {
