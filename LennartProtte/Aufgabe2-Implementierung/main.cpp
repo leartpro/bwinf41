@@ -94,7 +94,7 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int> >
  * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
  * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
  * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
- * @return
+ * @return 0, w
  */
 int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
@@ -151,27 +151,29 @@ int main() {
         );
 
         auto it = result.begin();
+        bool success = false;
+
         //Für jede mögliche Kombination der Seitenlängen
-        while (it != result.end()) {
+        while (it != result.end()  && !success) {
             int t_length = length;
             vector<Slice> t_slices(slices);
             order.clear();
             //Wenn es eine Lösung gibt
             if (calculate_cube(t_length, it->first, it->second, order, t_slices)) {
+                success = true;
                 fout << "Quader " << length << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl << endl;
                 fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
                 for (auto const &o: order) {
                     fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
                 }
-                //Dateien schließen
-                fin.close();
-                fout.close();
-                return 0;
+                //TODO: continue with next input file
             }
             it++;
         }
         //Wenn es keine Lösung gab
-        fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
+        if(!success) {
+            fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
+        }
         //Dateien schließen
         fin.close();
         fout.close();

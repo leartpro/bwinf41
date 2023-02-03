@@ -26,9 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V49 SAT Solver Approach documentation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V50 documentation">
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -225,14 +223,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="59605000" />
-    </task>
-    <task id="LOCAL-00042" summary="V29 Aufgabe2 tests">
-      <created>1673783835694</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1673783835694</updated>
+      <workItem from="1674995327877" duration="59926000" />
     </task>
     <task id="LOCAL-00043" summary="V29 Aufgabe2 runs">
       <created>1673783887952</created>
@@ -570,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675438605072</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="V49 documentation">
+      <created>1675443069626</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1675443069626</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V35 Aufgabe1 SAT Solver Approach" />
     <MESSAGE value="V35 CMakeLists.txt" />
     <MESSAGE value="V36 SAT Solver Approach" />
     <MESSAGE value="V37 SAT Solver Approach" />
@@ -614,7 +611,8 @@
     <MESSAGE value="V49 SAT Solver Approach completing tsp to sat reduction" />
     <MESSAGE value="V49 SAT Solver Approach remove prints" />
     <MESSAGE value="V49 SAT Solver Approach documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="V49 SAT Solver Approach documentation" />
+    <MESSAGE value="V50 documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="V50 documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
