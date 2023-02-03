@@ -3,9 +3,8 @@
 #include <unordered_map>
 #include <cmath>
 
-//Checks if a vertex is reachable from another vertex
 /**
- *
+ * Checks if a vertex is reachable from another vertex
  * @param to
  * @param route
  * @param from
@@ -23,9 +22,8 @@ bool is_reachable(const int &to,
     return false;
 }
 
-//Checks if current is not excluded by the clauses set by route
 /**
- *
+ * Checks if current is not excluded by the clauses set by route
  * @param current
  * @param route
  * @param not_together_clauses
@@ -137,8 +135,6 @@ bool sat_solver(std::vector<int> &vertexes,
  */
 int main() {
     // Beispieldatensatz von 2d-Punktkoordinaten
-
-
     std::vector<std::pair<double, double>> coordinates{
             {2.0, 4.0},
             {0.0, 1.0},
