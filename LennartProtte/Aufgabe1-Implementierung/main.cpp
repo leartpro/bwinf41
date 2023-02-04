@@ -7,18 +7,33 @@
 
 using namespace std;
 
+/**
+ *
+ * @param from
+ * @param to
+ * @param route
+ * @param graph
+ * @return
+ */
 bool is_reachable(const int &from,
                   const int &to,
                   vector<int> &route,
                   const unordered_map<int, pair<pair<double, double>, pair<double, double> > > &graph
 ) {
-    //is route is empty has to be checked first, otherwise bad_access exception
     if (route.empty() || graph.find(from)->second.second == graph.find(to)->second.first) {
         return true;
     }
     return false;
 }
 
+/**
+ *
+ * @param current
+ * @param route
+ * @param not_together_clauses
+ * @param one_existing_clauses
+ * @return
+ */
 bool is_not_excluded(const int &current,
                      vector<int> &route,
                      const vector<pair<int, int> > &not_together_clauses,
@@ -44,6 +59,15 @@ bool is_not_excluded(const int &current,
     return true;
 }
 
+/**
+ *
+ * @param route
+ * @param graph
+ * @param count_of_nodes
+ * @param not_together_clauses
+ * @param one_existing_clauses
+ * @return
+ */
 bool is_route_satisfied(vector<int> &route,
                         const unordered_map<int, pair<pair<double, double>, pair<double, double> > > &graph,
                         const int& count_of_nodes,
@@ -70,7 +94,7 @@ bool is_route_satisfied(vector<int> &route,
     }
 }
 
-bool sat_solver(vector<int> &vertexes,
+bool sat_solver(const vector<int> &vertexes,
                 vector<int> &route,
                 const unordered_map<int, pair<pair<double, double>, pair<double, double> > > &graph,
                 const int& count_of_nodes,
@@ -80,21 +104,22 @@ bool sat_solver(vector<int> &vertexes,
     if (is_route_satisfied(route, graph, count_of_nodes, not_together_clauses, one_existing_clauses)) {
         return true;
     }
-    vector<int> removed_vertexes;
-    for (auto it = vertexes.begin(); it != vertexes.end(); ++it) { //TODO: remove iterator
-        if (is_reachable(route[int(route.size()) - 1], *it, route, graph) &&
-            is_not_excluded(*it, route, not_together_clauses, one_existing_clauses)) {
-            route.emplace_back(*it);
-            removed_vertexes.push_back(*it);
-            vertexes.erase(it);
-            if (sat_solver(vertexes, route, graph, count_of_nodes, not_together_clauses, one_existing_clauses)) {
+    for (int i = 0; i < vertexes.size(); i++) {
+        if (is_reachable(route[int(route.size()) - 1], vertexes[i], route, graph) &&
+            is_not_excluded(vertexes[i], route, not_together_clauses, one_existing_clauses)) {
+            cout << "current route (size=" << int(route.size()) << ", i=" << i << "): ";
+            for(const auto& p : route) {
+                cout << p << " -> ";
+            }
+            cout << endl;
+            route.emplace_back(vertexes[i]);
+            vector<int> p_vertexes(vertexes);
+            p_vertexes.erase(p_vertexes.begin() + i);
+            //TODO: sort vertexes here by distance
+            if (sat_solver(p_vertexes, route, graph, count_of_nodes, not_together_clauses, one_existing_clauses)) {
                 return true;
             } else {
                 route.pop_back();
-                for (auto &vertex: removed_vertexes) {
-                    vertexes.push_back(vertex);
-                }
-                removed_vertexes.clear();
             }
         }
     }
@@ -219,6 +244,7 @@ int main() {
             std::cout << std::endl;
         }
          */
+
 
         //init vertexes
         vector<int> result, vertexes;

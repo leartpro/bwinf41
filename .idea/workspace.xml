@@ -26,8 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V50 remove output files">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V50 debugging">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
@@ -89,7 +88,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -225,14 +224,8 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="66627000" />
-    </task>
-    <task id="LOCAL-00046" summary="V33 works when sorted">
-      <created>1673989838116</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1673989838116</updated>
+      <workItem from="1674995327877" duration="68058000" />
+      <workItem from="1675520882218" duration="3172000" />
     </task>
     <task id="LOCAL-00047" summary="V33 works when sorted&#10;fails because he on iteration fail, he uses the same element twice&#10;&#10;cube: 6x3x3x&#10;current slice: {3, 6}&#10;current dimension for slice: 0&#10;ORDER: &#10;slice: (6, 6) dimension: 0&#10;slice: (6, 6) dimension: 0&#10;slice: (4, 6) dimension: 1&#10;slice: (4, 6) dimension: 1&#10;slice: (4, 6) dimension: 0&#10;slice: (3, 6) dimension: 1&#10;slice: (3, 6) dimension: 0 //2. time">
       <created>1673990091822</created>
@@ -570,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675514913260</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="V50 debugging">
+      <created>1675519157469</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1675519157469</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,7 +589,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V37 SAT Solver Approach" />
     <MESSAGE value="V38 SAT Solver Approach" />
     <MESSAGE value="V39 SAT Solver Approach" />
     <MESSAGE value="V40 SAT Solver Approach" />
@@ -614,7 +613,8 @@
     <MESSAGE value="V50 documentation" />
     <MESSAGE value="V50 read input files" />
     <MESSAGE value="V50 remove output files" />
-    <option name="LAST_COMMIT_MESSAGE" value="V50 remove output files" />
+    <MESSAGE value="V50 debugging" />
+    <option name="LAST_COMMIT_MESSAGE" value="V50 debugging" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
