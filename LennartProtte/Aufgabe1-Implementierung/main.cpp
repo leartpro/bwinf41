@@ -79,8 +79,8 @@ bool is_route_satisfied(const vector<int> &route,
     }
     for (int i = 0; i < route.size() - 1; i++) {
         bool is_not_reachable = !is_reachable(route[i], route[i + 1], route, graph);
-        bool is_excluded = !is_not_excluded(route[i], route, not_together_clauses, one_existing_clauses);
-        if (is_not_reachable || is_excluded) {
+        //bool is_excluded = !is_not_excluded(route[i], route, not_together_clauses, one_existing_clauses);
+        if (is_not_reachable /*|| is_excluded */) {
             return false;
         }
     }
@@ -99,44 +99,6 @@ void remove_excluded(vector<int> &vertexes,
                      const vector<pair<int, int> > &not_together_clauses,
                      const vector<vector<int> > &one_existing_clauses
 ) {
-    /*
-vertexes.erase(remove_if(
-                   vertexes.begin(),
-                   vertexes.end(),
-                   [&route, &not_together_clauses](int i) {
-                       return any_of(not_together_clauses.begin(), not_together_clauses.end(),
-                                     [&route, &i](pair<int, int> clause) {
-                                         return route[route.size() - 1] == clause.first && i == clause.second;
-                                     });
-                   }),
-           vertexes.end());
-           */
-    for (int i = 0; i < vertexes.size(); i++) {
-        for (const pair<int, int> &clause: not_together_clauses) {
-            if (route.back()== clause.first && vertexes[i] == clause.second) {
-                vertexes.erase(vertexes.begin() + i);
-            }
-        }
-    }
-    /*
-    for(int i = 0; i < route.size(); i++) {
-        for(const vector<int> &clause : one_existing_clauses) {
-            for(int j = 0; j < clause.size(); j++) {
-                if(i == clause[j]) {
-                    for(int k = 0; k < clause.size(); k++) {
-                        if(j != k) {
-                            const auto it = find(vertexes.begin(), vertexes.end(), clause[k]);
-                            if(it != vertexes.end()) {
-                                vertexes.erase(it);
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-    }
-*/
     vector<int> remove_vertexes;
     for(int & unused_vertex : vertexes) {
         for (const pair<int, int> &not_together_clause: not_together_clauses) {
@@ -155,6 +117,9 @@ vertexes.erase(remove_if(
             }
         }
     }
+    for(int & remove_vertex : remove_vertexes) {
+        vertexes.erase( remove( vertexes.begin(), vertexes.end(), remove_vertex ), vertexes.end() );
+    }
 }
 
 bool sat_solver(const vector<int> &vertexes,
@@ -168,8 +133,9 @@ bool sat_solver(const vector<int> &vertexes,
         return true;
     }
     for (int i = 0; i < vertexes.size(); i++) {
-        if (is_reachable(route[int(route.size()) - 1], vertexes[i], route, graph) &&
-            is_not_excluded(vertexes[i], route, not_together_clauses, one_existing_clauses)) {
+        if (is_reachable(route[int(route.size()) - 1], vertexes[i], route, graph)
+            //&& is_not_excluded(vertexes[i], route, not_together_clauses, one_existing_clauses)) {
+            ) {
             cout << "current route (size=" << int(route.size()) << ", i=" << i << "): ";
             for (const auto &p: route) {
                 cout << p << " -> ";
