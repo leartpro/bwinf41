@@ -94,6 +94,9 @@ bool sat_solver(const vector<int> &vertexes,
             // if there is no sole candidate, sort by lowest degree (degree ascending)
 
             //TODO: another option is to use the nearest neighbour heuristic at this point
+
+            //TODO: replace graph by matrix array and coordinates array to increase performance
+            // matrix contains at every position vertex_id & distance, coordinates contains each coordinate
             if (sat_solver(p_vertexes, route, graph, count_of_nodes, not_together_clauses, one_existing_clauses)) {
                 return true;
             } else {
