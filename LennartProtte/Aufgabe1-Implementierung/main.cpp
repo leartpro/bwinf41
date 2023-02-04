@@ -108,8 +108,8 @@ bool sat_solver(vector<int> &vertexes,
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
-    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
+    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -157,22 +157,22 @@ int main() {
         }
 
         //creates not_together_clauses that contains if two edges can not be behind each other
-        for (auto i = graph.begin(); i != graph.end(); i++) {
-            for (auto j = graph.begin(); j != graph.end(); j++) {
-                if (i != j && i->second.second == j->second.first && i->second.first != j->second.second) {
+        for (int i = 0; i < graph.size(); i++) {
+            for (int j = 0; j < graph.size(); j++) {
+                if (graph[i] != graph[j] && graph[i].second == graph[j].first && graph[i].first != graph[j].second) {
                     pair<double, double> v1;
-                    v1.first = i->second.second.first - i->second.first.first;
-                    v1.second = i->second.second.second - i->second.first.second;
+                    v1.first = graph[i].second.first - graph[i].first.first;
+                    v1.second = graph[i].second.second - graph[i].first.second;
                     pair<double, double> v2;
-                    v2.first = j->second.first.first - j->second.second.first;
-                    v2.second = j->second.first.second - j->second.second.second;
+                    v2.first = graph[j].first.first - graph[j].second.first;
+                    v2.second = graph[j].first.second - graph[j].second.second;
                     double dot_product = v1.first * v2.first + v1.second * v2.second;
                     double v1_length = sqrt(v1.first * v1.first + v1.second * v1.second);
                     double v2_length = sqrt(v2.first * v2.first + v2.second * v2.second);
                     double angle = acos(dot_product / (v1_length * v2_length));
                     angle = angle * 180 / M_PI; // Umrechnung in Grad des innen Winkels alpha
                     if (angle < 90) {
-                        not_together_clauses.emplace_back(i->first, j->first);
+                        not_together_clauses.emplace_back(i, j);
                     }
                 }
             }
@@ -192,6 +192,34 @@ int main() {
             one_existing_clauses.push_back(to_node);
         }
 
+        std::cout << "Vertexes: " << std::endl;
+        for (auto &i: graph) {
+            std::cout << i.first << " | ";
+            std::cout
+                    << "(" << i.second.first.first
+                    << ", " << i.second.first.second
+                    << ") -> (" << i.second.second.first
+                    << ", " << i.second.second.second
+                    << ")" << std::endl;
+        }
+        std::cout << std::endl;
+
+
+        std::cout << "not_together_clauses: " << std::endl;
+        for (const auto &clause: not_together_clauses) {
+            std::cout << clause.first << " " << clause.second;
+            std::cout << std::endl;
+        }
+        /*
+        std::cout << "one_existing_clauses: " << std::endl;
+        for (const auto &clause: one_existing_clauses) {
+            for (const auto &vertex: clause) {
+                std::cout << vertex << " ";
+            }
+            std::cout << std::endl;
+        }
+         */
+
         //init vertexes
         vector<int> result, vertexes;
         for (auto &i : graph) {
@@ -202,12 +230,12 @@ int main() {
             cout << "solution" << endl;
             for (int r : result) {
                 if (graph.find(r) != graph.end()) {
-                    auto it = graph.find(r);
+                    auto value = graph.find(r);
                     cout
-                            << "(" << it->second.first.first
-                            << ", " << it->second.first.second
-                            << ") -> (" << it->second.second.first
-                            << ", " << it->second.second.second
+                            << "(" << value->second.first.first
+                            << ", " << value->second.first.second
+                            << ") -> (" << value->second.second.first
+                            << ", " << value->second.second.second
                             << ")" << endl;
                 }
             }

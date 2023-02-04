@@ -26,12 +26,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V50 documentation">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V50 remove output files">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,21 +225,7 @@
       <workItem from="1674657750545" duration="5416000" />
       <workItem from="1674673208459" duration="25125000" />
       <workItem from="1674823477411" duration="24856000" />
-      <workItem from="1674995327877" duration="65536000" />
-    </task>
-    <task id="LOCAL-00044" summary="V32">
-      <created>1673984726732</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1673984726732</updated>
-    </task>
-    <task id="LOCAL-00045" summary="V33">
-      <created>1673985272783</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1673985272783</updated>
+      <workItem from="1674995327877" duration="66627000" />
     </task>
     <task id="LOCAL-00046" summary="V33 works when sorted">
       <created>1673989838116</created>
@@ -572,7 +556,21 @@
       <option name="project" value="LOCAL" />
       <updated>1675443373111</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="V50 read input files">
+      <created>1675514889137</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1675514889137</updated>
+    </task>
+    <task id="LOCAL-00094" summary="V50 remove output files">
+      <created>1675514913260</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1675514913260</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,8 +589,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V35 CMakeLists.txt" />
-    <MESSAGE value="V36 SAT Solver Approach" />
     <MESSAGE value="V37 SAT Solver Approach" />
     <MESSAGE value="V38 SAT Solver Approach" />
     <MESSAGE value="V39 SAT Solver Approach" />
@@ -616,7 +612,9 @@
     <MESSAGE value="V49 SAT Solver Approach remove prints" />
     <MESSAGE value="V49 SAT Solver Approach documentation" />
     <MESSAGE value="V50 documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="V50 documentation" />
+    <MESSAGE value="V50 read input files" />
+    <MESSAGE value="V50 remove output files" />
+    <option name="LAST_COMMIT_MESSAGE" value="V50 remove output files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
