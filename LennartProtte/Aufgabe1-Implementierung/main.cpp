@@ -84,9 +84,11 @@ bool is_route_satisfied(const vector<int> &route,
             return false;
         }
     }
+    /*
     if (!is_not_excluded(route[route.size() - 1], route, not_together_clauses, one_existing_clauses)) {
         return false;
     }
+     */
     if (route.size() == count_of_nodes) {
         return true;
     } else {
