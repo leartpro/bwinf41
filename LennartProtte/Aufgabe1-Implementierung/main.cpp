@@ -4,6 +4,7 @@
 #include <cmath>
 #include <filesystem>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -46,24 +47,26 @@ void remove_excluded(vector<int> &vertexes,
                      const vector<vector<int> > &one_existing_clauses
 ) {
     vector<int> remove_vertexes;
-    for(int & unused_vertex : vertexes) {
+    for (int &unused_vertex: vertexes) {
         for (const pair<int, int> &not_together_clause: not_together_clauses) {
             if (not_together_clause.first == route.back() && not_together_clause.second == unused_vertex) {
                 remove_vertexes.push_back(unused_vertex);
             }
         }
-        for (const int &used_vertex : route) {
+        for (const int &used_vertex: route) {
             if (used_vertex != unused_vertex) {
-                for (const vector<int> &one_existing_clause : one_existing_clauses) {
-                    if (find(one_existing_clause.begin(), one_existing_clause.end(), used_vertex) != one_existing_clause.end()) {
-                        remove_vertexes.insert(remove_vertexes.end(), one_existing_clause.begin(), one_existing_clause.end());
+                for (const vector<int> &one_existing_clause: one_existing_clauses) {
+                    if (find(one_existing_clause.begin(), one_existing_clause.end(), used_vertex) !=
+                        one_existing_clause.end()) {
+                        remove_vertexes.insert(remove_vertexes.end(), one_existing_clause.begin(),
+                                               one_existing_clause.end());
                     }
                 }
             }
         }
     }
-    for(int & remove_vertex : remove_vertexes) {
-        vertexes.erase( remove( vertexes.begin(), vertexes.end(), remove_vertex ), vertexes.end() );
+    for (int &remove_vertex: remove_vertexes) {
+        vertexes.erase(remove(vertexes.begin(), vertexes.end(), remove_vertex), vertexes.end());
     }
 }
 
@@ -79,7 +82,7 @@ bool sat_solver(const vector<int> &vertexes,
     }
     cout << "iterating through " << int(vertexes.size()) << " vertexes" << endl;
     for (int i = 0; i < vertexes.size(); i++) {
-        if (is_reachable(route[int(route.size()) - 1], vertexes[i], route, graph) ) {
+        if (is_reachable(route[int(route.size()) - 1], vertexes[i], route, graph)) {
             cout << "current route (size=" << int(route.size()) << ", i=" << i << "): ";
             for (const auto &p: route) {
                 cout << p << " -> ";
@@ -118,7 +121,7 @@ int main() {
     string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
 
     //Durchläuft alle Dateien im Eingabeordner
-    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+    for (const std::filesystem::directory_entry &entry: filesystem::directory_iterator(input_dir)) {
 
         //Liest den Dateinamen aus
         string input_file = entry.path();
@@ -132,53 +135,53 @@ int main() {
         //Öffnet die Ausgabedatei
         ofstream fout(output_file);
 
+        int total_count_of_nodes = int(std::count(istreambuf_iterator<char>(fin), istreambuf_iterator<char>(), '\n'));
+
         //Liest die Eingabedatei ein
         vector<pair<double, double> > coordinates;
+        vector<vector<pair<int, double>>> vertexes;
+        vector<pair<int, int> > not_together_clauses; //they cant be after each other
+        vector<vector<int> > one_existing_clauses; //only one of them can exist in solution
+        coordinates.reserve(total_count_of_nodes);
+        vertexes.reserve(total_count_of_nodes * total_count_of_nodes);
+        not_together_clauses.reserve(total_count_of_nodes * (total_count_of_nodes - 1));
+        one_existing_clauses.reserve(total_count_of_nodes * total_count_of_nodes);
         double x, y;
         while (fin >> x >> y) {
             coordinates.emplace_back(x, y);
         }
 
-        int n = int(coordinates.size());
-        vector<pair<int, int> > not_together_clauses; //they cant be after each other
-        vector<vector<int> > one_existing_clauses; //only one of them can exist in solution
-        unordered_map<int, pair<pair<double, double>, pair<double, double> > > graph;
-        graph.reserve(n * (n - 1)); //maximum count of vertexes (because every vertex is stored for every direction)
-
-        //1. clause that every edge can only used once
-        //2. creates vector with all possible edges
-        int key = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
+        int identifier = 0;
+        for (int i = 0; i < total_count_of_nodes; i++) {
+            for (int j = 0; j < total_count_of_nodes; j++) {
                 if (i != j) {
-                    auto value_1 = make_pair(coordinates[i], coordinates[j]);
-                    auto value_2 = make_pair(coordinates[j], coordinates[i]);
-                    graph.insert(make_pair(key, value_1));
-                    key++;
-                    graph.insert(make_pair(key, value_2));
-                    key++;
-                    one_existing_clauses.push_back({key - 2, key - 1});
+                    double distance = sqrt(pow((coordinates[i].first - coordinates[j].first), 2.0) +
+                                           (pow((coordinates[i].second - coordinates[j].second), 2.0)));
+                    vertexes[i][j] = make_pair(identifier, distance);
+                    identifier++;
+                } else {
+                    vertexes[i][j] = make_pair(-1, 0);
                 }
             }
         }
 
         //creates not_together_clauses that contains if two edges can not be behind each other
-        for (int i = 0; i < graph.size(); i++) {
-            for (int j = 0; j < graph.size(); j++) {
-                if (graph[i] != graph[j] && graph[i].second == graph[j].first && graph[i].first != graph[j].second) {
-                    pair<double, double> v1;
-                    v1.first = graph[i].second.first - graph[i].first.first;
-                    v1.second = graph[i].second.second - graph[i].first.second;
-                    pair<double, double> v2;
-                    v2.first = graph[j].first.first - graph[j].second.first;
-                    v2.second = graph[j].first.second - graph[j].second.second;
-                    double dot_product = v1.first * v2.first + v1.second * v2.second;
-                    double v1_length = sqrt(v1.first * v1.first + v1.second * v1.second);
-                    double v2_length = sqrt(v2.first * v2.first + v2.second * v2.second);
-                    double angle = acos(dot_product / (v1_length * v2_length));
-                    angle = angle * 180 / M_PI; // Umrechnung in Grad des innen Winkels alpha
-                    if (angle < 90) {
-                        not_together_clauses.emplace_back(i, j);
+        for (int i = 0; i < total_count_of_nodes; i++) {
+            for (int j = 0; j < total_count_of_nodes; j++) {
+                if(i != j) {
+                    for(int m = 0; m < total_count_of_nodes; m++) {
+                        for(int n = 0; n < total_count_of_nodes; n++) {
+                            if(m != n && !(m == i && n == j)) {
+                                pair<double, double> p, q;
+                                p = make_pair(coordinates[i].first - coordinates[j].first, coordinates[i].second - coordinates[j].second);
+                                q = make_pair(coordinates[m].first - coordinates[n].first, coordinates[m].second - coordinates[n].second);
+                                double dot_product = p.first * q.first + p.second * q.second;
+                                double angle = acos(dot_product / (vertexes[i][j].second * vertexes[m][n].second)) * 180 / M_PI;
+                                if (angle < 90) {
+                                    not_together_clauses.emplace_back(i, j);
+                                }
+                            }
+                        }
                     }
                 }
             }

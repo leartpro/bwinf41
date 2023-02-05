@@ -26,7 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V50 debugging">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V52 exclude by deleting approach TODOs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
@@ -81,23 +81,23 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/leartpro/Documents/Projects/bwinf41/LennartProtte/Aufgabe1-Implementierung&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/lenni/Desktop/Projects/bwinf41/LennartProtte/Aufgabe1-Implementierung/TestInput&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung" />
       <recent name="$PROJECT_DIR$/LennartProtte" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -119,31 +119,6 @@
         <aux-dir>/</aux-dir>
       </texify-bibtex>
       <method v="2" />
-    </configuration>
-    <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="task1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task1">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="task2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task2">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Aufgabe1" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe1">
-      <option name="sourceFile" value="LennartProtte/Aufgabe1-Implementierung/main.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Aufgabe2" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe2">
-      <option name="sourceFile" value="LennartProtte/Aufgabe2-Implementierung/main.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="EXTERNAL_TOOL_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-external>
@@ -183,19 +158,35 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
+    <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="task1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="task2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task2">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aufgabe1" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe1">
+      <option name="sourceFile" value="LennartProtte/Aufgabe1-Implementierung/main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aufgabe2" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe2">
+      <option name="sourceFile" value="LennartProtte/Aufgabe2-Implementierung/main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="C/C++ File.Aufgabe2" />
-      <item itemvalue="C/C++ File.Aufgabe1" />
       <item itemvalue="CMake Application.task1" />
       <item itemvalue="CMake Application.task2" />
-      <item itemvalue="CMake Debug.bwinf41" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="CMake Debug.bwinf41" />
-        <item itemvalue="C/C++ File.Aufgabe1" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -226,41 +217,7 @@
       <workItem from="1674823477411" duration="24856000" />
       <workItem from="1674995327877" duration="68058000" />
       <workItem from="1675520882218" duration="3172000" />
-    </task>
-    <task id="LOCAL-00047" summary="V33 works when sorted&#10;fails because he on iteration fail, he uses the same element twice&#10;&#10;cube: 6x3x3x&#10;current slice: {3, 6}&#10;current dimension for slice: 0&#10;ORDER: &#10;slice: (6, 6) dimension: 0&#10;slice: (6, 6) dimension: 0&#10;slice: (4, 6) dimension: 1&#10;slice: (4, 6) dimension: 1&#10;slice: (4, 6) dimension: 0&#10;slice: (3, 6) dimension: 1&#10;slice: (3, 6) dimension: 0 //2. time">
-      <created>1673990091822</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1673990091822</updated>
-    </task>
-    <task id="LOCAL-00048" summary="V33 debug print">
-      <created>1674058759681</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1674058759681</updated>
-    </task>
-    <task id="LOCAL-00049" summary="V33 debug is working">
-      <created>1674076800344</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1674076800344</updated>
-    </task>
-    <task id="LOCAL-00050" summary="V33 nice debug but causes bugs">
-      <created>1674078891437</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1674078891437</updated>
-    </task>
-    <task id="LOCAL-00051" summary="V33 nice debug but probably causes bugs">
-      <created>1674081560891</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1674081560891</updated>
+      <workItem from="1675598065652" duration="2974000" />
     </task>
     <task id="LOCAL-00052" summary="V34 results">
       <created>1674082027900</created>
@@ -570,7 +527,42 @@
       <option name="project" value="LOCAL" />
       <updated>1675519157469</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="V52 Aufgabe1">
+      <created>1675551244433</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1675551244433</updated>
+    </task>
+    <task id="LOCAL-00097" summary="V52 exclude by deleting approach">
+      <created>1675551765296</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1675551765296</updated>
+    </task>
+    <task id="LOCAL-00098" summary="V52 exclude by deleting approach">
+      <created>1675551801235</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1675551801235</updated>
+    </task>
+    <task id="LOCAL-00099" summary="V52 exclude by deleting approach">
+      <created>1675554084217</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1675554084218</updated>
+    </task>
+    <task id="LOCAL-00100" summary="V52 exclude by deleting approach TODOs">
+      <created>1675554736034</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1675554736034</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,9 +581,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V38 SAT Solver Approach" />
-    <MESSAGE value="V39 SAT Solver Approach" />
-    <MESSAGE value="V40 SAT Solver Approach" />
     <MESSAGE value="V41 SAT Solver Approach" />
     <MESSAGE value="V42 SAT Solver Approach Cleanup" />
     <MESSAGE value="V43 SAT Solver Approach" />
@@ -614,7 +603,10 @@
     <MESSAGE value="V50 read input files" />
     <MESSAGE value="V50 remove output files" />
     <MESSAGE value="V50 debugging" />
-    <option name="LAST_COMMIT_MESSAGE" value="V50 debugging" />
+    <MESSAGE value="V52 Aufgabe1" />
+    <MESSAGE value="V52 exclude by deleting approach" />
+    <MESSAGE value="V52 exclude by deleting approach TODOs" />
+    <option name="LAST_COMMIT_MESSAGE" value="V52 exclude by deleting approach TODOs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
