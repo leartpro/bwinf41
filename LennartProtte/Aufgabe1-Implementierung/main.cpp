@@ -1,6 +1,5 @@
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 #include <cmath>
 #include <filesystem>
 #include <fstream>
@@ -12,7 +11,7 @@ using namespace std;
 
 bool is_reachable(const int &idx_from,
                   const int &idx_to,
-                  const vector<int> &route,
+                  vector<int> &route,
                   const vector<vector<pair<int, double> > > &graph,
                   const vector<pair<double, double> > &coordinates
 ) {
@@ -40,15 +39,10 @@ bool sat_solver(vector<int> &route,
         return true;
     }
     for (int i = 0; i < coordinates.size(); i++) {
-        if (is_reachable(route.back(), vertexes[i], route, graph)) {
-            cout << "current route (size=" << int(route.size()) << ", i=" << i << "): ";
-            for (const auto &p: route) {
-                cout << p << " -> ";
-            }
-            cout << endl;
-            route.emplace_back(vertexes[i]);
-            vector<int> p_vertexes(vertexes);
-            p_vertexes.erase(p_vertexes.begin() + i);
+        if (is_reachable(route.back(), graph[route.back()][i].first, route, graph, coordinates)) {
+            //route.emplace_back(vertexes[i]);
+            //vector<int> p_vertexes(vertexes);
+            //p_vertexes.erase(p_vertexes.begin() + i);
             if (sat_solver(route, graph, coordinates)) {
                 return true;
             } else {
@@ -59,12 +53,6 @@ bool sat_solver(vector<int> &route,
     return false;
 }
 
-/**
- * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
- * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
- * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
- * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
- */
 int main() {
     string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
     string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
@@ -84,30 +72,30 @@ int main() {
         //Öffnet die Ausgabedatei
         ofstream fout(output_file);
 
-        int total_count_of_nodes = int(std::count(istreambuf_iterator<char>(fin), istreambuf_iterator<char>(), '\n'));
-
         //Liest die Eingabedatei ein
         vector<pair<double, double> > coordinates;
         vector<vector<pair<int, double>>> graph;
-        coordinates.reserve(total_count_of_nodes);
-        graph.reserve(total_count_of_nodes * total_count_of_nodes);
         double x, y;
         while (fin >> x >> y) {
             coordinates.emplace_back(x, y);
         }
+        int total_count_of_nodes = int(coordinates.size());
+        graph.reserve(total_count_of_nodes * total_count_of_nodes);
 
         int identifier = 0;
         for (int i = 0; i < total_count_of_nodes; i++) {
+            vector<pair<int, double>> vertexes;
             for (int j = 0; j < total_count_of_nodes; j++) {
                 if (i != j) {
                     double distance = sqrt(pow((coordinates[i].first - coordinates[j].first), 2.0) +
                                            (pow((coordinates[i].second - coordinates[j].second), 2.0)));
-                    graph[i][j] = make_pair(identifier, distance);
+                    vertexes.emplace_back(identifier, distance);
                     identifier++;
                 } else {
-                    graph[i][j] = make_pair(-1, 0);
+                    vertexes.emplace_back(-1, 0);
                 }
             }
+            graph.emplace_back(vertexes);
         }
 
         cout << "Coordinates:" << endl;
@@ -121,13 +109,6 @@ int main() {
             }
             cout << endl;
         }
-        /*
-        std::cout << "not_together_clauses: " << std::endl;
-        for (const auto &clause: not_together_clauses) {
-            std::cout << clause.first << " " << clause.second;
-            std::cout << std::endl;
-        }
-         */
 
         //init graph
         vector<int> result;
