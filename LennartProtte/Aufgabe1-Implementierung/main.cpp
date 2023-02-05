@@ -38,11 +38,10 @@ bool sat_solver(vector<int> &route,
     if (route.size() == coordinates.size()) {
         return true;
     }
-    for (int i = 0; i < coordinates.size(); i++) {
-        if (is_reachable(route.back(), graph[route.back()][i].first, route, graph, coordinates)) {
-            //route.emplace_back(vertexes[i]);
-            //vector<int> p_vertexes(vertexes);
-            //p_vertexes.erase(p_vertexes.begin() + i);
+    vector<pair<int, double> > vertexes = graph[route.back()];
+    for (auto & vertex : vertexes) {
+        if (is_reachable(route.back(), vertex.first, route, graph, coordinates)) {
+            route.emplace_back(vertex.first);
             if (sat_solver(route, graph, coordinates)) {
                 return true;
             } else {
