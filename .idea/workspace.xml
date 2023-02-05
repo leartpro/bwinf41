@@ -26,7 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V51 improved runtime performance">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V51 improved runtime performance v2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
@@ -226,14 +226,7 @@
       <workItem from="1675520882218" duration="3172000" />
       <workItem from="1675598065652" duration="2974000" />
       <workItem from="1675602247167" duration="502000" />
-      <workItem from="1675602760593" duration="3468000" />
-    </task>
-    <task id="LOCAL-00052" summary="V34 results">
-      <created>1674082027900</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1674082027900</updated>
+      <workItem from="1675602760593" duration="4907000" />
     </task>
     <task id="LOCAL-00053" summary="V34 Project Structure">
       <created>1674082359550</created>
@@ -571,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675554736034</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="V51 improved runtime performance v2">
+      <created>1675608561295</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1675608561296</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +590,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V41 SAT Solver Approach" />
     <MESSAGE value="V42 SAT Solver Approach Cleanup" />
     <MESSAGE value="V43 SAT Solver Approach" />
     <MESSAGE value="V44 SAT Solver Approach" />
@@ -615,7 +614,8 @@
     <MESSAGE value="V52 Aufgabe1" />
     <MESSAGE value="V52 exclude by deleting approach" />
     <MESSAGE value="V52 exclude by deleting approach TODOs" />
-    <option name="LAST_COMMIT_MESSAGE" value="V52 exclude by deleting approach TODOs" />
+    <MESSAGE value="V51 improved runtime performance v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="V51 improved runtime performance v2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
