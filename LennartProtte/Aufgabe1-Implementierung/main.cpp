@@ -13,17 +13,17 @@ bool is_reachable(const pair<double, double> &from_node,
                   const double &distance_from_to,
                   const double &distance_last_from
 ) {
-        pair<double, double> p, q;
-        p = make_pair(from_node.first - to_node.first,
-                      from_node.second - to_node.second);
-        q = make_pair(last_node.first - from_node.first,
-                      last_node.second - from_node.second);
-        double dot_product = p.first * q.first + p.second * q.second;
-        double angle = acos(dot_product / (distance_from_to * distance_last_from)) * 180 / M_PI;
-        if (angle < 90) {
-            return false;
-        }
-        return true;
+    pair<double, double> p, q;
+    p = make_pair(from_node.first - to_node.first,
+                  from_node.second - to_node.second);
+    q = make_pair(last_node.first - from_node.first,
+                  last_node.second - from_node.second);
+    double dot_product = p.first * q.first + p.second * q.second;
+    double angle = acos(dot_product / (distance_from_to * distance_last_from)) * 180 / M_PI;
+    if (angle < 90) {
+        return false;
+    }
+    return true;
 }
 
 
@@ -40,18 +40,22 @@ bool solve(vector<pair<double, double> > &route,
         }
         auto edges = graph[i];
         for (int j = 0; j < edges.size(); j++) {
-            if (edges[j] != 0 && (
-                    route.empty() || (
-                            std::find(route.begin(),
-                                      route.end(),
-                                      coordinates[j]) == route.end() &&
-                            is_reachable(route.back(),
-                                         coordinates[j],
-                                         route[route.size() - 2],
-                                         graph[i][j],
-                                         graph[j - 1][i])
-                    )
-            )
+            if (edges[j] == 0) {
+                continue;
+            }
+            if (route.empty()) {
+                route.push_back(coordinates[i]);
+            } else if (
+                    std::find(route.begin(),
+                              route.end(),
+                              coordinates[j]) == route.end() &&
+                    is_reachable(route.back(),
+                                 coordinates[j],
+                                 route[route.size() - 2],
+                                 sqrt(pow((route.back().first - coordinates[j].first), 2.0) +
+                                      (pow((route.back().second - coordinates[j].second), 2.0))),
+                                 sqrt(pow((route.back().first - route[route.size() - 2].first), 2.0) +
+                                      (pow((route.back().second - route[route.size() - 2].second), 2.0))))
                     ) {
                 route.push_back(coordinates[j]);
                 if (solve(route, graph, coordinates)) {

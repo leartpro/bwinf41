@@ -28,6 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V51 improved runtime performance v2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput/circlepath.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,14 +228,7 @@
       <workItem from="1675598065652" duration="2974000" />
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
-      <workItem from="1675779917670" duration="2586000" />
-    </task>
-    <task id="LOCAL-00056" summary="V35 CMakeLists.txt">
-      <created>1674672019145</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1674672019145</updated>
+      <workItem from="1675779917670" duration="4819000" />
     </task>
     <task id="LOCAL-00057" summary="V36 SAT Solver Approach">
       <created>1674740327615</created>
@@ -572,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675634321355</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="V51 improved runtime performance v2">
+      <created>1675782749460</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1675782749460</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
