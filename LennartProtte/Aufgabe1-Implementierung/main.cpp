@@ -7,50 +7,64 @@
 
 using namespace std;
 
-//TODO: everything is stored by index to entry in coordinates
-
-bool is_reachable(const int &idx_from,
-                  const int &idx_to,
-                  vector<int> &route,
-                  const vector<vector<pair<int, double> > > &graph,
-                  const vector<pair<double, double> > &coordinates
+bool is_reachable(const pair<double, double> &from_node,
+                  const pair<double, double> &to_node,
+                  const pair<double, double> &last_node,
+                  const double &distance_from_to,
+                  const double &distance_last_from
 ) {
-    if (route.empty() || graph[idx_from][idx_to].first != -1) {
         pair<double, double> p, q;
-        p = make_pair(coordinates[idx_from].first - coordinates[idx_to].first,
-                      coordinates[idx_from].second - coordinates[idx_to].second);
-        q = make_pair(coordinates[route.back()].first - coordinates[idx_from].first,
-                      coordinates[route.back()].second - coordinates[idx_from].second);
+        p = make_pair(from_node.first - to_node.first,
+                      from_node.second - to_node.second);
+        q = make_pair(last_node.first - from_node.first,
+                      last_node.second - from_node.second);
         double dot_product = p.first * q.first + p.second * q.second;
-        double angle = acos(dot_product / (graph[idx_from][idx_to].second * graph[route.back()][idx_from].second)) * 180 / M_PI;
+        double angle = acos(dot_product / (distance_from_to * distance_last_from)) * 180 / M_PI;
         if (angle < 90) {
             return false;
         }
         return true;
-    }
-    return false;
 }
 
-bool sat_solver(vector<int> &route,
-                const vector<vector<pair<int, double> > > &graph,
-                const vector<pair<double, double> > &coordinates
-                ) {
+
+bool solve(vector<pair<double, double> > &route,
+           const vector<vector<double> > &graph,
+           const vector<pair<double, double> > &coordinates
+) {
     if (route.size() == coordinates.size()) {
         return true;
     }
-    vector<pair<int, double> > vertexes = graph[route.back()];
-    for (auto & vertex : vertexes) {
-        if (is_reachable(route.back(), vertex.first, route, graph, coordinates)) {
-            route.emplace_back(vertex.first);
-            if (sat_solver(route, graph, coordinates)) {
-                return true;
-            } else {
-                route.pop_back();
+    for (int i = 0; i < coordinates.size(); i++) {
+        if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
+            continue;
+        }
+        auto edges = graph[i];
+        for (int j = 0; j < edges.size(); j++) {
+            if (edges[j] != 0 && (
+                    route.empty() || (
+                            std::find(route.begin(),
+                                      route.end(),
+                                      coordinates[j]) == route.end() &&
+                            is_reachable(route.back(),
+                                         coordinates[j],
+                                         route[route.size() - 2],
+                                         graph[i][j],
+                                         graph[j - 1][i])
+                    )
+            )
+                    ) {
+                route.push_back(coordinates[j]);
+                if (solve(route, graph, coordinates)) {
+                    return true;
+                } else {
+                    route.pop_back();
+                }
             }
         }
     }
     return false;
 }
+
 
 int main() {
     string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
@@ -73,7 +87,7 @@ int main() {
 
         //Liest die Eingabedatei ein
         vector<pair<double, double> > coordinates;
-        vector<vector<pair<int, double>>> graph;
+        vector<vector<double>> graph;
         double x, y;
         while (fin >> x >> y) {
             coordinates.emplace_back(x, y);
@@ -81,17 +95,15 @@ int main() {
         int total_count_of_nodes = int(coordinates.size());
         graph.reserve(total_count_of_nodes * total_count_of_nodes);
 
-        int identifier = 0;
         for (int i = 0; i < total_count_of_nodes; i++) {
-            vector<pair<int, double>> vertexes;
+            vector<double> vertexes;
             for (int j = 0; j < total_count_of_nodes; j++) {
                 if (i != j) {
                     double distance = sqrt(pow((coordinates[i].first - coordinates[j].first), 2.0) +
                                            (pow((coordinates[i].second - coordinates[j].second), 2.0)));
-                    vertexes.emplace_back(identifier, distance);
-                    identifier++;
+                    vertexes.push_back(distance);
                 } else {
-                    vertexes.emplace_back(-1, 0);
+                    vertexes.push_back(0);
                 }
             }
             graph.emplace_back(vertexes);
@@ -104,18 +116,20 @@ int main() {
         cout << "Vertexes:" << endl;
         for (int i = 0; i < total_count_of_nodes; i++) {
             for (int j = 0; j < total_count_of_nodes; j++) {
-                cout << "<" << graph[i][j].first << ", " << graph[i][j].second << "> ";
+                cout << "<" << graph[i][j] << "> ";
             }
             cout << endl;
         }
 
         //init graph
-        vector<int> result;
-        if (sat_solver(result, graph, coordinates)) {
+
+        vector<pair<double, double> > result;
+        if (solve(result, graph, coordinates)) {
             cout << "solution" << endl;
         } else {
             cout << "no solution" << endl;
         }
+
     }
     return 0;
 }
