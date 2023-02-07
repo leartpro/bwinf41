@@ -78,6 +78,8 @@ int main() {
     string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
     string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
 
+    auto start = std::chrono::high_resolution_clock::now();
+
     //Durchläuft alle Dateien im Eingabeordner
     for (const std::filesystem::directory_entry &entry: filesystem::directory_iterator(input_dir)) {
 
@@ -135,12 +137,8 @@ int main() {
         //init graph
 
         vector<pair<double, double> > result;
-        auto start = std::chrono::high_resolution_clock::now();
         if (solve(result, graph, coordinates)) {
-            auto stop = std::chrono::high_resolution_clock::now();
-            auto duration = duration_cast<std::chrono::microseconds>(stop - start);
-            cout << "Time taken by function: "
-                 << duration.count() << " microseconds" << endl;
+
             cout << "solution: " << endl;
             for(const auto v : result) {
                 cout << "(" << v.first << ", " << v.second << ") -> ";
@@ -151,5 +149,9 @@ int main() {
         }
 
     }
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = duration_cast<std::chrono::microseconds>(stop - start);
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
     return 0;
 }
