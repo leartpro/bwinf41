@@ -28,7 +28,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V51 improved runtime performance v2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput/circlepath.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -228,14 +227,7 @@
       <workItem from="1675598065652" duration="2974000" />
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
-      <workItem from="1675779917670" duration="4819000" />
-    </task>
-    <task id="LOCAL-00057" summary="V36 SAT Solver Approach">
-      <created>1674740327615</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1674740327615</updated>
+      <workItem from="1675779917670" duration="7704000" />
     </task>
     <task id="LOCAL-00058" summary="V37 SAT Solver Approach">
       <created>1674742616792</created>
@@ -573,7 +565,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675782749460</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="V51 improved runtime performance v2">
+      <created>1675786166130</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1675786166130</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,6 +617,72 @@
     <MESSAGE value="V52 exclude by deleting approach TODOs" />
     <MESSAGE value="V51 improved runtime performance v2" />
     <option name="LAST_COMMIT_MESSAGE" value="V51 improved runtime performance v2" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>40</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>45</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>47</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>49</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>67</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>58</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>48</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>9</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>18</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>19</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>20</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>22</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

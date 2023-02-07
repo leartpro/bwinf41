@@ -9,17 +9,14 @@ using namespace std;
 
 bool is_reachable(const pair<double, double> &from_node,
                   const pair<double, double> &to_node,
-                  const pair<double, double> &last_node,
-                  const double &distance_from_to,
-                  const double &distance_last_from
+                  const pair<double, double> &last_node
 ) {
     pair<double, double> p, q;
     p = make_pair(from_node.first - to_node.first,
                   from_node.second - to_node.second);
-    q = make_pair(last_node.first - from_node.first,
-                  last_node.second - from_node.second);
-    double dot_product = p.first * q.first + p.second * q.second;
-    double angle = acos(dot_product / (distance_from_to * distance_last_from)) * 180 / M_PI;
+    q = make_pair(from_node.first - last_node.first,
+                  from_node.second - last_node.second);
+    double angle = acos(p.first * q.first + p.second * q.second / (sqrt( pow((from_node.first - to_node.first), 2.0) + (pow((from_node.second - to_node.second), 2.0))) * sqrt(pow((from_node.first - last_node.first), 2.0) + (pow((from_node.second - last_node.second), 2.0))))) * 180 / M_PI;
     if (angle < 90) {
         return false;
     }
@@ -31,6 +28,11 @@ bool solve(vector<pair<double, double> > &route,
            const vector<vector<double> > &graph,
            const vector<pair<double, double> > &coordinates
 ) {
+    cout << "route: ";
+    for(const auto p : route) {
+        cout << "(" << p.first << "," << p.second << ") -> ";
+    }
+    cout << endl;
     if (route.size() == coordinates.size()) {
         return true;
     }
@@ -51,11 +53,8 @@ bool solve(vector<pair<double, double> > &route,
                               coordinates[j]) == route.end() &&
                     is_reachable(route.back(),
                                  coordinates[j],
-                                 route[route.size() - 2],
-                                 sqrt(pow((route.back().first - coordinates[j].first), 2.0) +
-                                      (pow((route.back().second - coordinates[j].second), 2.0))),
-                                 sqrt(pow((route.back().first - route[route.size() - 2].first), 2.0) +
-                                      (pow((route.back().second - route[route.size() - 2].second), 2.0))))
+                                 route[route.size() - 2]
+                                 )
                     ) {
                 route.push_back(coordinates[j]);
                 if (solve(route, graph, coordinates)) {
@@ -119,6 +118,7 @@ int main() {
         }
         cout << "Vertexes:" << endl;
         for (int i = 0; i < total_count_of_nodes; i++) {
+            cout << "("<< coordinates[i].first << ", " << coordinates[i].second << "): ";
             for (int j = 0; j < total_count_of_nodes; j++) {
                 cout << "<" << graph[i][j] << "> ";
             }
@@ -128,6 +128,9 @@ int main() {
         //init graph
 
         vector<pair<double, double> > result;
+        result.push_back(coordinates[0]);
+        result.push_back(coordinates[2]);
+        result.push_back(coordinates[3]);
         if (solve(result, graph, coordinates)) {
             cout << "solution" << endl;
         } else {
