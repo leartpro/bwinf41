@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <fstream>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -28,11 +29,6 @@ bool solve(vector<pair<double, double> > &route,
            const vector<vector<double> > &graph,
            const vector<pair<double, double> > &coordinates
 ) {
-    cout << "route: ";
-    for(const auto p : route) {
-        cout << "(" << p.first << "," << p.second << ") -> ";
-    }
-    cout << endl;
     if (route.size() == coordinates.size()) {
         return true;
     }
@@ -47,6 +43,15 @@ bool solve(vector<pair<double, double> > &route,
             }
             if (route.empty()) {
                 route.push_back(coordinates[i]);
+            } else if (route.size() == coordinates.size() - 1) {  //TODO: Das Problem ist, dass der letzte Knoten keine freie Verbindung findet
+                                                                    // außerdem kommt er nie für sich selbst dran, da vorher geprüft wird, ob distance == 0 ist
+                if(is_reachable(route.back(),
+                                coordinates[i],
+                                route[route.size() - 2]
+                )) {
+                    route.push_back(coordinates[i]);
+                    return true;
+                }
             } else if (
                     std::find(route.begin(),
                               route.end(),
@@ -70,8 +75,8 @@ bool solve(vector<pair<double, double> > &route,
 
 
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
-    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
+    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const std::filesystem::directory_entry &entry: filesystem::directory_iterator(input_dir)) {
@@ -112,6 +117,7 @@ int main() {
             graph.emplace_back(vertexes);
         }
 
+        /*
         cout << "Coordinates:" << endl;
         for (int i = 0; i < total_count_of_nodes; i++) {
             cout << "index = " << i << ", (" << coordinates[i].first << ", " << coordinates[i].second << ")" << endl;
@@ -124,15 +130,22 @@ int main() {
             }
             cout << endl;
         }
+         */
 
         //init graph
 
         vector<pair<double, double> > result;
-        result.push_back(coordinates[0]);
-        result.push_back(coordinates[2]);
-        result.push_back(coordinates[3]);
+        auto start = std::chrono::high_resolution_clock::now();
         if (solve(result, graph, coordinates)) {
-            cout << "solution" << endl;
+            auto stop = std::chrono::high_resolution_clock::now();
+            auto duration = duration_cast<std::chrono::microseconds>(stop - start);
+            cout << "Time taken by function: "
+                 << duration.count() << " microseconds" << endl;
+            cout << "solution: " << endl;
+            for(const auto v : result) {
+                cout << "(" << v.first << ", " << v.second << ") -> ";
+            }
+            cout << endl;
         } else {
             cout << "no solution" << endl;
         }
