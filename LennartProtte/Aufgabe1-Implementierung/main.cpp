@@ -87,8 +87,6 @@ int main() {
         string input_file = entry.path();
         string output_file = output_dir + "/" + entry.path().filename().string();
 
-        cout << "calculate solution for " << entry.path().filename().string() << endl;
-
         //Öffnet die Eingabedatei
         ifstream fin(input_file);
 
@@ -105,6 +103,7 @@ int main() {
         int total_count_of_nodes = int(coordinates.size());
         graph.reserve(total_count_of_nodes * total_count_of_nodes);
 
+        //Initialisiert den Graphen
         for (int i = 0; i < total_count_of_nodes; i++) {
             vector<double> vertexes;
             for (int j = 0; j < total_count_of_nodes; j++) {
@@ -119,33 +118,15 @@ int main() {
             graph.emplace_back(vertexes);
         }
 
-        /*
-        cout << "Coordinates:" << endl;
-        for (int i = 0; i < total_count_of_nodes; i++) {
-            cout << "index = " << i << ", (" << coordinates[i].first << ", " << coordinates[i].second << ")" << endl;
-        }
-        cout << "Vertexes:" << endl;
-        for (int i = 0; i < total_count_of_nodes; i++) {
-            cout << "("<< coordinates[i].first << ", " << coordinates[i].second << "): ";
-            for (int j = 0; j < total_count_of_nodes; j++) {
-                cout << "<" << graph[i][j] << "> ";
-            }
-            cout << endl;
-        }
-         */
-
-        //init graph
-
+        //Berechnet die Lösung
         vector<pair<double, double> > result;
         if (solve(result, graph, coordinates)) {
-
-            cout << "solution: " << endl;
+            fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden" << endl;
             for(const auto v : result) {
-                cout << "(" << v.first << ", " << v.second << ") -> ";
+                fout << "(" << v.first << ", " << v.second << ") -> " << endl;
             }
-            cout << endl;
         } else {
-            cout << "no solution" << endl;
+            fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
         }
 
     }

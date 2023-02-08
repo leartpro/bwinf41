@@ -26,16 +26,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V51 improved runtime performance v2">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm7.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput/circlegraph.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestOutput/circlegraph.txt" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V53 task1 &amp; task2 stable version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,21 +227,7 @@
       <workItem from="1675598065652" duration="2974000" />
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
-      <workItem from="1675779917670" duration="10028000" />
-    </task>
-    <task id="LOCAL-00059" summary="V38 SAT Solver Approach">
-      <created>1674755057070</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1674755057071</updated>
-    </task>
-    <task id="LOCAL-00060" summary="V39 SAT Solver Approach">
-      <created>1674765024524</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1674765024524</updated>
+      <workItem from="1675779917670" duration="11016000" />
     </task>
     <task id="LOCAL-00061" summary="V40 SAT Solver Approach">
       <created>1674773252938</created>
@@ -579,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1675789566289</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="V53 task1 &amp; task2 stable version">
+      <created>1675791323596</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1675791323596</updated>
+    </task>
+    <task id="LOCAL-00109" summary="V53 task1 &amp; task2 stable version">
+      <created>1675791454947</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1675791454947</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -598,7 +591,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V42 SAT Solver Approach Cleanup" />
     <MESSAGE value="V43 SAT Solver Approach" />
     <MESSAGE value="V44 SAT Solver Approach" />
     <MESSAGE value="V45 SAT Solver Approach" />
@@ -623,7 +615,8 @@
     <MESSAGE value="V52 exclude by deleting approach" />
     <MESSAGE value="V52 exclude by deleting approach TODOs" />
     <MESSAGE value="V51 improved runtime performance v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="V51 improved runtime performance v2" />
+    <MESSAGE value="V53 task1 &amp; task2 stable version" />
+    <option name="LAST_COMMIT_MESSAGE" value="V53 task1 &amp; task2 stable version" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
