@@ -26,10 +26,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V53 task1 &amp; task2 stable version">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V54 documentation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-coverage/CMakeFiles/clion-Debug-Coverage-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-coverage/CMakeFiles/clion-Debug-Coverage-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-event-trace/CMakeFiles/clion-Debug-event-trace-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-event-trace/CMakeFiles/clion-Debug-event-trace-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +126,11 @@
         <aux-dir>/</aux-dir>
       </texify-bibtex>
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
     </configuration>
     <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
@@ -228,14 +235,8 @@
       <workItem from="1675598065652" duration="2974000" />
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
-      <workItem from="1675779917670" duration="15076000" />
-    </task>
-    <task id="LOCAL-00062" summary="V41 SAT Solver Approach">
-      <created>1674907136496</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1674907136497</updated>
+      <workItem from="1675779917670" duration="16565000" />
+      <workItem from="1676313077087" duration="741000" />
     </task>
     <task id="LOCAL-00063" summary="V42 SAT Solver Approach Cleanup">
       <created>1674926080340</created>
@@ -573,7 +574,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675854924134</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="V54 documentation">
+      <created>1676313013407</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1676313013407</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +600,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V43 SAT Solver Approach" />
     <MESSAGE value="V44 SAT Solver Approach" />
     <MESSAGE value="V45 SAT Solver Approach" />
     <MESSAGE value="V46 SAT Solver Approach bst solution so far" />
@@ -617,7 +624,8 @@
     <MESSAGE value="V52 exclude by deleting approach TODOs" />
     <MESSAGE value="V51 improved runtime performance v2" />
     <MESSAGE value="V53 task1 &amp; task2 stable version" />
-    <option name="LAST_COMMIT_MESSAGE" value="V53 task1 &amp; task2 stable version" />
+    <MESSAGE value="V54 documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="V54 documentation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

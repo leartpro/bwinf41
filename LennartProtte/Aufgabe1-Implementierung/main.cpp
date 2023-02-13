@@ -8,7 +8,7 @@
 using namespace std;
 
 /**
- * überprüft, anhand drei aufeinanderfolgender Knoten,
+ * Überprüft, anhand drei aufeinanderfolgender Knoten,
  * ob das Winkelkriterium der Aufgabenstellung für diese drei Knoten erfüllt ist
  * @param from_node der zweite Knoten
  * @param to_node der dritte Knoten (Zielknoten)
@@ -31,7 +31,7 @@ bool is_reachable(const pair<double, double> &from_node,
                     sqrt(pow((from_node.first - last_node.first), 2.0) +
                          (pow((from_node.second - last_node.second), 2.0)))
             )
-    ) * 180 / M_PI;
+    ) * 180 / M_PI; //Umrechnung von Radian nach Grad
     if (angle < 90) {
         return false;
     }
@@ -60,6 +60,7 @@ bool solve(vector<pair<double, double> > &route,
         return true;
     }
     //Für jeden Knoten
+    //TODO: sort coordinates by nearest
     for (int i = 0; i < coordinates.size(); i++) {
         //Wenn dieser Knoten bereits in der Lösungsmenge existiert, überspringe diesen
         if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
@@ -67,6 +68,7 @@ bool solve(vector<pair<double, double> > &route,
         }
         auto edges = graph[i];
         //Für alle Kanten des aktuellen Knotens
+        //TODO: sort edges by nearest
         for (int j = 0; j < edges.size(); j++) {
             //Wenn es eine Kante zu ihm selbst ist, überspringe diese
             if (edges[j] == 0) {
