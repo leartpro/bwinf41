@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
-#include <chrono>
-
 
 using namespace std;
 
@@ -103,9 +101,6 @@ int main() {
     string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
 
-    auto start = std::chrono::high_resolution_clock::now();
-
-
     //Durchläuft alle Dateien im Eingabeordner
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
 
@@ -186,10 +181,5 @@ int main() {
         fin.close();
         fout.close();
     }
-
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = duration_cast<std::chrono::microseconds>(stop - start);
-    cout << "Time taken by function: "
-         << duration.count() << " microseconds" << endl;
     return 0;
 }

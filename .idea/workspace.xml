@@ -28,6 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V53 task1 &amp; task2 stable version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,14 +228,7 @@
       <workItem from="1675598065652" duration="2974000" />
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
-      <workItem from="1675779917670" duration="11016000" />
-    </task>
-    <task id="LOCAL-00061" summary="V40 SAT Solver Approach">
-      <created>1674773252938</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1674773252938</updated>
+      <workItem from="1675779917670" duration="15076000" />
     </task>
     <task id="LOCAL-00062" summary="V41 SAT Solver Approach">
       <created>1674907136496</created>
@@ -572,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675791454947</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="V53 task1 &amp; task2 stable version">
+      <created>1675854924134</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1675854924134</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
