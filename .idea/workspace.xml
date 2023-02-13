@@ -26,9 +26,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V54 documentation">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V54 documentation and runtime improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.tex" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien/wenigerkrumm3.txt" afterDir="false" />
@@ -241,14 +240,7 @@
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
       <workItem from="1675779917670" duration="16565000" />
-      <workItem from="1676313077087" duration="5361000" />
-    </task>
-    <task id="LOCAL-00065" summary="V43 SAT Solver Approach">
-      <created>1674928144384</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1674928144385</updated>
+      <workItem from="1676313077087" duration="9005000" />
     </task>
     <task id="LOCAL-00066" summary="V44 SAT Solver Approach">
       <created>1674998773111</created>
@@ -586,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676314047735</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="V54 documentation and runtime improvements">
+      <created>1676328856392</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1676328856392</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,7 +604,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V44 SAT Solver Approach" />
     <MESSAGE value="V45 SAT Solver Approach" />
     <MESSAGE value="V46 SAT Solver Approach bst solution so far" />
     <MESSAGE value="V47 SAT Solver Approach bst solution so far" />
@@ -630,7 +628,19 @@
     <MESSAGE value="V51 improved runtime performance v2" />
     <MESSAGE value="V53 task1 &amp; task2 stable version" />
     <MESSAGE value="V54 documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="V54 documentation" />
+    <MESSAGE value="V54 documentation and runtime improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="V54 documentation and runtime improvements" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp</url>
+          <line>137</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

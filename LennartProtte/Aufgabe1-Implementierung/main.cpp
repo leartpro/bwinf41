@@ -17,7 +17,7 @@ using namespace std;
  */
 double cross_angle(const pair<double, double> &from_node,
                    const pair<double, double> &over_node,
-                  const pair<double, double> &to_node
+                   const pair<double, double> &to_node
 
 ) {
     pair<double, double> p, q;
@@ -25,7 +25,7 @@ double cross_angle(const pair<double, double> &from_node,
                   over_node.second - to_node.second);
     q = make_pair(over_node.first - from_node.first,
                   over_node.second - from_node.second);
-    return acos(
+    double angle = acos(
             p.first * q.first + p.second * q.second / (
                     sqrt(pow((over_node.first - to_node.first), 2.0) +
                          (pow((over_node.second - to_node.second), 2.0))) *
@@ -33,6 +33,7 @@ double cross_angle(const pair<double, double> &from_node,
                          (pow((over_node.second - from_node.second), 2.0)))
             )
     ) * 180 / M_PI; //Umrechnung von Radian nach Grad
+    return angle;
 }
 
 /**
@@ -45,13 +46,30 @@ double cross_angle(const pair<double, double> &from_node,
  * @return true, wenn alle Knoten in der Lösungsmenge (route) enthalten sind,
  * andernfalls wird false zurückgegeben
  */
-bool solve(vector<pair<double, double> > &route, const vector<pair<double, double> > &coordinates) {
+bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
+    /*
+    cout << "route (depth=" << route.size() << "): ";
+    for (const auto &p: route) {
+        cout << "(" << p.first << "," << p.second << ") -> ";
+    }
+    cout << endl;
+     */
     //Wenn alle Knoten in der Lösungsmenge sind
     if (route.size() == coordinates.size()) {
         return true;
     }
+    //Sortiere nach dem nächsten Knoten
+    /*
+    if (!route.empty()) {
+        const auto &p = route.back();
+        sort(coordinates.begin(), coordinates.end(),
+             [p](const auto &lhs, const auto &rhs) {
+                 return sqrt(pow((p.first - lhs.first), 2.0) + (pow((p.second - lhs.second), 2.0)))
+                 > sqrt(pow((p.first - rhs.first), 2.0) + (pow((p.second - rhs.second), 2.0)));
+             });
+    }
+     */
     //Für jeden Knoten
-    //TODO: sort coordinates by nearest
     for (int i = 0; i < coordinates.size(); i++) {
         //Wenn dieser Knoten bereits in der Lösungsmenge existiert, überspringe diesen
         if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
@@ -63,9 +81,13 @@ bool solve(vector<pair<double, double> > &route, const vector<pair<double, doubl
             route.push_back(coordinates[i]);
             //Wenn es der Knoten noch nicht in der Lösungsmenge enthalten ist
             //und nach den Winkelkriterien erreichbar ist
-        } else if (std::find(route.begin(),route.end(),coordinates[i]) == route.end() &&
-        //TODO: if the params of from_node and over_node are changed, everything is working
-                cross_angle(route[route.size() - 2], route.back(), coordinates[i]) < 90) {
+        } else if (
+                std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
+                (
+                        route.size() < 3 ||
+                        cross_angle(route[route.size() - 2], route.back(), coordinates[i]) >= 90
+                )
+                ) {
             //Füge den Knoten hinzu
             route.push_back(coordinates[i]);
             //Wenn es eine Lösung mit der aktuellen Route gibt
@@ -97,6 +119,8 @@ int main() {
         string input_file = entry.path();
         string output_file = output_dir + "/" + entry.path().filename().string();
 
+        cout << output_file << ":" << endl;
+
         //Öffnet die Eingabedatei
         ifstream fin(input_file);
 
@@ -120,7 +144,6 @@ int main() {
         } else {
             fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
         }
-
     }
     return 0;
 }
