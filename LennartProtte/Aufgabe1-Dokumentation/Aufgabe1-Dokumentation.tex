@@ -110,6 +110,56 @@
     \section{Umsetzung}\label{sec:umsetzung}
     Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde.
     Hier können auch Implementierungsdetails erwähnt werden.
+    
+    \begin{algorithm}
+\caption{Rekursive Funktion zur Findung einer Route durch den Graphen}
+\label{algorithm:solve}
+\begin{algorithmic}[1]
+\Function{solve}{$route, coordinates$}
+\If{$route.size() == coordinates.size()$}
+\State \textbf{return} \textsc{true}
+\EndIf
+\If{$\neg route.empty()$}
+\State $p \gets route.back()$
+\State $\text{sort}(coordinates.begin(), coordinates.end(), \ \hspace{2.5em} \text{function}\ (lhs, rhs) \rightarrow \sqrt{(p_1 - lhs_1)^2 + (p_2 - lhs_2)^2} < \sqrt{(p_1 - rhs_1)^2 + (p_2 - rhs_2)^2})$
+\EndIf
+\For{$i \gets 0$ \textbf{to} $coordinates.size() - 1$}
+\If{$coordinates[i] \in route$}
+\State \textbf{continue}
+\EndIf
+\State $angle \gets -1$
+\If{$route.size() \geq 2$}
+\State $angle \gets \text{cross_angle}(route[route.size() - 2], route.back(), coordinates[i])$
+\EndIf
+\If{$route.empty() \lor (\neg(coordinates[i] \in route) \land (route.size() < 2 \lor angle \geq 90 \lor angle = 0))$}
+\State $route.\text{push_back}(coordinates[i])$
+\If{\textsc{solve}($route$, $coordinates$)}
+\State \textbf{return} \textsc{true}
+\Else
+\State $route.\text{pop_back}()$
+\EndIf
+\EndIf
+\EndFor
+\State \textbf{return} \textsc{false}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Berechnung des Winkels zwischen Vektoren}
+\label{algorithm:cross_angle}
+\begin{algorithmic}[1]
+\Function{cross_angle}{$from_node, over_node, to_node$}
+\State $p \gets (over_node_1 - from_node_1, over_node_2 - from_node_2)$
+\State $q \gets (to_node_1 - over_node_1, to_node_2 - over_node_2)$
+\State $angle \gets \arccos \left( \frac{p_1 q_1 + p_2 q_2}{\sqrt{p_1^2 + p_2^2} \sqrt{q_1^2 + q_2^2}} \right) \cdot 180 / \pi$
+\If{$angle > 180$}
+\State $angle \gets 180 - angle$
+\EndIf
+\State \textbf{return} $angle$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
     \newpage
     \section{Beispiele}\label{sec:beispiele}
