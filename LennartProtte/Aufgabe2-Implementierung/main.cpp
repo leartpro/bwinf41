@@ -18,6 +18,34 @@ struct Slice {
     int length, height;
 };
 
+
+/**
+ * Repräsentiert eine Dimension
+ */
+enum Dimension{
+    FRONT,
+    TOP,
+    SIDE,
+    INVALID
+};
+
+/*
+ * Dimension als String
+ */
+constexpr const char* to_string(Dimension dimension) {
+    switch (dimension) {
+        case Dimension::FRONT:
+            return "front";
+        case Dimension::TOP:
+            return "top";
+        case Dimension::SIDE:
+            return "side";
+        case Dimension::INVALID:
+            return "invalid";
+    }
+}
+
+
 /**
  * Prüft, ob eine Scheibe, von einem Quader abgeschnitten werden kann
  * @param length die Länge des Quaders
@@ -31,15 +59,15 @@ struct Slice {
  * 1 => OBEN
  * 2 => SEITE
  */
-int canRemoveSlice(int length, int height, int depth, Slice slice) {
+Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
     if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
-        return 0; //FRONT
+        return FRONT;
     } else if (slice.length == length && slice.height == depth || slice.height == length && slice.length == depth) {
-        return 1; //TOP
+        return TOP;
     } else if (slice.length == height && slice.height == depth || slice.height == height && slice.length == depth) {
-        return 2; //SIDE
+        return SIDE;
     } else {
-        return -1; //DOES NOT FIT
+        return INVALID;
     }
 }
 
@@ -54,7 +82,7 @@ int canRemoveSlice(int length, int height, int depth, Slice slice) {
  * @param slices die noch nicht verwendete Menge an Scheiben
  * @return true, wenn es eine lösung gibt, ansonsten false
  */
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> &order, vector<Slice> &slices) {
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
     //Wenn alle Scheiben in der Lösungsmenge enthalten sind
     if (slices.empty()) {
         //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
@@ -63,13 +91,13 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, int>> 
     vector<Slice> removed_slices;
     //Für jede noch nicht verwendete Schiebe
     for (auto it = slices.begin(); it != slices.end(); ++it) {
-        int dimension = canRemoveSlice(length, height, depth, *it);
+        Dimension dimension = canRemoveSlice(length, height, depth, *it);
         //Wenn die aktuelle Scheibe abgeschnitten werden kann
-        if (dimension >= 0) {
+        if (dimension != INVALID) {
             //Aktualisiere die Maße des Quaders
-            int new_length = length - (dimension == 2 ? 1 : 0);
-            int new_height = height - (dimension == 1 ? 1 : 0);
-            int new_depth = depth - (dimension == 0 ? 1 : 0);
+            int new_length = length - (dimension == SIDE ? 1 : 0);
+            int new_height = height - (dimension == TOP ? 1 : 0);
+            int new_depth = depth - (dimension == FRONT ? 1 : 0);
             //Füge die Scheibe zur Lösungsmenge hinzu
             order.emplace_back(*it, dimension);
             removed_slices.push_back(*it);
@@ -145,7 +173,7 @@ int main() {
         }
 
         //Sortiert die Scheiben nach ihrer Fläche
-        vector<pair<Slice, int>> order;
+        vector<pair<Slice, Dimension>> order;
         sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
                  return (a.length * a.height) > (b.length * b.height);
              }
@@ -153,9 +181,8 @@ int main() {
 
         auto it = result.begin();
         bool success = false;
-
         //Für jede mögliche Kombination der Seitenlängen
-        while (it != result.end() && !success) {
+        while (it != result.end()) {
             int t_length = length;
             vector<Slice> t_slices(slices);
             order.clear();
@@ -166,10 +193,10 @@ int main() {
                      << endl;
                 fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
                 for (auto const &o: order) {
-                    fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second
+                    fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << to_string(o.second)
                          << endl;
                 }
-                //TODO: continue with next input file
+                break;
             }
             it++;
         }

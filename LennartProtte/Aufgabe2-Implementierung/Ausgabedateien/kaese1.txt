@@ -1,15 +1,15 @@
 Quader 6x6x6 V(216)
 
 Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (6, 6) Dimension: 0
-Slice: (6, 6) Dimension: 0
-Slice: (4, 6) Dimension: 1
-Slice: (4, 6) Dimension: 1
-Slice: (4, 6) Dimension: 0
-Slice: (3, 6) Dimension: 1
-Slice: (3, 3) Dimension: 2
-Slice: (3, 3) Dimension: 2
-Slice: (3, 4) Dimension: 0
-Slice: (2, 4) Dimension: 1
-Slice: (2, 4) Dimension: 0
-Slice: (2, 4) Dimension: 0
+Slice: (6, 6) Dimension: front
+Slice: (6, 6) Dimension: front
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: front
+Slice: (3, 6) Dimension: top
+Slice: (3, 3) Dimension: side
+Slice: (3, 3) Dimension: side
+Slice: (3, 4) Dimension: front
+Slice: (2, 4) Dimension: top
+Slice: (2, 4) Dimension: front
+Slice: (2, 4) Dimension: front
