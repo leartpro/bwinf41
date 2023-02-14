@@ -17,20 +17,17 @@ using namespace std;
  */
 double cross_angle(const pair<double, double> &from_node,
                    const pair<double, double> &over_node,
-                   const pair<double, double> &to_node
-
-) {
+                   const pair<double, double> &to_node) {
     pair<double, double> p, q;
-    p = make_pair(over_node.first - to_node.first,
-                  over_node.second - to_node.second);
-    q = make_pair(over_node.first - from_node.first,
+    p = make_pair(over_node.first - from_node.first,
                   over_node.second - from_node.second);
+    q = make_pair(to_node.first - over_node.first,
+                  to_node.second - over_node.second);
     double angle = acos(
-            p.first * q.first + p.second * q.second / (
-                    sqrt(pow((over_node.first - to_node.first), 2.0) +
-                         (pow((over_node.second - to_node.second), 2.0))) *
-                    sqrt(pow((over_node.first - from_node.first), 2.0) +
-                         (pow((over_node.second - from_node.second), 2.0)))
+            (p.first * q.first + p.second * q.second) / (
+                    sqrt(pow(p.first, 2.0) + (pow(p.second, 2.0))) *
+                    sqrt(pow(q.first, 2.0) + (pow(q.second, 2.0))
+                    )
             )
     ) * 180 / M_PI; //Umrechnung von Radian nach Grad
     return angle;
@@ -47,19 +44,11 @@ double cross_angle(const pair<double, double> &from_node,
  * andernfalls wird false zurückgegeben
  */
 bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
-    /*
-    cout << "route (depth=" << route.size() << "): ";
-    for (const auto &p: route) {
-        cout << "(" << p.first << "," << p.second << ") -> ";
-    }
-    cout << endl;
-     */
     //Wenn alle Knoten in der Lösungsmenge sind
     if (route.size() == coordinates.size()) {
         return true;
     }
     //Sortiere nach dem nächsten Knoten
-    /*
     if (!route.empty()) {
         const auto &p = route.back();
         sort(coordinates.begin(), coordinates.end(),
@@ -68,25 +57,16 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
                  > sqrt(pow((p.first - rhs.first), 2.0) + (pow((p.second - rhs.second), 2.0)));
              });
     }
-     */
     //Für jeden Knoten
     for (int i = 0; i < coordinates.size(); i++) {
         //Wenn dieser Knoten bereits in der Lösungsmenge existiert, überspringe diesen
         if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
             continue;
         }
-        //Wenn es noch keinen Knoten in der Lösungsmenge gibt
-        if (route.empty()) {
-            //Füge den Knoten hinzu
-            route.push_back(coordinates[i]);
-            //Wenn es der Knoten noch nicht in der Lösungsmenge enthalten ist
-            //und nach den Winkelkriterien erreichbar ist
-        } else if (
-                std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
-                (
-                        route.size() < 3 ||
-                        cross_angle(route[route.size() - 2], route.back(), coordinates[i]) >= 90
-                )
+        double angle = route.size() < 2 ? 0.0 : cross_angle(route[route.size() - 2], route.back(), coordinates[i]);
+        if (route.empty() ||
+            (std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
+             (route.size() < 2 || angle >= 90 || angle == 0))
                 ) {
             //Füge den Knoten hinzu
             route.push_back(coordinates[i]);
@@ -98,8 +78,8 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
             }
         }
     }
-    //Wenn es mit der aktuellen Route keine Lösung geben kann
-    return false;
+//Wenn es mit der aktuellen Route keine Lösung geben kann
+return false;
 }
 
 /**
@@ -138,8 +118,13 @@ int main() {
         vector<pair<double, double> > result;
         if (solve(result, coordinates)) {
             fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden" << endl;
-            for (const auto v: result) {
-                fout << "(" << v.first << ", " << v.second << ") -> " << endl;
+            for (int i = 0; i < result.size(); i++) {
+                fout << "[(" << result[i].first << ", " << result[i].second << ")";
+                if (i == 0 || i == result.size() - 1) {
+                    fout << "] -> ";
+                } else {
+                    fout << " " << cross_angle(result[i - 1], result[i], result[i + 1]) << "°] -> ";
+                }
             }
         } else {
             fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
