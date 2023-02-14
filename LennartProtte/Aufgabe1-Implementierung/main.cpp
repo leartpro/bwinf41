@@ -62,7 +62,10 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
         if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
             continue;
         }
-        double angle = route.size() < 2 ? 0.0 : cross_angle(route[route.size() - 2], route.back(), coordinates[i]);
+        double angle = -1;
+        if(route.size() >= 2) {
+            angle = cross_angle(route[route.size() - 2], route.back(), coordinates[i]);
+        }
         if (route.empty() ||
             (std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
              (route.size() < 2 || angle >= 90 || angle == 0))
