@@ -1,2 +1,0 @@
-Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden
-[(0, 0)] -> [(1, 1) 135°] -> [(0, 1) 135°] -> [(1, 0)] -> 
