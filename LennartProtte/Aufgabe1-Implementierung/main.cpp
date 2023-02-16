@@ -8,19 +8,19 @@ using namespace std;
 
 
 void generate_adi_graph(const vector<pair<double, double>>& result, const string &file) {
-    cout << "\\NewAdigraph{"<< file << "}{" << endl;
+    cout << "\\NewAdigraph{"<< file.substr(0, file.size() - 4) << "}{" << endl;
     for(int i = 0; i < result.size(); i++) {
-        cout << "    " << i << ":" << result[i].first/30 << "," <<  result[i].second/30 << ":" << i << ";" << endl;
+        cout << "    " << i << ":" << result[i].first/50 << "," <<  result[i].second/50 << ":" << i << ";" << endl;
     }
     cout << "}{" << endl;
-   /* for(int i = 0; i+1 < result.size(); i++) {
-        cout << i << "," << i+1 << ":" << sqrt(pow((result[i].first - result[i+1].first), 2.0) + (pow((result[i].second - result[i+1].second), 2.0))) << ";" << endl;
-    }*/
-    cout << "}\n\\" << file << "{"; //<< endl;
-    /*for(int i = 0; i < result.size(); i++) {
+    for(int i = 0; i+1 < result.size(); i++) {
+        cout << i << "," << i+1 /*<< ":" << sqrt(pow((result[i].first - result[i+1].first), 2.0) + (pow((result[i].second - result[i+1].second), 2.0)))*/ << ";" << endl;
+    }
+    cout << "}\n\\" << file.substr(0, file.size() - 4) << "{" << endl;
+    for(int i = 0; i < result.size(); i++) {
         cout << i << (i == result.size() -1 ? "" : ",");
     }
-    cout << "::red;" << endl;*/
+    cout << "::red;" << endl;
     cout << "}" << endl;
 }
 
@@ -39,9 +39,6 @@ double cross_angle(const pair<double, double> &from_node,
     b = sqrt(pow((from_node.first - over_node.first), 2.0) + (pow((from_node.second - over_node.second), 2.0)));
     c = sqrt(pow((over_node.first - to_node.first), 2.0) + (pow((over_node.second - to_node.second), 2.0)));
     double angle = acos((pow(a, 2.0) - pow(b, 2.0) - pow(c, 2.0)) / (-2 * b * c)) * 180 / M_PI;
-    if(angle > 180) {
-        angle = 180 - angle;
-    }
     return angle;
 }
 
@@ -53,6 +50,9 @@ double cross_angle(const pair<double, double> &from_node,
  * @return true, wenn alle Knoten in der Lösungsmenge (route) enthalten sind, sonst false
  */
 bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
+    for(auto & i : route) {
+        cout << "(" << i.first << "," << i.second << ") -> ";
+    } cout << endl;
     //Wenn alle Knoten in der Lösungsmenge sind
     if (route.size() == coordinates.size()) {
         return true;
@@ -78,7 +78,7 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
         }
         if (route.empty() ||
             (std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
-             (route.size() < 2 || angle >= 90 || angle == 0))
+             (route.size() < 2 || angle >= 90))
                 ) {
             //Füge den Knoten hinzu
             route.push_back(coordinates[i]);
