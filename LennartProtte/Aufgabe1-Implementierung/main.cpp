@@ -3,9 +3,26 @@
 #include <cmath>
 #include <filesystem>
 #include <fstream>
-#include <algorithm>
 
 using namespace std;
+
+
+void generate_adi_graph(const vector<pair<double, double>>& result, const string &file) {
+    cout << "\\NewAdigraph{"<< file << "}{" << endl;
+    for(int i = 0; i < result.size(); i++) {
+        cout << "    " << i << ":" << result[i].first/30 << "," <<  result[i].second/30 << ":" << i << ";" << endl;
+    }
+    cout << "}{" << endl;
+   /* for(int i = 0; i+1 < result.size(); i++) {
+        cout << i << "," << i+1 << ":" << sqrt(pow((result[i].first - result[i+1].first), 2.0) + (pow((result[i].second - result[i+1].second), 2.0))) << ";" << endl;
+    }*/
+    cout << "}\n\\" << file << "{"; //<< endl;
+    /*for(int i = 0; i < result.size(); i++) {
+        cout << i << (i == result.size() -1 ? "" : ",");
+    }
+    cout << "::red;" << endl;*/
+    cout << "}" << endl;
+}
 
 /**
  * Berechnet den Winkel zwischen den Vektoren von from_node nach over_node und over_node nach to_node
@@ -17,18 +34,11 @@ using namespace std;
 double cross_angle(const pair<double, double> &from_node,
                    const pair<double, double> &over_node,
                    const pair<double, double> &to_node) {
-    pair<double, double> p, q;
-    p = make_pair(over_node.first - from_node.first,
-                  over_node.second - from_node.second);
-    q = make_pair(to_node.first - over_node.first,
-                  to_node.second - over_node.second);
-    double angle = acos(
-            (p.first * q.first + p.second * q.second) / (
-                    sqrt(pow(p.first, 2.0) + (pow(p.second, 2.0))) *
-                    sqrt(pow(q.first, 2.0) + (pow(q.second, 2.0))
-                    )
-            )
-    ) * 180 / M_PI; //Umrechnung von Radian nach Grad
+    double a, b, c;
+    a = sqrt(pow((from_node.first - to_node.first), 2.0) + (pow((from_node.second - to_node.second), 2.0)));
+    b = sqrt(pow((from_node.first - over_node.first), 2.0) + (pow((from_node.second - over_node.second), 2.0)));
+    c = sqrt(pow((over_node.first - to_node.first), 2.0) + (pow((over_node.second - to_node.second), 2.0)));
+    double angle = acos((pow(a, 2.0) - pow(b, 2.0) - pow(c, 2.0)) / (-2 * b * c)) * 180 / M_PI;
     if(angle > 180) {
         angle = 180 - angle;
     }
@@ -115,6 +125,7 @@ int main() {
         }
 
         //Berechnet die Lösung
+        //TODO: Aufgabenkriterien beachten
         vector<pair<double, double> > result;
         if (solve(result, coordinates)) {
             fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden" << endl;
@@ -127,6 +138,7 @@ int main() {
         } else {
             fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
         }
+        generate_adi_graph(result, entry.path().filename().string());
     }
     return 0;
 }
