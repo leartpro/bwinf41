@@ -55,13 +55,10 @@ double cross_angle(const pair<double, double> &from_node,
  * @return true, wenn alle Knoten in der Lösungsmenge (route) enthalten sind, sonst false
  */
 bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
-    /*for(auto & i : route) {
-        cout << "depth=" << route.size() << "(" << i.first << "," << i.second << ") -> ";
-    } cout << endl;*/
-    //Wenn alle Knoten in der Lösungsmenge sind
-    if (route.size() == coordinates.size()) {
-        return true;
-    }
+    cout << "depth=" << route.size();
+    for(auto & i : route) {
+         cout << "(" << i.first << "," << i.second << ") -> ";
+    } cout << endl;
     //Sortiere nach dem nächsten Knoten
     if (!route.empty()) {
         const auto &p = route.back();
@@ -87,6 +84,10 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
                 ) {
             //Füge den Knoten hinzu
             route.push_back(coordinates[i]);
+            //Wenn alle Knoten in der Lösungsmenge sind
+            if (route.size() == coordinates.size()) {
+                return true;
+            }
             //Wenn es eine Lösung mit der aktuellen Route gibt
             if (solve(route, coordinates)) {
                 return true;
@@ -106,7 +107,7 @@ return false;
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
+    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/testInput";
     string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
@@ -131,9 +132,22 @@ int main() {
 
         //Berechnet die Lösung
         //TODO: Aufgabenkriterien beachten
-
-        //TODO: am Anfang die Knoten nach nähe zum Schwerpunkt der Punktewolke sortieren
+        //Berechnet den Schwerpunkt der Punktewolke
+        double sum_x, sum_y;
+        for(auto & coordinate : coordinates) {
+            sum_x += coordinate.first;
+            sum_y += coordinate.second;
+        }
+        sum_x /= int(coordinates.size());
+        sum_y /= int(coordinates.size());
+        //Sortiert absteigend nach der Entfernung zum Schwerpunkt der Punktwolke
+        sort(coordinates.begin(), coordinates.end(),
+             [sum_x, sum_y](const auto &lhs, const auto &rhs) {
+                 return sqrt(pow((lhs.first - sum_x), 2.0) + (pow((lhs.second - sum_y), 2.0)))
+                        > sqrt(pow((rhs.first - sum_x), 2.0) + (pow((rhs.second - sum_y), 2.0)));
+             });
         vector<pair<double, double> > result;
+        //Schreibt das Ergebnis in die entsprechende Ausgabedatei
         if (solve(result, coordinates)) {
             fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden" << endl;
             for (int i = 0; i < result.size(); i++) {
@@ -145,7 +159,7 @@ int main() {
         } else {
             fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
         }
-        generate_adi_graph(result, entry.path().filename().string());
+        //generate_adi_graph(result, entry.path().filename().string());
     }
     return 0;
 }
