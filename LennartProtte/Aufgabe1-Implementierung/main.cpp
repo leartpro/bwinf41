@@ -8,9 +8,10 @@ using namespace std;
 
 
 void generate_adi_graph(const vector<pair<double, double>>& result, const string &file) {
+    cout << "\\begin{figure}[!h]\\centering" << endl;
     cout << "\\NewAdigraph{"<< file.substr(0, file.size() - 4) << "}{" << endl;
     for(int i = 0; i < result.size(); i++) {
-        cout << "    " << i << ":" << result[i].first/50 << "," <<  result[i].second/50 << ":" << i << ";" << endl;
+        cout << "    " << i << ":" << result[i].first/30 << "," <<  result[i].second/30 << ":" << i << ";" << endl;
     }
     cout << "}{" << endl;
     for(int i = 0; i+1 < result.size(); i++) {
@@ -22,6 +23,10 @@ void generate_adi_graph(const vector<pair<double, double>>& result, const string
     }
     cout << "::red;" << endl;
     cout << "}" << endl;
+    cout << "\\caption{Figur: " << file.substr(0, file.size() - 4) << "}\n"
+            "        \\label{fig:" << file.substr(0, file.size() - 4) << "}\n"
+            "    \\end{figure}" << endl;
+    cout << "\\newpage" << endl;
 }
 
 /**
@@ -50,9 +55,9 @@ double cross_angle(const pair<double, double> &from_node,
  * @return true, wenn alle Knoten in der Lösungsmenge (route) enthalten sind, sonst false
  */
 bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
-    for(auto & i : route) {
-        cout << "(" << i.first << "," << i.second << ") -> ";
-    } cout << endl;
+    /*for(auto & i : route) {
+        cout << "depth=" << route.size() << "(" << i.first << "," << i.second << ") -> ";
+    } cout << endl;*/
     //Wenn alle Knoten in der Lösungsmenge sind
     if (route.size() == coordinates.size()) {
         return true;
@@ -126,6 +131,8 @@ int main() {
 
         //Berechnet die Lösung
         //TODO: Aufgabenkriterien beachten
+
+        //TODO: am Anfang die Knoten nach nähe zum Schwerpunkt der Punktewolke sortieren
         vector<pair<double, double> > result;
         if (solve(result, coordinates)) {
             fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden" << endl;
