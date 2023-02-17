@@ -11,7 +11,7 @@ void generate_adi_graph(const vector<pair<double, double>>& result, const string
     cout << "\\begin{figure}[!h]\\centering" << endl;
     cout << "\\NewAdigraph{"<< file.substr(0, file.size() - 4) << "}{" << endl;
     for(int i = 0; i < result.size(); i++) {
-        cout << "    " << i << ":" << result[i].first/30 << "," <<  result[i].second/30 << ":" << i << ";" << endl;
+        cout << "    " << i << ":" << result[i].first/50 << "," <<  result[i].second/25 << ":" << i << ";" << endl;
     }
     cout << "}{" << endl;
     for(int i = 0; i+1 < result.size(); i++) {
@@ -75,6 +75,16 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
             continue;
         }
         double angle = -1;
+        if(route.size() == coordinates.size() - 2) {
+            std::vector<pair<double, double>> v_symDifference;
+            std::sort(coordinates.begin(), coordinates.end());
+            std::sort(route.begin(), route.end());
+            std::set_symmetric_difference(
+                    coordinates.begin(), coordinates.end(),
+                    route.begin(), route.end(),
+                    std::back_inserter(v_symDifference));
+            cout << "close one" << endl;
+        }
         if(route.size() >= 2) {
             angle = cross_angle(route[route.size() - 2], route.back(), coordinates[i]);
         }
@@ -146,6 +156,7 @@ int main() {
                  return sqrt(pow((lhs.first - sum_x), 2.0) + (pow((lhs.second - sum_y), 2.0)))
                         > sqrt(pow((rhs.first - sum_x), 2.0) + (pow((rhs.second - sum_y), 2.0)));
              });
+        generate_adi_graph(coordinates, entry.path().filename().string());
         vector<pair<double, double> > result;
         //Schreibt das Ergebnis in die entsprechende Ausgabedatei
         if (solve(result, coordinates)) {
