@@ -133,7 +133,6 @@ int main() {
         }
 
         //Berechnet die Lösung
-        //TODO: Aufgabenkriterien beachten
         //Berechnet den Schwerpunkt der Punktewolke
         double sum_x, sum_y;
         for (auto &coordinate: coordinates) {
@@ -161,7 +160,7 @@ int main() {
         } else {
             fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
         }
-        generate_adi_graph(result, entry.path().filename().string());
+        //generate_adi_graph(result, entry.path().filename().string());
     }
     return 0;
 }

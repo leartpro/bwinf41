@@ -126,7 +126,7 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/debug";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
@@ -151,24 +151,27 @@ int main() {
         }
 
         //Berechnet das Volumen des Quaders
-        int volume = 0, length = 0;
+        int volume = 0, height = 0;
         for (const auto &slice: slices) {
             volume += slice.length * slice.height;
         }
 
-        //Findet die Seite, wo der größte Wert maximal ist und setzt die Länge auf diesen
+        //Findet die Seite, wo der größte Wert maximal ist und setzt die Länge auf diesen Wert
         for (const auto &slice: slices) {
             int side = (slice.length > slice.height) ? slice.length : slice.height;
-            if (side > length) {
-                length = side;
+            if (side > height) {
+                height = side;
             }
         }
 
         //Findet alle anderen möglichen Seiten zu der gesetzten Länge
         vector<pair<int, int>> result; //TODO: e.g Quader 210x210x90V(9261000) is very suspicious
-        for (int i = 1; i <= volume / length; i++) {
-            if (volume % (length * i) == 0) {
-                result.emplace_back(length, i);
+        int base = volume / height;
+        for(int side_a = 1; side_a <= base; side_a++) {
+            for(int side_b = 1; side_b <= base; side_b++) {
+                if(side_a * side_b * height == volume) {
+                    result.emplace_back(side_a, side_b);
+                }
             }
         }
 
@@ -183,13 +186,13 @@ int main() {
         bool success = false;
         //Für jede mögliche Kombination der Seitenlängen
         while (it != result.end()) {
-            int t_length = length;
+            int t_height = height;
             vector<Slice> t_slices(slices);
             order.clear();
             //Wenn es eine Lösung gibt
-            if (calculate_cube(t_length, it->first, it->second, order, t_slices)) {
+            if (calculate_cube( it->first, t_height, it->second, order, t_slices)) {
                 success = true;
-                fout << "Quader " << length << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
+                fout << "Quader " << height << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
                      << endl;
                 fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
                 for (auto const &o: order) {

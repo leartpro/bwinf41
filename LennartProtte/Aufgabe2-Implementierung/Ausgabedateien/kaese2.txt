@@ -1,8 +1,8 @@
-Quader 1000x1000x2 V(2000000)
+Quader 1000x2x1000 V(2000000)
 
 Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (2, 1000) Dimension: top
-Slice: (2, 1000) Dimension: top
-Slice: (2, 998) Dimension: side
-Slice: (998, 999) Dimension: front
-Slice: (998, 999) Dimension: front
+Slice: (2, 1000) Dimension: front
+Slice: (2, 1000) Dimension: front
+Slice: (2, 998) Dimension: top
+Slice: (998, 999) Dimension: side
+Slice: (998, 999) Dimension: side

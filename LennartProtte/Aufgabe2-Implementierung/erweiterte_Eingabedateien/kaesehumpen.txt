@@ -1,0 +1,4 @@
+humpen
+//r=3, h=2
+3 3 //r=3 h=1
+//Probem, länge der Schiebe ist nicht zwingend ganzzahlig
