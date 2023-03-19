@@ -217,21 +217,15 @@ int main() {
                 vector<Slice> t_slices(slices);
                 for (auto dimension: combination) {
                     order.clear();
-                    if (calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order,t_slices)) {
-                        fout << "Quader " << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension)
-                             << " V(" << volume << ")" << endl
-                             << endl;
-                        fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
-                        for (auto const &o: order) {
-                            fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: "
-                                 << to_string(o.second) << endl;
-                        }
-                    } else {
+                    if (!calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order,t_slices)) {
                         valid = false;
                     }
                 }
                 if (valid && t_slices.empty()) {
-                    cout << "done" << endl;
+                    fout << "Quader:" << endl;
+                    for(auto dimension : combination) {
+                        fout << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension) << endl;
+                    }
                     break;
                 }
             }

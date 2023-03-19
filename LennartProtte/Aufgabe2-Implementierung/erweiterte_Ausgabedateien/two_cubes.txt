@@ -1,29 +1,3 @@
-Quader 1x1x1 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (1, 1) Dimension: front
-Quader 1x1x1 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (1, 1) Dimension: front
-Quader 1x1x1 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (1, 1) Dimension: front
-Quader 1x1x1 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (1, 1) Dimension: front
-Quader 1x1x1 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (1, 1) Dimension: front
-Quader 1x1x1 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (1, 1) Dimension: front
-Quader 2x2x2 V(9)
-
-Die Scheiben können zu einem Quader zusammengesetzt werden:
-Slice: (2, 2) Dimension: front
-Slice: (2, 2) Dimension: front
+Quader:
+1x1x1
+2x2x2
