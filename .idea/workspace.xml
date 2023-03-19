@@ -26,9 +26,44 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V54 completing task 1">
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V55 task1 cleanup">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/gerade.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/kreis.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/nicht_loesbar.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/viereck.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/nicht_loesbar.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/viereck.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/drei_quader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/zwei_quader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/2x2x2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/drei_quader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/zwei_quader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.out" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/gerade.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.synctex.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.out" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/kreis.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.synctex.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien/kaese5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien/kaese5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien/one_cube.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien/one_cube.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien/one_cube.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien/one_cube.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-coverage/CMakeFiles/clion-Debug-Coverage-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-event-trace/CMakeFiles/clion-Debug-event-trace-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,31 +120,31 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "full.screen.before.presentation.mode": "true",
-    "last_opened_file_path": "/Users/leartpro/Documents/Projects/bwinf41/LennartProtte",
+    "last_opened_file_path": "/Users/leartpro/Documents/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/testInput" />
       <recent name="$PROJECT_DIR$/LennartProtte" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Dump" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/LennartProtte" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/debug" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/testInput" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.task2">
@@ -162,6 +197,27 @@
       </texify-external>
       <method v="2" />
     </configuration>
+    <configuration name="Aufgabe1-Dokumentation" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>TEXLIVE</latex-distribution>
+        <has-been-run>true</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify>
         <compiler>PDFLATEX</compiler>
@@ -198,7 +254,15 @@
       <item itemvalue="CMake Application.task1" />
       <item itemvalue="CMake Application.task2" />
       <item itemvalue="CMake Debug.bwinf41" />
+      <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="C/C++ File.Aufgabe1" />
+        <item itemvalue="CMake Debug.bwinf41" />
+        <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -233,77 +297,21 @@
       <workItem from="1675602247167" duration="502000" />
       <workItem from="1675602760593" duration="11789000" />
       <workItem from="1675779917670" duration="16565000" />
-      <workItem from="1676313077087" duration="20088000" />
-    </task>
-    <task id="LOCAL-00069" summary="V46 SAT Solver Approach bst solution so far">
-      <created>1675027660580</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1675027660580</updated>
-    </task>
-    <task id="LOCAL-00070" summary="V46 SAT Solver Approach bst solution so far">
-      <created>1675028748387</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1675028748387</updated>
-    </task>
-    <task id="LOCAL-00071" summary="V47 SAT Solver Approach bst solution so far">
-      <created>1675031413737</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1675031413737</updated>
-    </task>
-    <task id="LOCAL-00072" summary="V47 SAT Solver Approach">
-      <created>1675032217898</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1675032217898</updated>
-    </task>
-    <task id="LOCAL-00073" summary="V47 SAT Solver Approach">
-      <created>1675077993129</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1675077993129</updated>
-    </task>
-    <task id="LOCAL-00074" summary="V47 SAT Solver Approach">
-      <created>1675112603680</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1675112603680</updated>
-    </task>
-    <task id="LOCAL-00075" summary="V48 SAT Solver Approach">
-      <created>1675169619319</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1675169619319</updated>
-    </task>
-    <task id="LOCAL-00076" summary="V48 SAT Solver Approach Cleanup">
-      <created>1675169846794</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1675169846794</updated>
-    </task>
-    <task id="LOCAL-00077" summary="V48 SAT Solver Approach Debugging">
-      <created>1675171036023</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1675171036023</updated>
-    </task>
-    <task id="LOCAL-00078" summary="V48 SAT Solver Approach Debugging">
-      <created>1675176319648</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1675176319648</updated>
+      <workItem from="1676313077087" duration="25176000" />
+      <workItem from="1676472744044" duration="1094000" />
+      <workItem from="1676537536547" duration="5598000" />
+      <workItem from="1676733861269" duration="848000" />
+      <workItem from="1676905376359" duration="1583000" />
+      <workItem from="1677929843300" duration="5426000" />
+      <workItem from="1678006597119" duration="596000" />
+      <workItem from="1678273411777" duration="68000" />
+      <workItem from="1678613278689" duration="670000" />
+      <workItem from="1678699946079" duration="242000" />
+      <workItem from="1678702533259" duration="614000" />
+      <workItem from="1678705377531" duration="1205000" />
+      <workItem from="1679156625340" duration="2977000" />
+      <workItem from="1679162891143" duration="7192000" />
+      <workItem from="1679221684461" duration="11809000" />
     </task>
     <task id="LOCAL-00079" summary="V48 SAT Solver Approach Debugging">
       <created>1675199191502</created>
@@ -578,7 +586,77 @@
       <option name="project" value="LOCAL" />
       <updated>1676398924587</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="V54 documentation">
+      <created>1676400483832</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1676400483832</updated>
+    </task>
+    <task id="LOCAL-00119" summary="V54 documentation">
+      <created>1676404633028</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1676404633028</updated>
+    </task>
+    <task id="LOCAL-00120" summary="V54 documentation">
+      <created>1676406799940</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1676406799940</updated>
+    </task>
+    <task id="LOCAL-00121" summary="V55 task2 b">
+      <created>1679179197800</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1679179197800</updated>
+    </task>
+    <task id="LOCAL-00122" summary="V55 task2 b">
+      <created>1679222943988</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1679222943988</updated>
+    </task>
+    <task id="LOCAL-00123" summary="V55 task2 b">
+      <created>1679241443135</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1679241443135</updated>
+    </task>
+    <task id="LOCAL-00124" summary="V55 task2 b">
+      <created>1679244951605</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1679244951605</updated>
+    </task>
+    <task id="LOCAL-00125" summary="V55 task2 b">
+      <created>1679246620786</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1679246620786</updated>
+    </task>
+    <task id="LOCAL-00126" summary="V55 task2 b todo">
+      <created>1679247013545</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1679247013545</updated>
+    </task>
+    <task id="LOCAL-00127" summary="V55 task1 cleanup">
+      <created>1679247201611</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1679247201611</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,9 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V47 SAT Solver Approach bst solution so far" />
-    <MESSAGE value="V47 SAT Solver Approach" />
-    <MESSAGE value="V48 SAT Solver Approach" />
     <MESSAGE value="V48 SAT Solver Approach Cleanup" />
     <MESSAGE value="V48 SAT Solver Approach Debugging" />
     <MESSAGE value="V48 SAT Solver Approach re-structuring" />
@@ -618,11 +693,14 @@
     <MESSAGE value="V52 exclude by deleting approach TODOs" />
     <MESSAGE value="V51 improved runtime performance v2" />
     <MESSAGE value="V53 task1 &amp; task2 stable version" />
-    <MESSAGE value="V54 documentation" />
     <MESSAGE value="V54 documentation and runtime improvements" />
     <MESSAGE value="V54 reworking" />
     <MESSAGE value="V54 completing task 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="V54 completing task 1" />
+    <MESSAGE value="V54 documentation" />
+    <MESSAGE value="V55 task2 b" />
+    <MESSAGE value="V55 task2 b todo" />
+    <MESSAGE value="V55 task1 cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="V55 task1 cleanup" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

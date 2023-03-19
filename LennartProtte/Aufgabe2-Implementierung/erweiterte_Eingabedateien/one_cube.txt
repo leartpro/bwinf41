@@ -1,3 +1,14 @@
-Quader 6x1x36 V(216)
+12
+2 4
+4 6
+6 6
+3 4
+4 6
+3 6
+2 4
+2 4
+4 6
+3 3
+3 3
+6 6
 
-Die Scheiben können zu einem Quader zusammengesetzt werden:

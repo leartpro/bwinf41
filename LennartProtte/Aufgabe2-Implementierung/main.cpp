@@ -73,11 +73,11 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
 
 // Hilfsfunktion, um alle möglichen Kombinationen von Längen, Breiten und Höhen für einen Quader zu finden
 //TODO: larges side heuristic to minimise runtime
-vector<tuple<int, int, int>> findDimensions(int volume) {
+vector<tuple<int, int, int>> findDimensions(int volume, const int& min, const int& max) {
     vector<tuple<int, int, int>> dimensions;
-    for (int l = 1; l <= volume; l++) {
-        for (int w = 1; w <= volume; w++) {
-            for (int h = 1; h <= volume; h++) {
+    for (int l = min; l <= max; l++) {
+        for (int w = min; w <= max; w++) {
+            for (int h = min; h <= max; h++) {
                 if (l * w * h <= volume) {
                     dimensions.emplace_back(l, w, h);
                 }
@@ -90,6 +90,8 @@ vector<tuple<int, int, int>> findDimensions(int volume) {
 // Rekursive Funktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
 void findCombinations(int remainingVolume,
                       int remainingQuads,
+                      const int& min,
+                      const int& max,
                       vector<vector<tuple<int, int, int>>> &combinations,
                       vector<tuple<int, int, int>> &currentCombination) {
     // Basisfall: Wenn alle Quadern ausgewählt wurden und das Gesamtvolumen erreicht wurde, fügen wir die aktuelle Kombination zur Liste der Kombinationen hinzu
@@ -102,20 +104,35 @@ void findCombinations(int remainingVolume,
         return;
     }
     // Wir durchlaufen alle möglichen Abmessungen für den nächsten Quader
-    vector<tuple<int, int, int>> possibleDimensions = findDimensions(remainingVolume);
+    vector<tuple<int, int, int>> possibleDimensions = findDimensions(remainingVolume, min, max);
     for (auto dimension: possibleDimensions) {
         currentCombination.push_back(dimension);
         findCombinations(remainingVolume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
-                         remainingQuads - 1, combinations, currentCombination);
+                         remainingQuads - 1, min, max, combinations, currentCombination);
         currentCombination.pop_back();
     }
 }
 
 // Hauptfunktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
-vector<vector<tuple<int, int, int>>> findAllCombinations(int totalVolume, int numQuads) {
+vector<vector<tuple<int, int, int>>> findAllCombinations(int totalVolume, int numQuads, const vector<Slice>& slices) {
     vector<vector<tuple<int, int, int>>> combinations;
     vector<tuple<int, int, int>> currentCombination;
-    findCombinations(totalVolume, numQuads, combinations, currentCombination);
+
+    int max = 0, min = totalVolume;
+    for (const auto &slice: slices) {
+        int side = (slice.length > slice.height) ? slice.length : slice.height;
+        if (side > max) {
+            max = side;
+        }
+    }
+    for (const auto &slice: slices) {
+        int side = (slice.length < slice.height) ? slice.length : slice.height;
+        if (side < min) {
+            min = side;
+        }
+    }
+
+    findCombinations(totalVolume, numQuads, min, max, combinations, currentCombination);
     return combinations;
 }
 
@@ -174,8 +191,8 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -213,7 +230,7 @@ int main() {
         vector<pair<Slice, Dimension>> order;
         //increase count of cubes with each failed solving attempt
         for (int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
-            vector<vector<tuple<int, int, int>>> combinations = findAllCombinations(volume, count_of_cubes);
+            vector<vector<tuple<int, int, int>>> combinations = findAllCombinations(volume, count_of_cubes, slices);
             for (const auto &combination: combinations) {
                 bool valid = true;
                 vector<Slice> t_slices(slices);

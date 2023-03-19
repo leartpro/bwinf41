@@ -109,8 +109,8 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
+    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const std::filesystem::directory_entry &entry: filesystem::directory_iterator(input_dir)) {
