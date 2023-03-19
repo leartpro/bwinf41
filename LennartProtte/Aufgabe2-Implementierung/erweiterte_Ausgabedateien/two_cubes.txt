@@ -1,0 +1,4 @@
+Quader 1x1x9 V(9)
+
+Die Scheiben können zu einem Quader zusammengesetzt werden:
+Slice: (1, 1) Dimension: front

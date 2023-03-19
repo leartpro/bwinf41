@@ -22,7 +22,7 @@ struct Slice {
 /**
  * Repräsentiert eine Dimension
  */
-enum Dimension{
+enum Dimension {
     FRONT,
     TOP,
     SIDE,
@@ -32,7 +32,7 @@ enum Dimension{
 /*
  * Dimension als String
  */
-constexpr const char* to_string(Dimension dimension) {
+constexpr const char *to_string(Dimension dimension) {
     switch (dimension) {
         case Dimension::FRONT:
             return "front";
@@ -71,39 +71,49 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
     }
 }
 
-//outer vector is for every cube
-//inner vector is for every combination of a cube //TODO: combinations of two n cubes are always related, maybe use tuple instead of vector
-//tupel is for dimensions of a cube
-vector<vector<tuple<int, int, int>>> calculate_all_cubes_dimensions(int count_of_cubes, int volume) {
-    vector<vector<tuple<int, int, int>>> cubes;
-    if (count_of_cubes == 1) {
-        for(int length = 1; length <= volume; length++) {
-            for(int height = 1; height <= volume; height++) {
-                for(int depth = 1; depth <= volume; depth++) {
-                    if(length * height * depth == volume) {
-                        cubes.push_back({make_tuple(length, height, depth)});
-                    }
-                }
-            }
-        }
-    } else {
-        for(int length = 1; length <= volume; length++) {
-            for(int height = 1; height <= volume; height++) {
-                for(int depth = 1; depth <= volume; depth++) {
-                    if(length * height * depth <= volume) {
-                        auto cube = make_tuple(length, height, depth);
-                        int new_volume = volume - length * height * depth;
-                        auto sub_cubes = calculate_all_cubes_dimensions(count_of_cubes - 1, new_volume);
-                        for (auto sub_cube : sub_cubes) {
-                            sub_cube.push_back(cube);
-                            cubes.push_back(sub_cube);
-                        }
-                    }
+// Hilfsfunktion, um alle möglichen Kombinationen von Längen, Breiten und Höhen für einen Quader zu finden
+vector<tuple<int, int, int>> findDimensions(int volume) {
+    vector<tuple<int, int, int>> dimensions;
+    for (int l = 1; l <= volume; l++) {
+        for (int w = 1; w <= volume; w++) {
+            for (int h = 1; h <= volume; h++) {
+                if (l * w * h == volume) {
+                    dimensions.emplace_back(l, w, h);
                 }
             }
         }
     }
-    return cubes;
+    return dimensions;
+}
+
+// Rekursive Funktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
+void findCombinations(int remainingVolume, int remainingQuads, vector<vector<tuple<int, int, int>>> &combinations,
+                      vector<tuple<int, int, int>> &currentCombination) {
+    // Basisfall: Wenn alle Quadern ausgewählt wurden und das Gesamtvolumen erreicht wurde, fügen wir die aktuelle Kombination zur Liste der Kombinationen hinzu
+    if (remainingQuads == 0 && remainingVolume == 0) {
+        combinations.push_back(currentCombination);
+        return;
+    }
+    // Wenn das Gesamtvolumen erreicht wurde, aber noch Quadern übrig sind, brechen wir ab
+    if (remainingVolume == 0 || remainingQuads == 0) {
+        return;
+    }
+    // Wir durchlaufen alle möglichen Abmessungen für den nächsten Quader
+    vector<tuple<int, int, int>> possibleDimensions = findDimensions(remainingVolume);
+    for (auto dimension: possibleDimensions) {
+        currentCombination.push_back(dimension);
+        findCombinations(remainingVolume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
+                         remainingQuads - 1, combinations, currentCombination);
+        currentCombination.pop_back();
+    }
+}
+
+// Hauptfunktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
+vector<vector<tuple<int, int, int>>> findAllCombinations(int totalVolume, int numQuads) {
+    vector<vector<tuple<int, int, int>>> combinations;
+    vector<tuple<int, int, int>> currentCombination;
+    findCombinations(totalVolume, numQuads, combinations, currentCombination);
+    return combinations;
 }
 
 /**
@@ -117,7 +127,8 @@ vector<vector<tuple<int, int, int>>> calculate_all_cubes_dimensions(int count_of
  * @param slices die noch nicht verwendete Menge an Scheiben
  * @return true, wenn es eine lösung gibt, ansonsten false
  */
-pair<bool, vector<Slice>> calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
+pair<bool, vector<Slice>>
+calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
     //Wenn alle Scheiben in der Lösungsmenge enthalten sind
     if (length == 0 || height == 0 || depth == 0) {
         //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
@@ -161,8 +172,8 @@ pair<bool, vector<Slice>> calculate_cube(int length, int height, int depth, vect
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -200,54 +211,50 @@ int main() {
         }
 
         //Findet alle anderen möglichen Seiten zu der gesetzten Länge
-        vector<pair<int, int>> result; //TODO: e.g Quader 210x210x90V(9261000) is very suspicious
+        vector<pair<int, int>> result;
         int base = volume / height;
-        for(int side_a = 1; side_a <= base; side_a++) {
-            for(int side_b = 1; side_b <= base; side_b++) {
-                if(side_a * side_b * height == volume) {
+        for (int side_a = 1; side_a <= base; side_a++) {
+            for (int side_b = 1; side_b <= base; side_b++) {
+                if (side_a * side_b * height == volume) {
                     result.emplace_back(side_a, side_b);
                 }
             }
         }
 
         //Sortiert die Scheiben nach ihrer Fläche
-        vector<pair<Slice, Dimension>> order;
         sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
                  return (a.length * a.height) > (b.length * b.height);
              }
         );
 
-        for(int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
-            auto cubes = calculate_all_cubes_dimensions(count_of_cubes, volume);
-            for(auto cube : cubes) {
-
-            }
-        }
-
-        auto it = result.begin();
-        bool success = false;
-        //Für jede mögliche Kombination der Seitenlängen
-        while (it != result.end()) {
-            int t_height = height;
-            vector<Slice> t_slices(slices);
-            order.clear();
-            //Wenn es eine Lösung gibt
-            if (calculate_cube( it->first, t_height, it->second, order, t_slices).first) {
-                success = true;
-                fout << "Quader " << height << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
-                     << endl;
-                fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
-                for (auto const &o: order) {
-                    fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << to_string(o.second)
-                         << endl;
+        vector<pair<Slice, Dimension>> order;
+        for (int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
+            vector<vector<tuple<int, int, int>>> combinations = findAllCombinations(volume, count_of_cubes);
+            for (const auto &combination: combinations) {
+                bool valid = true;
+                for (auto dimension: combination) {
+                    vector<Slice> t_slices(slices);
+                    //TODO: make sth with the return of calc_cube, because it is maybe useful
+                    order.clear();
+                    if (calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order,
+                                       t_slices).first) {
+                        fout << "Quader " << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension)
+                             << " V(" << volume << ")" << endl
+                             << endl;
+                        fout << "Die Scheiben können zu einem Quader zusammengesetzt werden:" << endl;
+                        for (auto const &o: order) {
+                            fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: "
+                                 << to_string(o.second) << endl;
+                        }
+                    } else {
+                        valid = false;
+                    }
                 }
-                break;
+                if (valid) {
+                    cout << "done" << endl;
+                    break;
+                }
             }
-            it++;
-        }
-        //Wenn es keine Lösung gab
-        if (!success) {
-            fout << "Die Scheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
         }
         //Dateien schließen
         fin.close();

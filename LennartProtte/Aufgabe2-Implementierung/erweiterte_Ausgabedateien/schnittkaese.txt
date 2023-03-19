@@ -1,1 +1,0 @@
-Die Scheiben können nicht zu einem Quader zusammengesetzt werden.
