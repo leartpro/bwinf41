@@ -77,7 +77,7 @@ vector<tuple<int, int, int>> findDimensions(int volume) {
     for (int l = 1; l <= volume; l++) {
         for (int w = 1; w <= volume; w++) {
             for (int h = 1; h <= volume; h++) {
-                if (l * w * h == volume) {
+                if (l * w * h <= volume) {
                     dimensions.emplace_back(l, w, h);
                 }
             }
@@ -87,7 +87,9 @@ vector<tuple<int, int, int>> findDimensions(int volume) {
 }
 
 // Rekursive Funktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
-void findCombinations(int remainingVolume, int remainingQuads, vector<vector<tuple<int, int, int>>> &combinations,
+void findCombinations(int remainingVolume,
+                      int remainingQuads,
+                      vector<vector<tuple<int, int, int>>> &combinations,
                       vector<tuple<int, int, int>> &currentCombination) {
     // Basisfall: Wenn alle Quadern ausgewählt wurden und das Gesamtvolumen erreicht wurde, fügen wir die aktuelle Kombination zur Liste der Kombinationen hinzu
     if (remainingQuads == 0 && remainingVolume == 0) {
@@ -127,12 +129,11 @@ vector<vector<tuple<int, int, int>>> findAllCombinations(int totalVolume, int nu
  * @param slices die noch nicht verwendete Menge an Scheiben
  * @return true, wenn es eine lösung gibt, ansonsten false
  */
-pair<bool, vector<Slice>>
-calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
-    //Wenn alle Scheiben in der Lösungsmenge enthalten sind
-    if (length == 0 || height == 0 || depth == 0) {
-        //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
-        return (make_pair(true, slices));
+bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
+
+    //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
+    if(length == 0 || height == 0 || depth == 0) {
+        return true;
     }
     vector<Slice> removed_slices;
     //Für jede noch nicht verwendete Schiebe
@@ -149,8 +150,8 @@ calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>>
             removed_slices.push_back(*it);
             slices.erase(it);
             //Wenn es eine Lösung mit der aktuellen Scheibe gibt
-            if (calculate_cube(new_length, new_height, new_depth, order, slices).first) {
-                return (make_pair(true, slices));
+            if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
+                return true;
             } else {
                 //Entferne die aktuelle Scheibe von der Lösungsmenge
                 order.pop_back();
@@ -162,7 +163,7 @@ calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>>
         }
     }
     //Wenn keine der noch nicht betrachteten Scheiben verwendet werden kann
-    return (make_pair(true, slices));
+    return false;
 }
 
 /**
@@ -202,25 +203,6 @@ int main() {
             volume += slice.length * slice.height;
         }
 
-        //Findet die Seite, wo der größte Wert maximal ist und setzt die Länge auf diesen Wert
-        for (const auto &slice: slices) {
-            int side = (slice.length > slice.height) ? slice.length : slice.height;
-            if (side > height) {
-                height = side;
-            }
-        }
-
-        //Findet alle anderen möglichen Seiten zu der gesetzten Länge
-        vector<pair<int, int>> result;
-        int base = volume / height;
-        for (int side_a = 1; side_a <= base; side_a++) {
-            for (int side_b = 1; side_b <= base; side_b++) {
-                if (side_a * side_b * height == volume) {
-                    result.emplace_back(side_a, side_b);
-                }
-            }
-        }
-
         //Sortiert die Scheiben nach ihrer Fläche
         sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
                  return (a.length * a.height) > (b.length * b.height);
@@ -232,12 +214,10 @@ int main() {
             vector<vector<tuple<int, int, int>>> combinations = findAllCombinations(volume, count_of_cubes);
             for (const auto &combination: combinations) {
                 bool valid = true;
+                vector<Slice> t_slices(slices);
                 for (auto dimension: combination) {
-                    vector<Slice> t_slices(slices);
-                    //TODO: make sth with the return of calc_cube, because it is maybe useful
                     order.clear();
-                    if (calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order,
-                                       t_slices).first) {
+                    if (calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order,t_slices)) {
                         fout << "Quader " << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension)
                              << " V(" << volume << ")" << endl
                              << endl;
@@ -250,12 +230,13 @@ int main() {
                         valid = false;
                     }
                 }
-                if (valid) {
+                if (valid && t_slices.empty()) {
                     cout << "done" << endl;
                     break;
                 }
             }
         }
+
         //Dateien schließen
         fin.close();
         fout.close();
