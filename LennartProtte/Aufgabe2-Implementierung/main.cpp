@@ -72,6 +72,7 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
 }
 
 // Hilfsfunktion, um alle möglichen Kombinationen von Längen, Breiten und Höhen für einen Quader zu finden
+//TODO: larges side heuristic to minimise runtime
 vector<tuple<int, int, int>> findDimensions(int volume) {
     vector<tuple<int, int, int>> dimensions;
     for (int l = 1; l <= volume; l++) {
@@ -210,6 +211,7 @@ int main() {
         );
 
         vector<pair<Slice, Dimension>> order;
+        //increase count of cubes with each failed solving attempt
         for (int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
             vector<vector<tuple<int, int, int>>> combinations = findAllCombinations(volume, count_of_cubes);
             for (const auto &combination: combinations) {
