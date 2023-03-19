@@ -71,6 +71,41 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
     }
 }
 
+//outer vector is for every cube
+//inner vector is for every combination of a cube //TODO: combinations of two n cubes are always related, maybe use tuple instead of vector
+//tupel is for dimensions of a cube
+vector<vector<tuple<int, int, int>>> calculate_all_cubes_dimensions(int count_of_cubes, int volume) {
+    vector<vector<tuple<int, int, int>>> cubes;
+    if (count_of_cubes == 1) {
+        for(int length = 1; length <= volume; length++) {
+            for(int height = 1; height <= volume; height++) {
+                for(int depth = 1; depth <= volume; depth++) {
+                    if(length * height * depth == volume) {
+                        cubes.push_back({make_tuple(length, height, depth)});
+                    }
+                }
+            }
+        }
+    } else {
+        for(int length = 1; length <= volume; length++) {
+            for(int height = 1; height <= volume; height++) {
+                for(int depth = 1; depth <= volume; depth++) {
+                    if(length * height * depth <= volume) {
+                        auto cube = make_tuple(length, height, depth);
+                        int new_volume = volume - length * height * depth;
+                        auto sub_cubes = calculate_all_cubes_dimensions(count_of_cubes - 1, new_volume);
+                        for (auto sub_cube : sub_cubes) {
+                            sub_cube.push_back(cube);
+                            cubes.push_back(sub_cube);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return cubes;
+}
+
 /**
  * Versucht rekursiv durch backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben zu finden
  * Dabei werden Scheiben von slices nach order verschoben, so dass order am Ende die Lösungsmenge enthält
@@ -82,11 +117,11 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
  * @param slices die noch nicht verwendete Menge an Scheiben
  * @return true, wenn es eine lösung gibt, ansonsten false
  */
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
+pair<bool, vector<Slice>> calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
     //Wenn alle Scheiben in der Lösungsmenge enthalten sind
-    if (slices.empty()) {
+    if (length == 0 || height == 0 || depth == 0) {
         //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
-        return (length == 0 || height == 0 || depth == 0);
+        return (make_pair(true, slices));
     }
     vector<Slice> removed_slices;
     //Für jede noch nicht verwendete Schiebe
@@ -103,8 +138,8 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
             removed_slices.push_back(*it);
             slices.erase(it);
             //Wenn es eine Lösung mit der aktuellen Scheibe gibt
-            if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
-                return true;
+            if (calculate_cube(new_length, new_height, new_depth, order, slices).first) {
+                return (make_pair(true, slices));
             } else {
                 //Entferne die aktuelle Scheibe von der Lösungsmenge
                 order.pop_back();
@@ -116,7 +151,7 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
         }
     }
     //Wenn keine der noch nicht betrachteten Scheiben verwendet werden kann
-    return false;
+    return (make_pair(true, slices));
 }
 
 /**
@@ -126,7 +161,7 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/debug";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
     string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
@@ -182,6 +217,13 @@ int main() {
              }
         );
 
+        for(int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
+            auto cubes = calculate_all_cubes_dimensions(count_of_cubes, volume);
+            for(auto cube : cubes) {
+
+            }
+        }
+
         auto it = result.begin();
         bool success = false;
         //Für jede mögliche Kombination der Seitenlängen
@@ -190,7 +232,7 @@ int main() {
             vector<Slice> t_slices(slices);
             order.clear();
             //Wenn es eine Lösung gibt
-            if (calculate_cube( it->first, t_height, it->second, order, t_slices)) {
+            if (calculate_cube( it->first, t_height, it->second, order, t_slices).first) {
                 success = true;
                 fout << "Quader " << height << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
                      << endl;
