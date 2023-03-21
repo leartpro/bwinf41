@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
+#include <unordered_set>
 
 using namespace std;
 
@@ -71,15 +72,41 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
     }
 }
 
+struct hashFunction {
+    size_t operator()(const tuple<int, int, int> &x) const {
+        return get<0>(x) ^ get<1>(x) ^ get<2>(x);
+    }
+};
+
+void sort_tupel(tuple<int, int, int> &tupel) {
+    int temp;
+    if (get<0>(tupel) > get<1>(tupel)) {
+        temp = get<0>(tupel);
+        get<0>(tupel) = get<1>(tupel);
+        get<1>(tupel) = temp;
+    }
+    if (get<1>(tupel) > get<2>(tupel)) {
+        temp = get<1>(tupel);
+        get<1>(tupel) = get<2>(tupel);
+        get<2>(tupel) = temp;
+        if (get<0>(tupel) > get<1>(tupel)) {
+            temp = get<0>(tupel);
+            get<0>(tupel) = get<1>(tupel);
+            get<1>(tupel) = temp;
+        }
+    }
+}
+
 // Hilfsfunktion, um alle möglichen Kombinationen von Längen, Breiten und Höhen für einen Quader zu finden
-//TODO: larges side heuristic to minimise runtime
-vector<tuple<int, int, int>> findDimensions(int volume, const int& min, const int& max) {
-    vector<tuple<int, int, int>> dimensions;
+unordered_set<tuple<int, int, int>, hashFunction> findDimensions(int volume, const int &min, const int &max) {
+    unordered_set<tuple<int, int, int>, hashFunction> dimensions;
     for (int l = min; l <= max; l++) {
         for (int w = min; w <= max; w++) {
             for (int h = min; h <= max; h++) {
                 if (l * w * h <= volume) {
-                    dimensions.emplace_back(l, w, h);
+                    tuple<int, int, int> tupel = make_tuple(l, w, h);
+                    sort_tupel(tupel);
+                    dimensions.insert(tupel);
                 }
             }
         }
@@ -90,10 +117,10 @@ vector<tuple<int, int, int>> findDimensions(int volume, const int& min, const in
 // Rekursive Funktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
 void findCombinations(int remainingVolume,
                       int remainingQuads,
-                      const int& min,
-                      const int& max,
-                      vector<vector<tuple<int, int, int>>> &combinations,
-                      vector<tuple<int, int, int>> &currentCombination) {
+                      const int &min,
+                      const int &max,
+                      vector<unordered_set<tuple<int, int, int>, hashFunction>> &combinations,
+                      unordered_set<tuple<int, int, int>, hashFunction> &currentCombination) {
     // Basisfall: Wenn alle Quadern ausgewählt wurden und das Gesamtvolumen erreicht wurde, fügen wir die aktuelle Kombination zur Liste der Kombinationen hinzu
     if (remainingQuads == 0 && remainingVolume == 0) {
         combinations.push_back(currentCombination);
@@ -104,19 +131,20 @@ void findCombinations(int remainingVolume,
         return;
     }
     // Wir durchlaufen alle möglichen Abmessungen für den nächsten Quader
-    vector<tuple<int, int, int>> possibleDimensions = findDimensions(remainingVolume, min, max);
+    unordered_set<tuple<int, int, int>, hashFunction> possibleDimensions = findDimensions(remainingVolume, min, max);
     for (auto dimension: possibleDimensions) {
-        currentCombination.push_back(dimension);
+        currentCombination.insert(dimension);
         findCombinations(remainingVolume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
                          remainingQuads - 1, min, max, combinations, currentCombination);
-        currentCombination.pop_back();
+        currentCombination.erase(dimension);
     }
 }
 
 // Hauptfunktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
-vector<vector<tuple<int, int, int>>> findAllCombinations(int totalVolume, int numQuads, const vector<Slice>& slices) {
-    vector<vector<tuple<int, int, int>>> combinations;
-    vector<tuple<int, int, int>> currentCombination;
+vector<unordered_set<tuple<int, int, int>, hashFunction>>
+findAllCombinations(int totalVolume, int numQuads, const vector<Slice> &slices) {
+    vector<unordered_set<tuple<int, int, int>, hashFunction>> combinations;
+    unordered_set<tuple<int, int, int>, hashFunction> currentCombination;
 
     int max = 0, min = totalVolume;
     for (const auto &slice: slices) {
@@ -150,7 +178,7 @@ vector<vector<tuple<int, int, int>>> findAllCombinations(int totalVolume, int nu
 bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
 
     //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
-    if(length == 0 || height == 0 || depth == 0) {
+    if (length == 0 || height == 0 || depth == 0) {
         return true;
     }
     vector<Slice> removed_slices;
@@ -216,7 +244,7 @@ int main() {
         }
 
         //Berechnet das Volumen des Quaders
-        int volume = 0, height = 0;
+        int volume = 0;
         for (const auto &slice: slices) {
             volume += slice.length * slice.height;
         }
@@ -227,22 +255,23 @@ int main() {
              }
         );
 
+        //TODO: findAllCombinations returns also combinations with less amount of cubes than requested
         vector<pair<Slice, Dimension>> order;
         //increase count of cubes with each failed solving attempt
         for (int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
-            vector<vector<tuple<int, int, int>>> combinations = findAllCombinations(volume, count_of_cubes, slices);
+            const auto &combinations = findAllCombinations(volume, count_of_cubes, slices);
             for (const auto &combination: combinations) {
                 bool valid = true;
                 vector<Slice> t_slices(slices);
                 for (auto dimension: combination) {
                     order.clear();
-                    if (!calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order,t_slices)) {
+                    if (!calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order, t_slices)) {
                         valid = false;
                     }
                 }
                 if (valid && t_slices.empty()) {
                     fout << "Quader:" << endl;
-                    for(auto dimension : combination) {
+                    for (auto dimension: combination) {
                         fout << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension) << endl;
                     }
                     break;
