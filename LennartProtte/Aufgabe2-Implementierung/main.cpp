@@ -161,6 +161,13 @@ findAllCombinations(int totalVolume, int numQuads, const vector<Slice> &slices) 
     }
 
     findCombinations(totalVolume, numQuads, min, max, combinations, currentCombination);
+    //TODO: remove combinations with size less than requested_cubes
+    combinations.erase(
+            std::remove_if(combinations.begin(), combinations.end(),
+                           [&numQuads](auto combination) {
+                               return combination.size() != numQuads;
+                           }), combinations.end()
+    );
     return combinations;
 }
 
@@ -255,8 +262,9 @@ int main() {
              }
         );
 
-        //TODO: findAllCombinations returns also combinations with less amount of cubes than requested
         vector<pair<Slice, Dimension>> order;
+        unordered_set<tuple<int, int, int>, hashFunction> solution;
+        bool success = false;
         //increase count of cubes with each failed solving attempt
         for (int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
             const auto &combinations = findAllCombinations(volume, count_of_cubes, slices);
@@ -270,12 +278,16 @@ int main() {
                     }
                 }
                 if (valid && t_slices.empty()) {
-                    fout << "Quader:" << endl;
-                    for (auto dimension: combination) {
-                        fout << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension) << endl;
-                    }
-                    break;
+                    success = true;
+                    solution = combination;
+                    goto end;
                 }
+            }
+        } end:
+        if(success) {
+            fout << "Quader:" << endl;
+            for (auto dimension: solution) {
+                fout << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension) << endl;
             }
         }
 
