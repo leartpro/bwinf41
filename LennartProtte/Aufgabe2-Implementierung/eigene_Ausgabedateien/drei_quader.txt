@@ -1,9 +1,4 @@
 Quader:
 1x1x1
+5x5x5
 3x3x3
-5x5x5
-Quader:
-1x1x1
-1x3x3
-2x3x3
-5x5x5

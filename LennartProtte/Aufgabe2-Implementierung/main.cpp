@@ -19,6 +19,13 @@ struct Slice {
     int length, height;
 };
 
+//Wird für die Tupel benötigt
+struct hashFunction {
+    size_t operator()(const tuple<int, int, int> &x) const {
+        return get<0>(x) ^ get<1>(x) ^ get<2>(x);
+    }
+};
+
 
 /**
  * Repräsentiert eine Dimension
@@ -53,12 +60,7 @@ constexpr const char *to_string(Dimension dimension) {
  * @param height die Höhe des Quaders
  * @param depth die Tiefe des Quaders
  * @param slice die Scheibe, auf die getestet wird
- * @return -1, wenn die Scheibe nicht entfernt werden kann,
- * ansonsten wird die Dimension zurückgegeben, wo diese entfernt werden kann
- * Dimensionen:
- * 0 => VORNE
- * 1 => OBEN
- * 2 => SEITE
+ * @return die Dimension, wo die Scheibe abgeschnitten werden kann
  */
 Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
     if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
@@ -72,12 +74,10 @@ Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
     }
 }
 
-struct hashFunction {
-    size_t operator()(const tuple<int, int, int> &x) const {
-        return get<0>(x) ^ get<1>(x) ^ get<2>(x);
-    }
-};
-
+/**
+ * Sortiert Tupel mit drei Elementen in aufsteigender Reihenfolge
+ * @param tupel der zu sortierende Tupel
+ */
 void sort_tupel(tuple<int, int, int> &tupel) {
     int temp;
     if (get<0>(tupel) > get<1>(tupel)) {
@@ -97,7 +97,13 @@ void sort_tupel(tuple<int, int, int> &tupel) {
     }
 }
 
-// Hilfsfunktion, um alle möglichen Kombinationen von Längen, Breiten und Höhen für einen Quader zu finden
+/**
+ * Ermittelt alle möglichen ganzzahligen Kombinationen von Längen, Breiten und Höhen für einen Quader
+ * @param volume das maximale Volumen des Quaders
+ * @param min die kürzeste Seite des Quaders
+ * @param max die längste Seite des Quaders
+ * @return alle möglichen Varianten des Quaders
+ */
 unordered_set<tuple<int, int, int>, hashFunction> findDimensions(int volume, const int &min, const int &max) {
     unordered_set<tuple<int, int, int>, hashFunction> dimensions;
     for (int l = min; l <= max; l++) {
@@ -114,45 +120,66 @@ unordered_set<tuple<int, int, int>, hashFunction> findDimensions(int volume, con
     return dimensions;
 }
 
-// Rekursive Funktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
-void findCombinations(int remainingVolume,
-                      int remainingQuads,
+/**
+ * Ermittelt rekursiv alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
+ * @param volume das Gesamtvolumen für jede Kombination
+ * @param squares die maximale Anzahl an Quadern in einer Kombination
+ * @param min die minimale Länge einer Quaderseite
+ * @param max die maximale Länge einer Quaderseite
+ * @param combinations alle Kombinationen
+ * @param currentCombination die aktuelle Kombination
+ */
+void findCombinations(int volume,
+                      int squares,
                       const int &min,
                       const int &max,
                       vector<unordered_set<tuple<int, int, int>, hashFunction>> &combinations,
                       unordered_set<tuple<int, int, int>, hashFunction> &currentCombination) {
-    // Basisfall: Wenn alle Quadern ausgewählt wurden und das Gesamtvolumen erreicht wurde, fügen wir die aktuelle Kombination zur Liste der Kombinationen hinzu
-    if (remainingQuads == 0 && remainingVolume == 0) {
+    //Wenn die aktuelle Kombination vollständig ist
+    if (squares == 0 && volume == 0) {
         combinations.push_back(currentCombination);
         return;
     }
-    // Wenn das Gesamtvolumen erreicht wurde, aber noch Quadern übrig sind, brechen wir ab
-    if (remainingVolume == 0 || remainingQuads == 0) {
+    // Wenn das Volumen die aktuelle Kombination nicht aufgeht
+    if (volume == 0 || squares == 0) {
         return;
     }
-    // Wir durchlaufen alle möglichen Abmessungen für den nächsten Quader
-    unordered_set<tuple<int, int, int>, hashFunction> possibleDimensions = findDimensions(remainingVolume, min, max);
+    //Berechnet rekursiv den nächsten Quader der aktuellen Kombination
+    unordered_set<tuple<int, int, int>, hashFunction> possibleDimensions = findDimensions(volume, min, max);
     for (auto dimension: possibleDimensions) {
         currentCombination.insert(dimension);
-        findCombinations(remainingVolume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
-                         remainingQuads - 1, min, max, combinations, currentCombination);
+        findCombinations(volume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
+                         squares - 1,
+                         min,
+                         max,
+                         combinations,
+                         currentCombination);
         currentCombination.erase(dimension);
     }
 }
 
-// Hauptfunktion, um alle möglichen Kombinationen von Abmessungen für n-Quadern zu finden
-vector<unordered_set<tuple<int, int, int>, hashFunction>>
-findAllCombinations(int totalVolume, int numQuads, const vector<Slice> &slices) {
+/**
+ * Ermittelt alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
+ * @param volume das maximale Gesamtvolumen für jede Kombination
+ * @param count_of_squares die Anzahl der Quader in jeder Kombination
+ * @param slices die gegebene Menge an Scheiben
+ * @return alle Kombinationen für die gegebenen Parameter
+ */
+vector<unordered_set<tuple<int, int, int>, hashFunction>> findAllCombinations(int volume,
+                                                                              int count_of_squares,
+                                                                              const vector<Slice> &slices) {
     vector<unordered_set<tuple<int, int, int>, hashFunction>> combinations;
     unordered_set<tuple<int, int, int>, hashFunction> currentCombination;
 
-    int max = 0, min = totalVolume;
+    int max = 0, min = volume;
+    //Ermittelt die maximale Seitenlänge eines Quaders
     for (const auto &slice: slices) {
         int side = (slice.length > slice.height) ? slice.length : slice.height;
         if (side > max) {
             max = side;
         }
     }
+    //Ermittelt die minimale Seitenlänge eines Quaders
     for (const auto &slice: slices) {
         int side = (slice.length < slice.height) ? slice.length : slice.height;
         if (side < min) {
@@ -160,21 +187,19 @@ findAllCombinations(int totalVolume, int numQuads, const vector<Slice> &slices) 
         }
     }
 
-    findCombinations(totalVolume, numQuads, min, max, combinations, currentCombination);
-    //TODO: remove combinations with size less than requested_cubes
+    findCombinations(volume, count_of_squares, min, max, combinations, currentCombination);
+    //Entfernt die Kombinationen, welche nicht der erwarteten Anzahl von Quadern entsprechen
     combinations.erase(
             std::remove_if(combinations.begin(), combinations.end(),
-                           [&numQuads](auto combination) {
-                               return combination.size() != numQuads;
+                           [&count_of_squares](auto combination) {
+                               return combination.size() != count_of_squares;
                            }), combinations.end()
     );
     return combinations;
 }
 
 /**
- * Versucht rekursiv durch backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben zu finden
- * Dabei werden Scheiben von slices nach order verschoben, so dass order am Ende die Lösungsmenge enthält
- * Am Anfang wird order ohne Elemente erwartet und sollte es eine Lösung geben, enthält order alle Scheiben aus slices
+ * Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
  * @param length die Länge des Quaders
  * @param height die Höhe des Quaders
  * @param depth die Tiefe des Quaders
@@ -182,7 +207,7 @@ findAllCombinations(int totalVolume, int numQuads, const vector<Slice> &slices) 
  * @param slices die noch nicht verwendete Menge an Scheiben
  * @return true, wenn es eine lösung gibt, ansonsten false
  */
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
+bool calculate_square(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
 
     //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
     if (length == 0 || height == 0 || depth == 0) {
@@ -203,7 +228,7 @@ bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimens
             removed_slices.push_back(*it);
             slices.erase(it);
             //Wenn es eine Lösung mit der aktuellen Scheibe gibt
-            if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
+            if (calculate_square(new_length, new_height, new_depth, order, slices)) {
                 return true;
             } else {
                 //Entferne die aktuelle Scheibe von der Lösungsmenge
@@ -265,15 +290,15 @@ int main() {
         vector<pair<Slice, Dimension>> order;
         unordered_set<tuple<int, int, int>, hashFunction> solution;
         bool success = false;
-        //increase count of cubes with each failed solving attempt
-        for (int count_of_cubes = 1; count_of_cubes < slices.size(); count_of_cubes++) {
-            const auto &combinations = findAllCombinations(volume, count_of_cubes, slices);
+        //Erhöht die Anzahl der Würfel schrittweise, bis es eine Lösung gibt
+        for (int count_of_squares = 1; count_of_squares < slices.size(); count_of_squares++) {
+            const auto &combinations = findAllCombinations(volume, count_of_squares, slices);
             for (const auto &combination: combinations) {
                 bool valid = true;
                 vector<Slice> t_slices(slices);
                 for (auto dimension: combination) {
                     order.clear();
-                    if (!calculate_cube(get<0>(dimension), get<1>(dimension), get<2>(dimension), order, t_slices)) {
+                    if (!calculate_square(get<0>(dimension), get<1>(dimension), get<2>(dimension), order, t_slices)) {
                         valid = false;
                     }
                 }
@@ -283,8 +308,10 @@ int main() {
                     goto end;
                 }
             }
-        } end:
-        if(success) {
+        }
+        end:
+        //Schreibt die Ausgabe
+        if (success) {
             fout << "Quader:" << endl;
             for (auto dimension: solution) {
                 fout << get<0>(dimension) << "x" << get<1>(dimension) << "x" << get<2>(dimension) << endl;
