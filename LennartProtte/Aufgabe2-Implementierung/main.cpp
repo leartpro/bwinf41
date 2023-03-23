@@ -22,54 +22,15 @@ enum Dimension {
     TOP = 1,
     RIGHT = 2
 };
-
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices);
-
+bool assemble_cube_backtracking(int cube[3], vector<pair<Slice, Dimension>>& sorted, vector<Slice>& slices, int index);
+bool calculate_cube(int cube[], vector<pair<Slice *, Dimension>> *sorted, vector<Slice *> unsorted);
 
 int main() {
-    int length = 6, height = 6, depth = 6;
-    vector<pair<Slice, Dimension>> order;
-    /*
-    vector<Slice> slices = {
-            {2, 4},
-            {4, 6},
-            {6, 6},
-            {3, 4},
-            {4, 6},
-            {3, 6},
-            {2, 4},
-            {2, 4},
-            {4, 6},
-            {3, 3},
-            {3, 3},
-            {6, 6}
-    };
-            */
-    //vector<Slice> slices = { {6, 4}, {4, 6}, {4, 4}, {4, 2}, {2, 4} };
-    vector<Slice> slices = {
-            {2, 3},
-            {1, 2},
-            {2, 2}
-    };
-    if (calculate_cube(length, height, depth, order, slices)) {
-        cout << "Die Käsescheiben können zu einem Quader zusammengesetzt werden:" << endl;
-        for (auto const &o: order) {
-            cout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << o.second << endl;
-        }
-    } else {
-        cout << "Die Käsescheiben können nicht zu einem Quader zusammengesetzt werden." << endl;
-    }
+    //string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
+    //string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
 
-    return 0;
-}
-
-/*
-int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/TestInput";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/TestOutput";
-
-    //string input_dir = "./TestInput";
-    //string output_dir = "./TestOutput";
+    string input_dir = "./TestInput";
+    string output_dir = "./TestOutput";
 
     // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -85,17 +46,17 @@ int main() {
         ofstream fout(output_file);
 
         //Ausgabedatei einlesen
-        vector<Slice *> slices;
+        vector<Slice> slices;
         int a, b, n;
         fin >> n;
         while (fin >> a >> b) {
-            slices.push_back(new Slice(a, b));
+            slices.push_back(Slice(a, b));
         }
 
         // Calculate the volume of the cheese cube
         int volume = 0;
         for (const auto &slice: slices) {
-            volume += slice->length * slice->height;
+            volume += slice.length * slice.height;
         }
 
         // Calculate the dimensions of the cheese cube //TODO: not calculated correctly yet
@@ -115,7 +76,14 @@ int main() {
         cout << "cube dimensions: length=" << length << ", height=" << height << ", depth=" << depth << endl << endl;
         //get result
         vector<pair<Slice *, Dimension>> order;
-        bool success = calculate_cube(length, height, depth}, order, slices);
+        //bool success = calculate_cube(new int[3]{length, height, depth}, &order, slices);
+        //vector<Slice> slices = {{2, 4}, {4, 6}, {6, 6}, {3, 4}, {4, 6}, {3, 6}, {2, 4}, {2, 4}, {4, 6}, {3, 3}, {3, 3}, {6, 6}};
+        vector<pair<Slice, Dimension>> sorted;
+        int cube[3] = {6, 6, 6};
+        sort(slices.begin(), slices.end(), [](const Slice &a, const Slice &b) {
+            return max(a.length, a.height) > max(b.length, b.height);
+        });
+        bool success = assemble_cube_backtracking(cube, sorted, slices, 0);
 
         if (!success) {
             cout << "The cheese slices cannot be assembled into a complete cheese cube." << endl;
@@ -138,51 +106,53 @@ int main() {
         fout.close();
     }
     return 0;
-}*/
-
-bool canRemoveSlice(int length, int height, int depth, Slice slice, Dimension &dimension) {
-    if (slice.length == length && slice.height == height) {
-        dimension = Dimension::FRONT;
-    } else if (slice.height == length && slice.length == height) {
-        dimension = Dimension::FRONT;
-    } else if (slice.length == length && slice.height == depth) {
-        dimension = Dimension::TOP;
-    } else if (slice.height == length && slice.length == depth) {
-        dimension = Dimension::TOP;
-    } else if (slice.length == height && slice.height == depth) {
-        dimension = Dimension::RIGHT;
-    } else if (slice.height == height && slice.length == depth) {
-        dimension = Dimension::RIGHT;
-    } else {
-        return false;
-    }
-    return true;
 }
 
-bool calculate_cube(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
-    if (slices.empty()) {
-        return (length == 0 || height == 0 || depth == 0);
+/*
+ * Gegeben: int[3] cube, vector<pair<Slice*, Dimension>> sorted, vector<Slice> unsorted
+ * Return: bool
+ * init bool isValid mit false
+ * Für jedes Element aus unsorted:
+ *  kann an einer Seite (nicht) gedreht weggenommen werden?
+ *  ja:
+ *      verkleinere cube
+ *      push_back current in sorted mit dimension
+ *      remove von unsorted
+ *      isValid init mit true
+ *      if rekursion gleich true:
+ *          return true
+ *      else continue mit nächstem element
+ *  wenn unsorted durchlaufen und isValid gleich false:
+ *      return false
+ *  wenn unsorted leer und cube{x,y,z} = 0
+ *      return true
+ */
+bool assemble_cube_backtracking(int cube[3], vector<pair<Slice, Dimension>>& sorted, vector<Slice>& slices, int index) {
+    if (index == slices.size()) {
+        if (cube[0] == 0 && cube[1] == 0 && cube[2] == 0) {
+            return true;
+        }
+        return false;
     }
-    for (auto it = slices.begin(); it != slices.end(); ++it) {
-        Dimension dimension;
-        if (canRemoveSlice(length, height, depth, *it, dimension)) {
-            int new_length = length - (dimension == Dimension::FRONT ? it->length : 0);
-            int new_height = height - (dimension == Dimension::TOP ? it->height : 0);
-            int new_depth = depth - (dimension == Dimension::RIGHT ? it->length : 0);
-            order.emplace_back(*it, dimension);
-            slices.erase(it);
-            if (calculate_cube(new_length, new_height, new_depth, order, slices)) {
-                return true;
-            } else {
-                order.pop_back();
-                slices.push_back(*it);
+    for (int i = 0; i < 3; i++) {
+        for (int j = i + 1; j < 3; j++) {
+            if ((slices[index].length == cube[i] && slices[index].height == cube[j]) ||
+                (slices[index].height == cube[i] && slices[index].length == cube[j])) {
+                int previous_i = cube[i];
+                int previous_j = cube[j];
+                cube[i] -= 1;
+                cube[j] -= 1;
+                sorted.emplace_back(slices[index], static_cast<Dimension>(3 - i - j));
+                if (assemble_cube_backtracking(cube, sorted, slices, index + 1)) {
+                    return true;
+                }
+                sorted.pop_back();
+                cube[i] = previous_i;
+                cube[j] = previous_j;
             }
         }
     }
     return false;
 }
-
-
-
 
 
