@@ -1,1 +1,26 @@
-The cheese slices cannot be assembled into a complete cheese cube.
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 1000x10x1000 V(10000000)
+
+Slice: (1000, 1000) Dimension: side
+Slice: (1000, 1000) Dimension: side
+Slice: (1000, 1000) Dimension: side
+Slice: (7, 1000) Dimension: front
+Slice: (999, 1000) Dimension: side
+Slice: (6, 1000) Dimension: front
+Slice: (998, 1000) Dimension: side
+Slice: (5, 998) Dimension: top
+Slice: (998, 999) Dimension: side
+Slice: (4, 999) Dimension: front
+Slice: (4, 997) Dimension: top
+Slice: (4, 998) Dimension: front
+Slice: (4, 998) Dimension: front
+Slice: (4, 995) Dimension: top
+Slice: (995, 997) Dimension: side
+Slice: (995, 997) Dimension: side
+Slice: (2, 997) Dimension: front
+Slice: (2, 994) Dimension: top
+Slice: (2, 996) Dimension: front
+Slice: (2, 993) Dimension: top
+Slice: (2, 995) Dimension: front
+Slice: (992, 995) Dimension: side
+Slice: (992, 995) Dimension: side

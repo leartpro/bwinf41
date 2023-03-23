@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -11,17 +14,21 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="bwinf41" targetName="bwinf41" />
+      <config projectName="task2" targetName="task1" />
+      <config projectName="task2" targetName="task2_b" />
+      <config projectName="task2" targetName="task2_a" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug-event-trace" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="--profiling-format=google-trace --profiling-output=CMakeFiles/clion-event-trace.json" />
+      <configuration PROFILE_NAME="Debug-Coverage" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_CXX_FLAGS=&quot;-fprofile-instr-generate -fcoverage-mapping&quot; -DCMAKE_C_FLAGS=&quot;-fprofile-instr-generate -fcoverage-mapping&quot;" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V32">
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V56 cleanup">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +50,14 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="f44b6ee8dccaca60fa3a2f05953d0ce521962eae" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="2blvd1ud" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -65,40 +75,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/lenni/Desktop/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;dynamic.analysis.tools.perf.profiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "full.screen.before.presentation.mode": "true",
+    "last_opened_file_path": "/Users/leartpro/Documents/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/testInput" />
+      <recent name="$PROJECT_DIR$/LennartProtte" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Dump" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/LennartProtte" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestOutput" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/ungeloest" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien_b" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="CMake Application.Aufgabe2b">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -115,9 +130,16 @@
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bwinf41" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="bwinf41" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="bwinf41" RUN_TARGET_NAME="bwinf41">
+    <configuration name="Aufgabe1" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe1">
+      <option name="sourceFile" value="LennartProtte/Aufgabe1-Implementierung/main.cpp" />
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aufgabe2" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe2">
+      <option name="sourceFile" value="LennartProtte/Aufgabe2-Implementierung/main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="EXTERNAL_TOOL_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
@@ -126,6 +148,27 @@
         <main-file />
         <work-dir />
       </texify-external>
+      <method v="2" />
+    </configuration>
+    <configuration name="Aufgabe1-Dokumentation" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>TEXLIVE</latex-distribution>
+        <has-been-run>true</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
       <method v="2" />
     </configuration>
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
@@ -158,6 +201,22 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="C/C++ File.Aufgabe2" />
+      <item itemvalue="C/C++ File.Aufgabe1" />
+      <item itemvalue="CMake Application.Aufgabe1" />
+      <item itemvalue="CMake Application.Aufgabe2a" />
+      <item itemvalue="CMake Application.Aufgabe2b" />
+      <item itemvalue="CMake Debug.project" />
+      <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="CMake Debug.project" />
+        <item itemvalue="C/C++ File.Aufgabe1" />
+        <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -180,316 +239,380 @@
       <workItem from="1673697086110" duration="9791000" />
       <workItem from="1673779549509" duration="3022000" />
       <workItem from="1673782579012" duration="1314000" />
+      <workItem from="1673990225490" duration="812000" />
+      <workItem from="1674056141439" duration="11102000" />
+      <workItem from="1674076752615" duration="11110000" />
+      <workItem from="1674657750545" duration="5416000" />
+      <workItem from="1674673208459" duration="25125000" />
+      <workItem from="1674823477411" duration="24856000" />
+      <workItem from="1674995327877" duration="68058000" />
+      <workItem from="1675520882218" duration="3172000" />
+      <workItem from="1675598065652" duration="2974000" />
+      <workItem from="1675602247167" duration="502000" />
+      <workItem from="1675602760593" duration="11789000" />
+      <workItem from="1675779917670" duration="16565000" />
+      <workItem from="1676313077087" duration="25176000" />
+      <workItem from="1676472744044" duration="1094000" />
+      <workItem from="1676537536547" duration="5598000" />
+      <workItem from="1676733861269" duration="848000" />
+      <workItem from="1676905376359" duration="1583000" />
+      <workItem from="1677929843300" duration="5426000" />
+      <workItem from="1678006597119" duration="596000" />
+      <workItem from="1678273411777" duration="68000" />
+      <workItem from="1678613278689" duration="670000" />
+      <workItem from="1678699946079" duration="242000" />
+      <workItem from="1678702533259" duration="614000" />
+      <workItem from="1678705377531" duration="1205000" />
+      <workItem from="1679156625340" duration="2977000" />
+      <workItem from="1679162891143" duration="7192000" />
+      <workItem from="1679221684461" duration="11962000" />
+      <workItem from="1679423076994" duration="8151000" />
+      <workItem from="1679478376988" duration="16854000" />
     </task>
-    <task id="LOCAL-00001" summary="Init">
-      <created>1672871021303</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+    <task id="LOCAL-00086" summary="V49 SAT Solver Approach debugging">
+      <created>1675376386492</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
       <option name="project" value="LOCAL" />
-      <updated>1672871021303</updated>
+      <updated>1675376386492</updated>
     </task>
-    <task id="LOCAL-00002" summary="Init Latex and notes">
-      <created>1672875691059</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+    <task id="LOCAL-00087" summary="V49 SAT Solver Approach completing tsp to sat reduction">
+      <created>1675437910042</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
       <option name="project" value="LOCAL" />
-      <updated>1672875691059</updated>
+      <updated>1675437910042</updated>
     </task>
-    <task id="LOCAL-00003" summary="V1 of the algorithm">
-      <created>1672877978632</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+    <task id="LOCAL-00088" summary="V49 SAT Solver Approach remove prints">
+      <created>1675438116876</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
       <option name="project" value="LOCAL" />
-      <updated>1672877978632</updated>
+      <updated>1675438116876</updated>
     </task>
-    <task id="LOCAL-00004" summary="V2 of the algorithm">
-      <created>1672878396376</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+    <task id="LOCAL-00089" summary="V49 SAT Solver Approach documentation">
+      <created>1675438483909</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
       <option name="project" value="LOCAL" />
-      <updated>1672878396376</updated>
+      <updated>1675438483909</updated>
     </task>
-    <task id="LOCAL-00005" summary="V3 of the algorithm">
-      <created>1672882046629</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+    <task id="LOCAL-00090" summary="V49 SAT Solver Approach documentation">
+      <created>1675438605072</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
       <option name="project" value="LOCAL" />
-      <updated>1672882046629</updated>
+      <updated>1675438605072</updated>
     </task>
-    <task id="LOCAL-00006" summary="Output V1">
-      <created>1672916942119</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
+    <task id="LOCAL-00091" summary="V49 documentation">
+      <created>1675443069626</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
       <option name="project" value="LOCAL" />
-      <updated>1672916942119</updated>
+      <updated>1675443069626</updated>
     </task>
-    <task id="LOCAL-00007" summary="Output V2">
-      <created>1672919418076</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
+    <task id="LOCAL-00092" summary="V50 documentation">
+      <created>1675443373111</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
       <option name="project" value="LOCAL" />
-      <updated>1672919418076</updated>
+      <updated>1675443373111</updated>
     </task>
-    <task id="LOCAL-00008" summary="Output V3">
-      <created>1672921400546</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
+    <task id="LOCAL-00093" summary="V50 read input files">
+      <created>1675514889137</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
       <option name="project" value="LOCAL" />
-      <updated>1672921400546</updated>
+      <updated>1675514889137</updated>
     </task>
-    <task id="LOCAL-00009" summary="Output V4 (only Console)">
-      <created>1672927130574</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
+    <task id="LOCAL-00094" summary="V50 remove output files">
+      <created>1675514913260</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
       <option name="project" value="LOCAL" />
-      <updated>1672927130574</updated>
+      <updated>1675514913260</updated>
     </task>
-    <task id="LOCAL-00010" summary="Output V5 (only Console)">
-      <created>1672929304241</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+    <task id="LOCAL-00095" summary="V50 debugging">
+      <created>1675519157469</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
       <option name="project" value="LOCAL" />
-      <updated>1672929304241</updated>
+      <updated>1675519157469</updated>
     </task>
-    <task id="LOCAL-00011" summary="MindMap.pdf">
-      <created>1673004646294</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+    <task id="LOCAL-00096" summary="V52 Aufgabe1">
+      <created>1675551244433</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
       <option name="project" value="LOCAL" />
-      <updated>1673004646294</updated>
+      <updated>1675551244433</updated>
     </task>
-    <task id="LOCAL-00012" summary="V7">
-      <created>1673018023114</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+    <task id="LOCAL-00097" summary="V52 exclude by deleting approach">
+      <created>1675551765296</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
       <option name="project" value="LOCAL" />
-      <updated>1673018023114</updated>
+      <updated>1675551765296</updated>
     </task>
-    <task id="LOCAL-00013" summary="V8">
-      <created>1673018348594</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+    <task id="LOCAL-00098" summary="V52 exclude by deleting approach">
+      <created>1675551801235</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
       <option name="project" value="LOCAL" />
-      <updated>1673018348594</updated>
+      <updated>1675551801235</updated>
     </task>
-    <task id="LOCAL-00014" summary="V9">
-      <created>1673021205775</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+    <task id="LOCAL-00099" summary="V52 exclude by deleting approach">
+      <created>1675554084217</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
       <option name="project" value="LOCAL" />
-      <updated>1673021205775</updated>
+      <updated>1675554084218</updated>
     </task>
-    <task id="LOCAL-00015" summary="V11">
-      <created>1673027677503</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+    <task id="LOCAL-00100" summary="V52 exclude by deleting approach TODOs">
+      <created>1675554736034</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
       <option name="project" value="LOCAL" />
-      <updated>1673027677503</updated>
+      <updated>1675554736034</updated>
     </task>
-    <task id="LOCAL-00016" summary="V12">
-      <created>1673028595267</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+    <task id="LOCAL-00101" summary="V51 improved runtime performance v2">
+      <created>1675608561295</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
       <option name="project" value="LOCAL" />
-      <updated>1673028595267</updated>
+      <updated>1675608561296</updated>
     </task>
-    <task id="LOCAL-00017" summary="V13">
-      <created>1673031609150</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+    <task id="LOCAL-00102" summary="V51 improved runtime performance v2">
+      <created>1675628724769</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
       <option name="project" value="LOCAL" />
-      <updated>1673031609150</updated>
+      <updated>1675628724769</updated>
     </task>
-    <task id="LOCAL-00018" summary="V14">
-      <created>1673033340986</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+    <task id="LOCAL-00103" summary="V51 improved runtime performance v2">
+      <created>1675631443810</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
       <option name="project" value="LOCAL" />
-      <updated>1673033340986</updated>
+      <updated>1675631443810</updated>
     </task>
-    <task id="LOCAL-00019" summary="V15">
-      <created>1673037607373</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
+    <task id="LOCAL-00104" summary="V51 improved runtime performance v2">
+      <created>1675634321355</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
       <option name="project" value="LOCAL" />
-      <updated>1673037607373</updated>
+      <updated>1675634321355</updated>
     </task>
-    <task id="LOCAL-00020" summary="V16">
-      <created>1673037671670</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
+    <task id="LOCAL-00105" summary="V51 improved runtime performance v2">
+      <created>1675782749460</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
       <option name="project" value="LOCAL" />
-      <updated>1673037671670</updated>
+      <updated>1675782749460</updated>
     </task>
-    <task id="LOCAL-00021" summary="V17 each edge printed only once">
-      <created>1673092223989</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
+    <task id="LOCAL-00106" summary="V51 improved runtime performance v2">
+      <created>1675786166130</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
       <option name="project" value="LOCAL" />
-      <updated>1673092223989</updated>
+      <updated>1675786166130</updated>
     </task>
-    <task id="LOCAL-00022" summary="V17 correct print of edges">
-      <created>1673092728040</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
+    <task id="LOCAL-00107" summary="V51 improved runtime performance v2">
+      <created>1675789566289</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
       <option name="project" value="LOCAL" />
-      <updated>1673092728040</updated>
+      <updated>1675789566289</updated>
     </task>
-    <task id="LOCAL-00023" summary="V18">
-      <created>1673097293398</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
+    <task id="LOCAL-00108" summary="V53 task1 &amp; task2 stable version">
+      <created>1675791323596</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
       <option name="project" value="LOCAL" />
-      <updated>1673097293398</updated>
+      <updated>1675791323596</updated>
     </task>
-    <task id="LOCAL-00024" summary="V19">
-      <created>1673099619153</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
+    <task id="LOCAL-00109" summary="V53 task1 &amp; task2 stable version">
+      <created>1675791454947</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
       <option name="project" value="LOCAL" />
-      <updated>1673099619153</updated>
+      <updated>1675791454947</updated>
     </task>
-    <task id="LOCAL-00025" summary="V21">
-      <created>1673103843216</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
+    <task id="LOCAL-00110" summary="V53 task1 &amp; task2 stable version">
+      <created>1675854924134</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
       <option name="project" value="LOCAL" />
-      <updated>1673103843216</updated>
+      <updated>1675854924134</updated>
     </task>
-    <task id="LOCAL-00026" summary="V22 Most useful i got so far :-(">
-      <created>1673106672252</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
+    <task id="LOCAL-00111" summary="V54 documentation">
+      <created>1676313013407</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
       <option name="project" value="LOCAL" />
-      <updated>1673106672252</updated>
+      <updated>1676313013407</updated>
     </task>
-    <task id="LOCAL-00027" summary="V23">
-      <created>1673109355584</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
+    <task id="LOCAL-00112" summary="V54 documentation">
+      <created>1676313965430</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
       <option name="project" value="LOCAL" />
-      <updated>1673109355584</updated>
+      <updated>1676313965431</updated>
     </task>
-    <task id="LOCAL-00028" summary="V24">
-      <created>1673128954975</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
+    <task id="LOCAL-00113" summary="V54 documentation">
+      <created>1676314047735</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
       <option name="project" value="LOCAL" />
-      <updated>1673128954975</updated>
+      <updated>1676314047735</updated>
     </task>
-    <task id="LOCAL-00029" summary="V25b First Correct result (round about 60h of work and studying computer theory)">
-      <created>1673129877207</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
+    <task id="LOCAL-00114" summary="V54 documentation and runtime improvements">
+      <created>1676328856392</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
       <option name="project" value="LOCAL" />
-      <updated>1673129877207</updated>
+      <updated>1676328856392</updated>
     </task>
-    <task id="LOCAL-00030" summary="V26 debug counter">
-      <created>1673131311117</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
+    <task id="LOCAL-00115" summary="V54 reworking">
+      <created>1676332582714</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
       <option name="project" value="LOCAL" />
-      <updated>1673131311117</updated>
+      <updated>1676332582714</updated>
     </task>
-    <task id="LOCAL-00031" summary="V26 approach two">
-      <created>1673131561633</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
+    <task id="LOCAL-00116" summary="V54 reworking">
+      <created>1676392902293</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
       <option name="project" value="LOCAL" />
-      <updated>1673131561633</updated>
+      <updated>1676392902293</updated>
     </task>
-    <task id="LOCAL-00032" summary="V26 approach three&#10;looks like a success">
-      <created>1673133015269</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
+    <task id="LOCAL-00117" summary="V54 completing task 1">
+      <created>1676398924587</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
       <option name="project" value="LOCAL" />
-      <updated>1673133015269</updated>
+      <updated>1676398924587</updated>
     </task>
-    <task id="LOCAL-00033" summary="V26 workspace.xml">
-      <created>1673197587205</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
+    <task id="LOCAL-00118" summary="V54 documentation">
+      <created>1676400483832</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
       <option name="project" value="LOCAL" />
-      <updated>1673197587205</updated>
+      <updated>1676400483832</updated>
     </task>
-    <task id="LOCAL-00034" summary="V26 runConfigurations">
-      <created>1673200201099</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
+    <task id="LOCAL-00119" summary="V54 documentation">
+      <created>1676404633028</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
       <option name="project" value="LOCAL" />
-      <updated>1673200201099</updated>
+      <updated>1676404633028</updated>
     </task>
-    <task id="LOCAL-00035" summary="V27 Solution Problem 2">
-      <created>1673212209855</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
+    <task id="LOCAL-00120" summary="V54 documentation">
+      <created>1676406799940</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
       <option name="project" value="LOCAL" />
-      <updated>1673212209855</updated>
+      <updated>1676406799940</updated>
     </task>
-    <task id="LOCAL-00036" summary="V27 Solution Problem 2 Read from File">
-      <created>1673212721245</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
+    <task id="LOCAL-00121" summary="V55 task2 b">
+      <created>1679179197800</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
       <option name="project" value="LOCAL" />
-      <updated>1673212721245</updated>
+      <updated>1679179197800</updated>
     </task>
-    <task id="LOCAL-00037" summary="V27 Solution Problem 2 Docu">
-      <created>1673213805350</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
+    <task id="LOCAL-00122" summary="V55 task2 b">
+      <created>1679222943988</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
       <option name="project" value="LOCAL" />
-      <updated>1673213805350</updated>
+      <updated>1679222943988</updated>
     </task>
-    <task id="LOCAL-00038" summary="V27">
-      <created>1673306354854</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
+    <task id="LOCAL-00123" summary="V55 task2 b">
+      <created>1679241443135</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
       <option name="project" value="LOCAL" />
-      <updated>1673306354854</updated>
+      <updated>1679241443135</updated>
     </task>
-    <task id="LOCAL-00039" summary="V28">
-      <created>1673369634728</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
+    <task id="LOCAL-00124" summary="V55 task2 b">
+      <created>1679244951605</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
       <option name="project" value="LOCAL" />
-      <updated>1673369634728</updated>
+      <updated>1679244951605</updated>
     </task>
-    <task id="LOCAL-00040" summary="V29 Aufgabe2 tests">
-      <created>1673715798390</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
+    <task id="LOCAL-00125" summary="V55 task2 b">
+      <created>1679246620786</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
       <option name="project" value="LOCAL" />
-      <updated>1673715798390</updated>
+      <updated>1679246620786</updated>
     </task>
-    <task id="LOCAL-00041" summary="V29 Aufgabe2 recursion">
-      <created>1673782061871</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
+    <task id="LOCAL-00126" summary="V55 task2 b todo">
+      <created>1679247013545</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
       <option name="project" value="LOCAL" />
-      <updated>1673782061871</updated>
+      <updated>1679247013545</updated>
     </task>
-    <task id="LOCAL-00042" summary="V29 Aufgabe2 tests">
-      <created>1673783835694</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
+    <task id="LOCAL-00127" summary="V55 task1 cleanup">
+      <created>1679247201611</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
       <option name="project" value="LOCAL" />
-      <updated>1673783835694</updated>
+      <updated>1679247201611</updated>
     </task>
-    <task id="LOCAL-00043" summary="V29 Aufgabe2 runs">
-      <created>1673783887952</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
+    <task id="LOCAL-00128" summary="V55 examples">
+      <created>1679255150453</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
       <option name="project" value="LOCAL" />
-      <updated>1673783887952</updated>
+      <updated>1679255150453</updated>
     </task>
-    <task id="LOCAL-00044" summary="V32">
-      <created>1673984726732</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
+    <task id="LOCAL-00129" summary="V55 unordered_set">
+      <created>1679439845769</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
       <option name="project" value="LOCAL" />
-      <updated>1673984726732</updated>
+      <updated>1679439845769</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00130" summary="V55 hotfix runtime">
+      <created>1679442135525</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1679442135525</updated>
+    </task>
+    <task id="LOCAL-00131" summary="V56 cleanup">
+      <created>1679483648714</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1679483648714</updated>
+    </task>
+    <task id="LOCAL-00132" summary="V56 cleanup">
+      <created>1679602657719</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1679602657719</updated>
+    </task>
+    <task id="LOCAL-00133" summary="V56 cleanup">
+      <created>1679603948239</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1679603948239</updated>
+    </task>
+    <task id="LOCAL-00134" summary="V56 cleanup">
+      <created>1679604077602</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1679604077603</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,31 +631,38 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V15" />
-    <MESSAGE value="V16" />
-    <MESSAGE value="V17 each edge printed only once" />
-    <MESSAGE value="V17 correct print of edges" />
-    <MESSAGE value="V18" />
-    <MESSAGE value="V19" />
-    <MESSAGE value="V21" />
-    <MESSAGE value="V22 Most useful i got so far :-(" />
-    <MESSAGE value="V23" />
-    <MESSAGE value="V24" />
-    <MESSAGE value="V25b First Correct result (round about 60h of work and studying computer theory)" />
-    <MESSAGE value="V26 debug counter" />
-    <MESSAGE value="V26 approach two" />
-    <MESSAGE value="V26 approach three&#10;looks like a success" />
-    <MESSAGE value="V26 workspace.xml" />
-    <MESSAGE value="V26 runConfigurations" />
-    <MESSAGE value="V27 Solution Problem 2" />
-    <MESSAGE value="V27 Solution Problem 2 Read from File" />
-    <MESSAGE value="V27 Solution Problem 2 Docu" />
-    <MESSAGE value="V27" />
-    <MESSAGE value="V28" />
-    <MESSAGE value="V29 Aufgabe2 recursion" />
-    <MESSAGE value="V29 Aufgabe2 tests" />
-    <MESSAGE value="V29 Aufgabe2 runs" />
-    <MESSAGE value="V32" />
-    <option name="LAST_COMMIT_MESSAGE" value="V32" />
+    <MESSAGE value="V49 SAT Solver Approach debugging print lines" />
+    <MESSAGE value="V49 SAT Solver Approach debugging" />
+    <MESSAGE value="V49 SAT Solver Approach completing tsp to sat reduction" />
+    <MESSAGE value="V49 SAT Solver Approach remove prints" />
+    <MESSAGE value="V49 SAT Solver Approach documentation" />
+    <MESSAGE value="V50 documentation" />
+    <MESSAGE value="V50 read input files" />
+    <MESSAGE value="V50 remove output files" />
+    <MESSAGE value="V50 debugging" />
+    <MESSAGE value="V52 Aufgabe1" />
+    <MESSAGE value="V52 exclude by deleting approach" />
+    <MESSAGE value="V52 exclude by deleting approach TODOs" />
+    <MESSAGE value="V51 improved runtime performance v2" />
+    <MESSAGE value="V53 task1 &amp; task2 stable version" />
+    <MESSAGE value="V54 documentation and runtime improvements" />
+    <MESSAGE value="V54 reworking" />
+    <MESSAGE value="V54 completing task 1" />
+    <MESSAGE value="V54 documentation" />
+    <MESSAGE value="V55 task2 b" />
+    <MESSAGE value="V55 task2 b todo" />
+    <MESSAGE value="V55 task1 cleanup" />
+    <MESSAGE value="V55 examples" />
+    <MESSAGE value="V55 unordered_set" />
+    <MESSAGE value="V55 hotfix runtime" />
+    <MESSAGE value="V56 cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="V56 cleanup" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="../../../../Documents/Projects/bwinf41/cmake-build-debug-coverage" NAME="bwinf41 Coverage Results" MODIFIED="1674057281801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="gcov/llvm" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

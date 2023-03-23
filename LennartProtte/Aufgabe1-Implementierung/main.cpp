@@ -1,130 +1,155 @@
-#include <iostream>
 #include <vector>
+#include <iostream>
 #include <cmath>
 #include <filesystem>
 #include <fstream>
 
 using namespace std;
 
-// Struktur für einen Ort
-struct Location {
-    Location(double px, double py) {
-        x = px;
-        y  = py;
+/**
+ * Berechnet den Winkel in Grad zwischen den Vektoren von from_node nach over_node und over_node nach to_node
+ * @param over_node der zweite Knoten
+ * @param to_node der dritte Knoten (Zielknoten)
+ * @param from_node der erste Knoten
+ * @return false, wenn der Innenwinkel zwischen den Kanten kleiner als 90° beträgt, andernfalls true
+ */
+double cross_angle(const pair<double, double> &from_node,
+                   const pair<double, double> &over_node,
+                   const pair<double, double> &to_node) {
+    double a, b, c;
+    a = sqrt(pow((from_node.first - to_node.first), 2.0) + (pow((from_node.second - to_node.second), 2.0)));
+    b = sqrt(pow((from_node.first - over_node.first), 2.0) + (pow((from_node.second - over_node.second), 2.0)));
+    c = sqrt(pow((over_node.first - to_node.first), 2.0) + (pow((over_node.second - to_node.second), 2.0)));
+    double angle = acos((pow(a, 2.0) - pow(b, 2.0) - pow(c, 2.0)) / (-2 * b * c)) * 180 / M_PI;
+    return angle;
+}
+
+void generate_adi_graph(const vector<pair<double, double>> &result, const string &file) {
+    int fx = 24, fy = 24;
+    cout << "\\begin{figure}[!h]\\centering" << endl;
+    cout << "\\NewAdigraph{" << file.substr(0, file.size() - 4) << "}{" << endl;
+    for (int i = 0; i < result.size(); i++) {
+        if (i != 0 && i != result.size() - 1) {
+            cout << "    " << i << ":" << result[i].first / fx << "," << result[i].second / fy << ":"
+                 << (((float)((int)(cross_angle(result[i - 1], result[i], result[i + 1]) * 10))) / 10) << "° " << ";" << endl;
+        } else if (i == 0) {
+            cout << "    " << i << ":" << result[i].first / fx << "," << result[i].second / fy << ":start;" << endl;
+        } else {
+            cout << "    " << i << ":" << result[i].first / fx << "," << result[i].second / fy << ":end;" << endl;
+        }
     }
-    double x{};
-    double y{};
-};
-
-// Funktion zum Berechnen des Abbiegwinkels zwischen zwei Orten
-double calculateAngle(Location loc1, Location loc2) {
-    double xDiff = loc1.x - loc2.x;
-    double yDiff = loc1.y - loc2.y;
-    return atan2(yDiff, xDiff) * 180 / M_PI;
+    cout << "}{" << endl;
+    for (int i = 0; i + 1 < result.size(); i++) {
+        cout << i << "," << i + 1 << ";" << endl;
+    }
+    cout << "}\n\\" << file.substr(0, file.size() - 4) << "{" << endl;
+    for (int i = 0; i < result.size(); i++) {
+        cout << i << (i == result.size() - 1 ? "" : ",");
+    }
+    cout << "::red;" << endl;
+    cout << "}" << endl;
+    cout << "\\caption{Figur: " << file.substr(0, file.size() - 4) << "}\n\\label{fig:"
+         << file.substr(0, file.size() - 4) << "}\n\\end{figure}" << endl;
+    cout << "\\newpage" << endl;
 }
 
-double calculateDistance(double x1, double y1, double x2, double y2) {
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-}
-
-
-void search(vector<Location> locations, vector<vector<Location>> &solutions, vector<Location> currentLocations) {
-
-}
-
-vector<Location> calculateRoute(vector<Location> locations) {
-
-    // Erstelle leere Liste für die berechnete Route
-    vector<Location> route;
-
-    // Wähle den ersten Ort als Startpunkt aus
-    Location currentLocation = locations[0];
-
-    // Füge den Startpunkt zur Route hinzu
-    route.push_back(currentLocation);
-
-    // Entferne den Startpunkt aus der Liste der verbleibenden Orte
-    locations.erase(locations.begin());
-
-    // Solange es noch Orte gibt, die besucht werden müssen...
-    while (!locations.empty()) {
-
-        // Setze die minimale Entfernung auf den maximalen Wert
-        double minDistance = numeric_limits<double>::max();
-
-        // Setze den Index des nächsten Orts auf -1
-        int nextLocationIndex = -1;
-
-        // Gehe alle verbleibenden Orte durch
-        for (int i = 0; i < locations.size(); i++) {
-
-            // Berechne die Entfernung zwischen aktuellem Ort und dem verbleibenden Ort
-
-            double distance = calculateDistance(currentLocation.x, currentLocation.y, locations[i].x, locations[i].y);
-
-             // Wenn die Entfernung kleiner als die bisher minimale Entfernung ist...
-            if (distance < minDistance) {
-
-                // Setze die minimale Entfernung auf die aktuelle Entfernung
-                minDistance = distance;
-
-                // Setze den Index des nächsten Orts auf den Index des aktuellen Orts
-                nextLocationIndex = i;
+/**
+ * Berechnet rekursiv mit Backtracking eine möglichst kurze Route durch den Graphen,
+ * welche die Aufgabenkriterien erfüllt.
+ * @param route die aktuelle Route
+ * @param coordinates die Menge aller eingelesenen Koordinaten
+ * @return true, wenn alle Knoten in der Lösungsmenge (route) enthalten sind, andernfalls false
+ */
+bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
+    //Sortiere nach dem nächsten Knoten
+    if (!route.empty()) {
+        const auto &p = route.back();
+        sort(coordinates.begin(), coordinates.end(),
+             [p](const auto &lhs, const auto &rhs) {
+                 return sqrt(pow((p.first - lhs.first), 2.0) + (pow((p.second - lhs.second), 2.0)))
+                        < sqrt(pow((p.first - rhs.first), 2.0) + (pow((p.second - rhs.second), 2.0)));
+             });
+    }
+    //Für jeden Knoten
+    for (int i = 0; i < coordinates.size(); i++) {
+        //Wenn dieser Knoten bereits in der Lösungsmenge existiert, überspringe diesen
+        if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
+            continue;
+        }
+        double angle = -1;
+        if (route.size() >= 2) {
+            angle = cross_angle(route[route.size() - 2], route.back(), coordinates[i]);
+        }
+        if (route.empty() ||
+            (std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
+             (route.size() < 2 || angle >= 90))
+                ) {
+            //Füge den Knoten hinzu
+            route.push_back(coordinates[i]);
+            //Wenn alle Knoten in der Lösungsmenge sind
+            if (route.size() == coordinates.size()) {
+                return true;
+            }
+            //Wenn es eine Lösung mit der aktuellen Route gibt
+            if (solve(route, coordinates)) {
+                return true;
+            } else {
+                route.pop_back();
             }
         }
-        // Wenn ein nächster Ort gefunden wurde...
-        if (nextLocationIndex != -1) {
-            // Füge den nächsten Ort zur Route hinzu
-            route.push_back(locations[nextLocationIndex]);
-             // Setze den aktuellen Ort auf den nächsten Ort
-            currentLocation = locations[nextLocationIndex];
-            // Entferne den nächsten Ort aus der Liste der verbleibenden Orte
-            locations.erase(locations.begin() + nextLocationIndex);
-        }
     }
-    // Gib die berechnete Route zurück
-    return route;
+//Wenn es mit der aktuellen Route keine Lösung geben kann
+    return false;
 }
 
-int main2() {
-    std::string input_dir = "../LennartProtte/Aufgabe1-Implementierung/TestInput";
-    std::string output_dir = "../LennartProtte/Aufgabe1-Implementierung/TestOutput";
+/**
+ * Liest die Eingabedateien ein und berechnet für jede Datei eine Lösung entsprechend der Aufgabenstellung.
+ * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben.
+ * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben.
+ * @return Exitcode
+ */
+int main() {
+    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
 
-    // Iterator erstellen, der alle Dateien im Eingabeordner durchläuft
-    for (const auto &entry: std::filesystem::directory_iterator(input_dir)) {
+    //Durchläuft alle Dateien im Eingabeordner
+    for (const std::filesystem::directory_entry &entry: filesystem::directory_iterator(input_dir)) {
 
-        // Dateiname und -pfad aus dem Iterator auslesen
-        std::string input_file = entry.path();
-        std::string output_file = output_dir + "/" + entry.path().filename().string();
-        cout << "run for " << entry.path().filename().string() << endl;
+        //Liest den Dateinamen aus
+        string input_file = entry.path();
+        string output_file = output_dir + "/" + entry.path().filename().string();
 
-        // Eingabedatei öffnen
-        std::ifstream fin(input_file);
+        //Öffnet die Eingabedatei
+        ifstream fin(input_file);
 
-        // Ausgabedatei öffnen
-        std::ofstream fout(output_file);
-        vector<Location> locations;
+        //Öffnet die Ausgabedatei
+        ofstream fout(output_file);
 
-        // Solange es noch Koordinaten in der Datei gibt
+        //Liest die Eingabedatei ein
+        vector<pair<double, double> > coordinates;
         double x, y;
         while (fin >> x >> y) {
-            cout << "Added new Node (" << x << ", " << y << ")" << endl;
-            locations.push_back(*new Location(x, y));
+            coordinates.emplace_back(x, y);
         }
-        cout << endl;
 
-        // Berechne Route mit calculateRoute
-        vector<Location> route = calculateRoute(locations);
-
-        // Gebe die mögliche Lösung aus
-        for (auto &i: route) {
-            cout << "(" << i.x << ", " << i.y << ")" << endl;
+        //Berechnet die Lösung und schreibt das Ergebnis in die entsprechende Ausgabedatei
+        vector<pair<double, double> > result;
+        if (solve(result, coordinates)) {
+            fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden." << endl;
+            for (int i = 0; i < result.size(); i++) {
+                if (i != 0 && i != result.size() - 1) {
+                    fout << cross_angle(result[i - 1], result[i], result[i + 1]) << "° ";
+                }
+                fout << "(" << result[i].first << ", " << result[i].second;
+                if(i == result.size() - 1) {
+                    fout << ") -> " << endl;
+                } else {
+                    fout << ")" << endl;
+                }
+            }
+        } else {
+            fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werden." << endl;
         }
-        cout << endl;
-
-        // Dateien schließen
-        fin.close();
-        fout.close();
     }
     return 0;
 }

@@ -1,0 +1,5 @@
+Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden.
+(0, 0)
+180° (100, 0)
+180° (200, 0)
+(300, 0) -> 
