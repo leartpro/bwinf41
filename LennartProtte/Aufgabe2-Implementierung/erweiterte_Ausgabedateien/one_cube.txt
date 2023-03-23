@@ -1,5 +1,0 @@
-Quader:
-6x6x6
-Quader:
-1x6x6
-5x6x6

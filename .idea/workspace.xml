@@ -15,10 +15,11 @@
   <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="task2" targetName="task1" />
-      <config projectName="task2" targetName="task2" />
+      <config projectName="task2" targetName="task2_b" />
+      <config projectName="task2" targetName="task2_a" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
       <configuration PROFILE_NAME="Debug-event-trace" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="--profiling-format=google-trace --profiling-output=CMakeFiles/clion-event-trace.json" />
@@ -26,41 +27,41 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V55 task1 cleanup">
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/gerade.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/kreis.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/nicht_loesbar.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien/viereck.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/nicht_loesbar.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/viereck.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/drei_quader.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/zwei_quader.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/2x2x2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/drei_quader.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/zwei_quader.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.pdf" afterDir="false" />
+    <list default="true" id="d0970718-8afd-4b7f-96e2-a5355e2b56f0" name="Changes" comment="V56 cleanup">
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.aux" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.synctex.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.aux" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.synctex.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/dreiQuader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/kleinerWuerfel.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/nQuader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/zweiQuader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/nQuader.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main_a.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.aux" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.out" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/gerade.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.synctex.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.aux" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.out" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien/kreis.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.synctex.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Dokumentation/Aufgabe2-Dokumentation.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Ausgabedateien/kaese5.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien/kaese5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien/kaese5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien/one_cube.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien/one_cube.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien/one_cube.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien/one_cube.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/2x2x2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/2x2x2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/drei_quader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/drei_quader.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/zwei_quader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien/zwei_quader.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/2x2x2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/temp/kleinerWuerfel.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/drei_quader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/temp/dreiQuader.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien/zwei_quader.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/temp/zweiQuader.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien/one_cube.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Ausgabedateien/two_cubes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien/one_cube.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien/two_cubes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main_b.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-coverage/CMakeFiles/clion-Debug-Coverage-log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-event-trace/CMakeFiles/clion-Debug-event-trace-log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
@@ -110,27 +111,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "full.screen.before.presentation.mode": "true",
-    "last_opened_file_path": "/Users/leartpro/Documents/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/leartpro/Documents/Projects/bwinf41/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien" />
@@ -140,14 +141,14 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/TestInput" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/temp" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Eingabedateien" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/erweiterte_Eingabedateien" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/debug" />
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/Eingabedateien" />
-      <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/testInput" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.task2">
+  <component name="RunManager" selected="CMake Application.Aufgabe2b">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -164,26 +165,13 @@
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bwinf41" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="task1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task1">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="task2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="task2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="task2" RUN_TARGET_NAME="task2">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Aufgabe1" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe1">
+    <configuration name="Aufgabe1" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe1">
       <option name="sourceFile" value="LennartProtte/Aufgabe1-Implementierung/main.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Aufgabe2" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="bwinf41" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe2">
+    <configuration name="Aufgabe2" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="task2" TARGET_NAME="main.cpp" CONFIG_NAME="Aufgabe2">
       <option name="sourceFile" value="LennartProtte/Aufgabe2-Implementierung/main.cpp" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
@@ -251,15 +239,16 @@
     <list>
       <item itemvalue="C/C++ File.Aufgabe2" />
       <item itemvalue="C/C++ File.Aufgabe1" />
-      <item itemvalue="CMake Application.task1" />
-      <item itemvalue="CMake Application.task2" />
-      <item itemvalue="CMake Debug.bwinf41" />
+      <item itemvalue="CMake Application.Aufgabe1" />
+      <item itemvalue="CMake Application.Aufgabe2a" />
+      <item itemvalue="CMake Application.Aufgabe2b" />
+      <item itemvalue="CMake Debug.project" />
       <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="CMake Debug.project" />
         <item itemvalue="C/C++ File.Aufgabe1" />
-        <item itemvalue="CMake Debug.bwinf41" />
         <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
       </list>
     </recent_temporary>
@@ -311,35 +300,9 @@
       <workItem from="1678705377531" duration="1205000" />
       <workItem from="1679156625340" duration="2977000" />
       <workItem from="1679162891143" duration="7192000" />
-      <workItem from="1679221684461" duration="11809000" />
-    </task>
-    <task id="LOCAL-00079" summary="V48 SAT Solver Approach Debugging">
-      <created>1675199191502</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1675199191502</updated>
-    </task>
-    <task id="LOCAL-00080" summary="V48 SAT Solver Approach re-structuring">
-      <created>1675251208262</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1675251208262</updated>
-    </task>
-    <task id="LOCAL-00081" summary="V48 SAT Solver Approach re-structuring">
-      <created>1675252527890</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1675252527890</updated>
-    </task>
-    <task id="LOCAL-00082" summary="V48 SAT Solver Approach re-structuring">
-      <created>1675340319592</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1675340319592</updated>
+      <workItem from="1679221684461" duration="11962000" />
+      <workItem from="1679423076994" duration="8151000" />
+      <workItem from="1679478376988" duration="15002000" />
     </task>
     <task id="LOCAL-00083" summary="V48 SAT Solver Approach adding todo">
       <created>1675340373363</created>
@@ -656,7 +619,35 @@
       <option name="project" value="LOCAL" />
       <updated>1679247201611</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="V55 examples">
+      <created>1679255150453</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1679255150453</updated>
+    </task>
+    <task id="LOCAL-00129" summary="V55 unordered_set">
+      <created>1679439845769</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1679439845769</updated>
+    </task>
+    <task id="LOCAL-00130" summary="V55 hotfix runtime">
+      <created>1679442135525</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1679442135525</updated>
+    </task>
+    <task id="LOCAL-00131" summary="V56 cleanup">
+      <created>1679483648714</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1679483648714</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,10 +666,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V48 SAT Solver Approach Cleanup" />
-    <MESSAGE value="V48 SAT Solver Approach Debugging" />
-    <MESSAGE value="V48 SAT Solver Approach re-structuring" />
-    <MESSAGE value="V48 SAT Solver Approach adding todo" />
     <MESSAGE value="V49 SAT Solver Approach debugging print lines" />
     <MESSAGE value="V49 SAT Solver Approach debugging" />
     <MESSAGE value="V49 SAT Solver Approach completing tsp to sat reduction" />
@@ -700,7 +687,27 @@
     <MESSAGE value="V55 task2 b" />
     <MESSAGE value="V55 task2 b todo" />
     <MESSAGE value="V55 task1 cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="V55 task1 cleanup" />
+    <MESSAGE value="V55 examples" />
+    <MESSAGE value="V55 unordered_set" />
+    <MESSAGE value="V55 hotfix runtime" />
+    <MESSAGE value="V56 cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="V56 cleanup" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main_b.cpp</url>
+          <line>295</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LennartProtte/Aufgabe2-Implementierung/main_b.cpp</url>
+          <line>296</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
