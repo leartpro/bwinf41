@@ -197,7 +197,6 @@ vector<unordered_set<tuple<int, int, int>, TupelHash>> findAllCombinations(int v
     return combinations;
 }
 
-long t_count = 0;
 /**
  * Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
  * @param length die Länge des Quaders
@@ -216,7 +215,6 @@ bool calculate_square(int length, int height, int depth, vector<pair<Slice, Dime
     vector<Slice> removed_slices;
     //Für jede noch nicht verwendete Schiebe
     for (auto it = slices.begin(); it != slices.end(); ++it) {
-        t_count++;
         Dimension dimension = canRemoveSlice(length, height, depth, *it);
         //Wenn die aktuelle Scheibe abgeschnitten werden kann
         if (dimension != INVALID) {
@@ -252,8 +250,8 @@ bool calculate_square(int length, int height, int depth, vector<pair<Slice, Dime
  * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/eigene_Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/eigene_Ausgabedateien";
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien_b";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien_b";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const auto &entry: filesystem::directory_iterator(input_dir)) {
@@ -325,7 +323,6 @@ int main() {
                 }
                 fout << endl;
             }
-            cout << "total Count of Operations: " << t_count << endl;
         } else {
             fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
         }

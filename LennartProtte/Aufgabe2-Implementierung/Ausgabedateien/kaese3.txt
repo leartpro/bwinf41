@@ -1,6 +1,6 @@
-Quader 1000x10x1000 V(10000000)
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 1000x10x1000 V(10000000)
 
-Die Scheiben können zu einem Quader zusammengesetzt werden:
 Slice: (1000, 1000) Dimension: side
 Slice: (1000, 1000) Dimension: side
 Slice: (1000, 1000) Dimension: side

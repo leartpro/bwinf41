@@ -109,8 +109,8 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
  * @return Exitcode
  */
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/eigene_Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/eigene_Ausgabedateien";
+    string input_dir = "../LennartProtte/Aufgabe1-Implementierung/Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe1-Implementierung/Ausgabedateien";
 
     //Durchläuft alle Dateien im Eingabeordner
     for (const std::filesystem::directory_entry &entry: filesystem::directory_iterator(input_dir)) {
@@ -135,7 +135,7 @@ int main() {
         //Berechnet die Lösung und schreibt das Ergebnis in die entsprechende Ausgabedatei
         vector<pair<double, double> > result;
         if (solve(result, coordinates)) {
-            fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden" << endl;
+            fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden." << endl;
             for (int i = 0; i < result.size(); i++) {
                 if (i != 0 && i != result.size() - 1) {
                     fout << cross_angle(result[i - 1], result[i], result[i + 1]) << "° ";
@@ -148,7 +148,7 @@ int main() {
                 }
             }
         } else {
-            fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werde" << endl;
+            fout << "Es konnte keine Flugstrecke durch alle Außenposten ermittelt werden." << endl;
         }
     }
     return 0;

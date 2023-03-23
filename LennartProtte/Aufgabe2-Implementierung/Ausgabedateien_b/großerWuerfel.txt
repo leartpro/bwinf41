@@ -1,0 +1,15 @@
+Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
+Quader: 6x6x6
+Slice: (6, 6) Dimension: front
+Slice: (6, 6) Dimension: front
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: front
+Slice: (3, 6) Dimension: top
+Slice: (3, 3) Dimension: side
+Slice: (3, 3) Dimension: side
+Slice: (3, 4) Dimension: front
+Slice: (2, 4) Dimension: top
+Slice: (2, 4) Dimension: front
+Slice: (2, 4) Dimension: front
+

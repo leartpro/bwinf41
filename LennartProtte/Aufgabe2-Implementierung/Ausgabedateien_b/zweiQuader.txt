@@ -1,0 +1,8 @@
+Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
+Quader: 1x1x1
+Slice: (1, 1) Dimension: front
+
+Quader: 2x2x2
+Slice: (2, 2) Dimension: front
+Slice: (2, 2) Dimension: front
+

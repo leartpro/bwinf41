@@ -1,6 +1,6 @@
-Quader 3570x2310x2730 V(1038654520)
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 3570x2310x2730 V(1038654520)
 
-Die Scheiben können zu einem Quader zusammengesetzt werden:
 Slice: (2730, 3570) Dimension: side
 Slice: (2309, 2730) Dimension: top
 Slice: (2730, 3569) Dimension: side

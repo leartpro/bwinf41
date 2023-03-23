@@ -1,4 +1,0 @@
-Quader:
-1x1x1
-5x5x5
-3x3x3

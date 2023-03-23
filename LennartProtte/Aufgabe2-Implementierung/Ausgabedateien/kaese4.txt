@@ -1,6 +1,6 @@
-Quader 210x210x210 V(9261000)
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 210x210x210 V(9261000)
 
-Die Scheiben können zu einem Quader zusammengesetzt werden:
 Slice: (210, 210) Dimension: front
 Slice: (209, 210) Dimension: top
 Slice: (209, 209) Dimension: side
