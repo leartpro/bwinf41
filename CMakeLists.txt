@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 project(task1)
-project(task2)
+project(task2_a)
+project(task2_b)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")

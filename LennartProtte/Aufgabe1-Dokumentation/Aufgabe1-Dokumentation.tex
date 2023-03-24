@@ -9,7 +9,7 @@
 
 % Die nächsten drei Felder bitte anpassen:
 \newcommand{\Aufgabe}{Aufgabe 1: Weniger krumme Touren} % Aufgabennummer und Aufgabennamen angeben
-\newcommand{\TeilnahmeId}{?????}                        % Teilnahme-ID angeben
+\newcommand{\TeilnahmeId}{67275}                        % Teilnahme-ID angeben
 \newcommand{\Name}{Lennart Protte}                      % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
 
 
@@ -90,21 +90,26 @@
     \maketitle
     \tableofcontents
     \vspace{0.5cm}
-
-    \textbf{Anleitung:} Trage oben in den Zeilen 8 bis 10 die Aufgabennummer,
-    die Teilnahme-ID und die/den Bearbeiterin/Bearbeiter dieser Aufgabe mit Vor- und Nachnamen ein.
-    Vergiss nicht, auch den Aufgabennamen anzupassen (statt \("`\)\LaTeX-Dokument\("'\))!
-
-    Dann kannst du dieses Dokument mit deiner \LaTeX-Umgebung übersetzen.
-
-    Die Texte, die hier bereits stehen, geben ein paar Hinweise zur
-    Einsendung.
-    Du solltest sie aber in deiner Einsendung wieder entfernen!
-
     \newpage
+    
     \section{Lösungsidee}\label{sec:losungsidee}
-    Die Idee der Lösung sollte hieraus vollkommen ersichtlich werden,
-    ohne dass auf die eigentliche Implementierung Bezug genommen wird.
+    
+    Der Aufgabenstellung ist zu entnehmen, dass eine beliebige Reihenfolge zu ermitteln ist, 
+    in welcher Anton seine Außenstellen abfliegen kann, 
+    ohne das es zu einem Innenwinkel von mehr als 90 Grad beim abbiegen kommt.
+    Dabei darf keine der Außenstellen ausgelassen werden 
+    und eine Außenstelle mehrfach zu besuchen erscheint nicht im Sinne der Aufgabenstellung.
+    Da nicht die kürzeste Route verlangt wird, kann nach einer approximierten Lösung gesucht werden.
+    
+    Die Problemstellung der Aufgabe kann mit dem bekannte Problem des Handlungsreisenden assoziert werden,
+    in welchem es gilt einen möglichst kurzen Hamiltonkreis in einem gewichteten Graphen zu finden.
+    Da die Aufgabenstellung allerdings nicht verlangt, dass Startpunkt und Endpunkt identisch sein müssen, 
+    ist es für die Aufgabenstellung ausreichend einen möglichst kurzen Hamiltonweg zu ermitteln.
+    Das Hamiltonwegproblem ist NP-vollständig, womit es keinen Algorithmus gibt, 
+    der die gegebene Aufgabenstellung nichtdeterministisch in Polynomialzeit lösen kann.
+    
+    
+    
     
     
 
