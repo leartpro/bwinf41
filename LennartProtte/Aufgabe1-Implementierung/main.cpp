@@ -63,11 +63,11 @@ void generate_adi_graph(const vector<pair<double, double>> &result, const string
 bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
     //Sortiere nach dem nächsten Knoten
     if (!route.empty()) {
-        const auto &p = route.back();
+        const auto &last = route.back();
         sort(coordinates.begin(), coordinates.end(),
-             [p](const auto &lhs, const auto &rhs) {
-                 return sqrt(pow((p.first - lhs.first), 2.0) + (pow((p.second - lhs.second), 2.0)))
-                        < sqrt(pow((p.first - rhs.first), 2.0) + (pow((p.second - rhs.second), 2.0)));
+             [last](const auto &lhs, const auto &rhs) {
+                 return sqrt(pow((last.first - lhs.first), 2.0) + (pow((last.second - lhs.second), 2.0)))
+                        < sqrt(pow((last.first - rhs.first), 2.0) + (pow((last.second - rhs.second), 2.0)));
              });
     }
     //Für jeden Knoten
