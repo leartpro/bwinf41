@@ -106,8 +106,203 @@
     Da die Aufgabenstellung allerdings nicht verlangt, dass Startpunkt und Endpunkt identisch sein müssen, 
     ist es für die Aufgabenstellung ausreichend einen möglichst kurzen Hamiltonweg zu ermitteln.
     Das Hamiltonwegproblem ist NP-vollständig, womit es keinen Algorithmus gibt, 
-    der die gegebene Aufgabenstellung nichtdeterministisch in Polynomialzeit lösen kann.
+    welcher die gegebene Aufgabenstellung nichtdeterministisch in Polynomialzeit lösen kann.
     
+    Um das Problem zu lösen, kann ein Greedy-Algorithmus verwendet werden, 
+    welcher die Nearest-Neighbour-Heuristik und Backtracking verwendet, 
+    um den als nächstes zu betrachtenen Außenposten zu ermitteln. 
+    Bei dieser Auswahl muss zusätzlich das Winkelkriterium angewendet werden.
+    Der Ausgewählte Außenposten kann der Lösungsmenge hinzugefügt werden 
+    und das näcshte Element kann rekursiv betrachtet werden.
+    Sollte der Fall eintreten, dass eine Lösung noch nicht gefunden wurde, aber es keinen Außenposten mehr gibt, 
+    welcher nach dem Winkelkriterium ausgewählt werden kann, so kann die Rekursion beendet werden.
+    
+    Wissenschaftlicher Pseudocode:
+\begin{algorithmic}
+\Function{solve}{$route, coordinates$}
+\If{$route \neq \emptyset$}
+\State $p \gets \text{letzter Knoten in }route$
+\State Sortiere $coordinates$ nach dem nächstgelegenen Knoten zu $p$
+\EndIf
+\For{$i \gets 0$ to $|coordinates|-1$}
+\If{$coordinates[i] \in route$}
+\State Überspringe diesen Knoten
+\EndIf
+\State $angle \gets -1$
+\If{$|route| \geq 2$}
+\State $angle \gets \text{Winkel zwischen } route[-2], route[-1] \text{ und } coordinates[i]$
+\EndIf
+\If{$route=\emptyset$ \textbf{or} ($coordinates[i] \notin route$ \textbf{and} ($|route| < 2$ \textbf{or} $angle \geq 90$))}
+\State Füge $coordinates[i]$ zu $route$ hinzu
+\If{$|route| = |coordinates|$}
+\State \textbf{return} \textit{true}
+\EndIf
+\If{\Call{solve}{$route, coordinates$}}
+\State \textbf{return} \textit{true}
+\Else
+\State Entferne letzten Knoten aus $route$
+\EndIf
+\EndIf
+\EndFor
+\State \textbf{return} \textit{false}
+\EndFunction
+\end{algorithmic}
+
+Abstrakter Pseudocode:
+\begin{algorithmic}
+\Function{solve}{route, coordinates}
+\If{route not empty}
+\State sort coordinates by nearest to last node in route
+\EndIf
+\For{each node $n$ in $coordinates$}
+\If{$n$ already in $route$}
+\State continue
+\EndIf
+\State $angle \gets$ angle between last two nodes in $route$ and $n$
+\If{$route$ empty or ($n$ not in $route$ and ($|route| < 2$ or $angle \geq 90$))}
+\State add $n$ to $route$
+\If{all nodes in $coordinates$ in $route$}
+\State \textbf{return} \textit{true}
+\EndIf
+\If{\Call{solve}{route, coordinates}}
+\State \textbf{return} \textit{true}
+\Else
+\State remove last node from $route$
+\EndIf
+\EndIf
+\EndFor
+\State \textbf{return} \textit{false}
+\EndFunction
+\end{algorithmic}
+
+Der folgende Pseudocode beschreibt eine Funktion "solve", die ein Problem löst, bei dem es darum geht, eine Route durch eine Menge von Knoten zu finden. Die Funktion erwartet als Eingabe zwei Mengen von Paaren von Gleitkommazahlen, die jeweils die Koordinaten der Knoten in der Reihenfolge ihrer Besuchung und aller Knoten enthalten. Die Funktion gibt einen booleschen Wert zurück, der angibt, ob eine Lösung gefunden wurde oder nicht.
+
+\begin{algorithmic}
+\Function{Solve}{route: ${ (x,y) | x,y \in \mathbb{R}}$, coordinates: ${ (x,y) | x,y \in \mathbb{R}}$}: \Return $b \in {true,false}$
+\If {$route$ is not empty}
+\State $p \gets$ last element in $route$
+\State Sortiere $coordinates$ nach der Entfernung von $p$ zu jedem Knoten
+\EndIf
+\For {$i \gets 0$ to $|coordinates|$}
+\If {$coordinatesi$ bereits in $route$}
+\State continue
+\EndIf
+\State $angle \gets -1$
+\If {$|route| \geq 2$}
+\State $angle \gets$ Winkel zwischen $(route{|route|-2}, route{|route|-1})$ und $(route{|route|-1}, coordinates_i)$
+\EndIf
+\If {$route$ ist leer oder ($coordinates_i$ nicht in $route$ und ($|route| < 2$ oder $angle \geq 90$))}
+\State Füge $coordinates_i$ zu $route$ hinzu
+\If {$|route| = |coordinates|$}
+\State \Return true
+\EndIf
+\If {Solve($route$, $coordinates$)}
+\State \Return true
+\Else
+\State Entferne letztes Element aus $route$
+\EndIf
+\EndIf
+\EndFor
+\State \Return false
+\EndFunction
+\end{algorithmic}
+
+Das folgende ist eine abstrakte und wissenschaftliche Darstellung des gegebenen Codes unter Verwendung von LaTeX-Paketen algpseudocode, adigraph, algorithm, and algorithmicx. Es ist wichtig zu beachten, dass diese Darstellung die genaue Syntax des gegebenen Codes nicht darstellt, sondern eine allgemeine Beschreibung des Algorithmus gibt, die von der Programmiersprache unabhängig ist.
+
+\begin{algorithm}
+\caption{Berechnung einer möglichst kurzen Route durch einen Graphen}
+\begin{algorithmic}[1]
+\Function{Solve}{$route, coordinates$}
+\If{$!route.empty()$}
+\State Sortiere $coordinates$ nach dem nächsten Knoten von $route$
+\EndIf
+\For{$i \gets 0, coordinates.size()-1$}
+\If{$coordinates_i \in route$}
+\State Überspringe $coordinates_i$
+\EndIf
+\State $angle \gets -1$
+\If{$route.size() \geq 2$}
+\State $angle \gets$ Winkel zwischen den letzten beiden Knoten in $route$ und $coordinates_i$
+\EndIf
+\If{$route.empty() \lor (coordinates_i \notin route \land (route.size() < 2 \lor angle \geq 90))$}
+\State Füge $coordinates_i$ zu $route$ hinzu
+\If{$route.size() = coordinates.size()$}
+\State \textbf{return} true
+\EndIf
+\If{\Call{Solve}{$route, coordinates$}}
+\State \textbf{return} true
+\Else
+\State Entferne $coordinates_i$ aus $route$
+\EndIf
+\EndIf
+\EndFor
+\State \textbf{return} false
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+Wissenschaftlicher Pseudocode:
+
+\begin{algorithm}
+\caption{Rekursive Backtracking-Lösung für kürzeste Route durch einen Graphen}
+\begin{algorithmic}[1]
+\Function{solve}{route, coordinates}
+\If {!route.empty()}
+\State $p \gets$ letzter Knoten in route
+\State sortiere coordinates nach nächstem Knoten von p
+\EndIf
+\For {jede Koordinate $c$ in coordinates}
+\If {Knoten $c$ bereits in route}
+\State überspringe diesen Knoten
+\EndIf
+\State $angle \gets$ Winkel zwischen $c$ und den letzten beiden Knoten in route
+\If {route.empty() oder ($c$ nicht in route und ($angle < 90$ oder $route.size() < 2$))}
+\State füge Knoten $c$ zu route hinzu
+\If {route enthält alle Knoten in coordinates}
+\State \textbf{return} true
+\EndIf
+\If {solve(route, coordinates) ist erfolgreich}
+\State \textbf{return} true
+\Else
+\State entferne letzten Knoten aus route
+\EndIf
+\EndIf
+\EndFor
+\State \textbf{return} false
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Abstrakter Pseudocode:
+
+\begin{algorithm}
+\caption{Rekursive Backtracking-Lösung für kürzeste Route durch einen Graphen}
+\begin{algorithmic}[1]
+\Function{solve}{route, coordinates}
+\If {route ist nicht leer}
+\State sortiere coordinates nach nächstem Knoten von letztem Knoten in route
+\EndIf
+\For {jede Koordinate $c$ in coordinates}
+\If {Knoten $c$ bereits in route}
+\State überspringe diesen Knoten
+\EndIf
+\If {es ist möglich, $c$ zur Route hinzuzufügen}
+\State füge Knoten $c$ zu route hinzu
+\If {route enthält alle Knoten in coordinates}
+\State \textbf{return} wahr
+\EndIf
+\If {solve(route, coordinates) ist erfolgreich}
+\State \textbf{return} wahr
+\Else
+\State entferne letzten Knoten aus route
+\EndIf
+\EndIf
+\EndFor
+\State \textbf{return} falsch
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
     
     
     
