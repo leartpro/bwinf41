@@ -119,7 +119,7 @@
     
 \begin{algorithm}[H]
 \caption{Find a Hamiltonian path in a Euclidean graph}
-\begin{algorithmic}[1]
+\begin{algorithmic}[1]\label{alg:algorithm}
 \Require A set of $n$ points in the plane $P={(x,y)| x,y \in \mathbb{R}}$, represented as a vector of pairs $\textit{coordinates}=[(x_1,y_1), (x_2,y_2),..., (x_n,y_n)]$.
 \Ensure A Hamiltonian path in the graph connecting all the points in $\textit{coordinates}$, or $\textit{false}$ if no such path exists.
 \Procedure{HamiltonianPath}{$\textit{route},\ \textit{coordinates}$}
@@ -148,8 +148,9 @@
 \EndIf
 \EndFor
 \State \textbf{return} \textit{false}
-\EndProcedure
-\EndProcedure
+\end{algorithmic}
+\begin{algorithmic}[2]\label{alg:algorithm2}
+\end{algorithmic}
 \Procedure{CrossAngle}{$\textit{from_node},\ \textit{over_node},\ \textit{to_node}$}
 \State $\textit{a}\gets \sqrt{(from_node_x - to_node_x)^2 + (from_node_y - to_node_y)^2}$
 \State $\textit{b}\gets \sqrt{(from_node_x - over_node_x)^2 + (from_node_y - over_node_y)^2}$
@@ -157,7 +158,6 @@
 \State $\textit{angle} \gets \arccos\left(\frac{a^2 - b^2 - c^2}{-2bc}\right) \times \frac{180}{\pi}$
 \State \Return $angle$
 \EndProcedure
-\end{algorithmic}
 \end{algorithm}
 
 
