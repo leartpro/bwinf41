@@ -303,10 +303,44 @@ Abstrakter Pseudocode:
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
-    
-    
-    
-    
+
+\textbf{Funktion} $\text{cross_angle}(from_node, over_node, to_node)$
+\begin{algorithmic}[1]
+\State $a \gets \sqrt{(from_node_1 - to_node_1)^2 + (from_node_2 - to_node_2)^2}$
+\State $b \gets \sqrt{(from_node_1 - over_node_1)^2 + (from_node_2 - over_node_2)^2}$
+\State $c \gets \sqrt{(over_node_1 - to_node_1)^2 + (over_node_2 - to_node_2)^2}$
+\State $angle \gets \arccos\left(\frac{a^2 - b^2 - c^2}{-2bc}\right) \cdot \frac{180}{\pi}$
+\State \Return $angle$
+\end{algorithmic}
+
+\textbf{Funktion} $\text{solve}(route, coordinates)$
+\begin{algorithmic}[1]
+\If{$route \neq \emptyset$}
+\State $p \gets \text{letztes Element von } route$
+\State $\text{Sortiere } coordinates \text{ nach Entfernung von } p$
+\EndIf
+\For{$i \gets 0$ \textbf{bis} $\text{Größe von } coordinates - 1$}
+\If{$coordinates_i \in route$}
+\State \textbf{continue}
+\EndIf
+\State $angle \gets -1$
+\If{$\text{Größe von } route \geq 2$}
+\State $angle \gets \text{cross_angle}(route[\text{Größe von }route-2], route[\text{Größe von }route-1], coordinates[i])$
+\EndIf
+\If{$route = \emptyset$ \textbf{oder} ($coordinates_i \notin route$ \textbf{und} ($\text{Größe von } route < 2$ \textbf{oder} $angle \geq 90$))}
+\State $\text{Füge } coordinates_i \text{ zu } route \text{ hinzu}$
+\If{$\text{Größe von } route = \text{Größe von } coordinates$}
+\State \Return \textbf{true}
+\EndIf
+\If{$\text{solve}(route, coordinates)$}
+\State \Return \textbf{true}
+\Else
+\State $\text{Entferne letztes Element von } route$
+\EndIf
+\EndIf
+\EndFor
+\State \Return \textbf{false}
+\end{algorithmic}
 
     \newpage
     \section{Umsetzung}\label{sec:umsetzung}
