@@ -1,14 +1,69 @@
 %! Author = leartpro
 %! Date = 04.01.23
 
-% Preamble
-\documentclass[11pt]{article}
+\documentclass[a4paper,10pt,ngerman]{scrartcl}
+\usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[a4paper,margin=2.5cm,footskip=0.5cm]{geometry}
 
-% Packages
-\usepackage{amsmath}
+% Die nächsten drei Felder bitte anpassen:
+\newcommand{\Aufgabe}{Allgemeines} % Aufgabennummer und Aufgabennamen angeben
+\newcommand{\TeilnahmeId}{67275}                 % Teilnahme-ID angeben
+\newcommand{\Name}{Lennart Protte}               % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
 
-% Document
+% Kopf- und Fußzeilen
+\usepackage{scrlayer-scrpage, lastpage}
+\setkomafont{pageheadfoot}{\large\textrm}
+\lohead{\Aufgabe}
+\rohead{Teilnahme-ID: \TeilnahmeId}
+
+% Position des Titels
+\usepackage{titling}
+\setlength{\droptitle}{-1.0cm}
+
+% Diese beiden Pakete müssen zuletzt geladen werden
+\usepackage{hyperref} % Anklickbare Links im Dokument
+\usepackage{cleveref}
+
+% Daten für die Titelseite
+\title{\textbf{\Huge\Aufgabe}}
+\author{\LARGE Teilnahme-ID: \LARGE \TeilnahmeId \\\\
+\LARGE Bearbeiter/-in dieser Aufgabe: \\
+\LARGE \Name\\\\}
+\date{\LARGE\today}
+
 \begin{document}
+
+    \maketitle
+    \tableofcontents
+
+    \vspace{0.5cm}
+
+    \textbf{Vorwort:}
+    Trage oben in den Zeilen 8 bis 10 die Aufgabennummer, die Teilnahme-ID und die/den Bearbeiterin/Bearbeiter dieser Aufgabe mit Vor- und Nachnamen ein.
+    Vergiss nicht, auch den Aufgabennamen anzupassen (statt \("`\)\LaTeX-Dokument\("'\))!
+
+    Dann kannst du dieses Dokument mit deiner \LaTeX-Umgebung übersetzen.
+
+    Die Texte, die hier bereits stehen, geben ein paar Hinweise zur
+    Einsendung.
+    Du solltest sie aber in deiner Einsendung wieder entfernen!
+
+    \section{Lösungsidee}
+    Die Idee der Lösung sollte hieraus vollkommen ersichtlich werden, ohne dass auf die eigentliche Implementierung Bezug genommen wird.
+
+    \section{Umsetzung}
+    Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde.
+    Hier können auch Implementierungsdetails erwähnt werden.
+
+    \section{Beispiele}
+    Genügend Beispiele einbinden!
+    Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
+
+    \section{Quellcode}
+    Unwichtige Teile des Programms sollen hier nicht abgedruckt werden.
+    Dieser Teil sollte nicht mehr als 2–3 Seiten umfassen, maximal 10.
 
 
 

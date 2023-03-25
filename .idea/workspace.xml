@@ -34,6 +34,12 @@
       <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.pdf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.synctex.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Allgemeines.aux" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Allgemeines.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Allgemeines.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Allgemeines.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Allgemeines.synctex.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Allgemeines.toc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.aux" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.log" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.out" afterDir="false" />
@@ -41,8 +47,7 @@
       <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.synctex(busy)" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.synctex.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/Aufgabe1-Dokumentation.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.tex" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Aufgabe1-Dokumentation/Aufgabe1-Dokumentation.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LennartProtte/Allgemeines.tex" beforeDir="false" afterPath="$PROJECT_DIR$/LennartProtte/Allgemeines.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +132,7 @@
       <recent name="$PROJECT_DIR$/LennartProtte/Aufgabe1-Implementierung/Ausgabedateien" />
     </key>
   </component>
-  <component name="RunManager" selected="LaTeX.Aufgabe1-Dokumentation">
+  <component name="RunManager" selected="LaTeX.Allgemeines">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -162,6 +167,27 @@
         <main-file />
         <work-dir />
       </texify-external>
+      <method v="2" />
+    </configuration>
+    <configuration name="Allgemeines" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/LennartProtte/Allgemeines.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>TEXLIVE</latex-distribution>
+        <has-been-run>true</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
       <method v="2" />
     </configuration>
     <configuration name="Aufgabe1-Dokumentation" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
@@ -222,10 +248,12 @@
       <item itemvalue="CMake Application.Aufgabe2a" />
       <item itemvalue="CMake Application.Aufgabe2b" />
       <item itemvalue="CMake Debug.project" />
+      <item itemvalue="LaTeX.Allgemeines" />
       <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="LaTeX.Allgemeines" />
         <item itemvalue="LaTeX.Aufgabe1-Dokumentation" />
         <item itemvalue="C/C++ File.Aufgabe1" />
       </list>
@@ -281,14 +309,7 @@
       <workItem from="1679221684461" duration="11962000" />
       <workItem from="1679423076994" duration="8151000" />
       <workItem from="1679478376988" duration="16854000" />
-      <workItem from="1679746871609" duration="778000" />
-    </task>
-    <task id="LOCAL-00089" summary="V49 SAT Solver Approach documentation">
-      <created>1675438483909</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1675438483909</updated>
+      <workItem from="1679746871609" duration="1109000" />
     </task>
     <task id="LOCAL-00090" summary="V49 SAT Solver Approach documentation">
       <created>1675438605072</created>
@@ -626,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679745890633</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="V57 latex doc">
+      <created>1679750430697</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1679750430697</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
