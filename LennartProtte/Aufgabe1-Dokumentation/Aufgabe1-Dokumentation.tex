@@ -95,76 +95,84 @@
 
     \section{Lösungsidee}\label{sec:losungsidee}
 
-    Der Aufgabenstellung ist zu entnehmen, dass eine beliebige Reihenfolge zu ermitteln ist,
-    in welcher Anton seine Außenstellen abfliegen kann,
-    ohne das es zu einem Innenwinkel von mehr als 90 Grad beim Abbiegen kommt.
-    Dabei darf keine der Außenstellen ausgelassen werden
-    und eine Außenstelle mehrfach zu besuchen erscheint nicht im Sinne der Aufgabenstellung.
-    Da nicht die kürzeste Route verlangt wird, kann nach einer approximierten Lösung gesucht werden.
+    Die vorliegende Aufgabe erfordert die Ermittlung einer beliebigen zulässigen Reihenfolge,
+    in der Anton seine Außenstellen abfliegen kann, ohne dass es zu einem Innenwinkel von mehr als 90 Grad beim Abbiegen kommt.
+    Es ist dabei zu beachten, dass keine Außenstelle ausgelassen werden darf und dass eine Außenstelle nicht mehrfach besucht werden darf.
+    Da in dieser Aufgabe nicht die kürzeste Route gesucht wird, kann eine approximierte Lösung angestrebt werden.
 
-    Die Problemstellung der Aufgabe kann mit dem bekannte Problem des Handlungsreisenden assoziert werden,
-    in welchem es gilt einen möglichst kurzen Hamiltonkreis in einem gewichteten Graphen zu finden.
-    Da die Aufgabenstellung allerdings nicht verlangt, dass Startpunkt und Endpunkt identisch sein müssen,
-    ist es für die Aufgabenstellung ausreichend einen möglichst kurzen Hamiltonweg zu ermitteln.
-    Das Hamiltonwegproblem ist NP-vollständig, womit es keinen Algorithmus gibt,
-    welcher die gegebene Aufgabenstellung nichtdeterministisch in Polynomialzeit lösen kann.
+    Die Problemstellung dieser Aufgabe lässt sich mit dem bekannten Handlungsreisendenproblem assoziieren, bei dem es darum geht, einen möglichst kurzen Hamiltonkreis in einem gewichteten Graphen zu finden.
+    Allerdings verlangt die vorliegende Aufgabe nicht, dass der Start- und Endpunkt identisch sind, so dass es ausreichend ist, einen möglichst kurzen Hamiltonweg zu ermitteln.
+    Das Hamiltonwegproblem ist NP-vollständig, so dass kein Algorithmus existiert, der die gegebene Aufgabe nichtdeterministisch in Polynomialzeit lösen kann.
 
-    Um das Problem zu lösen, kann ein Greedy-Algorithmus verwendet werden,
-    welcher die Nearest-Neighbour-Heuristik und Backtracking verwendet,
-    um den als nächstes zu betrachteten Außenposten zu ermitteln.
-    Bei dieser Auswahl muss zusätzlich das Winkelkriterium angewendet werden.
-    Der Ausgewählte Außenposten kann der Lösungsmenge hinzugefügt werden
-    und das nächste Element kann rekursiv betrachtet werden.
-    Sollte der Fall eintreten, dass eine Lösung noch nicht gefunden wurde, aber es keinen Außenposten mehr gibt,
-    welcher nach dem Winkelkriterium ausgewählt werden kann, so kann die Rekursion beendet werden.
+    Zur Lösung des Problems kann ein Greedy-Algorithmus eingesetzt werden, der die Nearest-Neighbour-Heuristik und Backtracking verwendet, um den nächsten zu betrachtenden Außenposten zu ermitteln.
+    Bei der Auswahl des nächsten Außenpostens muss zusätzlich das Winkelkriterium beachtet werden.
+    Der ausgewählte Außenposten kann der Lösungsmenge hinzugefügt werden und das nächste Element kann rekursiv betrachtet werden.
+    Falls es der Fall ist, dass noch keine Lösung gefunden wurde, aber es keinen Außenposten mehr gibt, der nach dem Winkelkriterium ausgewählt werden kann, kann die Rekursion beendet werden.
 
-\begin{algorithm}
-    \caption{Find a Hamiltonian path in a Euclidean graph}
-    \begin{algorithmic}
-        \Require A set of $n$ points in the plane $P={(x,y)| x,y \in \mathbb{R}}$, represented as a vector of pairs $\textit{coordinates}=[(x_1,y_1), (x_2,y_2),\dots, (x_n,y_n)]$.
-        \Ensure A Hamiltonian path in the graph connecting all the points in $\textit{coordinates}$, or $\textit{false}$ if no such path exists.
-        \Function{HamiltonianPath}{$\textit{route},\ \textit{coordinates}$}
-            \If {$\textit{route}$ is not empty}
-                \State $p\gets \textit{last element of } \textit{route}$
-                \State $\textit{sort } \textit{coordinates } \textit{in non-decreasing order of Euclidean distance to } p$
-            \EndIf
-            \For{$i=1$ to $n$}
-                \If {$\textit{coordinates}[i]$ is already in $\textit{route}$}
-                    \State $\textbf{continue}$
+    \begin{algorithm}
+        \caption{Finde einen Hamiltonpfad in einem euklidischen Graphen}
+        \begin{algorithmic}
+            \Require Eine Menge von $n$ Punkten in der Ebene $P={(x,y)| x,y \in \mathbb{R}}$, dargestellt als Vektor von Paaren $\textit{koordinaten}=[(x_1,y_1), (x_2,y_2),\dots, (x_n,y_n)]$.
+            \Ensure Ein Hamiltonpfad im Graphen, der alle Punkte in $\textit{koordinaten}$ verbindet, oder $\textit{falsch}$, falls ein solcher Pfad nicht existiert.
+            \Function{HamiltonianPfad}{$\textit{route},\ \textit{koordinaten}$}
+                \If {$\textit{route}$ ist nicht leer}
+                    \State $p\gets \textit{letztes Element von } \textit{route}$
+                    \State $\textit{sortiere } \textit{koordinaten } \textit{nach nicht abnehmender euklidischer Entfernung zu } p$
                 \EndIf
-                \State $\textit{angle}\gets -1$
-                \If {$\textit{route}$ has at least two elements}
-                    \State $\textit{angle}\gets$ \textsc{CrossAngle}$(\textit{route}[|\textit{route}|-1], \textit{route}[|\textit{route}|], \textit{coordinates}[i])$
-                \EndIf
-                \If {$\textit{route}$ is empty \textbf{or} ($\textit{coordinates}[i]$ is not in $\textit{route}$ \textbf{and} ($|\textit{route}|<2$ \textbf{or} $\textit{angle} \geq 90$))}
-                    \State $\textit{route append }\textit{coordinates}[i]$
-                    \If {$|\textit{route}|=n$}
-                        \State \textbf{return} \textit{true}
+                \For{$i=1$ bis $n$}
+                    \If {$\textit{koordinaten}[i]$ ist bereits in $\textit{route}$}
+                        \State $\textbf{continue}$
                     \EndIf
-                    \If {\textsc{HamiltonianPath}$(\textit{route},\ \textit{coordinates})$}
-                        \State \textbf{return} \textit{true}
-                    \Else
-                        \State $\textit{route remove last}$
+                    \State $\textit{winkel}\gets -1$
+                    \If {$\textit{route}$ hat mindestens zwei Elemente}
+                        \State $\textit{winkel}\gets$ \textsc{CrossAngle}$(\textit{route}[|\textit{route}|-1], \textit{route}[|\textit{route}|], \textit{koordinaten}[i])$
                     \EndIf
-                \EndIf
-            \EndFor
-            \State \textbf{return} \textit{false}
-        \EndFunction
-    \end{algorithmic}\label{alg:algorithm3}
-\end{algorithm}
-
-\begin{algorithm}
-    \caption{Calculates the Angle of two Edges}
-            \begin{algorithmic}
-            \Function{CrossAngle}{$from_node,over_node,to_node$}
- \State $\textit{a}\gets \sqrt{(from_node_x - to_node_x)^2 + (from_node_y - to_node_y)^2}$
-            \State $\textit{b}\gets \sqrt{(from_node_x - over_node_x)^2 + (from_node_y - over_node_y)^2}$
-            \State $\textit{c}\gets \sqrt{(over_node_x - to_node_x)^2 + (over_node_y - to_node_y)^2}$
-            \State $\textit{angle} \gets \arccos\left(\frac{a^2 - b^2 - c^2}{-2bc}\right) \times \frac{180}{\pi}$
-            \State \Return $angle$
+                    \If {$\textit{route}$ ist leer \textbf{oder} ($\textit{koordinaten}[i]$ ist nicht in $\textit{route}$ \textbf{und} ($|\textit{route}|<2$ \textbf{oder} $\textit{winkel} \geq 90$))}
+                        \State $\textit{füge }\textit{koordinaten}[i]\textit{ zu route hinzu}$
+                        \If {$|\textit{route}|=n$}
+                            \State \textbf{return} \textit{wahr}
+                        \EndIf
+                        \If {\textsc{HamiltonianPfad}$(\textit{route},\ \textit{koordinaten})$}
+                            \State \textbf{return} \textit{wahr}
+                        \Else
+                            \State $\textit{entferne das letzte Element aus route}$
+                        \EndIf
+                    \EndIf
+                \EndFor
+                \State \textbf{return} \textit{falsch}
             \EndFunction
-\end{algorithmic}\label{alg:algorithm2}
-\end{algorithm}
+        \end{algorithmic}\label{alg:algorithm3}
+    \end{algorithm}
+
+    \begin{algorithm}
+        \caption{Berechnet den Winkel zwischen zwei Kanten}
+        \begin{algorithmic}
+            \Function{CrossAngle}{$von_{knoten},\ddot uber_{knoten},zu_{knoten}$}
+                \State $\textit{a}\gets \sqrt{(von_{knoten.x} - zu_{knoten.x})^2 + (von_{knoten.y} - zu_{knoten.y})^2}$
+                \State $\textit{b}\gets \sqrt{(von_{knoten.x} - \ddot uber_{knoten.x})^2 + (von_{knoten.y} - \ddot uber_{knoten.y})^2}$
+                \State $\textit{c}\gets \sqrt{(\ddot uber_{knoten.x} - zu_{knoten.x})^2 + (\ddot uber_{knoten.y} - zu_{knoten.y})^2}$
+                \State $\textit{winkel} \gets \arccos\left(\frac{a^2 - b^2 - c^2}{-2bc}\right) \times \frac{180}{\pi}$
+                \State \Return $winkel$
+            \EndFunction
+        \end{algorithmic}\label{alg:algorithm2}
+    \end{algorithm}
+
+    Die grundlegende Konzeption des Algorithmus besteht darin, eine geeignete Reihenfolge der Punkte zu ermitteln,
+    um einen Hamiltonpfad im zugrundeliegenden Graphen zu generieren.
+    Zunächst erfolgt eine Sortierung der Koordinaten nach nicht abnehmender euklidischer Entfernung von einem Startpunkt aus.
+    Im Anschluss wird eine Schleife durchlaufen, in welcher jeder Punkt nacheinander besucht wird.
+    Es wird geprüft, ob der aktuelle Punkt bereits in der Route vorhanden ist.
+    Falls dies der Fall ist, wird mit dem nächsten Punkt fortgefahren.
+    Andernfalls wird der Winkel zwischen den beiden zuletzt besuchten Punkten und dem aktuellen Punkt berechnet.
+    Die Hinzunahme des aktuellen Punktes zur Route ist abhängig davon,
+    ob die Route noch leer ist oder der Winkel zwischen den beiden Kanten größer oder gleich 90 Grad ist.
+    Sobald alle Punkte der Menge in der Route enthalten sind, ist ein Hamiltonpfad gefunden und wird als wahr zurückgegeben.
+    Andernfalls wird das letzte Element aus der Route entfernt und mit dem nächsten Punkt fortgefahren.
+
+    Bei der Funktion \textsc{CrossAngle} handelt es sich um eine Hilfsmethode, welche den Winkel zwischen zwei Kanten berechnet,
+    die von einem gemeinsamen Knoten ausgehen und zu anderen Knoten führen.
+    Hierbei wird der Kosinussatz auf das Dreieck angewandt, welches von den drei Knoten gebildet wird
+    und das Ergebnis der Berechnung wird in Grad zurückgegeben.
 
     \newpage
 
