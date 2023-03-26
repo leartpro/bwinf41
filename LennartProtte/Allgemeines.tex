@@ -73,6 +73,8 @@
     Um die Quellcode-Dateien zu kompilieren, wird ein C/C++ Compiler benötigt
     (dies ist nicht zwingend notwendig, da bereits ausführbare Programme vorliegen).
     Die ausführbaren Programme wurden unter Ubuntu-22.04.2-LTS kompiliert und getestet.
+    \newpage
+    Der Compiler kann auf Ubuntu wie folgt installiert und verifiziert werden:
     \begin{lstlisting}[language=bash,label={lst:install}]
         $ sudo apt-get update && sudo apt-get upgrade
         $ sudo apt-get install build-essential manpages-dev
@@ -89,8 +91,10 @@
     Sollte der Fehler auftreten, dass Eingabe-/Ausgabe-Dateien nicht gefunden werden,
     wie Beispielsweise:
     \begin{lstlisting}[language=bash,label={lst:error}]
-        terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
-        what():  filesystem error: directory iterator cannot open directory: No such file or directory
+        terminate called after throwing an instance of
+        'std::filesystem::__cxx11::filesystem_error'
+        what():  filesystem error: directory iterator cannot open directory:
+        No such file or directory
     \end{lstlisting}
     Befindet sich die kompilierte Datei mit hoher Wahrscheinlichkeit in einem falschen Ordner.
 

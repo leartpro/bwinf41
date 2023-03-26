@@ -96,18 +96,34 @@
     \section{Lösungsidee}\label{sec:losungsidee}
 
     Die vorliegende Aufgabe erfordert die Ermittlung einer beliebigen zulässigen Reihenfolge,
-    in der Anton seine Außenstellen abfliegen kann, ohne dass es zu einem Innenwinkel von mehr als 90 Grad beim Abbiegen kommt.
-    Es ist dabei zu beachten, dass keine Außenstelle ausgelassen werden darf und dass eine Außenstelle nicht mehrfach besucht werden darf.
+    in der Anton seine Außenstellen abfliegen kann,
+    ohne dass es zu einem Innenwinkel von mehr als 90 Grad beim Abbiegen kommt.
+    Es ist dabei zu beachten, dass keine Außenstelle ausgelassen werden darf
+    und dass eine Außenstelle nicht mehrfach besucht werden darf.
     Da in dieser Aufgabe nicht die kürzeste Route gesucht wird, kann eine approximierte Lösung angestrebt werden.
 
-    Die Problemstellung dieser Aufgabe lässt sich mit dem bekannten Handlungsreisendenproblem assoziieren, bei dem es darum geht, einen möglichst kurzen Hamiltonkreis in einem gewichteten Graphen zu finden.
-    Allerdings verlangt die vorliegende Aufgabe nicht, dass der Start- und Endpunkt identisch sind, so dass es ausreichend ist, einen möglichst kurzen Hamiltonweg zu ermitteln.
-    Das Hamiltonwegproblem ist NP-vollständig, so dass kein Algorithmus existiert, der die gegebene Aufgabe nichtdeterministisch in Polynomialzeit lösen kann.
+    Die Problemstellung dieser Aufgabe lässt sich mit dem bekannten Handlungsreisendenproblem assoziieren,
+    bei dem es darum geht, einen möglichst kurzen Hamiltonkreis in einem gewichteten Graphen zu finden.
+    Allerdings verlangt die vorliegende Aufgabe nicht, dass der Start- und Endpunkt identisch sind,
+    so dass es ausreichend ist, einen möglichst kurzen Hamiltonweg zu ermitteln.
+    Das Hamiltonwegproblem ist NP-vollständig, so dass kein Algorithmus existiert,
+    der die gegebene Aufgabe deterministisch in Polynomialzeit lösen kann.
 
-    Zur Lösung des Problems kann ein Greedy-Algorithmus eingesetzt werden, der die Nearest-Neighbour-Heuristik und Backtracking verwendet, um den nächsten zu betrachtenden Außenposten zu ermitteln.
+    Zur Lösung des Problems kann ein Greedy-Algorithmus eingesetzt werden,
+    der die Nearest-Neighbour-Heuristik und Backtracking verwendet.
     Bei der Auswahl des nächsten Außenpostens muss zusätzlich das Winkelkriterium beachtet werden.
-    Der ausgewählte Außenposten kann der Lösungsmenge hinzugefügt werden und das nächste Element kann rekursiv betrachtet werden.
-    Falls es der Fall ist, dass noch keine Lösung gefunden wurde, aber es keinen Außenposten mehr gibt, der nach dem Winkelkriterium ausgewählt werden kann, kann die Rekursion beendet werden.
+    Alternative Ansätze, welche hier nicht tiefergehend betrachtet werden, wären Algorithmen für konvexe Hüllen,
+    da als Eingabe eine endliche ungeordnete Menge an Punkten gegeben ist, welche alle auf einer Ebene liegen.
+    Dieser Ansatz ist allerdings wahrscheinlich weniger für das Hamiltonpfadproblem,
+    als vielmehr für das Problem des Handlungsreisenden geeignet.
+    Des Weiteren stellt auch die Implementation eines solchen Algorithmus eine höhere Schwierigkeit dar.
+    Eine weitere Alternative, wäre ein SAT-Solver.
+    Dieser könnte durch alle Permutationen der gegebenen Punktmenge iterieren
+    und jede Permutation auf ihre Erfüllbarkeit prüfen.
+    Aber Aufgrund der Tatsache, dass es für $n$ Elemente $n!$ viele Permutationen gibt,
+    könnte die Laufzeit entsprechend hoch ausfallen.
+
+
 
     \begin{algorithm}
         \caption{Finde einen Hamiltonpfad in einem euklidischen Graphen}
