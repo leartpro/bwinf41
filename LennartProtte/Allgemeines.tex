@@ -18,6 +18,9 @@
 \lohead{\Aufgabe}
 \rohead{Teilnahme-ID: \TeilnahmeId}
 
+% Fonts
+\usepackage{listings}
+
 % Position des Titels
 \usepackage{titling}
 \setlength{\droptitle}{-1.0cm}
@@ -49,22 +52,38 @@
     Allerdings habe ich während der Bearbeitung nicht nur eine Programmiersprache erlernt,
     sondern auch mein Wissen in außerschulischen Inhalten der theoretischen Informatik und der Algorithmik erweitern können.
 
-
-    \section{Verwendete Sprachen}
+    \section{Verwendete Sprachen}\label{sec:verwendete-sprachen}
     Als Sprache habe ich C++ verwendet.
     Ich hatte in dieser keinerlei Vorwissen und habe daher den BWINF-41 als Gelegenheit genutzt C++ zu erlernen.
-    Die, für die Bearbeitung der BWINF-Aufgaben relevanten, Vorteile die C++ bietet sind
+    Die, für die Bearbeitung der BWINF-Aufgaben relevanten, Vorteile von C++ sind zum einen die
     Plattformunabhängigkeit (da ich auf mehreren verschiedenen Betriebssystemen arbeite),
-    Leistungsstärke und Effizienz in der Laufzeit und im Speicher,
-    Objektorientiert (da ich bereits Java Kenntnisse hatte, war der Umstieg auf C++ realistisch),
+    als auch Leistungsstärke und Effizienz in der Laufzeit und im Speicher (da eine geringe Laufzeit die Entwicklung vereinfacht),
+    so wie Objektorientierung (da ich bereits Java Kenntnisse hatte, war der Umstieg auf C++ realistisch).
 
 
+    \section{Verwendete Programme}\label{sec:verwendete-programme}
+    Als Programme habe ich CLion und Texmaker verwendet.
+    Texmaker habe ich für das Schreiben der Dokumentation mit LaTeX verwendet,
+    da es mir bereits aus der ersten Runde vertraut war.
+    CLion ist eine Jetbrains IDE und da ich bereits gut vertraut mit anderen IDE's, wie Intellij, Webstorm, Golang, etc.,
+    war, hat sich der Einstieg in CLion als problemlos herausgestellt.
 
-    \section{Verwendete Programme}
-    -Begründung, warum diese gewählt wurden
-
-    \section{Testen}
-    -Wie getestet werden kann
-    -Wie ausgeführt werden kann
+    \section{Testen}\label{sec:testen}
+    Das Projekt liegt als CMake-Projekt vor und enthält insgesamt drei Quellcode-Dateien.
+    Um die Quellcode-Dateien zu kompilieren, wird ein C/C++ Compiler benötigt
+    (dies ist nicht zwingend notwendig, da bereits ausführbare Programme vorliegen).
+    \begin{lstlisting}[language=bash,label={lst:install}]
+        $ sudo apt-get update
+        $ sudo apt-get install build-essential manpages-dev
+        $ gcc --version
+    \end{lstlisting}
+    Anschließend können die Quellcode-Dateien wie folgt kompiliert werden:
+    \begin{lstlisting}[language=cmd,label={lst:compile}]
+        $ gcc program-source-code.c -o executable-file-name
+    \end{lstlisting}
+    Die ausführbaren Programme können wie folgt ausgeführt werden:
+    \begin{lstlisting}[language=bash,label={lst:run}]
+        $ ./executable-file-name
+    \end{lstlisting}
 
 \end{document}
