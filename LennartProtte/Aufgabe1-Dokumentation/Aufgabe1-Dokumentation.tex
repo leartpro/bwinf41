@@ -111,10 +111,10 @@
 
     Um das Problem zu lösen, kann ein Greedy-Algorithmus verwendet werden,
     welcher die Nearest-Neighbour-Heuristik und Backtracking verwendet,
-    um den als nächstes zu betrachtenen Außenposten zu ermitteln.
+    um den als nächstes zu betrachteten Außenposten zu ermitteln.
     Bei dieser Auswahl muss zusätzlich das Winkelkriterium angewendet werden.
     Der Ausgewählte Außenposten kann der Lösungsmenge hinzugefügt werden
-    und das näcshte Element kann rekursiv betrachtet werden.
+    und das nächste Element kann rekursiv betrachtet werden.
     Sollte der Fall eintreten, dass eine Lösung noch nicht gefunden wurde, aber es keinen Außenposten mehr gibt,
     welcher nach dem Winkelkriterium ausgewählt werden kann, so kann die Rekursion beendet werden.
 
@@ -137,24 +137,24 @@
                     \State $\textit{angle}\gets$ \textsc{CrossAngle}$(\textit{route}[|\textit{route}|-1], \textit{route}[|\textit{route}|], \textit{coordinates}[i])$
                 \EndIf
                 \If {$\textit{route}$ is empty \textbf{or} ($\textit{coordinates}[i]$ is not in $\textit{route}$ \textbf{and} ($|\textit{route}|<2$ \textbf{or} $\textit{angle} \geq 90$))}
-                    \State $\textit{route.append(}\textit{coordinates}[i]\textit{)}$
+                    \State $\textit{route append }\textit{coordinates}[i]$
                     \If {$|\textit{route}|=n$}
                         \State \textbf{return} \textit{true}
                     \EndIf
                     \If {\textsc{HamiltonianPath}$(\textit{route},\ \textit{coordinates})$}
                         \State \textbf{return} \textit{true}
                     \Else
-                        \State $\textit{route.pop()}$
+                        \State $\textit{route remove last}$
                     \EndIf
                 \EndIf
             \EndFor
             \State \textbf{return} \textit{false}
         \EndFunction
-    \end{algorithmic}
+    \end{algorithmic}\label{alg:algorithm3}
 \end{algorithm}
 
 \begin{algorithm}
-    \caption{Find a Hamiltonian path in a Euclidean graph}
+    \caption{Calculates the Angle of two Edges}
             \begin{algorithmic}
             \Function{CrossAngle}{$from_node,over_node,to_node$}
  \State $\textit{a}\gets \sqrt{(from_node_x - to_node_x)^2 + (from_node_y - to_node_y)^2}$
@@ -172,48 +172,6 @@
     \section{Umsetzung}\label{sec:umsetzung}
     Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde.
     Hier können auch Implementierungsdetails erwähnt werden.
-
-    \begin{algorithm}
-        \begin{algorithmic}[1]
-            \Function{CrossAngle}{$from_node,over_node,to_node$}
-                \State $p \gets \Call{MakePair}{over_node.first-from_node.first,over_node.second-from_node.second}$
-                \State $q \gets \Call{MakePair}{to_node.first-over_node.first,to_node.second-over_node.second}$
-                \State $angle \gets acos(\frac{p.firstq.first+p.secondq.second}{\sqrt{p.first^2+p.second^2}\sqrt{q.first^2+q.second^2}})*180/\pi$
-                \If {$angle>180$}
-                    \State $angle \gets 180-angle$
-                \EndIf
-                \State \textbf{return} $angle$
-            \EndFunction
-            \State
-            \Function{Solve}{$route,coordinates$}
-                \If {$\Call{Size}{route} = \Call{Size}{coordinates}$}
-                    \State \textbf{return} $true$
-                \EndIf
-                \If {NOT $\Call{IsEmpty}{route}$}
-                    \State $p \gets \Call{Back}{route}$
-                    \State $\Call{Sort}{coordinates,lambda (lhs,rhs) \gets \sqrt{(p.first-lhs.first)^2+(p.second-lhs.second)^2}<\sqrt{(p.first-rhs.first)^2+(p.second-rhs.second)^2}}$
-                \EndIf
-                \For {$i \gets 1$ \textbf{to} $\Call{Size}{coordinates}$}
-                    \If {$coordinates[i] \in route$}
-                        \State \textbf{continue}
-                    \EndIf
-                    \State $angle \gets -1$
-                    \If {$\Call{Size}{route}\geq 2$}
-                        %!\State $angle \gets \Call{CrossAngle}{route[\Call{Size{route}-1],route[\Call{Size}{route}],coordinates[i]}$
-                    \EndIf
-                    \If {$\Call{IsEmpty}{route}$ OR ((NOT $coordinates[i] \in route$) AND ($\Call{Size}{route} < 2$ OR $angle\geq90$ OR $angle = 0$))}
-                        \State $\Call{PushBack}{route,coordinates[i]}$
-                        \If {$\Call{Solve}{route,coordinates}$}
-                            \State \textbf{return} $true$
-                        \Else
-                            \State $\Call{PopBack}{route}$
-                        \EndIf
-                    \EndIf
-                \EndFor
-                \State \textbf{return} $false$
-            \EndFunction
-        \end{algorithmic}\label{alg:algorithm}
-    \end{algorithm}
 
     \newpage
 
