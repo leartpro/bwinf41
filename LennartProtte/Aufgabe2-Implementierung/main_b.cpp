@@ -123,8 +123,8 @@ unordered_set<tuple<int, int, int>, TupelHash> findDimensions(int volume, const 
  * Ermittelt rekursiv alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
  * @param volume das Gesamtvolumen für jede Kombination
  * @param squares die maximale Anzahl an Quadern in einer Kombination
- * @param min die minimale Länge einer Quaderseite
- * @param max die maximale Länge einer Quaderseite
+ * @param min die minimale Länge einer Seite eines Quaders
+ * @param max die maximale Länge einer Seite eines Quaders
  * @param combinations alle Kombinationen
  * @param currentCombination die aktuelle Kombination
  */

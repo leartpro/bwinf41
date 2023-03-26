@@ -165,7 +165,7 @@ int main() {
         }
 
         //Findet alle anderen möglichen Seiten zu der gesetzten Länge
-        vector<pair<int, int>> result; //TODO: e.g Quader 210x210x90V(9261000) is very suspicious
+        vector<pair<int, int>> result;
         int base = volume / height;
         for(int side_a = 1; side_a <= base; side_a++) {
             for(int side_b = 1; side_b <= base; side_b++) {

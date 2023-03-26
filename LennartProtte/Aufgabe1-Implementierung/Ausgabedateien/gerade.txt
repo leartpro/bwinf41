@@ -1,5 +1,5 @@
-Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden.
-(0, 0)
-180° (100, 0)
-180° (200, 0)
-(300, 0) -> 
+Es konnte eine 300 km lange Flugstrecke durch alle Außenposten ermittelt werden.
+1. [0, 0] 
+2. [100, 0] 180° 
+3. [200, 0] 180° 
+4. [300, 0] 

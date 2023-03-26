@@ -135,16 +135,17 @@ int main() {
         //Berechnet die Lösung und schreibt das Ergebnis in die entsprechende Ausgabedatei
         vector<pair<double, double> > result;
         if (solve(result, coordinates)) {
-            fout << "Es konnte eine Flugstrecke durch alle Außenposten ermittelt werden." << endl;
+            double distance = 0;
+            for(int i = 0; i + 1 < result.size(); i++) {
+                distance += sqrt(pow((result[i].first - result[i+1].first), 2.0) + (pow((result[i].second - result[i+1].second), 2.0)));
+            }
+            fout << "Es konnte eine " << distance << " km lange Flugstrecke durch alle Außenposten ermittelt werden." << endl;
             for (int i = 0; i < result.size(); i++) {
+                fout << i + 1 << ". [" << result[i].first << ", " << result[i].second << "] ";
                 if (i != 0 && i != result.size() - 1) {
-                    fout << cross_angle(result[i - 1], result[i], result[i + 1]) << "° ";
-                }
-                fout << "(" << result[i].first << ", " << result[i].second;
-                if(i == result.size() - 1) {
-                    fout << ") -> " << endl;
+                    fout << cross_angle(result[i - 1], result[i], result[i + 1]) << "° " << endl;
                 } else {
-                    fout << ")" << endl;
+                    fout << endl;
                 }
             }
         } else {
