@@ -5,30 +5,9 @@
 #include <fstream>
 #include <unordered_set>
 #include <map>
+#include "main.h"
 
 using namespace std;
-
-/**
- * Repräsentiert eine Käsescheibe
- */
-struct Slice {
-    Slice(int p_length, int p_height) {
-        this->length = p_length;
-        this->height = p_height;
-    }
-
-    int length, height;
-};
-
-/**
- * Repräsentiert eine Dimension
- */
-enum Dimension {
-    FRONT,
-    TOP,
-    SIDE,
-    INVALID
-};
 
 //Hash-Funktion für Tupel
 struct TupelHash {
@@ -36,42 +15,6 @@ struct TupelHash {
         return get<0>(x) ^ get<1>(x) ^ get<2>(x);
     }
 };
-
-/*
- * Dimension als String
- */
-constexpr const char *to_string(Dimension dimension) {
-    switch (dimension) {
-        case Dimension::FRONT:
-            return "front";
-        case Dimension::TOP:
-            return "top";
-        case Dimension::SIDE:
-            return "side";
-        case Dimension::INVALID:
-            return "invalid";
-    }
-}
-
-/**
- * Prüft, ob eine Scheibe, von einem Quader abgeschnitten werden kann
- * @param length die Länge des Quaders
- * @param height die Höhe des Quaders
- * @param depth die Tiefe des Quaders
- * @param slice die Scheibe, auf die getestet wird
- * @return die Dimension, wo die Scheibe abgeschnitten werden kann
- */
-Dimension canRemoveSlice(int length, int height, int depth, Slice slice) {
-    if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
-        return FRONT;
-    } else if (slice.length == length && slice.height == depth || slice.height == length && slice.length == depth) {
-        return TOP;
-    } else if (slice.length == height && slice.height == depth || slice.height == height && slice.length == depth) {
-        return SIDE;
-    } else {
-        return INVALID;
-    }
-}
 
 /**
  * Sortiert Tupel mit drei Elementen in aufsteigender Reihenfolge
@@ -103,7 +46,7 @@ void sort_tupel(tuple<int, int, int> &tupel) {
  * @param max die längste Seite des Quaders
  * @return alle möglichen Varianten des Quaders
  */
-unordered_set<tuple<int, int, int>, TupelHash> findDimensions(int volume, const int &min, const int &max) {
+unordered_set<tuple<int, int, int>, TupelHash> find_dimensions(int volume, const int &min, const int &max) {
     unordered_set<tuple<int, int, int>, TupelHash> dimensions;
     for (int l = min; l <= max; l++) {
         for (int w = min; w <= max; w++) {
@@ -128,12 +71,12 @@ unordered_set<tuple<int, int, int>, TupelHash> findDimensions(int volume, const 
  * @param combinations alle Kombinationen
  * @param currentCombination die aktuelle Kombination
  */
-void findCombinations(int volume,
-                      int squares,
-                      const int &min,
-                      const int &max,
-                      vector<unordered_set<tuple<int, int, int>, TupelHash>> &combinations,
-                      unordered_set<tuple<int, int, int>, TupelHash> &currentCombination) {
+void find_combinations(int volume,
+                       int squares,
+                       const int &min,
+                       const int &max,
+                       vector<unordered_set<tuple<int, int, int>, TupelHash>> &combinations,
+                       unordered_set<tuple<int, int, int>, TupelHash> &currentCombination) {
     //Wenn die aktuelle Kombination vollständig ist
     if (squares == 0 && volume == 0) {
         combinations.push_back(currentCombination);
@@ -144,15 +87,15 @@ void findCombinations(int volume,
         return;
     }
     //Berechnet rekursiv den nächsten Quader der aktuellen Kombination
-    unordered_set<tuple<int, int, int>, TupelHash> possibleDimensions = findDimensions(volume, min, max);
+    unordered_set<tuple<int, int, int>, TupelHash> possibleDimensions = find_dimensions(volume, min, max);
     for (auto dimension: possibleDimensions) {
         currentCombination.insert(dimension);
-        findCombinations(volume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
-                         squares - 1,
-                         min,
-                         max,
-                         combinations,
-                         currentCombination);
+        find_combinations(volume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
+                          squares - 1,
+                          min,
+                          max,
+                          combinations,
+                          currentCombination);
         currentCombination.erase(dimension);
     }
 }
@@ -164,9 +107,9 @@ void findCombinations(int volume,
  * @param slices die gegebene Menge an Scheiben
  * @return alle Kombinationen für die gegebenen Parameter
  */
-vector<unordered_set<tuple<int, int, int>, TupelHash>> findAllCombinations(int volume,
-                                                                           int count_of_squares,
-                                                                           const vector<Slice> &slices) {
+vector<unordered_set<tuple<int, int, int>, TupelHash>> find_all_combinations(int volume,
+                                                                             int count_of_squares,
+                                                                             const vector<Slice> &slices) {
     vector<unordered_set<tuple<int, int, int>, TupelHash>> combinations;
     unordered_set<tuple<int, int, int>, TupelHash> currentCombination;
 
@@ -186,7 +129,7 @@ vector<unordered_set<tuple<int, int, int>, TupelHash>> findAllCombinations(int v
         }
     }
 
-    findCombinations(volume, count_of_squares, min, max, combinations, currentCombination);
+    find_combinations(volume, count_of_squares, min, max, combinations, currentCombination);
     //Entfernt die Kombinationen, welche nicht der erwarteten Anzahl von Quadern entsprechen
     combinations.erase(
             std::remove_if(combinations.begin(), combinations.end(),
@@ -197,51 +140,7 @@ vector<unordered_set<tuple<int, int, int>, TupelHash>> findAllCombinations(int v
     return combinations;
 }
 
-/**
- * Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
- * @param length die Länge des Quaders
- * @param height die Höhe des Quaders
- * @param depth die Tiefe des Quaders
- * @param order die Lösungsreihenfolge
- * @param slices die noch nicht verwendete Menge an Scheiben
- * @return true, wenn es eine lösung gibt, ansonsten false
- */
-bool calculate_square(int length, int height, int depth, vector<pair<Slice, Dimension>> &order, vector<Slice> &slices) {
 
-    //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
-    if (length == 0 || height == 0 || depth == 0) {
-        return true;
-    }
-    vector<Slice> removed_slices;
-    //Für jede noch nicht verwendete Schiebe
-    for (auto it = slices.begin(); it != slices.end(); ++it) {
-        Dimension dimension = canRemoveSlice(length, height, depth, *it);
-        //Wenn die aktuelle Scheibe abgeschnitten werden kann
-        if (dimension != INVALID) {
-            //Aktualisiere die Maße des Quaders
-            int new_length = length - (dimension == SIDE ? 1 : 0);
-            int new_height = height - (dimension == TOP ? 1 : 0);
-            int new_depth = depth - (dimension == FRONT ? 1 : 0);
-            //Füge die Scheibe zur Lösungsmenge hinzu
-            order.emplace_back(*it, dimension);
-            removed_slices.push_back(*it);
-            slices.erase(it);
-            //Wenn es eine Lösung mit der aktuellen Scheibe gibt
-            if (calculate_square(new_length, new_height, new_depth, order, slices)) {
-                return true;
-            } else {
-                //Entferne die aktuelle Scheibe von der Lösungsmenge
-                order.pop_back();
-                for (auto &slice: removed_slices) {
-                    slices.push_back(slice);
-                }
-                removed_slices.clear();
-            }
-        }
-    }
-    //Wenn keine der noch nicht betrachteten Scheiben verwendet werden kann
-    return false;
-}
 
 /**
  * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
@@ -291,7 +190,7 @@ int main() {
         bool success = false;
         //Erhöht die Anzahl der Würfel schrittweise, bis es eine Lösung gibt
         for (int count_of_squares = 1; count_of_squares <= slices.size(); count_of_squares++) {
-            const auto &combinations = findAllCombinations(volume, count_of_squares, slices);
+            const auto &combinations = find_all_combinations(volume, count_of_squares, slices);
             for (const auto &combination: combinations) {
                 bool valid = true;
                 vector<Slice> t_slices(slices);

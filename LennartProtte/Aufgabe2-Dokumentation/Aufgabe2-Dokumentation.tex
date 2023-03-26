@@ -8,9 +8,9 @@
 \usepackage[a4paper,margin=2.5cm,footskip=0.5cm]{geometry}
 
 % Die nächsten drei Felder bitte anpassen:
-\newcommand{\Aufgabe}{Aufgabe 2: \LaTeX-Dokument} % Aufgabennummer und Aufgabennamen angeben
-\newcommand{\TeilnahmeId}{?????}                  % Teilnahme-ID angeben
-\newcommand{\Name}{Vor- und Nachname}             % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
+\newcommand{\Aufgabe}{Aufgabe 2: Alles Käse} % Aufgabennummer und Aufgabennamen angeben
+\newcommand{\TeilnahmeId}{67275}                        % Teilnahme-ID angeben
+\newcommand{\Name}{Lennart Protte}                      % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
 
 % Kopf- und Fußzeilen
 \usepackage{scrlayer-scrpage, lastpage}
@@ -30,12 +30,20 @@
 % Für Bilder
 \usepackage{graphicx}
 
+%Für Überschriften
+\usepackage[labelformat=empty]{caption}
+\captionsetup[algorithm]{labelformat=empty}
+
 % Für Algorithmen
 \usepackage{algpseudocode}
+\usepackage{adigraph}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
 
 % Für Quelltext
 \usepackage{listings}
 \usepackage{color}
+\usepackage{textcomp}
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
@@ -46,15 +54,23 @@
     captionpos=b, % sets the caption-position to bottom
     keepspaces=true, % keeps spaces in text
     numbers=left, numbersep=5pt, showspaces=false,showstringspaces=true,
-    showtabs=false, stepnumber=2, tabsize=2, title=\lstname
-}
-\lstdefinelanguage{JavaScript}{ % JavaScript ist als einzige Sprache noch nicht vordefiniert
-    keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
-    morecomment=[l]{//},
-    morecomment=[s]{/*}{*/},
-    morestring=[b]',
-    morestring=[b]",
-    sensitive=true
+    showtabs=false, stepnumber=2, tabsize=2, title=\lstname ,
+    inputencoding = utf8,  % Input encoding
+    extendedchars = true,  % Extended ASCII
+    literate      =        % Support additional characters
+        {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+        {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+        {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+        {À}{{\`A}}1  {È}{{\'E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+        {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
+        {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
+        {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+        {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+        {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
+        {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1  {Ø}{{\O}}1   {å}{{\r a}}1
+        {Å}{{\r A}}1 {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1  {Õ}{{\~O}}1
+        {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+        {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
 }
 
 % Diese beiden Pakete müssen zuletzt geladen werden
@@ -72,33 +88,464 @@
 
     \maketitle
     \tableofcontents
-
     \vspace{0.5cm}
+    \newpage
 
-    \textbf{Anleitung:} Trage oben in den Zeilen 8 bis 10 die Aufgabennummer, die Teilnahme-ID und die/den Bearbeiterin/Bearbeiter dieser Aufgabe mit Vor- und Nachnamen ein.
-    Vergiss nicht, auch den Aufgabennamen anzupassen (statt \("`\)\LaTeX-Dokument\("'\))!
+    \section{Lösungsidee}\label{sec:losungsidee}
 
-    Dann kannst du dieses Dokument mit deiner \LaTeX-Umgebung übersetzen.
-
-    Die Texte, die hier bereits stehen, geben ein paar Hinweise zur
-    Einsendung.
-    Du solltest sie aber in deiner Einsendung wieder entfernen!
-
-    \section{Lösungsidee}
     Die Idee der Lösung sollte hieraus vollkommen ersichtlich werden, ohne dass auf die eigentliche Implementierung Bezug genommen wird.
+    \subsection{Erweiterung}\label{subsec:erweiterung_losungsidee}
 
-    \section{Umsetzung}
+    \section{Umsetzung}\label{sec:umsetzung}
     Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde.
     Hier können auch Implementierungsdetails erwähnt werden.
 
-    \section{Beispiele}
+    \section{Beispiele}\label{sec:beispiele}
     Genügend Beispiele einbinden!
     Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
 
+    \newpage
     \section{Quellcode}
-    Unwichtige Teile des Programms sollen hier nicht abgedruckt werden.
-    Dieser Teil sollte nicht mehr als 2–3 Seiten umfassen, maximal 10.
+    \label{sec:quellcode}
+    \label{LastPage}
+    \lstset{language=C++,
+        keywordstyle=\color{magenta},
+        stringstyle=\color{red},
+        commentstyle=\color{green},
+    }
+    \subsection{Header-File}\label{subsec:header-file}
 
+    \begin{lstlisting}[frame=single,language=C++,title=Struct Slice,breaklines=true,label={lst:code_slice}]
+/**
+ * Repräsentiert eine Käsescheibe
+ */
+struct Slice {
+    Slice(int p_length, int p_height) {
+        this->length = p_length;
+        this->height = p_height;
+    }
 
+    int length, height;
+};
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Enum Dimension,breaklines=true,label={lst:code_dimension}]
+/**
+ * Repräsentiert eine Dimension
+ */
+enum Dimension{
+    FRONT,
+    TOP,
+    SIDE,
+    INVALID
+};
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode can\_remove\_slice,breaklines=true,label={lst:code_canRemoveSlice}]
+/**
+ * Prüft, ob eine Scheibe, von einem Quader abgeschnitten werden kann
+ * @param length die Länge des Quaders
+ * @param height die Höhe des Quaders
+ * @param depth die Tiefe des Quaders
+ * @param slice die Scheibe, auf die getestet wird
+ * @return -1, wenn die Scheibe nicht entfernt werden kann,
+ * ansonsten wird die Dimension zurückgegeben, wo diese entfernt werden kann
+ * Dimensionen:
+ * 0 => VORNE
+ * 1 => OBEN
+ * 2 => SEITE
+ */
+Dimension can_remove_slice(int length, int height, int depth, Slice slice) {
+    if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
+        return FRONT;
+    } else if (slice.length == length && slice.height == depth || slice.height == length && slice.length == depth) {
+        return TOP;
+    } else if (slice.length == height && slice.height == depth || slice.height == height && slice.length == depth) {
+        return SIDE;
+    } else {
+        return INVALID;
+    }
+}
+    \end{lstlisting}
+
+    \newpage
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode calculate\_square,breaklines=true,label={lst:code_calculateSquare}]
+/**
+ * Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
+ * @param length die Länge des Quaders
+ * @param height die Höhe des Quaders
+ * @param depth die Tiefe des Quaders
+ * @param order die Lösungsreihenfolge
+ * @param slices die noch nicht verwendete Menge an Scheiben
+ * @return true, wenn es eine lösung gibt, ansonsten false
+ */
+bool calculate_square(int length, int height, int depth, std::vector<std::pair<Slice, Dimension>> &order, std::vector<Slice> &slices) {
+
+    //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
+    if (length == 0 || height == 0 || depth == 0) {
+        return true;
+    }
+    std::vector<Slice> removed_slices;
+    //Für jede noch nicht verwendete Schiebe
+    for (auto it = slices.begin(); it != slices.end(); ++it) {
+        Dimension dimension = can_remove_slice(length, height, depth, *it);
+        //Wenn die aktuelle Scheibe abgeschnitten werden kann
+        if (dimension != INVALID) {
+            //Aktualisiere die Maße des Quaders
+            int new_length = length - (dimension == SIDE ? 1 : 0);
+            int new_height = height - (dimension == TOP ? 1 : 0);
+            int new_depth = depth - (dimension == FRONT ? 1 : 0);
+            //Füge die Scheibe zur Lösungsmenge hinzu
+            order.emplace_back(*it, dimension);
+            removed_slices.push_back(*it);
+            slices.erase(it);
+            //Wenn es eine Lösung mit der aktuellen Scheibe gibt
+            if (calculate_square(new_length, new_height, new_depth, order, slices)) {
+                return true;
+            } else {
+                //Entferne die aktuelle Scheibe von der Lösungsmenge
+                order.pop_back();
+                for (auto &slice: removed_slices) {
+                    slices.push_back(slice);
+                }
+                removed_slices.clear();
+            }
+        }
+    }
+    //Wenn keine der noch nicht betrachteten Scheiben verwendet werden kann
+    return false;
+}
+    \end{lstlisting}
+
+    \newpage
+
+    \subsection{Alles Käse}\label{subsec:alles-kaese}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main}]
+/**
+ * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
+ * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
+ * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
+ * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
+ */
+int main() {
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
+
+    //Durchläuft alle Dateien im Eingabeordner
+    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+
+        //Liest den Dateinamen aus
+        string input_file = entry.path();
+        string output_file = output_dir + "/" + entry.path().filename().string();
+
+        //Öffnet die Eingabedatei
+        ifstream fin(input_file);
+
+        //Öffnet die Ausgabedatei
+        ofstream fout(output_file);
+
+        //Liest die Eingabedatei ein
+        vector<Slice> slices;
+        int a, b, n;
+        fin >> n;
+        while (fin >> a >> b) {
+            slices.emplace_back(a, b);
+        }
+
+        //Berechnet das Volumen des Quaders
+        int volume = 0, height = 0;
+        for (const auto &slice: slices) {
+            volume += slice.length * slice.height;
+        }
+
+        //Findet die Seite, wo der größte Wert maximal ist und setzt die Länge auf diesen Wert
+        for (const auto &slice: slices) {
+            int side = (slice.length > slice.height) ? slice.length : slice.height;
+            if (side > height) {
+                height = side;
+            }
+        }
+
+        //Findet alle anderen möglichen Seiten zu der gesetzten Länge
+        vector<pair<int, int>> result;
+        int base = volume / height;
+        for(int side_a = 1; side_a <= base; side_a++) {
+            for(int side_b = 1; side_b <= base; side_b++) {
+                if(side_a * side_b * height == volume) {
+                    result.emplace_back(side_a, side_b);
+                }
+            }
+        }
+
+        //Sortiert die Scheiben nach ihrer Fläche
+        vector<pair<Slice, Dimension>> order;
+        sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
+                 return (a.length * a.height) > (b.length * b.height);
+             }
+        );
+
+        auto it = result.begin();
+        bool success = false;
+        //Für jede mögliche Kombination der Seitenlängen
+        while (it != result.end()) {
+            int t_height = height;
+            vector<Slice> t_slices(slices);
+            order.clear();
+            //Wenn es eine Lösung gibt
+            if (calculate_square( it->first, t_height, it->second, order, t_slices)) {
+                success = true;
+                fout << "Die Scheiben können zu einem Quader zusammengesetzt werden." << endl;
+                fout << "Quader: " << height << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
+                     << endl;
+                for (auto const &o: order) {
+                    fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << to_string(o.second)
+                         << endl;
+                }
+                break;
+            }
+            it++;
+        }
+        //Wenn es keine Lösung gab
+        if (!success) {
+            fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
+        }
+        //Dateien schließen
+        fin.close();
+        fout.close();
+    }
+    return 0;
+}
+    \end{lstlisting}
+
+    \subsection{Erweiterung}\label{subsec:erweiterung}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode sort\_tupel,breaklines=true,label={lst:code_sortTupel}]
+/**
+ * Sortiert Tupel mit drei Elementen in aufsteigender Reihenfolge
+ * @param tupel der zu sortierende Tupel
+ */
+void sort_tupel(tuple<int, int, int> &tupel) {
+    int temp;
+    if (get<0>(tupel) > get<1>(tupel)) {
+        temp = get<0>(tupel);
+        get<0>(tupel) = get<1>(tupel);
+        get<1>(tupel) = temp;
+    }
+    if (get<1>(tupel) > get<2>(tupel)) {
+        temp = get<1>(tupel);
+        get<1>(tupel) = get<2>(tupel);
+        get<2>(tupel) = temp;
+        if (get<0>(tupel) > get<1>(tupel)) {
+            temp = get<0>(tupel);
+            get<0>(tupel) = get<1>(tupel);
+            get<1>(tupel) = temp;
+        }
+    }
+}
+    \end{lstlisting}
+
+    \newpage
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode find\_dimensions,breaklines=true,label={lst:code_findDimensions}]
+/**
+ * Ermittelt alle möglichen ganzzahligen Kombinationen von Längen, Breiten und Höhen für einen Quader
+ * @param volume das maximale Volumen des Quaders
+ * @param min die kürzeste Seite des Quaders
+ * @param max die längste Seite des Quaders
+ * @return alle möglichen Varianten des Quaders
+ */
+unordered_set<tuple<int, int, int>, TupelHash> find_dimensions(int volume, const int &min, const int &max) {
+    unordered_set<tuple<int, int, int>, TupelHash> dimensions;
+    for (int l = min; l <= max; l++) {
+        for (int w = min; w <= max; w++) {
+            for (int h = min; h <= max; h++) {
+                if (l * w * h <= volume) {
+                    tuple<int, int, int> tupel = make_tuple(l, w, h);
+                    sort_tupel(tupel);
+                    dimensions.insert(tupel);
+                }
+            }
+        }
+    }
+    return dimensions;
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode find\_combinations,breaklines=true,label={lst:code_findCombinations}]
+/**
+ * Ermittelt rekursiv alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
+ * @param volume das Gesamtvolumen für jede Kombination
+ * @param squares die maximale Anzahl an Quadern in einer Kombination
+ * @param min die minimale Länge einer Seite eines Quaders
+ * @param max die maximale Länge einer Seite eines Quaders
+ * @param combinations alle Kombinationen
+ * @param currentCombination die aktuelle Kombination
+ */
+void find_combinations(int volume,
+                       int squares,
+                       const int &min,
+                       const int &max,
+                       vector<unordered_set<tuple<int, int, int>, TupelHash>> &combinations,
+                       unordered_set<tuple<int, int, int>, TupelHash> &currentCombination) {
+    //Wenn die aktuelle Kombination vollständig ist
+    if (squares == 0 && volume == 0) {
+        combinations.push_back(currentCombination);
+        return;
+    }
+    // Wenn das Volumen die aktuelle Kombination nicht aufgeht
+    if (volume == 0 || squares == 0) {
+        return;
+    }
+    //Berechnet rekursiv den nächsten Quader der aktuellen Kombination
+    unordered_set<tuple<int, int, int>, TupelHash> possibleDimensions = find_dimensions(volume, min, max);
+    for (auto dimension: possibleDimensions) {
+        currentCombination.insert(dimension);
+        find_combinations(volume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
+                          squares - 1,
+                          min,
+                          max,
+                          combinations,
+                          currentCombination);
+        currentCombination.erase(dimension);
+    }
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode find\_all\_combinations,breaklines=true,label={lst:code_findAllCombinations}]
+/**
+ * Ermittelt alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
+ * @param volume das maximale Gesamtvolumen für jede Kombination
+ * @param count_of_squares die Anzahl der Quader in jeder Kombination
+ * @param slices die gegebene Menge an Scheiben
+ * @return alle Kombinationen für die gegebenen Parameter
+ */
+vector<unordered_set<tuple<int, int, int>, TupelHash>> find_all_combinations(int volume,
+                                                                             int count_of_squares,
+                                                                             const vector<Slice> &slices) {
+    vector<unordered_set<tuple<int, int, int>, TupelHash>> combinations;
+    unordered_set<tuple<int, int, int>, TupelHash> currentCombination;
+
+    int max = 0, min = volume;
+    //Ermittelt die maximale Seitenlänge eines Quaders
+    for (const auto &slice: slices) {
+        int side = (slice.length > slice.height) ? slice.length : slice.height;
+        if (side > max) {
+            max = side;
+        }
+    }
+    //Ermittelt die minimale Seitenlänge eines Quaders
+    for (const auto &slice: slices) {
+        int side = (slice.length < slice.height) ? slice.length : slice.height;
+        if (side < min) {
+            min = side;
+        }
+    }
+
+    find_combinations(volume, count_of_squares, min, max, combinations, currentCombination);
+    //Entfernt die Kombinationen, welche nicht der erwarteten Anzahl von Quadern entsprechen
+    combinations.erase(
+            std::remove_if(combinations.begin(), combinations.end(),
+                           [&count_of_squares](auto combination) {
+                               return combination.size() != count_of_squares;
+                           }), combinations.end()
+    );
+    return combinations;
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main_extended}]
+/**
+ * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
+ * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
+ * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
+ * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
+ */
+int main() {
+    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien_b";
+    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien_b";
+
+    //Durchläuft alle Dateien im Eingabeordner
+    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+
+        //Liest den Dateinamen aus
+        string input_file = entry.path();
+        string output_file = output_dir + "/" + entry.path().filename().string();
+
+        //Öffnet die Eingabedatei
+        ifstream fin(input_file);
+
+        //Öffnet die Ausgabedatei
+        ofstream fout(output_file);
+
+        //Liest die Eingabedatei ein
+        vector<Slice> slices;
+        int a, b, n;
+        fin >> n;
+        while (fin >> a >> b) {
+            slices.emplace_back(a, b);
+        }
+
+        //Berechnet das Volumen des Quaders
+        int volume = 0;
+        for (const auto &slice: slices) {
+            volume += slice.length * slice.height;
+        }
+
+        //Sortiert die Scheiben nach ihrer Fläche
+        sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
+                 return (a.length * a.height) > (b.length * b.height);
+             }
+        );
+
+        vector<pair<Slice, Dimension>> order;
+        map<tuple<int, int, int>, vector<pair<Slice, Dimension>>> solution;
+        bool success = false;
+        //Erhöht die Anzahl der Würfel schrittweise, bis es eine Lösung gibt
+        for (int count_of_squares = 1; count_of_squares <= slices.size(); count_of_squares++) {
+            const auto &combinations = find_all_combinations(volume, count_of_squares, slices);
+            for (const auto &combination: combinations) {
+                bool valid = true;
+                vector<Slice> t_slices(slices);
+                for (auto dimension: combination) {
+                    order.clear();
+                    if (!calculate_square(get<0>(dimension), get<1>(dimension), get<2>(dimension), order, t_slices)) {
+                        valid = false;
+                    } else {
+                        solution.insert(make_pair(dimension, order));
+                    }
+                }
+                if (valid && t_slices.empty()) {
+                    success = true;
+                    goto end;
+                } else {
+                    solution.clear();
+                }
+            }
+        }
+        end:
+        //Schreibt die Ausgabe
+        if (success) {
+            fout << "Die Scheiben können zu " << solution.size() << " Quader(n) zusammengesetzt werden." << endl;
+            for (auto & it : solution) {
+                fout << "Quader: " << get<0>(it.first) << "x" << get<1>(it.first) << "x" << get<2>(it.first) << endl;
+                for (auto item: it.second) {
+                    fout << "Slice: (" << item.first.length << ", " << item.first.height
+                         << ") Dimension: " << to_string(item.second) << endl;
+                }
+                fout << endl;
+            }
+        } else {
+            fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
+        }
+
+        //Dateien schließen
+        fin.close();
+        fout.close();
+    }
+    return 0;
+}
+    \end{lstlisting}
 
 \end{document}

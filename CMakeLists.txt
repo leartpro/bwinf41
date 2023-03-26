@@ -6,5 +6,5 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
 
 add_executable(task1 LennartProtte/Aufgabe1-Implementierung/main.cpp)
-add_executable(task2_a LennartProtte/Aufgabe2-Implementierung/main_a.cpp)
-add_executable(task2_b LennartProtte/Aufgabe2-Implementierung/main_b.cpp)
+add_executable(task2_a LennartProtte/Aufgabe2-Implementierung/main_a.cpp LennartProtte/Aufgabe2-Implementierung/main.h)
+add_executable(task2_b LennartProtte/Aufgabe2-Implementierung/main_b.cpp LennartProtte/Aufgabe2-Implementierung/main.h)
