@@ -39,6 +39,7 @@
 \usepackage{adigraph}
 \usepackage{algorithm}
 \usepackage{algorithmicx}
+\usepackage{tikz-3dplot}
 
 % Für Quelltext
 \usepackage{listings}
@@ -71,6 +72,92 @@
         {Å}{{\r A}}1 {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1  {Õ}{{\~O}}1
         {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
         {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+}
+
+\usetikzlibrary{calc}
+\tikzset{plane/.style n args={3}{insert path={%
+    #1 -- ++ #2 -- ++ #3 -- ++ ($-1*#2$) -- cycle}},
+    unit xy plane/.style={plane={#1}{(1,0,0)}{(0,1,0)}},
+    unit xz plane/.style={plane={#1}{(1,0,0)}{(0,0,1)}},
+    unit yz plane/.style={plane={#1}{(0,1,0)}{(0,0,1)}},
+    get projections/.style={insert path={%
+        let \p1=(1,0,0),\p2=(0,1,0)  in
+        [/utils/exec={\pgfmathtruncatemacro{\xproj}{sign(\x1)}\xdef\xproj{\xproj}
+        \pgfmathtruncatemacro{\yproj}{sign(\x2)}\xdef\yproj{\yproj}
+        \pgfmathtruncatemacro{\zproj}{sign(cos(\tdplotmaintheta))}\xdef\zproj{\zproj}}]}},
+    pics/unit cube/.style={code={
+        \path[get projections];
+        \draw (0,0,0) -- (1,1,1);
+        \ifnum\zproj=-1
+        \path[3d cube/every face,3d cube/xy face,unit xy plane={(0,0,0)}];
+        \fi
+        \ifnum\yproj=1
+        \path[3d cube/every face,3d cube/yz face,unit yz plane={(1,0,0)}];
+        \else
+        \path[3d cube/every face,3d cube/yz face,unit yz plane={(0,0,0)}];
+        \fi
+        \ifnum\xproj=1
+        \path[3d cube/every face,3d cube/xz face,unit xz plane={(0,0,0)}];
+        \else
+        \path[3d cube/every face,3d cube/xz face,unit xz plane={(0,1,0)}];
+        \fi
+        \ifnum\zproj>-1
+        \path[3d cube/every face,3d cube/xy face,unit xy plane={(0,0,1)}];
+        \fi
+    }},
+    3d cube/.cd,
+    xy face/.style={fill=blue!10},
+    xz face/.style={fill=blue!20},
+    yz face/.style={fill=blue!30},
+    num cubes x/.estore in=\NumCubesX,
+    num cubes y/.estore in=\NumCubesY,
+    num cubes z/.estore in=\NumCubesZ,
+    num cubes x=1,num cubes y/.initial=1,num cubes z/.initial=1,
+    cube scale/.initial=0.9,
+    every face/.style={draw,very thick},
+    /tikz/pics/.cd,
+    cube array/.style={code={%
+        \tikzset{3d cube/.cd,#1}
+        %\typeout{\NumCubesX,\NumCubesY,\NumCubesZ}
+        \path[get projections];
+        \ifnum\yproj=1
+        \def\LstX{1,...,\NumCubesX}
+        \else
+        \ifnum\NumCubesX>1
+        \pgfmathtruncatemacro{\NextToLast}{\NumCubesX-1}
+        \def\LstX{\NumCubesX,\NextToLast,...,1}
+        \else
+        \def\LstX{1}
+        \fi
+        \fi
+        \ifnum\xproj=-1
+        \def\LstY{1,...,\NumCubesY}
+        \else
+        \ifnum\NumCubesY>1
+        \pgfmathtruncatemacro{\NextToLast}{\NumCubesX-1}
+        \def\LstY{\NumCubesY,\NextToLast,...,1}
+        \else
+        \def\LstY{1}
+        \fi
+        \fi
+        \ifnum\zproj=1
+        \def\LstZ{1,...,\NumCubesZ}
+        \else
+        \ifnum\NumCubesZ>1
+        \pgfmathtruncatemacro{\NextToLast}{\NumCubesX-1}
+        \def\LstZ{\NumCubesZ,\NextToLast,...,1}
+        \else
+        \def\LstZ{1}
+        \fi
+        \def\LstZ{\NumCubesZ,\NextToLast,...,1}
+        \fi
+        \foreach \X in \LstX
+        {\foreach \Y in \LstY
+        {\foreach \Z in \LstZ
+        {\path (\X-\NumCubesX/2-1,\Y-\NumCubesY/2-1,\Z-\NumCubesY/2-1)
+      pic[scale=\pgfkeysvalueof{/tikz/3d cube/cube scale}]{unit cube};}}
+        }
+    }}
 }
 
 % Diese beiden Pakete müssen zuletzt geladen werden
@@ -172,10 +259,12 @@
 
     Dieser Pseudocode beschreibt eine Funktion namens can_remove_slice, die den optimalen Schnitt für die Herstellung eines Käsequaders aus vorgegebenen Käsescheiben bestimmt.
     Die Eingabeparameter sind die Länge $l$, Höhe $h$ und Tiefe $d$ des Käses sowie die zu untersuchende Käsescheibe $s$.
-    Der Operator $\land$ steht für die logische Konjunktion (AND). Der Ausdruck $(s_l = l \land s_h = h) \lor (s_l = h \land s_h = l)$ beschreibt die Bedingung,
+    Der Operator $\land$ steht für die logische Konjunktion (AND).
+    Der Ausdruck $(s_l = l \land s_h = h) \lor (s_l = h \land s_h = l)$ beschreibt die Bedingung,
     dass die Käsescheibe in der Länge und Höhe mit dem Käse übereinstimmt.
     Ähnliche Bedingungen gelten für die anderen beiden Fälle, bei denen die Käsescheibe in der Länge und Tiefe oder Höhe und Tiefe übereinstimmt.
-    Der Ausdruck $\lor$ steht für die logische Disjunktion (OR). Wenn keine der Bedingungen erfüllt ist, wird INVALID zurückgegeben.
+    Der Ausdruck $\lor$ steht für die logische Disjunktion (OR).
+    Wenn keine der Bedingungen erfüllt ist, wird INVALID zurückgegeben.
 
     Es soll ein Käsequader aus gegebenen Käsescheiben berechnet werden.
     Die Eingabe besteht aus den Dimensionen $l, h, d$ des Käsequaders sowie einer Liste $s$ mit $n$ Käsescheiben $s_1, s_2, ..., s_n$.
@@ -209,7 +298,44 @@
 
     \section{Beispiele}\label{sec:beispiele}
     Genügend Beispiele einbinden!
-    Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
+    Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken.
+    Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
+
+    \tdplotsetmaincoords{60}{200} % the first argument cannot be larger than 90
+    \begin{tikzpicture}[line join=round,font=\sffamily,3d cube/.cd,
+        num cubes x=1,num cubes y=1,num cubes z=1]
+        \begin{scope}[local bounding box=first row]
+            \begin{scope}[tdplot_main_coords,local bounding box=vector]
+                \path pic{cube array={num cubes x=3}};
+\end{scope}
+\begin{scope}[xshift=4cm,tdplot_main_coords,local bounding box=matrix]
+\path pic{cube array={num cubes x=3,num cubes z=3}};
+\end{scope}
+\begin{scope}[xshift=8cm,tdplot_main_coords,local bounding box=array]
+\path pic{cube array={num cubes x=3,num cubes y=3,num cubes z=3}};
+\end{scope}
+\end{scope}
+\foreach \X in {vector,matrix,array}
+{\node[above] at (\X|-first row.north){\X};}
+%
+\begin{scope}[yshift=-5.5cm,local bounding box=data frame,tdplot_main_coords]
+\foreach \Col [count=\XX] in {blue,purple,green}
+{\path (2-\XX,0,0)pic{cube array={num cubes z=3,
+xy face/.style={fill=\Col!10},
+xz face/.style={fill=\Col!20},
+yz face/.style={fill=\Col!30}}};}
+\end{scope}
+\node[above] (df) at (data frame.north){data frame};
+%
+\begin{scope}[yshift=-3.5cm,xshift=5cm,local bounding box=more]
+\path foreach \XX in {-1.5,0,1.5}
+{(\XX,0,0) pic[tdplot_main_coords,scale=0.4]{cube array={num cubes x=3,cube scale=0.36}}};
+\end{scope}
+\node at (df-|more){more};
+
+\end{tikzpicture}
+
+
 
     \newpage
 
