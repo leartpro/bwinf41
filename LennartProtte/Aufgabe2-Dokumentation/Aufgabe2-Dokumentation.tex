@@ -42,6 +42,8 @@
 
 % Für Beispiele
 \usepackage{tikz-3dplot}
+\usepackage{subcaption}
+
 
 % Für Quelltext
 \usepackage{listings}
@@ -274,6 +276,13 @@
     \end{subfigure}
     \caption{Pictures 1 and 2}\label{fig:figAB}
     \end{figure}
+
+    \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round]
+        \def\a{3.2}
+        \def\b{1.2}
+        \cubeab{(0,0,0)}{\a}{\b}{0}
+        \cubeab{(0,9,0)}{\a}{\b}{1.5}
+    \end{tikzpicture}
 
     \newpage
 
