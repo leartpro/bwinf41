@@ -101,21 +101,7 @@
     \end{scope}
 }
 
-\newcommand{\cubeab}[4]% origin, a, b, separation
-{
-    \begin{scope}[shift={#1}]
-        \simplecube{(0    ,0    ,0    )}{#2}{#2}{#2}{a}{a}{a}{1}
-        \simplecube{(#2+#4,0    ,0    )}{#3}{#2}{#2}{b}{a}{a}{1}
-        \simplecube{(0    ,#2+#4,0    )}{#2}{#3}{#2}{a}{b}{a}{1}
-        \simplecube{(#2+#4,#2+#4,0    )}{#3}{#3}{#2}{b}{b}{a}{1}
-        \simplecube{(0    ,0    ,#2+#4)}{#2}{#2}{#3}{a}{a}{b}{1}
-        \simplecube{(#2+#4,0    ,#2+#4)}{#3}{#2}{#3}{b}{a}{b}{1}
-        \simplecube{(0    ,#2+#4,#2+#4)}{#2}{#3}{#3}{a}{b}{b}{1}
-        \simplecube{(#2+#4,#2+#4,#2+#4)}{#3}{#3}{#3}{b}{b}{b}{1}
-    \end{scope}
-}
-
-\newcommand{\mycube}[4]% origin, a, b, separation
+\newcommand{\bigSquare}[4]% origin, a, b, separation
 {
     \begin{scope}[shift={#1}]
         \simplecube{(0,     0,      0)}     {1}{4}{2}   {a}{a}{a}   {1}
@@ -130,6 +116,42 @@
         \simplecube{(0,     0,      5+4*#4)}   {4}{6}{1}   {a}{a}{a}   {0.2}
         \simplecube{(4+4*#4,   0,      0))}    {1}{6}{6}   {a}{a}{a}   {0.2}
         \simplecube{(5+5*#4,   0,      0))}    {1}{6}{6}   {a}{a}{a}   {0}
+    \end{scope}
+}
+
+\newcommand{\smallSquare}[4]% origin, a, b, separation
+{
+    \begin{scope}[shift={#1}]
+        \simplecube{(0,     0,      0)}     {1}{2}{2}   {a}{a}{a}   {1}
+        \simplecube{(1+#4,   0,      0))}    {1}{2}{2}   {a}{a}{a}   {1}
+    \end{scope}
+}
+
+\newcommand{\unsolvedSquare}[4]% origin, a, b, separation
+{
+    \begin{scope}[shift={#1}]
+        \simplecube{(0,     0,      0)}     {1}{2}{2}   {a}{a}{a}   {1}
+        \simplecube{(1+#4,   0,      0))}    {1}{2}{2}   {a}{a}{a}   {1}
+        \simplecube{(2+2*#4,   0,      0))}    {1}{1}{1}   {a}{a}{a}   {1}
+    \end{scope}
+}
+
+\newcommand{\threeSquares}[4]% origin, a, b, separation
+{
+    \begin{scope}[shift={0}]
+        \simplecube{(0,     0,      0)}     {1}{1}{1}   {a}{a}{a}   {1}
+    \end{scope}
+    \begin{scope}[shift={5}]
+        \simplecube{(0,     0,      0)}     {1}{3}{3}   {a}{a}{a}   {1}
+        \simplecube{(1+#4,   0,      0))}    {1}{3}{3}   {a}{a}{a}   {1}
+        \simplecube{(2+2*#4,   0,      0))}    {1}{3}{3}   {a}{a}{a}   {1}
+    \end{scope}
+    \begin{scope}[shift={7}]
+        \simplecube{(0,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+        \simplecube{(1+#4,,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+        \simplecube{(2+2*#4,    0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+        \simplecube{(3+3*#4,    0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+        \simplecube{(4+4*#4,    0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
     \end{scope}
 }
 
@@ -283,19 +305,118 @@
         \def\b{1.2}
         \begin{subfigure}[b]{0.45\textwidth}
             \centering % b = bottom alignment
-            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.5]
-                \mycube{(0,0,0)}{\a}{\b}{0}
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \bigSquare{(0,0,0)}{\a}{\b}{0}
             \end{tikzpicture}
-            \caption{Zusammengesetzt}\label{fig:figA}
+            \caption{Zusammengesetzt}\label{fig:figA1}
         \end{subfigure}
         \begin{subfigure}[b]{0.45\textwidth}
             \centering % b = bottom alignment
-            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.5]
-                \mycube{(0,9,0)}{\a}{\b}{1}
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \bigSquare{(0,9,0)}{\a}{\b}{1}
             \end{tikzpicture}
-            \caption{Zerschnitten}\label{fig:figB}
+            \caption{Zerschnitten}\label{fig:figB1}
         \end{subfigure}
-        \caption{alleskaese1.txt}\label{fig:figAB}
+        \caption{alleskaese1.txt}\label{fig:figAB1}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \def\a{3.2}
+        \def\b{1.2}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \smallSquare{(0,0,0)}{\a}{\b}{0}
+            \end{tikzpicture}
+            \caption{Zusammengesetzt}\label{fig:figA2}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \smallSquare{(0,9,0)}{\a}{\b}{1}
+            \end{tikzpicture}
+            \caption{Zerschnitten}\label{fig:figB2}
+        \end{subfigure}
+        \caption{small square}\label{fig:figAB2}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \def\a{3.2}
+        \def\b{1.2}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \unsolvedSquare{(0,0,0)}{\a}{\b}{0}
+            \end{tikzpicture}
+            \caption{Zusammengesetzt}\label{fig:figA3}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \unsolvedSquare{(0,9,0)}{\a}{\b}{1}
+            \end{tikzpicture}
+            \caption{Zerschnitten}\label{fig:figB3}
+        \end{subfigure}
+        \caption{unsolved square}\label{fig:figAB3}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \def\a{3.2}
+        \def\b{1.2}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \begin{scope}
+                    \simplecube{(0,     0,      0)}     {1}{1}{1}   {a}{a}{a}   {1}
+                \end{scope}
+            \end{tikzpicture}
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \begin{scope}
+                    \simplecube{(0,     0,      0)}     {1}{3}{3}   {a}{a}{a}   {1}
+                    \simplecube{(1,   0,      0))}    {1}{3}{3}   {a}{a}{a}   {1}
+                    \simplecube{(2,   0,      0))}    {1}{3}{3}   {a}{a}{a}   {1}
+                \end{scope}
+            \end{tikzpicture}
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \begin{scope}
+                    \simplecube{(0,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(1,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(2,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(3,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(4,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                \end{scope}
+            \end{tikzpicture}
+            \caption{Zusammengesetzt}\label{fig:figA4}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \begin{scope}
+                    \simplecube{(0,     0,      0)}     {1}{1}{1}   {a}{a}{a}   {1}
+                \end{scope}
+            \end{tikzpicture}
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \begin{scope}
+                    \simplecube{(0,     0,      0)}     {1}{3}{3}   {a}{a}{a}   {1}
+                    \simplecube{(1+1,   0,      0))}    {1}{3}{3}   {a}{a}{a}   {1}
+                    \simplecube{(2+2*1,   0,      0))}    {1}{3}{3}   {a}{a}{a}   {1}
+                \end{scope}
+            \end{tikzpicture}
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \begin{scope}
+                    \simplecube{(0,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(1+1,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(2+2*1,    0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(3+3*1,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                    \simplecube{(4+4*1,     0,      0)}     {1}{5}{5}   {a}{a}{a}   {1}
+                \end{scope}
+            \end{tikzpicture}
+            \caption{Zerschnitten}\label{fig:figB4}
+        \end{subfigure}
+        \caption{three square}\label{fig:figAB4}
     \end{figure}
 
     \newpage
