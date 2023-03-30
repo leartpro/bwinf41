@@ -289,9 +289,12 @@
 
     \newpage
     \section{Umsetzung}\label{sec:umsetzung}
-    Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde.
-    Hier können auch Implementierungsdetails erwähnt werden.
-
+    - wie die Lösungsidee im Programm tatsächlich umgesetzt wurde
+    - auch Implementierungsdetails
+    - Transformation von Idee ins Programm
+    - Bezug zwischen der Lösungsidee und der Implementation
+    - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
+    - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
 
     \newpage
     \section{Beispiele}\label{sec:beispiele}
@@ -324,6 +327,10 @@ Slice: (2, 2) Dimension: front
 Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
+    - Simples Beispiel
+    - Lösbar für Standard und Erweiterung
+
+
     \begin{figure}[H]
         \centering
         \def\a{3.2}
@@ -354,6 +361,9 @@ Quader: 2x2x2
 Slice: (2, 2) Dimension: front
 Slice: (2, 2) Dimension: front
     \end{lstlisting}
+
+    - Simples Beispiel
+    - Lösbar nur für Erweiterung
 
     \begin{figure}[H]
         \centering
@@ -430,6 +440,8 @@ Slice: (5, 5) Dimension: front
 Slice: (5, 5) Dimension: front
     \end{lstlisting}
 
+    - Zeigt Erweiterung auf beliebige Mengen an Quadern anwendbar
+
     \begin{figure}[H]
         \centering
         \def\a{3.2}
@@ -470,6 +482,11 @@ Slice: (2, 4) Dimension: front
 
     \end{lstlisting}
 
+    - Beispiel 1 der Eingabedateien
+    - erstes beispiel, wo Algorithmus backtracking macht
+    - Lösbar nur Erweiterung nur mit sehr viel Zeit
+        => betrachtung 3 vs 2 Variablen
+
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting2}]
 Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 1000x2x1000 V(2000000)
@@ -481,6 +498,9 @@ Slice: (998, 999) Dimension: side
 Slice: (998, 999) Dimension: side
 
     \end{lstlisting}
+
+    - Beispiel 2 der Eingabedateien
+
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting2}]
 Die Scheiben können zu einem Quader zusammengesetzt werden.
@@ -511,11 +531,16 @@ Slice: (992, 995) Dimension: side
 Slice: (992, 995) Dimension: side
     \end{lstlisting}
 
+    - Beispiel 3 der Eingabedateien
+
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 210x210x210 V(9261000)
         [...]
     \end{lstlisting}
+
+    - Ausschnitt Beispiel 4 der Eingabedateien
+    (Anzahl der Scheiben zu groß zum darstellen)
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
@@ -523,13 +548,24 @@ Quader: 3570x2310x2730 V(1038654520)
                 [...]
     \end{lstlisting}
 
+    - Ausschnitt Beispiel 5 der Eingabedateien
+    (Anzahl der Scheiben zu groß zum darstellen)
+
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
+    - Ausschnitt Beispiel 6 der Eingabedateien
+    - Algorithmus findet keine Lösung
+    - zu groß für Erweiterung
+
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
+
+    - Ausschnitt Beispiel 7 der Eingabedateien
+    - Algorithmus findet keine Lösung
+    - zu groß für Erweiterung
 
 
     \newpage
