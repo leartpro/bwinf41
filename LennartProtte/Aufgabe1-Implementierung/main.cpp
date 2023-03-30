@@ -24,35 +24,6 @@ double cross_angle(const pair<double, double> &from_node,
     return angle;
 }
 
-void generate_adi_graph(const vector<pair<double, double>> &result, const string &file) {
-    int fx = 24, fy = 24;
-    cout << "\\begin{figure}[!h]\\centering" << endl;
-    cout << "\\NewAdigraph{" << file.substr(0, file.size() - 4) << "}{" << endl;
-    for (int i = 0; i < result.size(); i++) {
-        if (i != 0 && i != result.size() - 1) {
-            cout << "    " << i << ":" << result[i].first / fx << "," << result[i].second / fy << ":"
-                 << (((float)((int)(cross_angle(result[i - 1], result[i], result[i + 1]) * 10))) / 10) << "° " << ";" << endl;
-        } else if (i == 0) {
-            cout << "    " << i << ":" << result[i].first / fx << "," << result[i].second / fy << ":start;" << endl;
-        } else {
-            cout << "    " << i << ":" << result[i].first / fx << "," << result[i].second / fy << ":end;" << endl;
-        }
-    }
-    cout << "}{" << endl;
-    for (int i = 0; i + 1 < result.size(); i++) {
-        cout << i << "," << i + 1 << ";" << endl;
-    }
-    cout << "}\n\\" << file.substr(0, file.size() - 4) << "{" << endl;
-    for (int i = 0; i < result.size(); i++) {
-        cout << i << (i == result.size() - 1 ? "" : ",");
-    }
-    cout << "::red;" << endl;
-    cout << "}" << endl;
-    cout << "\\caption{Figur: " << file.substr(0, file.size() - 4) << "}\n\\label{fig:"
-         << file.substr(0, file.size() - 4) << "}\n\\end{figure}" << endl;
-    cout << "\\newpage" << endl;
-}
-
 /**
  * Berechnet rekursiv mit Backtracking eine möglichst kurze Route durch den Graphen,
  * welche die Aufgabenkriterien erfüllt.

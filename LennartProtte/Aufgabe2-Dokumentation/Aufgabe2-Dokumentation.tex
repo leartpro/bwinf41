@@ -295,49 +295,6 @@
 
     \newpage
     \section{Beispiele}\label{sec:beispiele}
-    Genügend Beispiele einbinden!
-    Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken.
-    Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
-
-    \begin{figure}[H]
-        \centering
-        \def\a{3.2}
-        \def\b{1.2}
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering % b = bottom alignment
-            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
-                \bigSquare{(0,0,0)}{\a}{\b}{0}
-            \end{tikzpicture}
-            \caption{Zusammengesetzt}\label{fig:figA1}
-        \end{subfigure}
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering % b = bottom alignment
-            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
-                \bigSquare{(0,9,0)}{\a}{\b}{1}
-            \end{tikzpicture}
-            \caption{Zerschnitten}\label{fig:figB1}
-        \end{subfigure}
-        \caption{alleskaese1.txt}\label{fig:figAB1}
-    \end{figure}
-
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
-    Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 6x6x6 V(216)
-
-Slice: (6, 6) Dimension: front
-Slice: (6, 6) Dimension: front
-Slice: (4, 6) Dimension: top
-Slice: (4, 6) Dimension: top
-Slice: (4, 6) Dimension: front
-Slice: (3, 6) Dimension: top
-Slice: (3, 3) Dimension: side
-Slice: (3, 3) Dimension: side
-Slice: (3, 4) Dimension: front
-Slice: (2, 4) Dimension: top
-Slice: (2, 4) Dimension: front
-Slice: (2, 4) Dimension: front
-
-    \end{lstlisting}
 
     \begin{figure}[H]
         \centering
@@ -357,10 +314,10 @@ Slice: (2, 4) Dimension: front
             \end{tikzpicture}
             \caption{Zerschnitten}\label{fig:figB2}
         \end{subfigure}
-        \caption{small square}\label{fig:figAB2}
+        \caption{Figur kleinerWuerfel.txt}\label{fig:figAB2}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kleinerWuerfel.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
 Quader: 2x2x2
 Slice: (2, 2) Dimension: front
@@ -385,10 +342,10 @@ Slice: (2, 2) Dimension: front
             \end{tikzpicture}
             \caption{Zerschnitten}\label{fig:figB3}
         \end{subfigure}
-        \caption{unsolved square}\label{fig:figAB3}
+        \caption{Figur zweiQuader.txt}\label{fig:figAB3}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe zweiQuader.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
 Quader: 1x1x1
 Slice: (1, 1) Dimension: front
@@ -452,10 +409,10 @@ Slice: (2, 2) Dimension: front
             \end{tikzpicture}
             \caption{Zerschnitten}\label{fig:figB4}
         \end{subfigure}
-        \caption{three square}\label{fig:figAB4}
+        \caption{Figur dreiQuader.txt}\label{fig:figAB4}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting2}]
 Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
 Quader: 1x1x1
 Slice: (1, 1) Dimension: front
@@ -473,7 +430,47 @@ Slice: (5, 5) Dimension: front
 Slice: (5, 5) Dimension: front
     \end{lstlisting}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{figure}[H]
+        \centering
+        \def\a{3.2}
+        \def\b{1.2}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \bigSquare{(0,0,0)}{\a}{\b}{0}
+            \end{tikzpicture}
+            \caption{Zusammengesetzt}\label{fig:figA1}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering % b = bottom alignment
+            \begin{tikzpicture}[3d view={115}{30},line cap=round,line join=round,scale=0.4]
+                \bigSquare{(0,9,0)}{\a}{\b}{1}
+            \end{tikzpicture}
+            \caption{Zerschnitten}\label{fig:figB1}
+        \end{subfigure}
+        \caption{Figur kaese1.txt}\label{fig:figAB1}
+    \end{figure}
+
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting2}]
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 6x6x6 V(216)
+
+Slice: (6, 6) Dimension: front
+Slice: (6, 6) Dimension: front
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: front
+Slice: (3, 6) Dimension: top
+Slice: (3, 3) Dimension: side
+Slice: (3, 3) Dimension: side
+Slice: (3, 4) Dimension: front
+Slice: (2, 4) Dimension: top
+Slice: (2, 4) Dimension: front
+Slice: (2, 4) Dimension: front
+
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting2}]
 Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 1000x2x1000 V(2000000)
 
@@ -485,7 +482,7 @@ Slice: (998, 999) Dimension: side
 
     \end{lstlisting}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting2}]
 Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 1000x10x1000 V(10000000)
 
@@ -514,11 +511,23 @@ Slice: (992, 995) Dimension: side
 Slice: (992, 995) Dimension: side
     \end{lstlisting}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting2}]
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 210x210x210 V(9261000)
+        [...]
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting2}]
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 3570x2310x2730 V(1038654520)
+                [...]
+    \end{lstlisting}
+
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe Figur 7., breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting2}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 

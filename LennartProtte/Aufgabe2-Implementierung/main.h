@@ -36,11 +36,11 @@ enum Dimension{
 constexpr const char* to_string(Dimension dimension) {
     switch (dimension) {
         case Dimension::FRONT:
-            return "front";
+            return "vorne / hinten";
         case Dimension::TOP:
-            return "top";
+            return "oben / unten";
         case Dimension::SIDE:
-            return "side";
+            return "links / rechts";
         case Dimension::INVALID:
             return "invalid";
     }
