@@ -20,6 +20,8 @@
 
 % Fonts
 \usepackage{listings}
+\lstset{escapeinside={<@}{@>}}
+\usepackage{color}
 
 % Position des Titels
 \usepackage{titling}
@@ -28,6 +30,7 @@
 % Diese beiden Pakete müssen zuletzt geladen werden
 \usepackage{hyperref} % Anklickbare Links im Dokument
 \usepackage{cleveref}
+
 
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
@@ -46,7 +49,8 @@
     \textbf{Vorwort:}
     Verglichen mit der ersten Runde, erscheint mir die Bearbeitung der zweiten Runde deutlich anspruchsvoller.
     Dies mag zum Teil daran liegen, dass die Bearbeitung während der Abiturvorbereitung gutes Zeitmanagement erfordert,
-    als auch zum Teil daran, dass ich mir die Sprache C++, in welcher meine Programme geschrieben sind, neu angeeignet habe.
+    als auch zum Teil daran, dass ich mir die Sprache C++ neu für die Implementation meiner Algorithmen angeeignet habe.
+    \newline
     Die Entscheidung, welche der Aufgaben ich bearbeite, ist mir leicht gefallen, da mir die Aufgabenstellung der ersten beiden
     Aufgaben sofort interessant erschienen ist.
     Allerdings habe ich während der Bearbeitung nicht nur eine Programmiersprache erlernt,
@@ -90,12 +94,8 @@
     \end{lstlisting}
     Sollte der Fehler auftreten, dass Eingabe-/Ausgabe-Dateien nicht gefunden werden,
     wie Beispielsweise:
-    \begin{lstlisting}[language=bash,label={lst:error}]
-        terminate called after throwing an instance of
-        'std::filesystem::__cxx11::filesystem_error'
-        what():  filesystem error: directory iterator cannot open directory:
-        No such file or directory
+    \begin{lstlisting}[language=bash,label={lst:error},color=blue]
+       <@\textcolor{red}{filesystem error: directory iterator cannot open directory: No such file or directory}@>
     \end{lstlisting}
     Befindet sich die kompilierte Datei mit hoher Wahrscheinlichkeit in einem falschen Ordner.
-
 \end{document}

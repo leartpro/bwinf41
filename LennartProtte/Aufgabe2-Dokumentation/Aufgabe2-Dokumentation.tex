@@ -48,10 +48,7 @@
 % Für Quelltext
 \usepackage{listings}
 \usepackage{color}
-\usepackage{textcomp}
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\usepackage{xcolor}
 \lstset{
     keywordstyle=\color{blue},commentstyle=\color{mygreen},
     stringstyle=\color{mymauve},rulecolor=\color{black},
@@ -159,6 +156,7 @@
 \usepackage{hyperref} % Anklickbare Links im Dokument
 \usepackage{cleveref}
 \usepackage{tikz}
+\usepackage{textcomp}
 
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
@@ -175,6 +173,30 @@
 
     \newpage
     \section{Lösungsidee}\label{sec:losungsidee}
+
+    Der Aufgabenstellung ist entnehmen, dass eine gegebene Menge an Scheiben, wobei zu jede Scheibe durch
+    eine Länge und eine Höhe beschreiben wird, geprüft werden soll, ob diese zu einem Quader zusammengesetzt werden können.
+    Wenn dies der Fall ist, soll auch die Reihenfolge angegeben werden, in der die Scheiben zu einem, Quader zusammengesetzt werden können.,
+    Dabei müssen in der Lösungsreihenfolge alle Scheiben der gegebenen Menge vorkommen.
+    Die Aufgabenstellung stellt dabei keine Ansprüche, an die Form des Zielquaders, allerdings erscheint es nicht im Sinne der Aufgabenstellung,
+    dass der Zielquader Lücken, beziehungsweise Hohlräume aufweist.
+
+    Beim Zusammensetzten der Scheiben zu einem Quader ist zu beachten, dass diese nicht zwangsläufig alle von der gleichen Seite des Quaders stammen müssen,
+    daher müssen alle Dimensionen des Quaders betrachtet werden.
+    Aufgrund der mathematischen Eigenschaften eines Quaders, ist es ausreichend, wenn nur drei der sechs Seiten betrachtet werden,
+    da parallele Seiten bei einem Quader identisch sind.
+
+    Aus der Menge der gegebenen Scheiben lässt sich das Volumen des Quaders berechnen.
+    Aus diesem und der längsten Seite, die eine Scheibe der gegebenen Menge besitzt, lassen sich alle möglichen Varianten des Zielquaders bilden.
+    Aufgrund der ganzzahligen Scheibendimensionen, kann angenommen werden, dass auch die Dimensionen des Zielquaders ganzzahlig sind.
+    Es müssen daher nur Quader mit ganzzahligen Dimensionen betrachtet werden, welche das berechnete Volumen beinhalten.
+
+    Nun kann für jede mögliche Variante des Zielquaders, mit einem Greedy-Algorithmus, geprüft werden,
+    ob sich die gegebene Menge an Scheiben zu dieser Variante zusammenzusetzen lässt.
+    Sobald dies der Fall ist, ist eine Lösung gefunden.
+    Sollte dies nicht der Fall sein, wird die nächste Variante betrachtet.
+    Sollte es für keine der möglichen Varianten eine Lösung geben, ist es nicht möglich die gegebene Menge an Scheiben
+    zu einem Quader zusammenzusetzen.
 
     Eine Funktion $can\_remove\_slice(l, h, d, s)$ prüft, ob eine gegebene Scheibe $s$ aus dem Quader entfernt werden kann.
     Dazu wird die Scheibe in drei möglichen Dimensionen des Quaders (Front, Top, Side) getestet.
@@ -320,7 +342,7 @@
         \caption{Figur kleinerWuerfel.txt}\label{fig:figAB2}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kleinerWuerfel.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kleinerWuerfel.txt, breaklines=true,label={lst:lstlisting3}]
     Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
 Quader: 2x2x2
 Slice: (2, 2) Dimension: front
@@ -352,7 +374,7 @@ Slice: (2, 2) Dimension: front
         \caption{Figur zweiQuader.txt}\label{fig:figAB3}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe zweiQuader.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe zweiQuader.txt, breaklines=true,label={lst:lstlisting4}]
     Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
 Quader: 1x1x1
 Slice: (1, 1) Dimension: front
@@ -422,7 +444,7 @@ Slice: (2, 2) Dimension: front
         \caption{Figur dreiQuader.txt}\label{fig:figAB4}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting5}]
 Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
 Quader: 1x1x1
 Slice: (1, 1) Dimension: front
@@ -463,7 +485,7 @@ Slice: (5, 5) Dimension: front
         \caption{Figur kaese1.txt}\label{fig:figAB1}
     \end{figure}
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting6}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 6x6x6 V(216)
 
@@ -487,7 +509,7 @@ Slice: (2, 4) Dimension: front
     - Lösbar nur Erweiterung nur mit sehr viel Zeit
         => betrachtung 3 vs 2 Variablen
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting7}]
 Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 1000x2x1000 V(2000000)
 
@@ -502,7 +524,7 @@ Slice: (998, 999) Dimension: side
     - Beispiel 2 der Eingabedateien
 
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting8}]
 Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 1000x10x1000 V(10000000)
 
@@ -533,7 +555,7 @@ Slice: (992, 995) Dimension: side
 
     - Beispiel 3 der Eingabedateien
 
-    \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting9}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 210x210x210 V(9261000)
         [...]
@@ -542,7 +564,7 @@ Quader: 210x210x210 V(9261000)
     - Ausschnitt Beispiel 4 der Eingabedateien
     (Anzahl der Scheiben zu groß zum darstellen)
 
-    \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting10}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 3570x2310x2730 V(1038654520)
                 [...]
@@ -551,7 +573,7 @@ Quader: 3570x2310x2730 V(1038654520)
     - Ausschnitt Beispiel 5 der Eingabedateien
     (Anzahl der Scheiben zu groß zum darstellen)
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting11}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
@@ -559,7 +581,7 @@ Quader: 3570x2310x2730 V(1038654520)
     - Algorithmus findet keine Lösung
     - zu groß für Erweiterung
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting2}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting12}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
