@@ -39,6 +39,8 @@
 \usepackage{adigraph}
 \usepackage{algorithm}
 \usepackage{algorithmicx}
+\usepackage{tikz}
+\usepackage{textcomp}
 
 % Für Beispiele
 \usepackage{tikz-3dplot}
@@ -155,8 +157,6 @@
 % Diese beiden Pakete müssen zuletzt geladen werden
 \usepackage{hyperref} % Anklickbare Links im Dokument
 \usepackage{cleveref}
-\usepackage{tikz}
-\usepackage{textcomp}
 
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
@@ -173,6 +173,8 @@
 
     \newpage
     \section{Lösungsidee}\label{sec:losungsidee}
+
+    \subsection{Allgemein}\label{subsec:allgemein}
 
     Der Aufgabenstellung ist entnehmen, dass eine gegebene Menge an Scheiben, wobei zu jede Scheibe durch
     eine Länge und eine Höhe beschreiben wird, geprüft werden soll, ob diese zu einem Quader zusammengesetzt werden können.
@@ -277,6 +279,10 @@
     - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
     - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
 
+    \subsection{Allgemein}\label{subsec:allgemein}
+
+    \subsection{Erweiterung}\label{subsec:erweiterung}
+
     \newpage
     \section{Beispiele}\label{sec:beispiele}
 
@@ -303,9 +309,9 @@
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kleinerWuerfel.txt, breaklines=true,label={lst:lstlisting3}]
     Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
-Quader: 2x2x2
-Slice: (2, 2) Dimension: front
-Slice: (2, 2) Dimension: front
+    Quader: 2x2x2
+    Slice: (2, 2) Dimension: front
+    Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
     - Simples Beispiel
@@ -335,12 +341,12 @@ Slice: (2, 2) Dimension: front
 
     \begin{lstlisting}[frame=single, title=Programmausgabe zweiQuader.txt, breaklines=true,label={lst:lstlisting4}]
     Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
-Quader: 1x1x1
-Slice: (1, 1) Dimension: front
+    Quader: 1x1x1
+    Slice: (1, 1) Dimension: front
 
-Quader: 2x2x2
-Slice: (2, 2) Dimension: front
-Slice: (2, 2) Dimension: front
+    Quader: 2x2x2
+    Slice: (2, 2) Dimension: front
+    Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
     - Simples Beispiel
@@ -406,21 +412,21 @@ Slice: (2, 2) Dimension: front
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting5}]
-Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
-Quader: 1x1x1
-Slice: (1, 1) Dimension: front
+    Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
+    Quader: 1x1x1
+    Slice: (1, 1) Dimension: front
 
-Quader: 3x3x3
-Slice: (3, 3) Dimension: front
-Slice: (3, 3) Dimension: front
-Slice: (3, 3) Dimension: front
+    Quader: 3x3x3
+    Slice: (3, 3) Dimension: front
+    Slice: (3, 3) Dimension: front
+    Slice: (3, 3) Dimension: front
 
-Quader: 5x5x5
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
+    Quader: 5x5x5
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
     \end{lstlisting}
 
     - Zeigt Erweiterung auf beliebige Mengen an Quadern anwendbar
@@ -450,20 +456,20 @@ Slice: (5, 5) Dimension: front
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting6}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 6x6x6 V(216)
+    Quader: 6x6x6 V(216)
 
-Slice: (6, 6) Dimension: front
-Slice: (6, 6) Dimension: front
-Slice: (4, 6) Dimension: top
-Slice: (4, 6) Dimension: top
-Slice: (4, 6) Dimension: front
-Slice: (3, 6) Dimension: top
-Slice: (3, 3) Dimension: side
-Slice: (3, 3) Dimension: side
-Slice: (3, 4) Dimension: front
-Slice: (2, 4) Dimension: top
-Slice: (2, 4) Dimension: front
-Slice: (2, 4) Dimension: front
+    Slice: (6, 6) Dimension: front
+    Slice: (6, 6) Dimension: front
+    Slice: (4, 6) Dimension: top
+    Slice: (4, 6) Dimension: top
+    Slice: (4, 6) Dimension: front
+    Slice: (3, 6) Dimension: top
+    Slice: (3, 3) Dimension: side
+    Slice: (3, 3) Dimension: side
+    Slice: (3, 4) Dimension: front
+    Slice: (2, 4) Dimension: top
+    Slice: (2, 4) Dimension: front
+    Slice: (2, 4) Dimension: front
 
     \end{lstlisting}
 
@@ -473,14 +479,14 @@ Slice: (2, 4) Dimension: front
         => betrachtung 3 vs 2 Variablen
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting7}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 1000x2x1000 V(2000000)
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 1000x2x1000 V(2000000)
 
-Slice: (2, 1000) Dimension: front
-Slice: (2, 1000) Dimension: front
-Slice: (2, 998) Dimension: top
-Slice: (998, 999) Dimension: side
-Slice: (998, 999) Dimension: side
+    Slice: (2, 1000) Dimension: front
+    Slice: (2, 1000) Dimension: front
+    Slice: (2, 998) Dimension: top
+    Slice: (998, 999) Dimension: side
+    Slice: (998, 999) Dimension: side
 
     \end{lstlisting}
 
@@ -490,32 +496,32 @@ Slice: (998, 999) Dimension: side
 
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting8}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 1000x10x1000 V(10000000)
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 1000x10x1000 V(10000000)
 
-Slice: (1000, 1000) Dimension: side
-Slice: (1000, 1000) Dimension: side
-Slice: (1000, 1000) Dimension: side
-Slice: (7, 1000) Dimension: front
-Slice: (999, 1000) Dimension: side
-Slice: (6, 1000) Dimension: front
-Slice: (998, 1000) Dimension: side
-Slice: (5, 998) Dimension: top
-Slice: (998, 999) Dimension: side
-Slice: (4, 999) Dimension: front
-Slice: (4, 997) Dimension: top
-Slice: (4, 998) Dimension: front
-Slice: (4, 998) Dimension: front
-Slice: (4, 995) Dimension: top
-Slice: (995, 997) Dimension: side
-Slice: (995, 997) Dimension: side
-Slice: (2, 997) Dimension: front
-Slice: (2, 994) Dimension: top
-Slice: (2, 996) Dimension: front
-Slice: (2, 993) Dimension: top
-Slice: (2, 995) Dimension: front
-Slice: (992, 995) Dimension: side
-Slice: (992, 995) Dimension: side
+    Slice: (1000, 1000) Dimension: side
+    Slice: (1000, 1000) Dimension: side
+    Slice: (1000, 1000) Dimension: side
+    Slice: (7, 1000) Dimension: front
+    Slice: (999, 1000) Dimension: side
+    Slice: (6, 1000) Dimension: front
+    Slice: (998, 1000) Dimension: side
+    Slice: (5, 998) Dimension: top
+    Slice: (998, 999) Dimension: side
+    Slice: (4, 999) Dimension: front
+    Slice: (4, 997) Dimension: top
+    Slice: (4, 998) Dimension: front
+    Slice: (4, 998) Dimension: front
+    Slice: (4, 995) Dimension: top
+    Slice: (995, 997) Dimension: side
+    Slice: (995, 997) Dimension: side
+    Slice: (2, 997) Dimension: front
+    Slice: (2, 994) Dimension: top
+    Slice: (2, 996) Dimension: front
+    Slice: (2, 993) Dimension: top
+    Slice: (2, 995) Dimension: front
+    Slice: (992, 995) Dimension: side
+    Slice: (992, 995) Dimension: side
     \end{lstlisting}
 
     - Beispiel 3 der Eingabedateien
