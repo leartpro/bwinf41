@@ -198,19 +198,11 @@
     Sollte es für keine der möglichen Varianten eine Lösung geben, ist es nicht möglich die gegebene Menge an Scheiben
     zu einem Quader zusammenzusetzen.
 
-    Eine Funktion $can\_remove\_slice(l, h, d, s)$ prüft, ob eine gegebene Scheibe $s$ aus dem Quader entfernt werden kann.
-    Dazu wird die Scheibe in drei möglichen Dimensionen des Quaders (Front, Top, Side) getestet.
+    Um zu prüfen, ob eine Variante in die gegebene Menge an Schieben zerlegt werden kann, wird jede
+    Scheibe in drei möglichen Dimensionen des Quaders (Vorne, Oben, Seite) getestet.
     Wenn eine der beiden Seitenlängen der Scheibe mit einer der Seitenlängen des Quaders übereinstimmt,
     kann die Scheibe in der entsprechenden Dimension entfernt werden.
-
-    Eine Funktion $calculate\_square(L, H, D, O, S)$ berechnet eine mögliche Lösung des Quaders.
-    Dabei wird eine Liste $O$ von Paaren (Scheibe, Dimension) verwendet, um die Reihenfolge der Scheiben festzuhalten,
-    und eine Liste $S$ von noch nicht verwendeten Scheiben.
-
-    Wenn die Länge, Höhe oder Tiefe des Quaders null ist, ist der Quader komplett gebildet und die Funktion gibt ``true'' zurück.
-
-    Ansonsten wird jede noch nicht verwendete Scheibe getestet, ob sie aus dem Quader entfernt werden kann.
-    Wenn eine Scheibe entfernt werden kann, wird sie zur Lösungsmenge $O$ hinzugefügt und aus der Liste $S$ entfernt.
+    Wenn dies der Fall ist, wird sie zur Lösungsmenge $O$ hinzugefügt und aus der Liste $S$ entfernt.
     Der Quader wird aktualisiert, indem die entsprechende Seitenlänge reduziert wird.
     Wenn es eine Lösung mit der aktuellen Scheibe gibt, gibt die Funktion ``true'' zurück.
     Andernfalls werden die Änderungen rückgängig gemacht, indem die Scheibe wieder zur Liste $S$ hinzugefügt wird
@@ -228,13 +220,13 @@
                 \If{length = 0 or height = 0 or depth = 0}
                     \State \Return true
                 \EndIf
-                \State removed\_slices $\gets$ leere Liste
-                \For{$slice$ \textbf{in} $slices$}
-                    \State dimension $\gets$ can\_remove\_slice(length, height, depth, slice)
-                    \If{dimension $\neq$ INVALID}
-                        \State new\_length $\gets$ length - (dimension = SIDE ? 1 : 0)
-                        \State new\_height $\gets$ height - (dimension = TOP ? 1 : 0)
-                        \State new\_depth $\gets$ depth - (dimension = FRONT ? 1 : 0)
+                \State removed\_slices \gets leere Liste
+                \For{slice \textbf{in} slices}
+                    \State dimension \gets can\_remove\_slice(length, height, depth, slice)
+                    \If{dimension \neq INVALID}
+                        \State new\_length \gets length - (dimension = SIDE ? 1 : 0)
+                        \State new\_height \gets height - (dimension = TOP ? 1 : 0)
+                        \State new\_depth \gets depth - (dimension = FRONT ? 1 : 0)
                         \State order.push\_back((slice, dimension))
                         \State removed\_slices.push\_back(slice)
                         \State slices.erase(slice)
@@ -242,11 +234,11 @@
                             \State \Return true
                         \Else
                             \State order.pop\_back()
-                            \For{$slice$ \textbf{in} removed_slices}
+                            \For{slice \textbf{in} removed_slices}
                                 \State slices.push\_back(slice)
                             \EndFor
-                            \State removed\_slices $\gets$ leere Liste
-                        \EndIf
+                            \State removed\_slices \gets leere Liste
+                        \EndElse
                     \EndIf
                 \EndFor
                 \State \Return false
@@ -255,17 +247,17 @@
     \end{algorithm}
 
     \begin{algorithm}
-        \caption{Bestimmung des optimalen Schnitts für die Herstellung eines Käsequaders aus vorgegebenen Käsescheiben}
+        \caption{Bestimmung der passenden Seite des Quaders zur Scheibe}
         \label{alg:cheese2}
         \begin{algorithmic}
-            \Function{can\_remove\_slice}{$l, h, d, s$}
-                \If{$(s_l = l$ \land $s_h = h$) \lor ($s_l = h$ \land $s_h = l$)}
+            \Function{can\_remove\_slice}{$length, height, depth, slice$}
+                \If{($slice_{length} = length$ \land $slice_{height} = height$) \lor ($slice_{length} = height$ \land $slice_{height} = length$)}
                     \State \Return $FRONT$
                 \ElsIf
-                        {($s_l = l$ \land $s_d = d$) \lor ($s_l = d$ \land $s_d = l$)}
+                        {($slice_{length} = length$ \land $slice_{depth} = depth$) \lor ($slice_{length} = depth$ \land $slice_{depth} = length$)}
                     \State \Return $TOP$
                 \ElsIf
-                        {($s_h = h$ \land $s_d = d$) \lor ($s_h = d$ \land $s_d = h$)}
+                        {($slice_{height} = height$ \land $slice_{depth} = depth$) \lor ($slice_{height} = depth$ \land $slice_{depth} = height$)}
                     \State \Return $SIDE$
                 \Else
                     \State \Return $INVALID$
@@ -273,39 +265,6 @@
             \EndFunction
         \end{algorithmic}
     \end{algorithm}
-
-    Dieser Pseudocode beschreibt eine Funktion namens can\_remove\_slice, die den optimalen Schnitt für die Herstellung eines Käsequaders aus vorgegebenen Käsescheiben bestimmt.
-    Die Eingabeparameter sind die Länge $l$, Höhe $h$ und Tiefe $d$ des Käses sowie die zu untersuchende Käsescheibe $s$.
-    Der Operator $\land$ steht für die logische Konjunktion (AND).
-    Der Ausdruck $(s_l = l \land s_h = h) \lor (s_l = h \land s_h = l)$ beschreibt die Bedingung,
-    dass die Käsescheibe in der Länge und Höhe mit dem Käse übereinstimmt.
-    Ähnliche Bedingungen gelten für die anderen beiden Fälle, bei denen die Käsescheibe in der Länge und Tiefe oder Höhe und Tiefe übereinstimmt.
-    Der Ausdruck $\lor$ steht für die logische Disjunktion (OR).
-    Wenn keine der Bedingungen erfüllt ist, wird INVALID zurückgegeben.
-
-    Es soll ein Käsequader aus gegebenen Käsescheiben berechnet werden.
-    Die Eingabe besteht aus den Dimensionen $l, h, d$ des Käsequaders sowie einer Liste $s$ mit $n$ Käsescheiben $s_1, s_2, \dots, s_n$.
-    Die Ausgabe besteht aus einem boolschen Wert $b$, der angibt, ob die Käsescheiben zu einem vollständigen Käsequader zusammengesetzt werden können,
-    sowie einer Reihenfolge $o$, in der die Käsescheiben zusammengesetzt werden müssen.
-
-    Die Funktion $calculate\_square$ nimmt als Eingabe die Dimensionen $l, h, d$ des Käsequaders sowie die Liste $s$ mit den Käsescheiben und gibt $b$ und $o$ als Ausgabe zurück.
-    Wenn eine Dimension $0$ ist, wird $true$ zurückgegeben, da dann der Käsequader bereits vollständig ist.
-    Die Liste $rs$ dient zur Speicherung der entfernten Käsescheiben, um sie später wieder hinzufügen zu können.
-
-    Die Funktion $can\_remove\_slice$ prüft für eine gegebene Käsescheibe $s_i$ und die Dimensionen des Käsequaders, ob die Käsescheibe in einer bestimmten Dimension entfernt werden kann.
-    Dabei gibt die Funktion $TOP$, $FRONT$ oder $SIDE$ zurück, falls die Käsescheibe in der Höhe,
-    Tiefe bzw.
-    Länge entfernt werden kann.
-    Falls die Käsescheibe nicht entfernt werden kann, wird $INVALID$ zurückgegeben.
-
-    In der Schleife über alle Käsescheiben wird zuerst geprüft, ob die Käsescheibe in einer Dimension entfernt werden kann.
-    Falls ja, wird die entsprechende Dimension des Käsequaders angepasst und die Käsescheibe zur Liste $rs$ der entfernten Käsescheiben hinzugefügt.
-    Die Käsescheibe wird auch aus der Liste $s$ entfernt und zur Reihenfolge $o$ hinzugefügt.
-    Dann wird rekursiv die Funktion $calculate\_square$ mit den angepassten Dimensionen aufgerufen.
-    Falls es eine Lösung gibt, wird $true$ zurückgegeben.
-    Falls nicht, wird die Käsescheibe aus der Reihenfolge $o$ entfernt, die entfernten Käsescheiben aus $rs$ wieder zu $s$ hinzugefügt und $rs$ geleert.
-
-    Wenn alle Käsescheiben durchlaufen wurden und keine Lösung gefunden wurde, wird $false$ zurückgegeben.
 
     \subsection{Erweiterung}\label{subsec:erweiterung_losungsidee}
 
@@ -387,6 +346,8 @@ Slice: (2, 2) Dimension: front
     - Simples Beispiel
     - Lösbar nur für Erweiterung
 
+     \newpage
+
     \begin{figure}[H]
         \centering
         \def\a{3.2}
@@ -464,6 +425,8 @@ Slice: (5, 5) Dimension: front
 
     - Zeigt Erweiterung auf beliebige Mengen an Quadern anwendbar
 
+    \newpage
+
     \begin{figure}[H]
         \centering
         \def\a{3.2}
@@ -522,6 +485,8 @@ Slice: (998, 999) Dimension: side
     \end{lstlisting}
 
     - Beispiel 2 der Eingabedateien
+
+    \newpage
 
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting8}]
@@ -602,7 +567,7 @@ Quader: 3570x2310x2730 V(1038654520)
         commentstyle=\color{green},
     }
 
-    \subsection{Header-File}\label{subsec:header-file}
+    \subsection{Header-File main.h}\label{subsec:header-file}
 
     \begin{lstlisting}[frame=single,language=C++,title=Struct Slice,breaklines=true,label={lst:code_slice}]
 /**
@@ -709,7 +674,7 @@ bool calculate_square(int length, int height, int depth, std::vector<std::pair<S
 
     \newpage
 
-    \subsection{Alles Käse}\label{subsec:alles-kaese}
+    \subsection{Aufgabe-A main\_a.cpp}\label{subsec:alles-kaese}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main}]
 /**
@@ -808,7 +773,7 @@ int main() {
 }
     \end{lstlisting}
 
-    \subsection{Erweiterung}\label{subsec:erweiterung}
+    \subsection{Erweiterung main\_b.cpp}\label{subsec:erweiterung}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode sort\_tupel,breaklines=true,label={lst:code_sortTupel}]
 /**
