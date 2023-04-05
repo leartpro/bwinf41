@@ -215,8 +215,6 @@
 
     \newpage
     \section{Umsetzung}\label{sec:umsetzung}
-    Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde.
-    Hier können auch Implementierungsdetails erwähnt werden.
 
     \[
         P = \begin{pmatrix}
@@ -244,6 +242,103 @@
     - Bezug zwischen der Lösungsidee und der Implementation
     - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
     - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
+
+    Die gezeigten Funktionen sind in C++ geschrieben und basieren auf Standard-Datentypen wie Vektoren und Paaren.
+    In der Funktion cross\_angle werden geometrische Berechnungen durchgeführt, um den Winkel in Grad zwischen den Vektoren von drei Knoten zu bestimmen.
+    Hierbei werden die x- und y-Koordinaten jedes Knotens als double gespeichert und als pair<double, double>-Paar an die Funktion übergeben.
+    Die Funktion verwendet die in C++ verfügbaren mathematischen Funktionen sqrt und pow, um die Wurzel und das Quadrat von Zahlen zu berechnen,
+    sowie die trigonometrische Funktion acos, um den Inversen Kosinus (Arcuscosinus) einer Zahl zu berechnen.
+    Der berechnete Winkel wird als double zurückgegeben.
+
+    In der Funktion solve wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
+    Hierzu werden ebenfalls Vektoren und Paare verwendet, um die Koordinaten aller Knoten zu speichern und die aktuelle Route zu halten.
+    Zunächst wird die Liste der Knoten nach der Entfernung zum letzten Knoten der aktuellen Route sortiert.
+    Dies wird durch die Verwendung von sort und einem Lambda-Ausdruck erreicht.
+    Der Lambda-Ausdruck gibt an, wie die Vergleichsfunktion für das Sortieren verwendet werden soll.
+    Wenn die Liste der Knoten sortiert ist, wird jeder Knoten in der Liste besucht und überprüft, ob er bereits in der Route enthalten ist oder nicht.
+    Wenn der Knoten noch nicht in der Route enthalten ist, wird der Winkel zwischen dem Knoten, dem vorherigen Knoten und dem vor vorherigen Knoten (falls vorhanden) berechnet.
+    Wenn der Winkel zwischen den Vektoren größer oder gleich 90 Grad ist oder die Route noch leer ist, wird der Knoten zur Route hinzugefügt.
+    Wenn alle Knoten in der Lösungsmenge enthalten sind, wird true zurückgegeben, andernfalls wird das Backtracking fortgesetzt, um eine weitere mögliche Route zu finden.
+
+    Die Verwendung von Vektoren und Paaren in C++ ist hier sinnvoll, da sie eine einfache und effiziente Möglichkeit bieten,
+    eine Liste von Koordinaten und eine Liste von Knoten (in Form von Paaren von Koordinaten) zu speichern.
+    Durch die Verwendung von std::find kann einfach überprüft werden, ob ein bestimmter Knoten bereits in der Route enthalten ist oder nicht.
+    Die Verwendung von Lambda-Ausdrücken und Standardalgorithmen wie sort erleichtert die Implementierung des Algorithmus und erhöht die Lesbarkeit des Codes.
+
+    Zusammenfassend verwendet der gezeigte Code Standard-C++-Funktionen wie Vektoren, Paare, Lambda-Ausdrücke und Standardalgorithmen,
+    um eine rekursive Backtracking-Methode zur Lösung eines Routing-Problems zu implementieren.
+    Die Verwendung von Standard-C++-Datentypen und Funktionen erleichtert die Implementierung des Algorithmus und erhöht die Lesbarkeit des Codes.
+
+    \newline\newline
+    Matrixdarstellung:
+    Dabei repräsentieren $d_{i,j}$ die Entfernung zwischen Knoten $i$ und $j$.
+
+    \begin{equation}
+        \begin{bmatrix}
+            0 & d{1,2} & d{1,3} & \cdots & d{1,n} \ d{2,1} & 0 & d{2,3} & \cdots & d{2,n} \ d{3,1} & d{3,2} &
+            0 & \cdots & d{3,n} \ \vdots & \vdots & \vdots & \ddots & \vdots \ d{n,1} & d{n,2} & d{n,3} & \cdots &
+            0
+        \end{bmatrix}\label{eq:equation}
+    \end{equation}
+
+    Diagrammdarstellung:
+    Ein Diagramm kann verwendet werden, um die Route durch den Graphen zu visualisieren.
+    Im Folgenden ist ein Beispiel für ein solches Diagramm gegeben:
+
+    \begin{figure}[htbp]
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \node[circle, draw] (a) at (0,0) {1};
+            \node[circle, draw] (b) at (1,0) {2};
+            \node[circle, draw] (c) at (2,0) {3};
+            \node[circle, draw] (d) at (3,0) {4};
+            \node[circle, draw] (e) at (4,0) {5};
+            \node[circle, draw] (f) at (5,0) {6};
+            \draw (a) -- (b) -- (c) -- (d) -- (e) -- (f);
+            \draw[dashed, red] (a) -- (c) -- (e);
+        \end{tikzpicture}
+        \caption{Route durch den Graphen.}\label{fig:figure}
+    \end{figure}
+
+    In diesem Diagramm sind die Knoten als Kreise und die Verbindungen zwischen den Knoten als Linien dargestellt.
+    Die rote gestrichelte Linie zeigt die Route durch den Graphen an.
+
+    \begin{center}
+        \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+        thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+        \node[main node] (1) {$1$};
+        \node[main node] (2) [above right of=1] {$2$};
+        \node[main node] (3) [below right of=2] {$3$};
+        \node[main node] (4) [below right of=1] {$4$};
+
+        \path[every node/.style={font=\sffamily\small}]
+        (1) edge node [left] {4} (4)
+        edge node [above] {2} (2)
+        (2) edge node [right] {3} (3)
+        (3) edge node [below] {1} (4);
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+        % Define the coordinates of the nodes
+            \coordinate[label=below:$from_{node}$] (fromNode) at (0,0);
+            \coordinate[label=above:$over_{node}$] (overNode) at (1.5,1);
+            \coordinate[label=below:$to_{node}$] (toNode) at (3,0);
+        % Draw the edges between the nodes
+            \draw (fromNode) -- node[above] {$a$} (overNode);
+            \draw (overNode) -- node[above] {$c$} (toNode);
+            \draw (fromNode) -- node[below] {$b$} (toNode);
+        % Draw the angle symbol
+            \draw [draw=black, fill=white] (0.7,0) arc (0:34:0.7);
+            \node at (0.9,0.3) {$\alpha$};
+        \end{tikzpicture}
+        \caption{Visuelle Darstellung der Winkelberechnung}\label{fig:figure2}
+    \end{figure}
+
+
 
     \newpage
     \section{Beispiele}\label{sec:beispiele}
