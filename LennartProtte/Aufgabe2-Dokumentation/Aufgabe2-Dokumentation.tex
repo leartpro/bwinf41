@@ -157,6 +157,7 @@
 % Diese beiden Pakete müssen zuletzt geladen werden
 \usepackage{hyperref} % Anklickbare Links im Dokument
 \usepackage{cleveref}
+\usepackage{wasysym}
 
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
@@ -172,6 +173,8 @@
     \vspace{0.5cm}
 
     \newpage
+
+
     \section{Lösungsidee}\label{sec:losungsidee}
 
     \subsection{Allgemein}\label{subsec:allgemein}
@@ -211,58 +214,59 @@
     und die letzte Scheibe aus der Lösungsmenge $O$ entfernt wird.
     Wenn keine der noch nicht betrachteten Scheiben entfernt werden kann, gibt die Funktion ``false'' zurück.
 
-    \begin{algorithm}
+    \begin{algorithm}[H]
         \caption{Berechnung eines Käsequaders aus gegebenen Käsescheiben}
-        \label{alg:cheese}
         \begin{algorithmic}
-            \Require Die Länge, Höhe und Tiefe des Käsequaders, eine Liste von Käsescheiben
+            \Require Die Länge $l$, Höhe $h$ und Tiefe $d$ des Käsequaders, eine Liste $S$ von Käsescheiben, eine leere Liste $O$
             \Ensure Ein boolescher Wert, der angibt, ob die Käsescheiben zu einem vollständigen Käsequader zusammengesetzt werden können,
-            und eine Reihenfolge, in der die Käsescheiben zusammengesetzt werden müssen
-            \Function{calculate\_square}{length, height, depth, slices}
-                \If{length = 0 or height = 0 or depth = 0}
+            und eine Lösungsreihenfolge $O$, in der die Käsescheiben zusammengesetzt werden können.
+            \Function{calculate\_square}{$\textit{l},\ \textit{h},\ \textit{d},\ \textit{S},\ \textit{O}$}
+                \If{$l$ = 0 or $h$ = 0 or $d$ = 0}
                     \State \Return true
                 \EndIf
-                \State removed\_slices \gets leere Liste
-                \For{slice \textbf{in} slices}
-                    \State dimension \gets can\_remove\_slice(length, height, depth, slice)
-                    \If{dimension \neq INVALID}
-                        \State new\_length \gets length - (dimension = SIDE ? 1 : 0)
-                        \State new\_height \gets height - (dimension = TOP ? 1 : 0)
-                        \State new\_depth \gets depth - (dimension = FRONT ? 1 : 0)
-                        \State order.push\_back((slice, dimension))
-                        \State removed\_slices.push\_back(slice)
-                        \State slices.erase(slice)
-                        \If{calculate\_square(new\_length, new\_height, new\_depth, order, slices)}
-                            \State \Return true
-                        \Else
-                            \State order.pop\_back()
-                            \For{slice \textbf{in} removed_slices}
-                                \State slices.push\_back(slice)
-                            \EndFor
-                            \State removed\_slices \gets leere Liste
+                \State $R_{removed} \gets \emptyset$
+                \For{$s \in S$}
+                    \State $D_{dimension} \gets \textsc{can\_remove\_slice}$
+                    \If{$D_{dimension} \neq UNG\ddot ULTIG$}
+                        \State $l_{new} \gets l - (D_{dimension} = SIDE ? 1 : 0)$
+                        \State $h_{new}  \gets h - (D_{dimension} = TOP ? 1 : 0)$
+                        \State $d_{new}  \gets d - (D_{dimension} = FRONT ? 1 : 0)$
+                        \State $O \gets {slice, dimension}$
+                        \State $R_{removed} \gets s$
+                        \State $S \notin s$
+                    \EndIf
+                    \If{$\textsc{calculate\_square}(l_{new},h_{new},d_{new},S,O)$}
+                        \State \Return true
+                    \Else
+                        \State $O \notin last$
+                        \For{$r \in R_{removed}$}
+                            \State $slices \gets r$
+                        \EndFor
+                        \State $R_{removed} \gets \emptyset$
                         \EndElse
                     \EndIf
                 \EndFor
                 \State \Return false
             \EndFunction
-        \end{algorithmic}
+        \end{algorithmic}\label{alg:pseudo_greedy}
     \end{algorithm}
 
-    \begin{algorithm}
+
+    \begin{algorithm}[H]
         \caption{Bestimmung der passenden Seite des Quaders zur Scheibe}
         \label{alg:cheese2}
         \begin{algorithmic}
-            \Function{can\_remove\_slice}{$length, height, depth, slice$}
-                \If{($slice_{length} = length$ \land $slice_{height} = height$) \lor ($slice_{length} = height$ \land $slice_{height} = length$)}
-                    \State \Return $FRONT$
+            \Function{can\_remove\_slice}{$l, h, d, s$}
+                \If{($s_{l} = l$ \land $s_{h} = h$) \lor ($s_{l} = h$ \land $s_{h} = l$)}
+                    \State \Return $VORNE$
                 \ElsIf
-                        {($slice_{length} = length$ \land $slice_{depth} = depth$) \lor ($slice_{length} = depth$ \land $slice_{depth} = length$)}
-                    \State \Return $TOP$
+                        {($s_{l} = l$ \land $s_{d} = d$) \lor ($s_{l} = d$ \land $s_{d} = l$)}
+                    \State \Return $OBEN$
                 \ElsIf
-                        {($slice_{height} = height$ \land $slice_{depth} = depth$) \lor ($slice_{height} = depth$ \land $slice_{depth} = height$)}
-                    \State \Return $SIDE$
+                        {($s_{h} = h$ \land $s_{d} = d$) \lor ($s_{h} = d$ \land $s_{d} = h$)}
+                    \State \Return $SEITE$
                 \Else
-                    \State \Return $INVALID$
+                    \State \Return $UNG\ddot ULTIG$
                 \EndIf
             \EndFunction
         \end{algorithmic}
@@ -271,6 +275,8 @@
     \subsection{Erweiterung}\label{subsec:erweiterung_losungsidee}
 
     \newpage
+
+
     \section{Umsetzung}\label{sec:umsetzung}
     - wie die Lösungsidee im Programm tatsächlich umgesetzt wurde
     - auch Implementierungsdetails
@@ -279,11 +285,13 @@
     - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
     - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
 
-    \subsection{Allgemein}\label{subsec:allgemein}
+    \subsection{Allgemein}\label{subsec:allgemein2}
 
-    \subsection{Erweiterung}\label{subsec:erweiterung}
+    \subsection{Erweiterung}\label{subsec:erweiterung2}
 
     \newpage
+
+
     \section{Beispiele}\label{sec:beispiele}
 
     \begin{figure}[H]
@@ -308,10 +316,10 @@
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kleinerWuerfel.txt, breaklines=true,label={lst:lstlisting3}]
-    Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
-    Quader: 2x2x2
-    Slice: (2, 2) Dimension: front
-    Slice: (2, 2) Dimension: front
+Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
+Quader: 2x2x2
+Slice: (2, 2) Dimension: front
+Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
     - Simples Beispiel
@@ -340,19 +348,19 @@
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe zweiQuader.txt, breaklines=true,label={lst:lstlisting4}]
-    Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
-    Quader: 1x1x1
-    Slice: (1, 1) Dimension: front
+Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
+Quader: 1x1x1
+Slice: (1, 1) Dimension: front
 
-    Quader: 2x2x2
-    Slice: (2, 2) Dimension: front
-    Slice: (2, 2) Dimension: front
+Quader: 2x2x2
+Slice: (2, 2) Dimension: front
+Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
     - Simples Beispiel
     - Lösbar nur für Erweiterung
 
-     \newpage
+    \newpage
 
     \begin{figure}[H]
         \centering
@@ -412,21 +420,21 @@
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting5}]
-    Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
-    Quader: 1x1x1
-    Slice: (1, 1) Dimension: front
+Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
+Quader: 1x1x1
+Slice: (1, 1) Dimension: front
 
-    Quader: 3x3x3
-    Slice: (3, 3) Dimension: front
-    Slice: (3, 3) Dimension: front
-    Slice: (3, 3) Dimension: front
+Quader: 3x3x3
+Slice: (3, 3) Dimension: front
+Slice: (3, 3) Dimension: front
+Slice: (3, 3) Dimension: front
 
-    Quader: 5x5x5
-    Slice: (5, 5) Dimension: front
-    Slice: (5, 5) Dimension: front
-    Slice: (5, 5) Dimension: front
-    Slice: (5, 5) Dimension: front
-    Slice: (5, 5) Dimension: front
+Quader: 5x5x5
+Slice: (5, 5) Dimension: front
+Slice: (5, 5) Dimension: front
+Slice: (5, 5) Dimension: front
+Slice: (5, 5) Dimension: front
+Slice: (5, 5) Dimension: front
     \end{lstlisting}
 
     - Zeigt Erweiterung auf beliebige Mengen an Quadern anwendbar
@@ -455,38 +463,38 @@
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting6}]
-    Die Scheiben können zu einem Quader zusammengesetzt werden.
-    Quader: 6x6x6 V(216)
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 6x6x6 V(216)
 
-    Slice: (6, 6) Dimension: front
-    Slice: (6, 6) Dimension: front
-    Slice: (4, 6) Dimension: top
-    Slice: (4, 6) Dimension: top
-    Slice: (4, 6) Dimension: front
-    Slice: (3, 6) Dimension: top
-    Slice: (3, 3) Dimension: side
-    Slice: (3, 3) Dimension: side
-    Slice: (3, 4) Dimension: front
-    Slice: (2, 4) Dimension: top
-    Slice: (2, 4) Dimension: front
-    Slice: (2, 4) Dimension: front
+Slice: (6, 6) Dimension: front
+Slice: (6, 6) Dimension: front
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: top
+Slice: (4, 6) Dimension: front
+Slice: (3, 6) Dimension: top
+Slice: (3, 3) Dimension: side
+Slice: (3, 3) Dimension: side
+Slice: (3, 4) Dimension: front
+Slice: (2, 4) Dimension: top
+Slice: (2, 4) Dimension: front
+Slice: (2, 4) Dimension: front
 
     \end{lstlisting}
 
     - Beispiel 1 der Eingabedateien
     - erstes beispiel, wo Algorithmus backtracking macht
     - Lösbar nur Erweiterung nur mit sehr viel Zeit
-        => betrachtung 3 vs 2 Variablen
+    => betrachtung 3 vs 2 Variablen
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting7}]
-    Die Scheiben können zu einem Quader zusammengesetzt werden.
-    Quader: 1000x2x1000 V(2000000)
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 1000x2x1000 V(2000000)
 
-    Slice: (2, 1000) Dimension: front
-    Slice: (2, 1000) Dimension: front
-    Slice: (2, 998) Dimension: top
-    Slice: (998, 999) Dimension: side
-    Slice: (998, 999) Dimension: side
+Slice: (2, 1000) Dimension: front
+Slice: (2, 1000) Dimension: front
+Slice: (2, 998) Dimension: top
+Slice: (998, 999) Dimension: side
+Slice: (998, 999) Dimension: side
 
     \end{lstlisting}
 
@@ -496,56 +504,56 @@
 
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting8}]
-    Die Scheiben können zu einem Quader zusammengesetzt werden.
-    Quader: 1000x10x1000 V(10000000)
+Die Scheiben können zu einem Quader zusammengesetzt werden.
+Quader: 1000x10x1000 V(10000000)
 
-    Slice: (1000, 1000) Dimension: side
-    Slice: (1000, 1000) Dimension: side
-    Slice: (1000, 1000) Dimension: side
-    Slice: (7, 1000) Dimension: front
-    Slice: (999, 1000) Dimension: side
-    Slice: (6, 1000) Dimension: front
-    Slice: (998, 1000) Dimension: side
-    Slice: (5, 998) Dimension: top
-    Slice: (998, 999) Dimension: side
-    Slice: (4, 999) Dimension: front
-    Slice: (4, 997) Dimension: top
-    Slice: (4, 998) Dimension: front
-    Slice: (4, 998) Dimension: front
-    Slice: (4, 995) Dimension: top
-    Slice: (995, 997) Dimension: side
-    Slice: (995, 997) Dimension: side
-    Slice: (2, 997) Dimension: front
-    Slice: (2, 994) Dimension: top
-    Slice: (2, 996) Dimension: front
-    Slice: (2, 993) Dimension: top
-    Slice: (2, 995) Dimension: front
-    Slice: (992, 995) Dimension: side
-    Slice: (992, 995) Dimension: side
+Slice: (1000, 1000) Dimension: side
+Slice: (1000, 1000) Dimension: side
+Slice: (1000, 1000) Dimension: side
+Slice: (7, 1000) Dimension: front
+Slice: (999, 1000) Dimension: side
+Slice: (6, 1000) Dimension: front
+Slice: (998, 1000) Dimension: side
+Slice: (5, 998) Dimension: top
+Slice: (998, 999) Dimension: side
+Slice: (4, 999) Dimension: front
+Slice: (4, 997) Dimension: top
+Slice: (4, 998) Dimension: front
+Slice: (4, 998) Dimension: front
+Slice: (4, 995) Dimension: top
+Slice: (995, 997) Dimension: side
+Slice: (995, 997) Dimension: side
+Slice: (2, 997) Dimension: front
+Slice: (2, 994) Dimension: top
+Slice: (2, 996) Dimension: front
+Slice: (2, 993) Dimension: top
+Slice: (2, 995) Dimension: front
+Slice: (992, 995) Dimension: side
+Slice: (992, 995) Dimension: side
     \end{lstlisting}
 
     - Beispiel 3 der Eingabedateien
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting9}]
-    Die Scheiben können zu einem Quader zusammengesetzt werden.
+Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 210x210x210 V(9261000)
-        [...]
+[...]
     \end{lstlisting}
 
     - Ausschnitt Beispiel 4 der Eingabedateien
     (Anzahl der Scheiben zu groß zum darstellen)
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting10}]
-    Die Scheiben können zu einem Quader zusammengesetzt werden.
+Die Scheiben können zu einem Quader zusammengesetzt werden.
 Quader: 3570x2310x2730 V(1038654520)
-                [...]
+[...]
     \end{lstlisting}
 
     - Ausschnitt Beispiel 5 der Eingabedateien
     (Anzahl der Scheiben zu groß zum darstellen)
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting11}]
-    Die Scheiben können zu keinem Quader zusammengesetzt werden.
+Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
     - Ausschnitt Beispiel 6 der Eingabedateien
@@ -553,7 +561,7 @@ Quader: 3570x2310x2730 V(1038654520)
     - zu groß für Erweiterung
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting12}]
-    Die Scheiben können zu keinem Quader zusammengesetzt werden.
+Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
     - Ausschnitt Beispiel 7 der Eingabedateien
@@ -577,54 +585,54 @@ Quader: 3570x2310x2730 V(1038654520)
 
     \begin{lstlisting}[frame=single,language=C++,title=Struct Slice,breaklines=true,label={lst:code_slice}]
 /**
- * Repräsentiert eine Käsescheibe
- */
+* Repräsentiert eine Käsescheibe
+*/
 struct Slice {
-    Slice(int p_length, int p_height) {
-        this->length = p_length;
-        this->height = p_height;
-    }
+Slice(int p_length, int p_height) {
+this->length = p_length;
+this->height = p_height;
+}
 
-    int length, height;
+int length, height;
 };
     \end{lstlisting}
 
     \begin{lstlisting}[frame=single,language=C++,title=Enum Dimension,breaklines=true,label={lst:code_dimension}]
 /**
- * Repräsentiert eine Dimension
- */
+* Repräsentiert eine Dimension
+*/
 enum Dimension{
-    FRONT,
-    TOP,
-    SIDE,
-    INVALID
+FRONT,
+TOP,
+SIDE,
+INVALID
 };
     \end{lstlisting}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode can\_remove\_slice,breaklines=true,label={lst:code_canRemoveSlice}]
 /**
- * Prüft, ob eine Scheibe, von einem Quader abgeschnitten werden kann
- * @param length die Länge des Quaders
- * @param height die Höhe des Quaders
- * @param depth die Tiefe des Quaders
- * @param slice die Scheibe, auf die getestet wird
- * @return -1, wenn die Scheibe nicht entfernt werden kann,
- * ansonsten wird die Dimension zurückgegeben, wo diese entfernt werden kann
- * Dimensionen:
- * 0 => VORNE
- * 1 => OBEN
- * 2 => SEITE
- */
+* Prüft, ob eine Scheibe, von einem Quader abgeschnitten werden kann
+* @param length die Länge des Quaders
+* @param height die Höhe des Quaders
+* @param depth die Tiefe des Quaders
+* @param slice die Scheibe, auf die getestet wird
+* @return -1, wenn die Scheibe nicht entfernt werden kann,
+* ansonsten wird die Dimension zurückgegeben, wo diese entfernt werden kann
+* Dimensionen:
+* 0 => VORNE
+* 1 => OBEN
+* 2 => SEITE
+*/
 Dimension can_remove_slice(int length, int height, int depth, Slice slice) {
-    if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
-        return FRONT;
-    } else if (slice.length == length && slice.height == depth || slice.height == length && slice.length == depth) {
-        return TOP;
-    } else if (slice.length == height && slice.height == depth || slice.height == height && slice.length == depth) {
-        return SIDE;
-    } else {
-        return INVALID;
-    }
+if (slice.length == length && slice.height == height || slice.height == length && slice.length == height) {
+return FRONT;
+} else if (slice.length == length && slice.height == depth || slice.height == length && slice.length == depth) {
+return TOP;
+} else if (slice.length == height && slice.height == depth || slice.height == height && slice.length == depth) {
+return SIDE;
+} else {
+return INVALID;
+}
 }
     \end{lstlisting}
 
@@ -632,49 +640,49 @@ Dimension can_remove_slice(int length, int height, int depth, Slice slice) {
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode calculate\_square,breaklines=true,label={lst:code_calculateSquare}]
 /**
- * Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
- * @param length die Länge des Quaders
- * @param height die Höhe des Quaders
- * @param depth die Tiefe des Quaders
- * @param order die Lösungsreihenfolge
- * @param slices die noch nicht verwendete Menge an Scheiben
- * @return true, wenn es eine lösung gibt, ansonsten false
- */
+* Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
+* @param length die Länge des Quaders
+* @param height die Höhe des Quaders
+* @param depth die Tiefe des Quaders
+* @param order die Lösungsreihenfolge
+* @param slices die noch nicht verwendete Menge an Scheiben
+* @return true, wenn es eine lösung gibt, ansonsten false
+*/
 bool calculate_square(int length, int height, int depth, std::vector<std::pair<Slice, Dimension>> &order, std::vector<Slice> &slices) {
 
-    //Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
-    if (length == 0 || height == 0 || depth == 0) {
-        return true;
-    }
-    std::vector<Slice> removed_slices;
-    //Für jede noch nicht verwendete Schiebe
-    for (auto it = slices.begin(); it != slices.end(); ++it) {
-        Dimension dimension = can_remove_slice(length, height, depth, *it);
-        //Wenn die aktuelle Scheibe abgeschnitten werden kann
-        if (dimension != INVALID) {
-            //Aktualisiere die Maße des Quaders
-            int new_length = length - (dimension == SIDE ? 1 : 0);
-            int new_height = height - (dimension == TOP ? 1 : 0);
-            int new_depth = depth - (dimension == FRONT ? 1 : 0);
-            //Füge die Scheibe zur Lösungsmenge hinzu
-            order.emplace_back(*it, dimension);
-            removed_slices.push_back(*it);
-            slices.erase(it);
-            //Wenn es eine Lösung mit der aktuellen Scheibe gibt
-            if (calculate_square(new_length, new_height, new_depth, order, slices)) {
-                return true;
-            } else {
-                //Entferne die aktuelle Scheibe von der Lösungsmenge
-                order.pop_back();
-                for (auto &slice: removed_slices) {
-                    slices.push_back(slice);
-                }
-                removed_slices.clear();
-            }
-        }
-    }
-    //Wenn keine der noch nicht betrachteten Scheiben verwendet werden kann
-    return false;
+//Wenn mindestens eine der Seiten auf null ist (daher das Volumen des Quaders null ist)
+if (length == 0 || height == 0 || depth == 0) {
+return true;
+}
+std::vector<Slice> removed_slices;
+//Für jede noch nicht verwendete Schiebe
+for (auto it = slices.begin(); it != slices.end(); ++it) {
+Dimension dimension = can_remove_slice(length, height, depth, *it);
+//Wenn die aktuelle Scheibe abgeschnitten werden kann
+if (dimension != INVALID) {
+//Aktualisiere die Maße des Quaders
+int new_length = length - (dimension == SIDE ? 1 : 0);
+int new_height = height - (dimension == TOP ? 1 : 0);
+int new_depth = depth - (dimension == FRONT ? 1 : 0);
+//Füge die Scheibe zur Lösungsmenge hinzu
+order.emplace_back(*it, dimension);
+removed_slices.push_back(*it);
+slices.erase(it);
+//Wenn es eine Lösung mit der aktuellen Scheibe gibt
+if (calculate_square(new_length, new_height, new_depth, order, slices)) {
+return true;
+} else {
+//Entferne die aktuelle Scheibe von der Lösungsmenge
+order.pop_back();
+for (auto &slice: removed_slices) {
+slices.push_back(slice);
+}
+removed_slices.clear();
+}
+}
+}
+//Wenn keine der noch nicht betrachteten Scheiben verwendet werden kann
+return false;
 }
     \end{lstlisting}
 
@@ -684,98 +692,98 @@ bool calculate_square(int length, int height, int depth, std::vector<std::pair<S
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main}]
 /**
- * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
- * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
- * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
- * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
- */
+* Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
+* Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
+* Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
+* @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
+*/
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
+string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien";
+string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien";
 
-    //Durchläuft alle Dateien im Eingabeordner
-    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+//Durchläuft alle Dateien im Eingabeordner
+for (const auto &entry: filesystem::directory_iterator(input_dir)) {
 
-        //Liest den Dateinamen aus
-        string input_file = entry.path();
-        string output_file = output_dir + "/" + entry.path().filename().string();
+//Liest den Dateinamen aus
+string input_file = entry.path();
+string output_file = output_dir + "/" + entry.path().filename().string();
 
-        //Öffnet die Eingabedatei
-        ifstream fin(input_file);
+//Öffnet die Eingabedatei
+ifstream fin(input_file);
 
-        //Öffnet die Ausgabedatei
-        ofstream fout(output_file);
+//Öffnet die Ausgabedatei
+ofstream fout(output_file);
 
-        //Liest die Eingabedatei ein
-        vector<Slice> slices;
-        int a, b, n;
-        fin >> n;
-        while (fin >> a >> b) {
-            slices.emplace_back(a, b);
-        }
+//Liest die Eingabedatei ein
+vector<Slice> slices;
+int a, b, n;
+fin >> n;
+while (fin >> a >> b) {
+slices.emplace_back(a, b);
+}
 
-        //Berechnet das Volumen des Quaders
-        int volume = 0, height = 0;
-        for (const auto &slice: slices) {
-            volume += slice.length * slice.height;
-        }
+//Berechnet das Volumen des Quaders
+int volume = 0, height = 0;
+for (const auto &slice: slices) {
+volume += slice.length * slice.height;
+}
 
-        //Findet die Seite, wo der größte Wert maximal ist und setzt die Länge auf diesen Wert
-        for (const auto &slice: slices) {
-            int side = (slice.length > slice.height) ? slice.length : slice.height;
-            if (side > height) {
-                height = side;
-            }
-        }
+//Findet die Seite, wo der größte Wert maximal ist und setzt die Länge auf diesen Wert
+for (const auto &slice: slices) {
+int side = (slice.length > slice.height) ? slice.length : slice.height;
+if (side > height) {
+height = side;
+}
+}
 
-        //Findet alle anderen möglichen Seiten zu der gesetzten Länge
-        vector<pair<int, int>> result;
-        int base = volume / height;
-        for(int side_a = 1; side_a <= base; side_a++) {
-            for(int side_b = 1; side_b <= base; side_b++) {
-                if(side_a * side_b * height == volume) {
-                    result.emplace_back(side_a, side_b);
-                }
-            }
-        }
+//Findet alle anderen möglichen Seiten zu der gesetzten Länge
+vector<pair<int, int>> result;
+int base = volume / height;
+for(int side_a = 1; side_a <= base; side_a++) {
+for(int side_b = 1; side_b <= base; side_b++) {
+if(side_a * side_b * height == volume) {
+result.emplace_back(side_a, side_b);
+}
+}
+}
 
-        //Sortiert die Scheiben nach ihrer Fläche
-        vector<pair<Slice, Dimension>> order;
-        sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
-                 return (a.length * a.height) > (b.length * b.height);
-             }
-        );
+//Sortiert die Scheiben nach ihrer Fläche
+vector<pair<Slice, Dimension>> order;
+sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
+return (a.length * a.height) > (b.length * b.height);
+}
+);
 
-        auto it = result.begin();
-        bool success = false;
-        //Für jede mögliche Kombination der Seitenlängen
-        while (it != result.end()) {
-            int t_height = height;
-            vector<Slice> t_slices(slices);
-            order.clear();
-            //Wenn es eine Lösung gibt
-            if (calculate_square( it->first, t_height, it->second, order, t_slices)) {
-                success = true;
-                fout << "Die Scheiben können zu einem Quader zusammengesetzt werden." << endl;
-                fout << "Quader: " << height << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
-                     << endl;
-                for (auto const &o: order) {
-                    fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << to_string(o.second)
-                         << endl;
-                }
-                break;
-            }
-            it++;
-        }
-        //Wenn es keine Lösung gab
-        if (!success) {
-            fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
-        }
-        //Dateien schließen
-        fin.close();
-        fout.close();
-    }
-    return 0;
+auto it = result.begin();
+bool success = false;
+//Für jede mögliche Kombination der Seitenlängen
+while (it != result.end()) {
+int t_height = height;
+vector<Slice> t_slices(slices);
+order.clear();
+//Wenn es eine Lösung gibt
+if (calculate_square( it->first, t_height, it->second, order, t_slices)) {
+success = true;
+fout << "Die Scheiben können zu einem Quader zusammengesetzt werden." << endl;
+fout << "Quader: " << height << "x" << it->first << "x" << it->second << " V(" << volume << ")" << endl
+<< endl;
+for (auto const &o: order) {
+fout << "Slice: (" << o.first.length << ", " << o.first.height << ") Dimension: " << to_string(o.second)
+<< endl;
+}
+break;
+}
+it++;
+}
+//Wenn es keine Lösung gab
+if (!success) {
+fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
+}
+//Dateien schließen
+fin.close();
+fout.close();
+}
+return 0;
 }
     \end{lstlisting}
 
@@ -783,26 +791,26 @@ int main() {
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode sort\_tupel,breaklines=true,label={lst:code_sortTupel}]
 /**
- * Sortiert Tupel mit drei Elementen in aufsteigender Reihenfolge
- * @param tupel der zu sortierende Tupel
- */
+* Sortiert Tupel mit drei Elementen in aufsteigender Reihenfolge
+* @param tupel der zu sortierende Tupel
+*/
 void sort_tupel(tuple<int, int, int> &tupel) {
-    int temp;
-    if (get<0>(tupel) > get<1>(tupel)) {
-        temp = get<0>(tupel);
-        get<0>(tupel) = get<1>(tupel);
-        get<1>(tupel) = temp;
-    }
-    if (get<1>(tupel) > get<2>(tupel)) {
-        temp = get<1>(tupel);
-        get<1>(tupel) = get<2>(tupel);
-        get<2>(tupel) = temp;
-        if (get<0>(tupel) > get<1>(tupel)) {
-            temp = get<0>(tupel);
-            get<0>(tupel) = get<1>(tupel);
-            get<1>(tupel) = temp;
-        }
-    }
+int temp;
+if (get<0>(tupel) > get<1>(tupel)) {
+temp = get<0>(tupel);
+get<0>(tupel) = get<1>(tupel);
+get<1>(tupel) = temp;
+}
+if (get<1>(tupel) > get<2>(tupel)) {
+temp = get<1>(tupel);
+get<1>(tupel) = get<2>(tupel);
+get<2>(tupel) = temp;
+if (get<0>(tupel) > get<1>(tupel)) {
+temp = get<0>(tupel);
+get<0>(tupel) = get<1>(tupel);
+get<1>(tupel) = temp;
+}
+}
 }
     \end{lstlisting}
 
@@ -810,201 +818,201 @@ void sort_tupel(tuple<int, int, int> &tupel) {
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode find\_dimensions,breaklines=true,label={lst:code_findDimensions}]
 /**
- * Ermittelt alle möglichen ganzzahligen Kombinationen von Längen, Breiten und Höhen für einen Quader
- * @param volume das maximale Volumen des Quaders
- * @param min die kürzeste Seite des Quaders
- * @param max die längste Seite des Quaders
- * @return alle möglichen Varianten des Quaders
- */
+* Ermittelt alle möglichen ganzzahligen Kombinationen von Längen, Breiten und Höhen für einen Quader
+* @param volume das maximale Volumen des Quaders
+* @param min die kürzeste Seite des Quaders
+* @param max die längste Seite des Quaders
+* @return alle möglichen Varianten des Quaders
+*/
 unordered_set<tuple<int, int, int>, TupelHash> find_dimensions(int volume, const int &min, const int &max) {
-    unordered_set<tuple<int, int, int>, TupelHash> dimensions;
-    for (int l = min; l <= max; l++) {
-        for (int w = min; w <= max; w++) {
-            for (int h = min; h <= max; h++) {
-                if (l * w * h <= volume) {
-                    tuple<int, int, int> tupel = make_tuple(l, w, h);
-                    sort_tupel(tupel);
-                    dimensions.insert(tupel);
-                }
-            }
-        }
-    }
-    return dimensions;
+unordered_set<tuple<int, int, int>, TupelHash> dimensions;
+for (int l = min; l <= max; l++) {
+for (int w = min; w <= max; w++) {
+for (int h = min; h <= max; h++) {
+if (l * w * h <= volume) {
+tuple<int, int, int> tupel = make_tuple(l, w, h);
+sort_tupel(tupel);
+dimensions.insert(tupel);
+}
+}
+}
+}
+return dimensions;
 }
     \end{lstlisting}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode find\_combinations,breaklines=true,label={lst:code_findCombinations}]
 /**
- * Ermittelt rekursiv alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
- * @param volume das Gesamtvolumen für jede Kombination
- * @param squares die maximale Anzahl an Quadern in einer Kombination
- * @param min die minimale Länge einer Seite eines Quaders
- * @param max die maximale Länge einer Seite eines Quaders
- * @param combinations alle Kombinationen
- * @param currentCombination die aktuelle Kombination
- */
+* Ermittelt rekursiv alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
+* @param volume das Gesamtvolumen für jede Kombination
+* @param squares die maximale Anzahl an Quadern in einer Kombination
+* @param min die minimale Länge einer Seite eines Quaders
+* @param max die maximale Länge einer Seite eines Quaders
+* @param combinations alle Kombinationen
+* @param currentCombination die aktuelle Kombination
+*/
 void find_combinations(int volume,
-                       int squares,
-                       const int &min,
-                       const int &max,
-                       vector<unordered_set<tuple<int, int, int>, TupelHash>> &combinations,
-                       unordered_set<tuple<int, int, int>, TupelHash> &currentCombination) {
-    //Wenn die aktuelle Kombination vollständig ist
-    if (squares == 0 && volume == 0) {
-        combinations.push_back(currentCombination);
-        return;
-    }
-    // Wenn das Volumen die aktuelle Kombination nicht aufgeht
-    if (volume == 0 || squares == 0) {
-        return;
-    }
-    //Berechnet rekursiv den nächsten Quader der aktuellen Kombination
-    unordered_set<tuple<int, int, int>, TupelHash> possibleDimensions = find_dimensions(volume, min, max);
-    for (auto dimension: possibleDimensions) {
-        currentCombination.insert(dimension);
-        find_combinations(volume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
-                          squares - 1,
-                          min,
-                          max,
-                          combinations,
-                          currentCombination);
-        currentCombination.erase(dimension);
-    }
+int squares,
+const int &min,
+const int &max,
+vector<unordered_set<tuple<int, int, int>, TupelHash>> &combinations,
+unordered_set<tuple<int, int, int>, TupelHash> &currentCombination) {
+//Wenn die aktuelle Kombination vollständig ist
+if (squares == 0 && volume == 0) {
+combinations.push_back(currentCombination);
+return;
+}
+// Wenn das Volumen die aktuelle Kombination nicht aufgeht
+if (volume == 0 || squares == 0) {
+return;
+}
+//Berechnet rekursiv den nächsten Quader der aktuellen Kombination
+unordered_set<tuple<int, int, int>, TupelHash> possibleDimensions = find_dimensions(volume, min, max);
+for (auto dimension: possibleDimensions) {
+currentCombination.insert(dimension);
+find_combinations(volume - get<0>(dimension) * get<1>(dimension) * get<2>(dimension),
+squares - 1,
+min,
+max,
+combinations,
+currentCombination);
+currentCombination.erase(dimension);
+}
 }
     \end{lstlisting}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode find\_all\_combinations,breaklines=true,label={lst:code_findAllCombinations}]
 /**
- * Ermittelt alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
- * @param volume das maximale Gesamtvolumen für jede Kombination
- * @param count_of_squares die Anzahl der Quader in jeder Kombination
- * @param slices die gegebene Menge an Scheiben
- * @return alle Kombinationen für die gegebenen Parameter
- */
+* Ermittelt alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
+* @param volume das maximale Gesamtvolumen für jede Kombination
+* @param count_of_squares die Anzahl der Quader in jeder Kombination
+* @param slices die gegebene Menge an Scheiben
+* @return alle Kombinationen für die gegebenen Parameter
+*/
 vector<unordered_set<tuple<int, int, int>, TupelHash>> find_all_combinations(int volume,
-                                                                             int count_of_squares,
-                                                                             const vector<Slice> &slices) {
-    vector<unordered_set<tuple<int, int, int>, TupelHash>> combinations;
-    unordered_set<tuple<int, int, int>, TupelHash> currentCombination;
+int count_of_squares,
+const vector<Slice> &slices) {
+vector<unordered_set<tuple<int, int, int>, TupelHash>> combinations;
+unordered_set<tuple<int, int, int>, TupelHash> currentCombination;
 
-    int max = 0, min = volume;
-    //Ermittelt die maximale Seitenlänge eines Quaders
-    for (const auto &slice: slices) {
-        int side = (slice.length > slice.height) ? slice.length : slice.height;
-        if (side > max) {
-            max = side;
-        }
-    }
-    //Ermittelt die minimale Seitenlänge eines Quaders
-    for (const auto &slice: slices) {
-        int side = (slice.length < slice.height) ? slice.length : slice.height;
-        if (side < min) {
-            min = side;
-        }
-    }
+int max = 0, min = volume;
+//Ermittelt die maximale Seitenlänge eines Quaders
+for (const auto &slice: slices) {
+int side = (slice.length > slice.height) ? slice.length : slice.height;
+if (side > max) {
+max = side;
+}
+}
+//Ermittelt die minimale Seitenlänge eines Quaders
+for (const auto &slice: slices) {
+int side = (slice.length < slice.height) ? slice.length : slice.height;
+if (side < min) {
+min = side;
+}
+}
 
-    find_combinations(volume, count_of_squares, min, max, combinations, currentCombination);
-    //Entfernt die Kombinationen, welche nicht der erwarteten Anzahl von Quadern entsprechen
-    combinations.erase(
-            std::remove_if(combinations.begin(), combinations.end(),
-                           [&count_of_squares](auto combination) {
-                               return combination.size() != count_of_squares;
-                           }), combinations.end()
-    );
-    return combinations;
+find_combinations(volume, count_of_squares, min, max, combinations, currentCombination);
+//Entfernt die Kombinationen, welche nicht der erwarteten Anzahl von Quadern entsprechen
+combinations.erase(
+std::remove_if(combinations.begin(), combinations.end(),
+[&count_of_squares](auto combination) {
+return combination.size() != count_of_squares;
+}), combinations.end()
+);
+return combinations;
 }
     \end{lstlisting}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main_extended}]
 /**
- * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
- * Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
- * Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
- * @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
- */
+* Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
+* Die Lösung wird anschließend in die entsprechende Ausgabedatei geschrieben
+* Sollte es keine Lösung geben, wird dies ebenfalls in die Ausgabedatei geschrieben
+* @return 0, wenn es zu keinem RuntimeError oder keiner RuntimeException gekommen ist
+*/
 int main() {
-    string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien_b";
-    string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien_b";
+string input_dir = "../LennartProtte/Aufgabe2-Implementierung/Eingabedateien_b";
+string output_dir = "../LennartProtte/Aufgabe2-Implementierung/Ausgabedateien_b";
 
-    //Durchläuft alle Dateien im Eingabeordner
-    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+//Durchläuft alle Dateien im Eingabeordner
+for (const auto &entry: filesystem::directory_iterator(input_dir)) {
 
-        //Liest den Dateinamen aus
-        string input_file = entry.path();
-        string output_file = output_dir + "/" + entry.path().filename().string();
+//Liest den Dateinamen aus
+string input_file = entry.path();
+string output_file = output_dir + "/" + entry.path().filename().string();
 
-        //Öffnet die Eingabedatei
-        ifstream fin(input_file);
+//Öffnet die Eingabedatei
+ifstream fin(input_file);
 
-        //Öffnet die Ausgabedatei
-        ofstream fout(output_file);
+//Öffnet die Ausgabedatei
+ofstream fout(output_file);
 
-        //Liest die Eingabedatei ein
-        vector<Slice> slices;
-        int a, b, n;
-        fin >> n;
-        while (fin >> a >> b) {
-            slices.emplace_back(a, b);
-        }
+//Liest die Eingabedatei ein
+vector<Slice> slices;
+int a, b, n;
+fin >> n;
+while (fin >> a >> b) {
+slices.emplace_back(a, b);
+}
 
-        //Berechnet das Volumen des Quaders
-        int volume = 0;
-        for (const auto &slice: slices) {
-            volume += slice.length * slice.height;
-        }
+//Berechnet das Volumen des Quaders
+int volume = 0;
+for (const auto &slice: slices) {
+volume += slice.length * slice.height;
+}
 
-        //Sortiert die Scheiben nach ihrer Fläche
-        sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
-                 return (a.length * a.height) > (b.length * b.height);
-             }
-        );
+//Sortiert die Scheiben nach ihrer Fläche
+sort(slices.begin(), slices.end(), [](Slice a, Slice b) {
+return (a.length * a.height) > (b.length * b.height);
+}
+);
 
-        vector<pair<Slice, Dimension>> order;
-        map<tuple<int, int, int>, vector<pair<Slice, Dimension>>> solution;
-        bool success = false;
-        //Erhöht die Anzahl der Würfel schrittweise, bis es eine Lösung gibt
-        for (int count_of_squares = 1; count_of_squares <= slices.size(); count_of_squares++) {
-            const auto &combinations = find_all_combinations(volume, count_of_squares, slices);
-            for (const auto &combination: combinations) {
-                bool valid = true;
-                vector<Slice> t_slices(slices);
-                for (auto dimension: combination) {
-                    order.clear();
-                    if (!calculate_square(get<0>(dimension), get<1>(dimension), get<2>(dimension), order, t_slices)) {
-                        valid = false;
-                    } else {
-                        solution.insert(make_pair(dimension, order));
-                    }
-                }
-                if (valid && t_slices.empty()) {
-                    success = true;
-                    goto end;
-                } else {
-                    solution.clear();
-                }
-            }
-        }
-        end:
-        //Schreibt die Ausgabe
-        if (success) {
-            fout << "Die Scheiben können zu " << solution.size() << " Quader(n) zusammengesetzt werden." << endl;
-            for (auto & it : solution) {
-                fout << "Quader: " << get<0>(it.first) << "x" << get<1>(it.first) << "x" << get<2>(it.first) << endl;
-                for (auto item: it.second) {
-                    fout << "Slice: (" << item.first.length << ", " << item.first.height
-                         << ") Dimension: " << to_string(item.second) << endl;
-                }
-                fout << endl;
-            }
-        } else {
-            fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
-        }
+vector<pair<Slice, Dimension>> order;
+map<tuple<int, int, int>, vector<pair<Slice, Dimension>>> solution;
+bool success = false;
+//Erhöht die Anzahl der Würfel schrittweise, bis es eine Lösung gibt
+for (int count_of_squares = 1; count_of_squares <= slices.size(); count_of_squares++) {
+const auto &combinations = find_all_combinations(volume, count_of_squares, slices);
+for (const auto &combination: combinations) {
+bool valid = true;
+vector<Slice> t_slices(slices);
+for (auto dimension: combination) {
+order.clear();
+if (!calculate_square(get<0>(dimension), get<1>(dimension), get<2>(dimension), order, t_slices)) {
+valid = false;
+} else {
+solution.insert(make_pair(dimension, order));
+}
+}
+if (valid && t_slices.empty()) {
+success = true;
+goto end;
+} else {
+solution.clear();
+}
+}
+}
+end:
+//Schreibt die Ausgabe
+if (success) {
+fout << "Die Scheiben können zu " << solution.size() << " Quader(n) zusammengesetzt werden." << endl;
+for (auto & it : solution) {
+fout << "Quader: " << get<0>(it.first) << "x" << get<1>(it.first) << "x" << get<2>(it.first) << endl;
+for (auto item: it.second) {
+fout << "Slice: (" << item.first.length << ", " << item.first.height
+<< ") Dimension: " << to_string(item.second) << endl;
+}
+fout << endl;
+}
+} else {
+fout << "Die Scheiben können zu keinem Quader zusammengesetzt werden." << endl;
+}
 
-        //Dateien schließen
-        fin.close();
-        fout.close();
-    }
-    return 0;
+//Dateien schließen
+fin.close();
+fout.close();
+}
+return 0;
 }
     \end{lstlisting}
 
