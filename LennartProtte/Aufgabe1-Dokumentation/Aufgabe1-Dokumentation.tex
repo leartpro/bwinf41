@@ -86,7 +86,7 @@
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
 \author{\LARGE Teilnahme-ID: \LARGE \TeilnahmeId \\\\
-\LARGE Bearbeiter/-in dieser Aufgabe: \\
+\LARGE Bearbeiter dieser Aufgabe: \\
 \LARGE \Name\\\\}
 \date{\LARGE\today}
 
@@ -99,6 +99,7 @@
 
 
     \section{Lösungsidee}\label{sec:losungsidee}
+    \subsection{Einleitung}\label{subsec:einleitung}
 
     Die vorliegende Aufgabe besteht darin, eine zulässige Reihenfolge zu ermitteln,
     in der Anton seine Außenstellen abfliegen kann,
@@ -106,14 +107,16 @@
     Dabei darf keine Außenstelle ausgelassen werden und weiter erscheint es nicht im Sinne der Außenstellung,
     dass eine Außenstelle nicht mehrfach besucht wird.
     Da in dieser Aufgabe nicht die kürzeste Route gesucht wird, kann eine approximierte Lösung angestrebt werden.
-    \newline\newline
+
+    \subsection{Abstraktion}\label{subsec:abstraktion}
+
     Diese Problemstellung kann mit dem Handlungsreisendenproblem assoziiert werden,
     das darin besteht, einen möglichst kurzen Hamiltonkreis in einem gewichteten euklidischen Graphen zu finden.
     Im Gegensatz zum Handlungsreisendenproblem erfordert diese Aufgabe jedoch keinen identischen Start- und Endpunkt,
     sondern nur einen Hamiltonweg.
     Da das Hamiltonwegproblem NP-vollständig ist,
     existiert kein Algorithmus, der die gegebene Aufgabe deterministisch in Polynomialzeit lösen kann.
-    \newline\newline
+    \subsection{Lösungsverfahren}\label{subsec:losungsverfahren}
     Ein möglicher Lösungsansatz für dieses Problem ist die Verwendung einer Variante eines Greedy-Algorithmus,
     der die Nearest-Neighbour-Heuristik und Backtracking verwendet
     und das Winkelkriterium bei der Auswahl des nächsten Außenpostens beachtet.
@@ -124,7 +127,7 @@
     jede Permutation auf ihre Erfüllbarkeit prüft.
     Da es jedoch für $n$ Elemente $n!$ Permutationen gibt, welche alle auf ihre Erfüllbarkeit geprüft werden müssten,
     könnte die Laufzeit sehr hoch ausfallen.
-    \newline\newline
+    \subsection{Algorithmus}\label{subsec:algorithmus}
     Um eine Lösung mit dem Greedy-Algorithmus zu ermitteln,
     erfolgt zunächst eine Sortierung der Koordinaten nach nicht abnehmender euklidischer Entfernung von einem Startpunkt aus.
     Anschließend wird eine Schleife durchlaufen, in welcher jeder Punkt nacheinander besucht wird.
@@ -246,6 +249,9 @@
     - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
     - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
 
+    \subsection{Methoden}\label{subsec:methoden}
+    \subsection{Transformation}\label{subsec:transformation}
+    \subsection{Implementationsdetails}\label{subsec:implementationsdetails}
     Die gezeigten Funktionen sind in C++ geschrieben und basieren auf Standard-Datentypen wie Vektoren und Paaren.
     In der Funktion cross\_angle werden geometrische Berechnungen durchgeführt, um den Winkel in Grad zwischen den Vektoren von drei Knoten zu bestimmen.
     Hierbei werden die x- und y-Koordinaten jedes Knotens als double gespeichert und als pair<double, double>-Paar an die Funktion übergeben.
@@ -346,7 +352,9 @@
     \newpage
     \section{Beispiele}\label{sec:beispiele}
 
-\begin{figure}[H]
+    \subsection{gerade.txt}\label{subsec:gerade.txt}
+
+    \begin{figure}[H]
     \NewAdigraph{FigurFuenf}{
         1:0,0;
         2:1,0;
@@ -376,6 +384,7 @@
     - Winkelkriterium erfüllt, da 180°
     => berechnung über Vektoren nicht möglich, da diese 0° liefert
 
+    \subsection{kreis.txt}\label{subsec:kreis.txt}
 
 
     \begin{figure}[H]
@@ -441,6 +450,8 @@
     -schnelle Lösung durch nearest neighbour heurestik
     -darstellung in list form sprat zeit, da sonst unnötig kanten betrachtet werden
 
+    \subsection{viereck.txt}\label{subsec:viereck.txt}
+
     \begin{figure}[H]
         \NewAdigraph{FigurFuenf}{
             1:0,0;
@@ -469,6 +480,9 @@
     4. [0, 100]
     \end{lstlisting}
 
+    \subsection{nicht\_loesbar.txt}\label{subsec:nichtloesbar.txt}
+
+
     \begin{figure}[H]
         \centering
         \begin{tikzpicture}
@@ -493,6 +507,7 @@
     - hier probiert algorithmus alle möglichkeiten aus
     => daher laufzeit = n!
 
+    \subsection{wenigerkrumm1.txt}\label{subsec:wenigerkrumm1.txt}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm1.txt, breaklines=true,label={lst:lstlisting4}]
     Es konnte eine 853.246 km lange Flugstrecke durch alle Außenposten ermittelt werden.
@@ -518,6 +533,8 @@
     -in den auslassungen sind alle winkel identisch (180°)
     -form des graphen kann annähernd als langes quadrat beschrieben werden
     - nearest neigbour heurestik sehr zielführend
+
+    \subsection{wenigerkrumm2.txt}\label{subsec:wenigerkrumm2.txt}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm2.txt, breaklines=true,label={lst:lstlisting4}]
     Es konnte eine 2183.66 km lange Flugstrecke durch alle Außenposten ermittelt werden.
@@ -585,6 +602,8 @@
 
     -graph stellt zwei inneinander liegende kreise da
     - nearest neigbour heurestik sehr zielführend
+
+    \subsection{wenigerkrumm3.txt}\label{subsec:wenigerkrumm3.txt}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm3.txt, breaklines=true,label={lst:lstlisting4}]
     Es konnte eine 2102.94 km lange Flugstrecke durch alle Außenposten ermittelt werden.
@@ -713,6 +732,8 @@
     -vier kreise die sich überschneiden
     - nearest neigbour heurestik sehr zielführend
 
+    \subsection{wenigerkrumm4.txt}\label{subsec:wenigerkrumm4.txt}
+
     \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm4.txt, breaklines=true,label={lst:lstlisting4}]
     Es konnte eine 2383.56 km lange Flugstrecke durch alle Außenposten ermittelt werden.
     1. [20.2122, 156.013]
@@ -746,14 +767,16 @@
     -kurz daher trotzdem in akzeptabler zeit lösbar
     - algorithmus läuft zwei mal im kreis
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm5.txt, breaklines=true,label={lst:lstlisting4}]
-        --
-    \end{lstlisting}
+    \subsection{wenigerkrumm5.txt}\label{subsec:wenigerkrumm5.txt}
 
+    -wenigerkrumm5.txt keine programmausgabe
     - es wurde keine lösung in akzeptabler zeit gefunden (3h)
     - graph hat keine bestimme form => schlechtes auswhlverfahren
     - dazu kommt noch die größe (anzahl knoten)
     - in der eingabe sind die knoten abwechselnd eher weit oben und weit unten angeordnet
+
+    \subsection{wenigerkrumm6.txt}\label{subsec:wenigerkrumm6.txt}
+
 
     \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm6.txt, breaklines=true,label={lst:lstlisting4}]
     Es konnte eine 4537.43 km lange Flugstrecke durch alle Außenposten ermittelt werden.
@@ -842,6 +865,8 @@
     - keine bestimmte form
     - viele knoten
     - da es hier viele mögliche lösungen gibt, muss der algorithmus nicht so viel abbrechen
+
+    \subsection{wenigerkrumm7.txt}\label{subsec:wenigerkrumm7.txt}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe wenigerkrumm7.txt, breaklines=true,label={lst:lstlisting4}]
     Es konnte eine 6249.18 km lange Flugstrecke durch alle Außenposten ermittelt werden.
@@ -960,6 +985,7 @@
         stringstyle=\color{red},
         commentstyle=\color{green},
     }
+    \subsection{Implementation Obermethode}\label{subsec:implementation-obermethode}
     \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main}]
 /**
  * Liest die Eingabedateien ein und berechnet für jede Datei eine Lösung entsprechend der Aufgabenstellung.
@@ -1016,6 +1042,7 @@ int main() {
     \end{lstlisting}
 
     \newpage
+    \subsection{Implementation Algorithmus}\label{subsec:implementation-algorithmus}
     \begin{lstlisting}[frame=single,language=C++,title=Methode solve,breaklines=true,label={lst:code_solve}]
 /**
  * Berechnet rekursiv mit Backtracking eine möglichst kurze Route durch den Graphen,
@@ -1068,6 +1095,7 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
     \end{lstlisting}
 
     \newpage
+    \subsection{Implementation Hilfsmethode}\label{subsec:implementation-hilfsmethode}
     \begin{lstlisting}[frame=single,language=C++,title=Methode cross\_angle,breaklines=true,label={lst:code_crossAngle}]
 /**
  * Berechnet den Winkel in Grad zwischen den Vektoren von from_node nach over_node und over_node nach to_node
