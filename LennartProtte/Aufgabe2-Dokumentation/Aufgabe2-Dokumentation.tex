@@ -162,7 +162,7 @@
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
 \author{\LARGE Teilnahme-ID: \LARGE \TeilnahmeId \\\\
-\LARGE Bearbeiter/-in dieser Aufgabe: \\
+\LARGE Bearbeiter dieser Aufgabe: \\
 \LARGE \Name\\\\}
 \date{\LARGE\today}
 
@@ -581,7 +581,8 @@ Die Scheiben können zu keinem Quader zusammengesetzt werden.
         commentstyle=\color{green},
     }
 
-    \subsection{Header-File main.h}\label{subsec:header-file}
+    \subsection{Header-File}\label{subsec:header-file}
+    \subsubsection{Implementierung Slice}
 
     \begin{lstlisting}[frame=single,language=C++,title=Struct Slice,breaklines=true,label={lst:code_slice}]
 /**
@@ -597,6 +598,7 @@ int length, height;
 };
     \end{lstlisting}
 
+    \subsubsection{Implementierung Dimension}
     \begin{lstlisting}[frame=single,language=C++,title=Enum Dimension,breaklines=true,label={lst:code_dimension}]
 /**
 * Repräsentiert eine Dimension
@@ -609,6 +611,7 @@ INVALID
 };
     \end{lstlisting}
 
+    \subsubsection{Implementierung Hilfsmethode}
     \begin{lstlisting}[frame=single,language=C++,title=Methode can\_remove\_slice,breaklines=true,label={lst:code_canRemoveSlice}]
 /**
 * Prüft, ob eine Scheibe, von einem Quader abgeschnitten werden kann
@@ -638,6 +641,7 @@ return INVALID;
 
     \newpage
 
+    \subsubsection{Implementierung Algorithmus}
     \begin{lstlisting}[frame=single,language=C++,title=Methode calculate\_square,breaklines=true,label={lst:code_calculateSquare}]
 /**
 * Ermittelt rekursiv durch Backtracking eine Lösungsreihenfolge für die gegebene Menge an Scheiben.
@@ -688,8 +692,8 @@ return false;
 
     \newpage
 
-    \subsection{Aufgabe-A main\_a.cpp}\label{subsec:alles-kaese}
-
+    \subsection{Aufgabe-A}\label{subsec:alles-kaese}
+    \subsubsection{Implementierung Obermethode}
     \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main}]
 /**
 * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
@@ -787,7 +791,8 @@ return 0;
 }
     \end{lstlisting}
 
-    \subsection{Erweiterung main\_b.cpp}\label{subsec:erweiterung}
+    \subsection{Erweiterung}\label{subsec:erweiterung}
+    \subsubsection{Implementierung Sortiermethode}
 
     \begin{lstlisting}[frame=single,language=C++,title=Methode sort\_tupel,breaklines=true,label={lst:code_sortTupel}]
 /**
@@ -815,7 +820,7 @@ get<1>(tupel) = temp;
     \end{lstlisting}
 
     \newpage
-
+    \subsubsection{Implementierung Hilfsmethode}
     \begin{lstlisting}[frame=single,language=C++,title=Methode find\_dimensions,breaklines=true,label={lst:code_findDimensions}]
 /**
 * Ermittelt alle möglichen ganzzahligen Kombinationen von Längen, Breiten und Höhen für einen Quader
@@ -840,7 +845,7 @@ dimensions.insert(tupel);
 return dimensions;
 }
     \end{lstlisting}
-
+    \subsubsection{Implementierung Algorithmus}
     \begin{lstlisting}[frame=single,language=C++,title=Methode find\_combinations,breaklines=true,label={lst:code_findCombinations}]
 /**
 * Ermittelt rekursiv alle möglichen Kombinationen von Abmessungen für beliebig viele Quader
@@ -923,6 +928,7 @@ return combinations;
 }
     \end{lstlisting}
 
+    \subsubsection{Implementierung Obermethode}
     \begin{lstlisting}[frame=single,language=C++,title=Methode main,breaklines=true,label={lst:code_main_extended}]
 /**
 * Liest die Eingabedateien ein und versucht für jede Datei eine Lösung entsprechend der Aufgabenstellung zu finden
