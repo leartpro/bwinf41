@@ -82,6 +82,7 @@
 \usetikzlibrary{angles}
 \usetikzlibrary{quotes}
 \usepackage{amsfonts}
+\usepackage{hyperref}
 
 % Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
@@ -128,43 +129,26 @@
     Da es jedoch für $n$ Elemente $n!$ Permutationen gibt, welche alle auf ihre Erfüllbarkeit geprüft werden müssten,
     könnte die Laufzeit sehr hoch ausfallen.
     \subsection{Algorithmus}\label{subsec:algorithmus}
-    Um eine Lösung mit dem Greedy-Algorithmus zu ermitteln,
-    erfolgt zunächst eine Sortierung der Koordinaten nach nicht abnehmender euklidischer Entfernung von einem Startpunkt aus.
+
+    Zunächst erfolgt eine Sortierung der Koordinaten nach nicht abnehmender euklidischer Entfernung von einem Startpunkt aus,
+    um die Nearest-Neighbour-Heuristik zu realisieren.
     Anschließend wird eine Schleife durchlaufen, in welcher jeder Punkt nacheinander besucht wird.
-    Es wird geprüft, ob der aktuelle Punkt bereits in der Route vorhanden ist.
+    Anschließend wird für jeden Knoten der Menge geprüft, ob der aktuelle Punkt bereits in der Lösungsmenge $route$ vorhanden ist.
     Falls dies der Fall ist, wird mit dem nächsten Punkt fortgefahren.
     Andernfalls wird der Winkel zwischen den beiden zuletzt besuchten Punkten und dem aktuellen Punkt berechnet.
-    Die Hinzunahme des aktuellen Punktes zur Route ist dabei abhängig davon, ob die Route noch leer ist oder der Winkel zwischen den beiden Kanten größer oder gleich 90 Grad ist.
-    Sobald alle Punkte der Menge in der Route enthalten sind, ist ein Hamiltonpfad gefunden und wird als wahr zurückgegeben.
-    Andernfalls wird das letzte Element aus der Route entfernt und mit dem nächsten Punkt fortgefahren.
-    \newline\newline
-    Die Funktion \textsc{HamiltonianPfad} erhält als Eingabe eine Menge von $n$ Punkten in der Ebene $P={(x,y)| x,y \in \mathbb{R}}$,
-    dargestellt als Vektor von Paaren $\textit{koordinaten}=[(x_1,y_1), (x_2,y_2),\dots, (x_n,y_n)]$, und gibt einen Hamiltonpfad zurück,
-    der alle Punkte in $\textit{koordinaten}$ verbindet, oder \textit{falsch}, falls ein solcher Pfad nicht existiert.
-    Der Algorithmus arbeitet rekursiv und fügt schrittweise Punkte zur Lösungsmenge hinzu, bis entweder alle Elemente in der Lösungsmenge sind oder kein Element gibt,
-    welches nach den Winkelkriterien als Nachfolger in Frage kommt.
-    In diesem Fall wird das Backtracking eingesetzt, und der letzte Schritt wird rückgängig gemacht.
-    Um den nächsten Außenposten auszuwählen, verwendet der Algorithmus die Nearest-Neighbour-Heuristik und beachtet zusätzlich das Winkelkriterium,
-    um die Reihenfolge der Punkte im Pfad zu bestimmen.
-    Dazu wird für jeden Punkt geprüft, ob er nach den Winkelkriterien als Nachfolger in Frage kommt.
-    Die Laufzeit des Algorithmus ist O($n!$), da alle $n!$ Permutationen der gegebenen Punktmenge iteriert werden müssen, um eine Lösung zu finden.
-    \newline\newline
-    Der Greedy-Algorithmus wird verwendet, um einen Hamiltonpfad zu finden.
-    Hierbei werden die Koordinaten nach der euklidischen Entfernung von einem Startpunkt aus sortiert.
-    Eine Schleife durchläuft alle Punkte und prüft, ob der aktuelle Punkt bereits in der Route vorhanden ist.
-    Falls dies der Fall ist, wird mit dem nächsten Punkt fortgefahren.
-    Wenn nicht, wird der Winkel zwischen den zuletzt besuchten Punkten und dem aktuellen Punkt berechnet.
     Wenn entweder die Lösungsmenge $route$ leer ist, oder die Bedingung $\textit{koordinaten}[i] \notin \textit{route} \land (|\textit{route}|<2 \lor \textit{winkel} \geq 90$ erfüllt ist,
     wird der aktuelle Punkt zur Lösungsmenge hinzugefügt.
-    Wenn alle Punkte in der Menge enthalten sind, ist ein Hamiltonpfad gefunden und wird als wahr zurückgegeben,
-    andernfalls wird das letzte Element aus der Route entfernt und mit dem nächsten Punkt fortgefahren.
-    Die Funktion \textsc{HamiltonianPfad} erhält eine Menge von Punkten als Eingabe und gibt einen Hamiltonpfad zurück oder \textit{falsch}, falls ein solcher Pfad nicht existiert.
-    Die Laufzeit des Algorithmus ist O($n!$), da alle $n!$ Permutationen der gegebenen Punktmenge iteriert werden müssen, um eine Lösung zu finden.
+    Befinden sich nun alle Punkte in der Lösungsmenge, ist ein Hamiltonpfad gefunden und wird als wahr zurückgegeben.
+    Ansonsten arbeitet der Algorithmus rekursiv, indem er sich für jeden, zur Lösungsmenge hinzugefügten Punkt, selbst aufruft.
+    Wenn alle Punkte, die sich noch nicht in der Lösungsmenge befinden, nicht unter berücksichtigung des Winkelkriteriums erreichbar sind,
+    wird das Backtracking eingesetzt, und der letzte Schritt wird rückgängig gemacht.
+    Die worst-case-Laufzeit des Algorithmus ist O($n!$), da im Fall,
+    dass keine Lösung existiert alle $n!$ Permutationen der gegebenen Punktmenge iteriert werden müssen, um eine Lösung zu finden.
 
     \begin{algorithm}[H]
         \caption{Finde einen Hamiltonpfad in einem euklidischen Graphen}
         \begin{algorithmic}
-            \Require Eine Menge von $n$ Punkten in der Ebene $P={(x,y)| x,y \in \mathbb{R}}$, dargestellt als Vektor von Paaren $\textit{koordinaten}=[(x_1,y_1), (x_2,y_2),\dots, (x_n,y_n)]$.
+            \Require Eine Menge von $n$ Punkten in der Ebene $P={(x,y)| x,y \in \mathbb{R}}$, dargestellt als Menge von Paaren $\textit{koordinaten}=[(x_1,y_1), (x_2,y_2),\dots, (x_n,y_n)]$.
             \Ensure Ein Hamiltonpfad im Graphen, der alle Punkte in $\textit{koordinaten}$ verbindet, oder $\textit{falsch}$, falls ein solcher Pfad nicht existiert.
             \Function{HamiltonianPfad}{$\textit{route},\ \textit{koordinaten}$}
                 \If {$\textit{route}$ ist nicht leer}
@@ -199,8 +183,28 @@
     Der Winkel zwischen zwei Kanten kann dabei über den Kosinussatz ermittelt werden,
     indem ein Dreieck aus dem vorletzten Punkt der Lösungsmenge,
     dem letzten Punkt der Lösungsmenge und dem aktuellen Punkt gebildet wird.
+    So wird in der \hyperref[fig:figure2]{Figur Winkelberechnung} eine Berechnung des Winkels $\alpha$ zwischen den Kanten
+    $from_{node}$ - $over_{node}$ und $over_{node}$ - $to_{node}$ dargestellt.
 
-    Bei der Funktion \textsc{Schnittwinkel} handelt es sich um eine Hilfsmethode, welche diesen Winkel berechnet.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            % Define the coordinates of the nodes
+            \coordinate[label=below:$over_{node}$] (fromNode) at (0,0);
+            \coordinate[label=above:$to_{node}$] (overNode) at (1.5,1);
+            \coordinate[label=below:$from_{node}$] (toNode) at (3,0);
+            % Draw the edges between the nodes
+            \draw (fromNode) -- node[above] {$b$} (overNode);
+            \draw (overNode) -- node[above] {$c$} (toNode);
+            \draw (fromNode) -- node[below] {$a$} (toNode);
+            % Draw the angle symbol
+            \draw [draw=black, fill=white] (0.7,0) arc (0:34:0.7);
+            \node at (0.9,0.3) {$\alpha$};
+        \end{tikzpicture}
+        \caption{Figur: Winkelberechnung}\label{fig:figure2}
+    \end{figure}
+
+    Bei der Funktion \hyperref[alg:pseudo_crossangle]{\textsc{Schnittwinkel}} handelt es sich um eine Hilfsmethode, welche diesen Winkel berechnet.
     Da $\arccos\left(\frac{a^2 - b^2 - c^2}{-2bc}\right)$ den Winkel in Bogenmaß zurückgibt,
     wird das Ergebnis in Grad umgerechnet, indem es mit $\frac{180}{\pi}$ multipliziert wird.
 
@@ -218,46 +222,15 @@
         \end{algorithmic}\label{alg:pseudo_crossangle}
     \end{algorithm}
 
-
-    \newpage
     \section{Umsetzung}\label{sec:umsetzung}
 
-    \[
-        P = \begin{pmatrix}
-                x_1 \\
-                y_1
-        \end{pmatrix},
-        \begin{pmatrix}
-            x_2 \\
-            y_2
-        \end{pmatrix},
-        \ldots,
-        \begin{pmatrix}
-            x_n \\
-            y_n
-        \end{pmatrix}
-    \]
-
-    \[
-    P = \left{ (x_1,y_1), (x_2,y_2), \ldots, (x_n,y_n) \right}
-    \]
-
-    - wie die Lösungsidee im Programm tatsächlich umgesetzt wurde
-    - auch Implementierungsdetails
-    - Transformation von Idee ins Programm
-    - Bezug zwischen der Lösungsidee und der Implementation
-    - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
-    - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
-
     \subsection{Methoden}\label{subsec:methoden}
-    \subsection{Transformation}\label{subsec:transformation}
-    \subsection{Implementationsdetails}\label{subsec:implementationsdetails}
-    Die gezeigten Funktionen sind in C++ geschrieben und basieren auf Standard-Datentypen wie Vektoren und Paaren.
     In der Funktion cross\_angle werden geometrische Berechnungen durchgeführt, um den Winkel in Grad zwischen den Vektoren von drei Knoten zu bestimmen.
     Hierbei werden die x- und y-Koordinaten jedes Knotens als double gespeichert und als pair<double, double>-Paar an die Funktion übergeben.
     Die Funktion verwendet die in C++ verfügbaren mathematischen Funktionen sqrt und pow, um die Wurzel und das Quadrat von Zahlen zu berechnen,
     sowie die trigonometrische Funktion acos, um den Inversen Kosinus (Arcuscosinus) einer Zahl zu berechnen.
     Der berechnete Winkel wird als double zurückgegeben.
+    \newline
 
     In der Funktion solve wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
     Hierzu werden ebenfalls Vektoren und Paare verwendet, um die Koordinaten aller Knoten zu speichern und die aktuelle Route zu halten.
@@ -269,30 +242,7 @@
     Wenn der Winkel zwischen den Vektoren größer oder gleich 90 Grad ist oder die Route noch leer ist, wird der Knoten zur Route hinzugefügt.
     Wenn alle Knoten in der Lösungsmenge enthalten sind, wird true zurückgegeben, andernfalls wird das Backtracking fortgesetzt, um eine weitere mögliche Route zu finden.
 
-    Die Verwendung von Vektoren und Paaren in C++ ist hier sinnvoll, da sie eine einfache und effiziente Möglichkeit bieten,
-    eine Liste von Koordinaten und eine Liste von Knoten (in Form von Paaren von Koordinaten) zu speichern.
-    Durch die Verwendung von std::find kann einfach überprüft werden, ob ein bestimmter Knoten bereits in der Route enthalten ist oder nicht.
-    Die Verwendung von Lambda-Ausdrücken und Standardalgorithmen wie sort erleichtert die Implementierung des Algorithmus und erhöht die Lesbarkeit des Codes.
-
-    Zusammenfassend verwendet der gezeigte Code Standard-C++-Funktionen wie Vektoren, Paare, Lambda-Ausdrücke und Standardalgorithmen,
-    um eine rekursive Backtracking-Methode zur Lösung eines Routing-Problems zu implementieren.
-    Die Verwendung von Standard-C++-Datentypen und Funktionen erleichtert die Implementierung des Algorithmus und erhöht die Lesbarkeit des Codes.
-
-    \newline\newline
-    Matrixdarstellung:
-    Dabei repräsentieren $d_{i,j}$ die Entfernung zwischen Knoten $i$ und $j$.
-
-    \begin{equation}
-        \begin{bmatrix}
-            0 & d{1,2} & d{1,3} & \cdots & d{1,n} \ d{2,1} & 0 & d{2,3} & \cdots & d{2,n} \ d{3,1} & d{3,2} &
-            0 & \cdots & d{3,n} \ \vdots & \vdots & \vdots & \ddots & \vdots \ d{n,1} & d{n,2} & d{n,3} & \cdots &
-            0
-        \end{bmatrix}\label{eq:equation}
-    \end{equation}
-
-    Diagrammdarstellung:
-    Ein Diagramm kann verwendet werden, um die Route durch den Graphen zu visualisieren.
-    Im Folgenden ist ein Beispiel für ein solches Diagramm gegeben:
+    \subsection{Transformation}\label{subsec:transformation}
 
     \begin{figure}[htbp]
         \centering
@@ -312,42 +262,18 @@
     In diesem Diagramm sind die Knoten als Kreise und die Verbindungen zwischen den Knoten als Linien dargestellt.
     Die rote gestrichelte Linie zeigt die Route durch den Graphen an.
 
-    \begin{center}
-        \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-        thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+    \subsection{Implementationsdetails}\label{subsec:implementationsdetails}
+    Verwendete Datenstrukturen sind hauptsächlich Vektoren und Tupel, da sie eine einfache und effiziente Möglichkeit bieten,
+    eine Liste von Koordinaten und eine Liste von Knoten (in Form von Paaren von Koordinaten) zu speichern.
 
-        \node[main node] (1) {$1$};
-        \node[main node] (2) [above right of=1] {$2$};
-        \node[main node] (3) [below right of=2] {$3$};
-        \node[main node] (4) [below right of=1] {$4$};
+    \[
+        P = \left{ (x_1,y_1), (x_2,y_2), \ldots, (x_n,y_n) \right}
+    \]
 
-        \path[every node/.style={font=\sffamily\small}]
-        (1) edge node [left] {4} (4)
-        edge node [above] {2} (2)
-        (2) edge node [right] {3} (3)
-        (3) edge node [below] {1} (4);
-        \end{tikzpicture}
-    \end{center}
-
-    \begin{figure}[h]
-        \centering
-        \begin{tikzpicture}[scale=1.5]
-        % Define the coordinates of the nodes
-            \coordinate[label=below:$from_{node}$] (fromNode) at (0,0);
-            \coordinate[label=above:$over_{node}$] (overNode) at (1.5,1);
-            \coordinate[label=below:$to_{node}$] (toNode) at (3,0);
-        % Draw the edges between the nodes
-            \draw (fromNode) -- node[above] {$a$} (overNode);
-            \draw (overNode) -- node[above] {$c$} (toNode);
-            \draw (fromNode) -- node[below] {$b$} (toNode);
-        % Draw the angle symbol
-            \draw [draw=black, fill=white] (0.7,0) arc (0:34:0.7);
-            \node at (0.9,0.3) {$\alpha$};
-        \end{tikzpicture}
-        \caption{Visuelle Darstellung der Winkelberechnung}\label{fig:figure2}
-    \end{figure}
-
-
+    Des Weiteren wird die Methode std::find verwendet, womit einfach überprüft werden kann,
+    ob ein bestimmter Knoten bereits in der Route enthalten ist.
+    Eine weitere verwendete Methode ist std::sort, wodurch sowohl eine hohe Effizienz garantiert ist,
+    als auch die Lesbarkeit des Codes verbessert wird.
 
     \newpage
     \section{Beispiele}\label{sec:beispiele}
