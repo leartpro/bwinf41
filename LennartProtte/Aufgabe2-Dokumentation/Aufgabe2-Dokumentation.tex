@@ -364,6 +364,33 @@
     Das Programm enthält auch die Strukturen Slice und Dimension, die jeweils eine Käsescheibe und eine Dimension des Quaders repräsentieren.
     Die Funktion to_string gibt eine lesbare Beschreibung einer Dimension zurück, die im Programm für Debugging-Zwecke verwendet wird.
 
+    Das folgende Programm implementiert eine Funktion, die eine gegebene Menge an Scheiben auf ihre Möglichkeit prüft, zu einem Quader zusammengesetzt zu werden.
+    Es verwendet Backtracking, um die Lösung zu finden.
+
+    Zunächst gibt es eine Struktur "Slice", die eine Käsescheibe mit Länge und Höhe repräsentiert.
+    Dann gibt es eine Aufzählung "Dimension", die die drei Dimensionen Vorne, Oben und Seite sowie eine ungültige Dimension enthält.
+
+    Die Funktion "can_remove_slice" prüft, ob eine Scheibe von einem Quader abgeschnitten werden kann, und gibt die Dimension zurück, in der die Scheibe entfernt werden kann.
+    Wenn die Scheibe nicht entfernt werden kann, gibt die Funktion -1 zurück.
+
+    Die Hauptfunktion "find_solution" prüft zuerst, ob es überhaupt möglich ist, einen Quader aus den gegebenen Scheiben zusammenzusetzen.
+    Wenn dies der Fall ist, wird für jede mögliche Variante des Zielquaders geprüft, ob die gegebene Menge an Scheiben zu dieser Variante zusammengesetzt werden kann.
+
+    Die möglichen Varianten des Zielquaders werden durch die Kombination der längsten Scheibenlänge und des Quadvolumens berechnet.
+    Dann wird für jede mögliche Variante eine Liste "solution" und eine Liste "slices" erstellt.
+    Die "solution" Liste enthält die in der aktuellen Lösung enthaltenen Scheiben, während die "slices" Liste die noch nicht betrachteten Scheiben enthält.
+    Der Quader wird durch die Längenparameter "length", "height" und "depth" repräsentiert.
+
+    Die Hauptfunktion durchläuft die Liste der Scheiben und versucht, jede Scheibe in jeder möglichen Dimension des Quaders zu entfernen, um zu prüfen, ob eine Lösung gefunden wurde.
+    Wenn eine Scheibe entfernt werden kann, wird sie zur "solution" Liste hinzugefügt, und die entsprechende Seitenlänge des Quaders wird reduziert.
+    Die Funktion wird dann rekursiv aufgerufen, um die restlichen Scheiben zu entfernen.
+    Wenn eine Lösung gefunden wird, wird "true" zurückgegeben, andernfalls werden die Änderungen rückgängig gemacht,
+    indem die Scheibe aus der "solution" Liste entfernt und die Seitenlänge des Quaders wieder erhöht wird.
+
+    Wenn alle Scheiben betrachtet wurden und keine Lösung gefunden wurde, wird "false" zurückgegeben.
+    Wenn eine Lösung gefunden wurde, gibt die Hauptfunktion die Liste "solution" zurück, die die Scheiben in der Reihenfolge enthält, in der sie zum Aufbau des Quaders verwendet werden sollen.
+    Wenn keine Lösung gefunden wurde, gibt die Hauptfunktion eine leere Liste zurück.
+
 
     - wie die Lösungsidee im Programm tatsächlich umgesetzt wurde
     - auch Implementierungsdetails

@@ -223,27 +223,37 @@
     \section{Umsetzung}\label{sec:umsetzung}
 
     \subsection{Methoden}\label{subsec:methoden}
-    In der Funktion cross\_angle werden geometrische Berechnungen durchgeführt, um den Winkel in Grad zwischen den Vektoren von drei Knoten zu bestimmen.
-    Hierbei werden die x- und y-Koordinaten jedes Knotens als double gespeichert und als pair<double, double>-Paar an die Funktion übergeben.
-    Die Funktion verwendet die in C++ verfügbaren mathematischen Funktionen sqrt und pow, um die Wurzel und das Quadrat von Zahlen zu berechnen,
-    sowie die trigonometrische Funktion acos, um den Inversen Kosinus (Arcuscosinus) einer Zahl zu berechnen.
-    Der berechnete Winkel wird als double zurückgegeben.
-    \newline
+    Ein Außenposten wird als \texttt{pair<double, double>} dargestellt, worin die Koordinaten des Außenposten gespeichert werden.
+    Die Menge an Außenposten kann dabei als \texttt{vector<pair<double, double> >} dargestellt werden.
+    Kantenbeziehungen müssen hier nicht repräsentiert werden, da die Kantengewichte sich jeweils durch die Koordinaten der Außenposten berechnen lassen
+    und das Nichtvorhandensein einer Kante ebenfalls nicht dargestellt werden muss ,da es sich immer um vollständige Graphen handelt.
+    Der Algorithmus kann in zwei Methoden implementiert werden.
+    Dabei beinhaltet die Methode \texttt{solve} die Algorithmische vorgehensweise und nutzt zur Berechnung des Winkels die Methode \texttt{cross\_angle}
 
-    In der Funktion solve wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
+    In der Funktion \texttt{solve} wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
     Hierzu werden ebenfalls Vektoren und Paare verwendet, um die Koordinaten aller Knoten zu speichern und die aktuelle Route zu halten.
     Zunächst wird die Liste der Knoten nach der Entfernung zum letzten Knoten der aktuellen Route sortiert.
     Dies wird durch die Verwendung von sort und einem Lambda-Ausdruck erreicht.
-    Der Lambda-Ausdruck gibt an, wie die Vergleichsfunktion für das Sortieren verwendet werden soll.
     Wenn die Liste der Knoten sortiert ist, wird jeder Knoten in der Liste besucht und überprüft, ob er bereits in der Route enthalten ist oder nicht.
     Wenn der Knoten noch nicht in der Route enthalten ist, wird der Winkel zwischen dem Knoten, dem vorherigen Knoten und dem vor vorherigen Knoten (falls vorhanden) berechnet.
     Wenn der Winkel zwischen den Vektoren größer oder gleich 90 Grad ist oder die Route noch leer ist, wird der Knoten zur Route hinzugefügt.
     Wenn alle Knoten in der Lösungsmenge enthalten sind, wird true zurückgegeben, andernfalls wird das Backtracking fortgesetzt, um eine weitere mögliche Route zu finden.
 
-    \subsection{Transformation}\label{subsec:transformation}
+    In der Funktion \texttt{cross\_angle} werden geometrische Berechnungen durchgeführt, um den Winkel in Grad zwischen den Vektoren von drei Knoten zu bestimmen.
+    Hierbei werden die x- und y-Koordinaten jedes Knotens als double gespeichert und als \texttt{pair<double, double>}-Paar an die Funktion übergeben.
+    Die Funktion verwendet die in C++ verfügbaren mathematischen Funktionen sqrt und pow, um die Wurzel und das Quadrat von Zahlen zu berechnen,
+    sowie die trigonometrische Funktion acos, um den Arcuscosinus einer Zahl zu berechnen.
+    Der berechnete Winkel wird als double zurückgegeben.
 
-    -darstellung in list form sprat zeit, da sonst unnötig kanten betrachtet werden
+    Des Weiteren wird die Methode \texttt{std::find} verwendet, womit einfach überprüft werden kann,
+    ob ein bestimmter Knoten bereits in der Route enthalten ist.
+    Eine weitere verwendete Methode ist \texttt{std::sort}, wodurch sowohl eine hohe Effizienz garantiert ist,
+    als auch die Lesbarkeit des Codes verbessert wird.
 
+    Allgemein kann festgehalten werden, dass hauptsächlich Vektoren und Tupel als Datenstrukturen verwendet werden,
+    da sie eine einfache und effiziente Möglichkeit bieten, eine Liste von Koordinaten und eine Liste von Knoten (in Form von Paaren von Koordinaten) zu speichern.
+
+    So könnten \texttt{route} und \texttt{koordinaten} für den vorliegenden Graphen wie folgt aussehen:
 
     \begin{figure}[htbp]
         \centering
@@ -251,30 +261,18 @@
             \node[circle, draw] (a) at (0,0) {1};
             \node[circle, draw] (b) at (1,0) {2};
             \node[circle, draw] (c) at (2,0) {3};
-            \node[circle, draw] (d) at (3,0) {4};
-            \node[circle, draw] (e) at (4,0) {5};
-            \node[circle, draw] (f) at (5,0) {6};
+            \node[circle, draw] (e) at (3,0) {4};
+            \node[circle, draw] (f) at (4,0) {5};
             \draw (a) -- (b) -- (c) -- (d) -- (e) -- (f);
-            \draw[dashed, red] (a) -- (c) -- (e);
+            \draw[dashed, red] (a) -- (b) -- (c);
         \end{tikzpicture}
-        \caption{Route durch den Graphen.}\label{fig:figure}
+        \caption{Route durch den Graphen}\label{fig:figure}
     \end{figure}
 
-    In diesem Diagramm sind die Knoten als Kreise und die Verbindungen zwischen den Knoten als Linien dargestellt.
-    Die rote gestrichelte Linie zeigt die Route durch den Graphen an.
-
-    \subsection{Implementationsdetails}\label{subsec:implementationsdetails}
-    Verwendete Datenstrukturen sind hauptsächlich Vektoren und Tupel, da sie eine einfache und effiziente Möglichkeit bieten,
-    eine Liste von Koordinaten und eine Liste von Knoten (in Form von Paaren von Koordinaten) zu speichern.
-
-    \[
-        P = \left{ (x_1,y_1), (x_2,y_2), \ldots, (x_n,y_n) \right}
-    \]
-
-    Des Weiteren wird die Methode std::find verwendet, womit einfach überprüft werden kann,
-    ob ein bestimmter Knoten bereits in der Route enthalten ist.
-    Eine weitere verwendete Methode ist std::sort, wodurch sowohl eine hohe Effizienz garantiert ist,
-    als auch die Lesbarkeit des Codes verbessert wird.
+    \begin{gather*}
+        koordinaten = \left{ (0,0), (1,0), (2,0), (3,0), (4,0) \right}\\
+        route = \left{ (0,0), (1,0), (2,0) \right}\\
+    \end{gather*}
 
     \newpage
     \section{Beispiele}\label{sec:beispiele}
@@ -441,9 +439,12 @@
     6. [500, 300]
     \end{lstlisting}
 
-    -backtracking
-    ...
-
+    Das Beispiel backtracking.txt zeigt gut, wie der Algorithmus arbeitet, wenn er an einer Stelle nicht mehr weiter kommt.
+    Nachdem er von Punkt zwei keinen Knoten mehr hat, welcher für ihn erreichbar ist, wird der Schritt rückgängig gemacht
+    und mit dem nächsten gültigen Punkt, welcher am nächsten am aktuellen Punk liegt wiederholt.
+    In diesem Beispiel sind nach dem Backtracking Punkt 4,5 und 6 gleichermaßen weit von Punkt 1 entfernt
+    und auch alle gleichermaßen nach dem Winkelkriterium erreichbar.
+    Daher wird der Punkt 5 ausgewählt, weil er als erstes aus der Eingabedatei eingelesenen wurde und damit auch als erstes in $koordinaten$ betrachtet wird$.
     \subsection{nicht\_loesbar.txt}\label{subsec:nichtloesbar.txt}
 
 
