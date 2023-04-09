@@ -1,0 +1,7 @@
+Es konnte eine 1165.69 km lange Flugstrecke durch alle Außenposten ermittelt werden.
+1. [300, 300] 
+2. [300, 100] 90° 
+3. [100, 100] 90° 
+4. [100, 300] 135° 
+5. [300, 500] 90° 
+6. [500, 300] 
