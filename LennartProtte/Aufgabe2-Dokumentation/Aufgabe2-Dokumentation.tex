@@ -40,7 +40,6 @@
 \usepackage{algorithm}
 \usepackage{algorithmicx}
 \usepackage{tikz}
-\usepackage{textcomp}
 
 % Für Beispiele
 \usepackage{tikz-3dplot}
@@ -48,9 +47,11 @@
 
 
 % Für Quelltext
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{textcomp}
 \usepackage{listings}
 \lstset{
-    \usepackage{color}
     keywordstyle=\color{blue},commentstyle=\color{mygreen},
     stringstyle=\color{mymauve},rulecolor=\color{black},
     basicstyle=\footnotesize\ttfamily,numberstyle=\tiny\color{mygray},
@@ -276,6 +277,94 @@
 
     \section{Umsetzung}\label{sec:umsetzung}
 
+    Das Programm implementiert den beschriebenen Algorithmus, um zu prüfen, ob eine gegebene Menge an Scheiben zu einem Quader zusammengesetzt werden kann.
+
+    Zunächst werden die notwendigen Datenstrukturen definiert, die in der Lösungsidee erwähnt werden.
+    Es gibt eine Datenstruktur, um eine Käsescheibe darzustellen, die durch Länge und Höhe beschrieben wird.
+    Dann gibt es eine Enumeration, um die verschiedenen Dimensionen eines Quaders zu definieren, sowie eine Funktion, um eine Dimension in einen String zu konvertieren.
+
+    Die Hauptfunktion des Programms ist die Funktion can_build_cube, die die gegebene Menge an Scheiben und die Größe des Quaders als Parameter erhält.
+    Die Funktion gibt einen boolschen Wert zurück, der angibt, ob die gegebene Menge an Scheiben zu einem Quader der gegebenen Größe zusammengesetzt werden kann.
+
+    Die Implementierung der Funktion can_build_cube folgt dem in der Lösungsidee beschriebenen Algorithmus.
+    Zunächst wird das Volumen des Quaders berechnet, indem die Länge, Höhe und Tiefe multipliziert werden.
+    Anschließend wird die längste Kantenlänge aller Scheiben in der gegebenen Menge bestimmt.
+
+    Danach wird für jede mögliche Variante des Zielquaders (dh für alle möglichen Kombinationen von Länge, Höhe und Tiefe, die das berechnete Volumen enthalten), überprüft, ob sich die gegebene Menge an Scheiben zu dieser Variante zusammensetzen lässt.
+
+    Dazu wird für jede Käsescheibe in der gegebenen Menge getestet, ob sie in den Quader passt.
+    Dazu werden die Längen und Höhen der Scheibe mit den Längen und Höhen des Quaders verglichen, um zu bestimmen, ob die Scheibe in der Vorder-, Ober- oder Seitenansicht entfernt werden kann.
+    Wenn eine Scheibe in den Quader passt, wird sie aus der Liste der Scheiben entfernt und zur Lösungsliste hinzugefügt.
+    Der Quader wird aktualisiert, indem die entsprechende Seitenlänge reduziert wird.
+
+    Wenn eine Lösung gefunden wird, wird die Funktion true zurückgegeben.
+    Andernfalls wird zur nächsten Variante des Zielquaders übergegangen und der Algorithmus fortgesetzt.
+    Wenn es keine mögliche Variante gibt, zu der sich die gegebene Menge an Scheiben zusammensetzen lässt, wird false zurückgegeben.
+
+    Insgesamt wurde die Lösungsidee gut umgesetzt.
+    Der Algorithmus wird klar und verständlich durch den Programmcode widergespiegelt.
+    Einige Konzepte, wie die Verwendung von Datenstrukturen, Enumerations und Funktionen, wurden elegant im Code modelliert.
+    Der Code ist leicht verständlich und nachvollziehbar.
+
+
+    Das Programm implementiert die Lösungsidee mithilfe einer Funktion can_form_cube, welche prüft, ob die gegebene Menge an Scheiben zu einem Quader zusammengesetzt werden kann.
+    Wenn dies der Fall ist, wird true zurückgegeben und die Reihenfolge, in der die Scheiben zusammengesetzt werden können, in out_slices geschrieben.
+    Andernfalls wird false zurückgegeben und out_slices bleibt leer.
+
+    Die Funktion beginnt damit, das Gesamtvolumen aller Scheiben zu berechnen, um zu prüfen, ob es möglich ist, eine Größe für den Zielquader zu finden, die dieses Volumen aufnehmen kann. Wenn das Gesamtvolumen keinem ganzzahligen Quader entspricht, gibt die Funktion false zurück.
+
+    Anschließend wird der größte Wert einer Scheibe in der Länge oder Höhe gesucht, da diese Dimensionen für den Quader maßgeblich sind.
+    Daraus können alle möglichen Quadergrößen abgeleitet werden, die das berechnete Volumen aufnehmen können.
+    Die möglichen Quadergrößen werden sortiert, um mit den kleinsten anzufangen.
+
+    Die Funktion iteriert nun über alle möglichen Quadergrößen und versucht für jeden Quader, die Scheiben zusammenzusetzen.
+    Dazu wird der Quader als aktueller Zustand initialisiert und eine Liste von Scheiben slices wird erzeugt, die alle Scheiben der Eingabe enthält.
+    Dann wird eine Schleife gestartet, in der für jede Scheibe in der Liste slices versucht wird, sie in den Quader einzufügen.
+
+    Dies erfolgt, indem die Scheibe in jeder möglichen Dimension des Quaders (vorne, oben und seitlich) getestet wird.
+    Wenn eine Scheibe in eine Dimension passt, wird sie entfernt, die Lösungsmenge out_slices wird um die Scheibe erweitert, und die Abmessungen des Quaders werden entsprechend aktualisiert. Wenn es keine weitere Scheibe gibt, die in den aktuellen Quader passt, wird der Algorithmus rekursiv aufgerufen, um zu versuchen, die restlichen Scheiben in den aktuellen Zustand einzufügen. Wenn dies erfolgreich ist, wird true zurückgegeben und die aktuelle Lösung wird zurückgegeben.
+
+    Wenn keine der Scheiben in den aktuellen Quader passt, wird die Funktion false zurückgeben und die Funktion wird beendet.
+    Wenn die Funktion false zurückgibt, wird die Schleife über alle möglichen Quadergrößen fortgesetzt, bis alle Größen ausprobiert wurden.
+    Wenn keine der Größen passt, wird die Funktion false zurückgeben und das Programm endet.
+
+    Die Funktion can_form_cube verwendet auch einige Hilfsfunktionen, um den Code übersichtlicher zu gestalten,
+    zum Beispiel find_possible_cubes, um alle möglichen Quadergrößen zu finden, die das berechnete Volumen aufnehmen können, remove_slice_from_list, um eine Scheibe aus einer Liste zu entfernen, und get_dimension_for_slice, um die Dimension des Quaders zu finden, in die eine Scheibe am besten passt.
+
+    Verwendung von Strukturen: Die Lösungsidee sieht vor, dass jede Scheibe durch Länge und Höhe beschrieben wird, während der Quader durch Länge, Breite und Höhe beschrieben wird.
+    Im Programm wurde dies durch Verwendung einer Struktur für jede Scheibe und einer separaten Struktur für den Quader umgesetzt.
+    Dadurch kann die Scheibenliste einfach an die Funktionen übergeben werden, ohne dass jeder Scheibe separat Länge und Höhe übergeben werden müssen.
+    Verwendung von Aufzählungstypen: Die Lösungsidee definiert die Dimensionen "vorne/hinten", "oben/unten" und "links/rechts".
+    Im Programm wurden diese Dimensionen durch Verwendung eines Aufzählungstyps (enum) implementiert.
+    Dadurch kann sichergestellt werden, dass nur gültige Werte verwendet werden und es leicht ist, zwischen den Dimensionen zu wechseln.
+    Verwendung von boolschen Werten: Die Lösungsidee sieht vor, dass die Funktion "TrySlice" entweder true oder false zurückgibt, je nachdem, ob die aktuelle Scheibe in den Quader passt oder nicht.
+    Im Programm wird dies durch Verwendung eines boolschen Rückgabewerts umgesetzt.
+    Dies macht es einfach zu prüfen, ob eine Lösung gefunden wurde oder nicht.
+    Verwendung von Kommentaren: Im Programm wurden Kommentare verwendet, um zu beschreiben, was jeder Teil des Codes tut.
+    Dadurch ist es einfacher zu verstehen, wie die Lösungsidee im Code umgesetzt wurde.
+    Verwendung von Konstanten: Einige Werte, wie die maximale Anzahl von Varianten, wurden als Konstanten definiert.
+    Dadurch kann sichergestellt werden, dass sie im gesamten Code einheitlich verwendet werden und es einfach ist, sie zu ändern, wenn nötig.
+
+    Das Programm implementiert die Lösungsidee, indem es eine Funktion assemble_slices enthält, die als Eingabe eine Menge von Käsescheiben und als Ausgabe die Reihenfolge der Käsescheiben zurückgibt, die zu einem Quader zusammengesetzt werden können.
+
+    Die Implementierung der Funktion assemble_slices folgt dem Algorithmus der Lösungsidee:
+
+    Es wird das Volumen des Zielquaders berechnet.
+    Es werden alle möglichen Dimensionen des Zielquaders ermittelt, die das berechnete Volumen beinhalten.
+    Für jede mögliche Dimension wird überprüft, ob die gegebenen Scheiben zu einem Quader dieser Dimension zusammengesetzt werden können.
+    Wenn eine Lösung gefunden wurde, wird die Reihenfolge der Scheiben zurückgegeben.
+    Wenn für keine der möglichen Dimensionen eine Lösung gefunden wurde, wird eine leere Liste zurückgegeben.
+    Die Funktion assemble_slices ruft dabei die Funktion assemble_slices_helper auf, die den eigentlichen Greedy-Algorithmus implementiert,
+    um zu prüfen, ob die gegebenen Käsescheiben zu einem Quader einer bestimmten Dimension zusammengesetzt werden können.
+    Die Funktion assemble_slices_helper prüft für jede Käsescheibe, ob sie in einer der drei Dimensionen des Quaders platziert werden kann.
+    Wenn dies der Fall ist, wird die Käsescheibe aus der Liste der noch nicht platzierten Käsescheiben entfernt und in die Lösungsliste aufgenommen.
+    Die Größe des Quaders wird entsprechend angepasst und die Funktion wird rekursiv aufgerufen, um die verbleibenden Käsescheiben zu platzieren.
+    Wenn keine der verbleibenden Käsescheiben in den verbleibenden Dimensionen des Quaders platziert werden kann, wird die letzte Käsescheibe aus der Lösungsliste entfernt, die Größe des Quaders wird wiederhergestellt und die Funktion gibt false zurück.
+
+    Das Programm enthält auch die Strukturen Slice und Dimension, die jeweils eine Käsescheibe und eine Dimension des Quaders repräsentieren.
+    Die Funktion to_string gibt eine lesbare Beschreibung einer Dimension zurück, die im Programm für Debugging-Zwecke verwendet wird.
+
+
     - wie die Lösungsidee im Programm tatsächlich umgesetzt wurde
     - auch Implementierungsdetails
     - Transformation von Idee ins Programm
@@ -322,10 +411,10 @@
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kleinerWuerfel.txt, breaklines=true,label={lst:lstlisting3}]
-Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
-Quader: 2x2x2
-Slice: (2, 2) Dimension: front
-Slice: (2, 2) Dimension: front
+    Die Scheiben können zu 1 Quader(n) zusammengesetzt werden.
+    Quader: 2x2x2
+    Slice: (2, 2) Dimension: front
+    Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
     - Simples Beispiel
@@ -354,13 +443,13 @@ Slice: (2, 2) Dimension: front
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe zweiQuader.txt, breaklines=true,label={lst:lstlisting4}]
-Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
-Quader: 1x1x1
-Slice: (1, 1) Dimension: front
+    Die Scheiben können zu 2 Quader(n) zusammengesetzt werden.
+    Quader: 1x1x1
+    Slice: (1, 1) Dimension: front
 
-Quader: 2x2x2
-Slice: (2, 2) Dimension: front
-Slice: (2, 2) Dimension: front
+    Quader: 2x2x2
+    Slice: (2, 2) Dimension: front
+    Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
     - Simples Beispiel
@@ -426,21 +515,21 @@ Slice: (2, 2) Dimension: front
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting5}]
-Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
-Quader: 1x1x1
-Slice: (1, 1) Dimension: front
+    Die Scheiben können zu 3 Quader(n) zusammengesetzt werden.
+    Quader: 1x1x1
+    Slice: (1, 1) Dimension: front
 
-Quader: 3x3x3
-Slice: (3, 3) Dimension: front
-Slice: (3, 3) Dimension: front
-Slice: (3, 3) Dimension: front
+    Quader: 3x3x3
+    Slice: (3, 3) Dimension: front
+    Slice: (3, 3) Dimension: front
+    Slice: (3, 3) Dimension: front
 
-Quader: 5x5x5
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
-Slice: (5, 5) Dimension: front
+    Quader: 5x5x5
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
+    Slice: (5, 5) Dimension: front
     \end{lstlisting}
 
     - Zeigt Erweiterung auf beliebige Mengen an Quadern anwendbar
@@ -469,22 +558,21 @@ Slice: (5, 5) Dimension: front
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting6}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 6x6x6 V(216)
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 6x6x6 V(216)
 
-Slice: (6, 6) Dimension: front
-Slice: (6, 6) Dimension: front
-Slice: (4, 6) Dimension: top
-Slice: (4, 6) Dimension: top
-Slice: (4, 6) Dimension: front
-Slice: (3, 6) Dimension: top
-Slice: (3, 3) Dimension: side
-Slice: (3, 3) Dimension: side
-Slice: (3, 4) Dimension: front
-Slice: (2, 4) Dimension: top
-Slice: (2, 4) Dimension: front
-Slice: (2, 4) Dimension: front
-
+    Slice: (6, 6) Dimension: front
+    Slice: (6, 6) Dimension: front
+    Slice: (4, 6) Dimension: top
+    Slice: (4, 6) Dimension: top
+    Slice: (4, 6) Dimension: front
+    Slice: (3, 6) Dimension: top
+    Slice: (3, 3) Dimension: side
+    Slice: (3, 3) Dimension: side
+    Slice: (3, 4) Dimension: front
+    Slice: (2, 4) Dimension: top
+    Slice: (2, 4) Dimension: front
+    Slice: (2, 4) Dimension: front
     \end{lstlisting}
 
     - Beispiel 1 der Eingabedateien
@@ -493,15 +581,14 @@ Slice: (2, 4) Dimension: front
     => betrachtung 3 vs 2 Variablen
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting7}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 1000x2x1000 V(2000000)
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 1000x2x1000 V(2000000)
 
-Slice: (2, 1000) Dimension: front
-Slice: (2, 1000) Dimension: front
-Slice: (2, 998) Dimension: top
-Slice: (998, 999) Dimension: side
-Slice: (998, 999) Dimension: side
-
+    Slice: (2, 1000) Dimension: front
+    Slice: (2, 1000) Dimension: front
+    Slice: (2, 998) Dimension: top
+    Slice: (998, 999) Dimension: side
+    Slice: (998, 999) Dimension: side
     \end{lstlisting}
 
     - Beispiel 2 der Eingabedateien
@@ -510,56 +597,56 @@ Slice: (998, 999) Dimension: side
 
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting8}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 1000x10x1000 V(10000000)
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 1000x10x1000 V(10000000)
 
-Slice: (1000, 1000) Dimension: side
-Slice: (1000, 1000) Dimension: side
-Slice: (1000, 1000) Dimension: side
-Slice: (7, 1000) Dimension: front
-Slice: (999, 1000) Dimension: side
-Slice: (6, 1000) Dimension: front
-Slice: (998, 1000) Dimension: side
-Slice: (5, 998) Dimension: top
-Slice: (998, 999) Dimension: side
-Slice: (4, 999) Dimension: front
-Slice: (4, 997) Dimension: top
-Slice: (4, 998) Dimension: front
-Slice: (4, 998) Dimension: front
-Slice: (4, 995) Dimension: top
-Slice: (995, 997) Dimension: side
-Slice: (995, 997) Dimension: side
-Slice: (2, 997) Dimension: front
-Slice: (2, 994) Dimension: top
-Slice: (2, 996) Dimension: front
-Slice: (2, 993) Dimension: top
-Slice: (2, 995) Dimension: front
-Slice: (992, 995) Dimension: side
-Slice: (992, 995) Dimension: side
+    Slice: (1000, 1000) Dimension: side
+    Slice: (1000, 1000) Dimension: side
+    Slice: (1000, 1000) Dimension: side
+    Slice: (7, 1000) Dimension: front
+    Slice: (999, 1000) Dimension: side
+    Slice: (6, 1000) Dimension: front
+    Slice: (998, 1000) Dimension: side
+    Slice: (5, 998) Dimension: top
+    Slice: (998, 999) Dimension: side
+    Slice: (4, 999) Dimension: front
+    Slice: (4, 997) Dimension: top
+    Slice: (4, 998) Dimension: front
+    Slice: (4, 998) Dimension: front
+    Slice: (4, 995) Dimension: top
+    Slice: (995, 997) Dimension: side
+    Slice: (995, 997) Dimension: side
+    Slice: (2, 997) Dimension: front
+    Slice: (2, 994) Dimension: top
+    Slice: (2, 996) Dimension: front
+    Slice: (2, 993) Dimension: top
+    Slice: (2, 995) Dimension: front
+    Slice: (992, 995) Dimension: side
+    Slice: (992, 995) Dimension: side
     \end{lstlisting}
 
     - Beispiel 3 der Eingabedateien
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting9}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 210x210x210 V(9261000)
-[...]
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 210x210x210 V(9261000)
+    [...]
     \end{lstlisting}
 
     - Ausschnitt Beispiel 4 der Eingabedateien
     (Anzahl der Scheiben zu groß zum darstellen)
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting10}]
-Die Scheiben können zu einem Quader zusammengesetzt werden.
-Quader: 3570x2310x2730 V(1038654520)
-[...]
+    Die Scheiben können zu einem Quader zusammengesetzt werden.
+    Quader: 3570x2310x2730 V(1038654520)
+    [...]
     \end{lstlisting}
 
     - Ausschnitt Beispiel 5 der Eingabedateien
     (Anzahl der Scheiben zu groß zum darstellen)
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting11}]
-Die Scheiben können zu keinem Quader zusammengesetzt werden.
+    Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
     - Ausschnitt Beispiel 6 der Eingabedateien
@@ -567,7 +654,7 @@ Die Scheiben können zu keinem Quader zusammengesetzt werden.
     - zu groß für Erweiterung
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting12}]
-Die Scheiben können zu keinem Quader zusammengesetzt werden.
+    Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
     - Ausschnitt Beispiel 7 der Eingabedateien
