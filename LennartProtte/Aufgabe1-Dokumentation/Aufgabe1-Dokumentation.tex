@@ -222,14 +222,14 @@
 
     \section{Umsetzung}\label{sec:umsetzung}
 
-    \subsection{Methoden}\label{subsec:methoden}
+    \subsection{Modellierung}\label{subsec:modellierung}
     Ein Außenposten wird als \texttt{pair<double, double>} dargestellt, worin die Koordinaten des Außenposten gespeichert werden.
     Die Menge an Außenposten kann dabei als \texttt{vector<pair<double, double> >} dargestellt werden.
     Kantenbeziehungen müssen hier nicht repräsentiert werden, da die Kantengewichte sich jeweils durch die Koordinaten der Außenposten berechnen lassen
     und das Nichtvorhandensein einer Kante ebenfalls nicht dargestellt werden muss ,da es sich immer um vollständige Graphen handelt.
     Der Algorithmus kann in Form von zwei Methoden \texttt{solve} und \texttt{cross\_angle} implementiert werden.
-    \newline
     Dabei beinhaltet die Methode \texttt{solve} die Algorithmische vorgehensweise und nutzt zur Berechnung des Winkels die Methode \texttt{cross\_angle}.
+    \subsection{Methoden}\label{subsec:methoden}
     In der Funktion \texttt{solve} wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
     Hierzu werden ebenfalls Vektoren und Paare verwendet, um die Koordinaten aller Knoten zu speichern und die aktuelle Route zu halten.
     Zunächst wird die Liste der Knoten nach der Entfernung zum letzten Knoten der aktuellen Route sortiert.

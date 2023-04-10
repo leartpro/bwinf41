@@ -194,6 +194,8 @@
     Aufgrund der ganzzahligen Scheibendimensionen, kann angenommen werden, dass auch die Dimensionen des Zielquaders ganzzahlig sind.
     Es müssen daher nur Quader mit ganzzahligen Dimensionen betrachtet werden, welche das berechnete Volumen beinhalten.
 
+    TODO: Vorsortierung größte Fläche
+
     Nun kann für jede mögliche Variante des Zielquaders, mit einem Greedy-Algorithmus, geprüft werden,
     ob sich die gegebene Menge an Scheiben zu dieser Variante zusammenzusetzen lässt.
     Sobald dies der Fall ist, ist eine Lösung gefunden.
@@ -282,6 +284,8 @@
     Wie bei der ersten Problemstellung ermittelt der Algorithmus für eine der Varianten entweder eine Lösung und ist damit beendet,
     sollte er allerdings für keine der Varianten eine Lösung finden, gibt er nun nicht mehr zurück, dass es keine Lösung für die Menge an Scheiben gibt,
     sondern erhöht die Anzahl der möglichen Quader um eins und wiederholt das ganze.
+    Ein bedeutender Unterschied zum ursprünglichen Algorithmus ist, dass hier alle drei Seiten des Quaders variieren können,
+    da es im weiteren Verlauf zu mehreren Quadern kommen kann und damit keine Seite eindeutig festgelegt werden kann.
     Eine Zusammensetzung von Varianten für mehrere Quader wird im folgenden Kombination genannt.
     Eine Beispiel für eine Kombination ist:
 
@@ -364,35 +368,43 @@
         \begin{algorithmic}[1]
             \Require{ $volumen, anzahl_{quader}, scheiben$}
             \Ensure{Alle Kombinationen für die gegebenen Parameter}
-            \Function{find\_all\_dimensions}{$volume, scheiben, anzahl_{quader}$}
-                \State $combinations \gets$ Liste von leeren Mengen von Tupeln
-                \State $currentCombination \gets$ leere Menge von Tupeln
+            \Function{finde\_alle\_kombinationen}{$volume, scheiben, anzahl_{quader}$}
+                \State $kombinationen \gets$ Liste von leeren Mengen von Tupeln
+                \State $kombination_{aktuell} \gets$ leere Menge von Tupeln
                 \State $max \gets 0$, $min \gets volume$
                 \For{Jede Scheibe $scheibe$ in $scheiben$}
-                    \State $side \gets \max(slice.length, slice.height)$
-                    \If{$side > \max$}
-                        \State $max \gets side$
+                    \State $seite \gets \max(scheibe_{l\ddot ange}, slice_{h\ddot ohe})$
+                    \If{$seite > \max$}
+                        \State $max \gets seite$
                     \EndIf
-                    \State $side \gets \min(slice.length, slice.height)$
-                    \If{$side < min$}
-                        \State $min \gets side$
-                    \EndIf
-                \EndFor
-                \State \textbf{find\_combinations}($volume, anzahl_{quader}, \min, \max, combinations, currentCombination$)
-                \For{$combination$ in $combinations$}
-                    \If{Die Größe von $combination$ ist nicht gleich $Anzahl_{quader}$}
-                        \State Entferne $combination$ aus $combinations$
+                    \State $seite \gets \min(scheibe_{l\ddot ange}, scheibe_{h\ddot ohe})$
+                    \If{$seite < min$}
+                        \State $min \gets seite$
                     \EndIf
                 \EndFor
-                \State \Return{$combinations$}\label{alg:algorithm}
+                \State \textsc{finde\_kombinationen}($volume, anzahl_{quader}, \min, \max, kombinationen, kombination_{aktuell}$)
+                \For{$kombination$ in $kombinationen$}
+                    \If{Die Größe von $kombination$ ist nicht gleich $Anzahl_{quader}$}
+                        \State Entferne $kombination$ aus $kombinationen$
+                    \EndIf
+                \EndFor
+                \State \Return{$kombinationen$}\label{alg:algorithm}
             \EndFunction
         \end{algorithmic}
     \end{algorithm}
 
     \newpage
-
-
     \section{Umsetzung}\label{sec:umsetzung}
+
+    \subsection{Allgemein}\label{subsec:allgemein2}
+
+
+
+    \subsubsection{Methoden}\label{subsubsec:methoden}
+
+    \subsubsection{Transformation}\label{subsubsec:transformation}
+
+    \subsubsection{Implementationsdetails}\label{subsubsec:implementationsdetails}
 
     Das Programm implementiert den beschriebenen Algorithmus, um zu prüfen, ob eine gegebene Menge an Scheiben zu einem Quader zusammengesetzt werden kann.
 
@@ -512,15 +524,12 @@
     Wenn eine Lösung gefunden wurde, gibt die Hauptfunktion die Liste "solution" zurück, die die Scheiben in der Reihenfolge enthält, in der sie zum Aufbau des Quaders verwendet werden sollen.
     Wenn keine Lösung gefunden wurde, gibt die Hauptfunktion eine leere Liste zurück.
 
-    \subsection{Allgemein}\label{subsec:allgemein2}
-
-    \subsubsection{Methoden}\label{subsubsec:methoden}
-
-    \subsubsection{Transformation}\label{subsubsec:transformation}
-
-    \subsubsection{Implementationsdetails}\label{subsubsec:implementationsdetails}
-
     \subsection{Erweiterung}\label{subsec:erweiterung2}
+
+    - Neue Problemstellung
+    - Unterschied zur A
+    - Umsetzung/Transformation
+    -Unterschied Anzahl Varianten (2 vs 3 Seiten)
 
     \subsubsection{Methoden}\label{subsubsec:methoden_erweiterung}
 
@@ -546,7 +555,6 @@
     Schließlich werden die Kombinationen, die nicht der erwarteten Anzahl von Quadern entsprechen, aus der Liste entfernt
     und die Liste der verbleibenden Kombinationen zurückgegeben.
     \newpage
-
 
     \section{Beispiele}\label{sec:beispiele}
 
@@ -578,10 +586,10 @@
     Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
-    - Simples Beispiel
-    - Lösbar für Standard und Erweiterung
-
-
+    Dieses Beispiel zeigt, dass der Algorithmus im besten Fall eine Laufzeit von $O(n)$ hat.
+    Hier kommt es nicht zum Backtracking und der algorithmus findet direkt einer Lösung.
+    Auch die Erweiterung löst die gegebene Menge an Scheiben direkt.
+    Die Anzahl der möglichen Quader übersteigt hier nie eins.
 
     \begin{figure}[H]
         \centering
@@ -614,8 +622,12 @@
     Slice: (2, 2) Dimension: front
     \end{lstlisting}
 
-    - Simples Beispiel
-    - Lösbar nur für Erweiterung
+    An diesem Beispiel wird der Unterschied zwischen dem ursprünglichen Algorithmus und der Erweiterung deutlich.
+    Während der ursprüngliche Algorithmus zu den Ergebnis kommt, dass keine Lösung existiert,
+    kommt es in der Erweiterung dazu, dass die maximale Anzahl an Quadern auf zwei erhöht wird und für eine Lösung ermittelt wird.
+    Daraus geht auch hervor, dass die Erweiterung in jedem Fall zu einem Ergebnis kommt.
+    Das liegt daran, dass im ``Worst-Case'' die Anzahl der möglichen Quader auf die Anzahl der Scheiben erhöht wird
+    und somit jede Scheibe einen eigenen Quader darstellt.
 
     \newpage
 
@@ -695,9 +707,9 @@
     Slice: (5, 5) Dimension: front
     \end{lstlisting}
 
-    - Zeigt Erweiterung auf beliebige Mengen an Quadern anwendbar
-
-    \newpage
+    Dieses Beispiel macht deutlich, dass die Erweiterung auch Lösungen für größere Eingabedateien in akzeptabler Zeit ermittelt kann.
+    Hier werden neun Scheiben zu drei Quadern zusammengesetzt.
+    Die Scheiben haben dabei immer Primzahlen als Maße, womit das Beispiel gut nachvollziehbar ist.
 
     \begin{figure}[H]
         \centering
@@ -720,6 +732,7 @@
         \caption{Figur kaese1.txt}\label{fig:figAB1}
     \end{figure}
 
+    \newpage
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese1.txt, breaklines=true,label={lst:lstlisting6}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
     Quader: 6x6x6 V(216)
@@ -738,10 +751,10 @@
     Slice: (2, 4) Dimension: front
     \end{lstlisting}
 
-    - Beispiel 1 der Eingabedateien
-    - erstes beispiel, wo Algorithmus backtracking macht
-    - Lösbar nur Erweiterung nur mit sehr viel Zeit
-    => betrachtung 3 vs 2 Variablen
+    Hierbei handelt es sich um die erste gegebene Eingabedatei.
+    Der ursprüngliche Algorithmus findet hier einen Würfel mit der Kantenlänge sechs als Lösung, indem es an einer Stelle zum Backtracking kommt.
+    Auch die Erweiterung kann die Lösung für diese Eingabedatei ermitteln, allerdings nur mit deutlich mehr Zeit.
+    Dies liegt daran, dass beim ursprünglichen algorithmus weniger Varianten betrachtet werden müssen.
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting7}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
@@ -754,10 +767,8 @@
     Slice: (998, 999) Dimension: side
     \end{lstlisting}
 
-    - Beispiel 2 der Eingabedateien
-
-    \newpage
-
+    Auch für die zweite Eingabedatei kann eine Lösung in akzeptabler Zeit ermittelt werden.
+    Hierbei können die Scheiben zu einem länglichen Quader zusammengesetzt werden.
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese3.txt, breaklines=true,label={lst:lstlisting8}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
@@ -788,7 +799,8 @@
     Slice: (992, 995) Dimension: side
     \end{lstlisting}
 
-    - Beispiel 3 der Eingabedateien
+    Für die Eingabedatei kaese3.txt kann ebenfalls eine Lösung gefunden werden.
+    An diesem Beispiel lässt sich gut erkennen, wie die Vorsortierung nach der größten Scheibe zu einem schnellen Ergebnis führt.
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese4.txt, breaklines=true,label={lst:lstlisting9}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
@@ -796,8 +808,8 @@
     [...]
     \end{lstlisting}
 
-    - Ausschnitt Beispiel 4 der Eingabedateien
-    (Anzahl der Scheiben zu groß zum darstellen)
+    Die Scheiben aus der Datei kaese4.txt können zu einem Würfel zusammengesetzt werden.
+    Die Anzahl der Scheiben ist zu umfangreich, um sie hier vollständig darzustellen.
 
     \begin{lstlisting}[frame=single, title=Ausschnitt der Programmausgabe kaese5.txt, breaklines=true,label={lst:lstlisting10}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.
@@ -805,29 +817,18 @@
     [...]
     \end{lstlisting}
 
-    - Ausschnitt Beispiel 5 der Eingabedateien
-    (Anzahl der Scheiben zu groß zum darstellen)
+    Die Scheiben aus der Datei kaese5.txt können zu einem Quader zusammengesetzt werden.
+    Die Anzahl der Scheiben ist auch hier zu umfangreich, um sie hier vollständig darzustellen.
 
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt, breaklines=true,label={lst:lstlisting11}]
+    \begin{lstlisting}[frame=single, title=Programmausgabe kaese6.txt / kaese7.txt, breaklines=true,label={lst:lstlisting11}]
     Die Scheiben können zu keinem Quader zusammengesetzt werden.
     \end{lstlisting}
 
-    - Ausschnitt Beispiel 6 der Eingabedateien
-    - Algorithmus findet keine Lösung
-    - zu groß für Erweiterung
-
-    \begin{lstlisting}[frame=single, title=Programmausgabe kaese7.txt, breaklines=true,label={lst:lstlisting12}]
-    Die Scheiben können zu keinem Quader zusammengesetzt werden.
-    \end{lstlisting}
-
-    - Ausschnitt Beispiel 7 der Eingabedateien
-    - Algorithmus findet keine Lösung
-    - zu groß für Erweiterung
-
+    Für die Eingabedateien kaese6.txt und kaese7.txt kommt der Algorithmus zu dem Ergebnis,
+    dass die gegebene Menge an Scheiben zu keine Quader zusammengesetzt werden kann.
+    Für die Erweiterung sind diese Eingabedateien zu groß um in akzeptabler Zeit gelöst zu werden.
 
     \newpage
-
-
     \section{Quellcode}
     \label{sec:quellcode}
     \label{LastPage}
