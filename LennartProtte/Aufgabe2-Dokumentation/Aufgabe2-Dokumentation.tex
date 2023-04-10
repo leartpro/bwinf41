@@ -409,38 +409,19 @@
 
     \subsubsection{Methoden}\label{subsubsec:methoden}
 
-    Der gegebene Code implementiert eine Funktion namens "can_remove_slice", die prüft, ob eine Scheibe aus einem Quader entfernt werden kann.
-    Die Funktion nimmt vier Parameter entgegen: die Länge, Höhe und Tiefe des Quaders sowie die zu prüfende Scheibe, die durch ein Objekt vom Typ "Slice" repräsentiert wird.
+    Die Methode \texttt{can\_remove\_slice} prüft, ob eine Scheibe aus einem Quader entfernt werden kann.
+    Die Funktion nimmt vier Parameter entgegen: die Länge, Höhe und Tiefe des Quaders sowie die zu prüfende Scheibe, die durch ein Objekt vom Typ $Slice$ repräsentiert wird.
     Das Rückgabewert der Funktion ist die Dimension, in der die Scheibe entfernt werden kann.
 
-    Die Funktion verwendet eine Reihe von bedingten Anweisungen (if-else-Statements),
-    um zu prüfen, ob die Scheibe in einer der drei Dimensionen des Quaders (vorne, oben oder seitlich) entfernt werden kann.
-    Zunächst überprüft sie, ob die Scheibe in der Vorder- oder Rückseite des Quaders liegt,
-    indem sie die Länge und Höhe der Scheibe mit der Länge und Höhe des Quaders vergleicht.
-    Wenn die Länge und Höhe der Scheibe mit der Länge und Höhe des Quaders übereinstimmen oder vertauscht werden können, wird die Dimension "VORNE" zurückgegeben.
+    Die Funktion verwendet eine Reihe von konditionalen Anweisungen,
+    um zu prüfen, ob die Scheibe in einer der drei Dimensionen des Quaders entfernt werden kann.
+    Wenn dies bei einer der Dimensionen der Fall ist, wird die entsprechende Dimension zurückgegeben.
+    Andernfalls wird $INVALID$ zurückgegeben.
 
-    Dann wird geprüft, ob die Scheibe oben oder unten auf dem Quader liegt.
-    Dies wird überprüft, indem die Länge und Höhe der Scheibe mit der Länge und Tiefe des Quaders verglichen werden.
-    Wenn die Länge und Höhe der Scheibe mit der Länge und Tiefe des Quaders übereinstimmen oder vertauscht werden können, wird die Dimension "OBEN" zurückgegeben.
-
-    Schließlich wird geprüft, ob die Scheibe seitlich am Quader liegt.
-    Dies wird überprüft, indem die Länge und Höhe der Scheibe mit der Höhe und Tiefe des Quaders verglichen werden.
-    Wenn die Länge und Höhe der Scheibe mit der Höhe und Tiefe des Quaders übereinstimmen oder vertauscht werden können, wird die Dimension "SEITE" zurückgegeben.
-
-    Wenn die Scheibe in keiner der Dimensionen entfernt werden kann, wird "INVALID" zurückgegeben.
-
-    Insgesamt kann die Funktion "can_remove_slice" dazu verwendet werden, um zu bestimmen, ob eine gegebene Scheibe aus einem Quader entfernt werden kann und in welcher Dimension dies möglich ist.
-
-    Dieser Code implementiert einen Backtracking-Algorithmus zur Lösung eines Problems, bei dem eine Menge von Scheiben in einen Quader mit den gegebenen Abmessungen (Länge, Höhe, Tiefe) eingelegt werden sollen.
-    Der Algorithmus versucht, die Scheiben nacheinander in den Quader einzupassen und speichert die Reihenfolge in einem Vektor.
-    Dabei wird für jede Scheibe geprüft, ob sie abgeschnitten werden kann, um in den Quader zu passen.
-    Wenn eine passende Scheibe gefunden wurde, wird sie in den Quader eingelegt, die Maße des Quaders werden entsprechend aktualisiert und der Algorithmus rekursiv aufgerufen, um die verbleibenden Scheiben einzupassen.
-    Wenn eine Lösung gefunden wird, gibt der Algorithmus true zurück.
-    Wenn jedoch keine Scheibe mehr verwendet werden kann, gibt der Algorithmus false zurück, und der Backtracking-Schritt wird ausgeführt, um die letzte Scheibe aus der Lösung zu entfernen und eine andere Scheibe zu versuchen.
-
-    Der Algorithmus nutzt die Funktion can_remove_slice, um zu prüfen, ob eine Scheibe abgeschnitten werden kann und an welcher Stelle sie abgeschnitten werden muss, um in den Quader zu passen.
-    Die Rückgabe von can_remove_slice ist eine Dimension, die angibt, welche Seite des Quaders für den Schnitt verwendet werden soll (0 für vorne, 1 für oben, 2 für seitlich).
-    Wenn keine passende Scheibe gefunden wird, wird false zurückgegeben, und der Algorithmus geht zum vorherigen Schritt zurück, um eine andere Scheibe auszuprobieren.
+    Die Methode \texttt{calculate\_square} verwendet die Methode \texttt{can\_remove\_slice}.
+    Weiter setzt sie die Lösungsidee um und versucht die gegebene Menge an Scheiben zusammenzusetzen.
+    Dazu modifiziert sie den Parameter $route$, welcher in der Hauptmethode anschließend verwendet werden kann,
+    um die Lösungsreihenfolge auszugeben.
 
     \subsection{Erweiterung}\label{subsec:erweiterung2}
 
