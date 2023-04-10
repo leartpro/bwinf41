@@ -254,7 +254,7 @@
         \caption{Bestimmung der passenden Seite des Quaders zur Scheibe}
         \label{alg:cheese2}
         \begin{algorithmic}
-            \Function{can\_remove\_slice}{$l, h, d, s$}
+        \Function{can\_remove\_slice}{$l, h, d, s$}
                 \If{($s_{l} = l$ \land $s_{h} = h$) \lor ($s_{l} = h$ \land $s_{h} = l$)}
                     \State \Return $VORNE$
                 \ElsIf
@@ -271,6 +271,52 @@
     \end{algorithm}
 
     \subsection{Erweiterung}\label{subsec:erweiterung_losungsidee}
+
+    Eine mögliche allgemeinere Fragestellung der Aufgabe könnte sein, dass Antje vergessen hat,
+    wie vielen Käsequadern sie am Anfang hatte.
+    Daher, zu welcher minimalen Anzahl von Quadern lässt sich die gegebene Menge an Scheiben zusammensetzten.
+
+    Um diese erweiterte Problemstellung zu lösen kann der ursprüngliche Algorithmus weiterhin angewendet werden.
+    Allerdings muss dieser nun für alle möglichen Varianten von $n$ Quadern ausgeführt werden.
+    Dies lässt sich realisieren, indem zuerst von einem Quader ausgegangen wird, zu dem sich die Scheiben zusammen setzten lassen.
+    Wie bei der ersten Problemstellung ermittelt der Algorithmus für eine der Varianten entweder eine Lösung und ist damit beendet,
+    sollte er allerdings für keine der Varianten eine Lösung finden, gibt er nun nicht mehr zurück, dass es keine Lösung für die Menge an Scheiben gibt,
+    sondern erhöht die Anzahl der möglichen Quader um eins und wiederholt das ganze.
+
+    \begin{algorithm}[H]
+        \caption{Finde alle möglichen Kombinationen von Abmessungen für beliebig viele Quader}
+        \label{alg:p}
+        \Require{Das maximale Gesamtvolumen $volume$ für jede Kombination, die Anzahl der Quader in jeder Kombination $count\_of\_squares$, die gegebene Menge an Scheiben $slices$}
+        \Ensure{Alle Kombinationen für die gegebenen Parameter}
+        \Function{find\_all\_dimensions}{$volume, slices, count\_of\_squares$}
+            \State $combinations \gets$ Liste von leeren Mengen von Tupeln
+            \State $currentCombination \gets$ leere Menge von Tupeln
+            \State $\max \gets 0$, $\min \gets volume$
+            \For{Jede Scheibe $slice$ in $slices$}
+                \State $side \gets \max(slice.length, slice.height)$
+                \If{$side > \max$}
+                    \State $\max \gets side$
+                \EndIf
+                \State $side \gets \min(slice.length, slice.height)$
+                \If{$side < \min$}
+                    \State $\min \gets side$
+                \EndIf
+            \EndFor
+            \State \textbf{find\_combinations}($volume, count_{of}_{squares}, \min, \max, combinations, currentCombination$)
+            \For{$combination$ in $combinations$}
+                \If{Die Größe von $combination$ ist nicht gleich $count_{of}_{squares}$}
+                    \State Entferne $combination$ aus $combinations$
+                \EndIf
+            \EndFor
+            \State \Return{$combinations$}\label{alg:algorithm}
+        \EndFunction
+    \end{algorithm}
+
+    Die Methode verwendet die beiden gegebenen Methoden, \textbf{find\_dimensions} und \textbf{find\_combinations}, um alle möglichen Kombinationen von Abmessungen für beliebig viele Quader zu finden.
+    Zunächst werden die maximalen und minimalen Seitenlängen der Quader berechnet, indem die Längen und Höhen der gegebenen Scheiben verglichen werden.
+    Dann wird die Methode \textbf{find\_combinations} aufgerufen, um rekursiv alle möglichen Kombinationen von Abmessungen für die gegebenen Parameter zu finden.
+    Schließlich werden die Kombinationen, die nicht der erwarteten Anzahl von Quadern entsprechen, aus der Liste entfernt und die Liste der verbleibenden Kombinationen zurückgegeben.
+
 
     \newpage
 
@@ -402,13 +448,17 @@
     \subsection{Allgemein}\label{subsec:allgemein2}
 
     \subsubsection{Methoden}\label{subsubsec:methoden}
+
     \subsubsection{Transformation}\label{subsubsec:transformation}
+
     \subsubsection{Implementationsdetails}\label{subsubsec:implementationsdetails}
 
     \subsection{Erweiterung}\label{subsec:erweiterung2}
 
     \subsubsection{Methoden}\label{subsubsec:methoden_erweiterung}
+
     \subsubsection{Transformation}\label{subsubsec:transformation_erweiterung}
+
     \subsubsection{Implementationsdetails}\label{subsubsec:implementationsdetails_erweiterung}
 
     \newpage

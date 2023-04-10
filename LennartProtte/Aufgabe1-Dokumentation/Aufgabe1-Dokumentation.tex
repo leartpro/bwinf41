@@ -104,7 +104,7 @@
     in der Anton seine Außenstellen abfliegen kann,
     ohne dass es zu einem Innenwinkel von mehr als 90 Grad beim Abbiegen kommt.
     Dabei darf keine Außenstelle ausgelassen werden und weiter erscheint es nicht im Sinne der Außenstellung,
-    dass eine Außenstelle nicht mehrfach besucht wird.
+    dass eine Außenstelle mehrfach besucht wird.
     Da in dieser Aufgabe nicht die kürzeste Route gesucht wird, kann eine approximierte Lösung angestrebt werden.
 
     \subsection{Abstraktion}\label{subsec:abstraktion}
@@ -121,7 +121,7 @@
     und das Winkelkriterium bei der Auswahl des nächsten Außenpostens beachtet.
     Alternativ könnten auch Algorithmen für konvexe Hüllen eingesetzt werden,
     obwohl diese für das Hamiltonpfadproblem weniger geeignet sind als für das Handlungsreisendenproblem.
-    Die Implementierung eines solchen Algorithmus stellt jedoch eine höhere Schwierigkeit dar.
+    Die Implementierung eines solchen Algorithmus stellt außerdem eine höhere Schwierigkeit dar.
     Eine weitere Möglichkeit ist die Verwendung eines SAT-Solvers, der alle Permutationen der gegebenen Punktmenge durchgeht und
     jede Permutation auf ihre Erfüllbarkeit prüft.
     Da es jedoch für $n$ Elemente $n!$ Permutationen gibt, welche alle auf ihre Erfüllbarkeit geprüft werden müssten,
@@ -131,16 +131,16 @@
     Zunächst erfolgt eine Sortierung der Koordinaten nach nicht abnehmender euklidischer Entfernung von einem Startpunkt aus,
     um die Nearest-Neighbour-Heuristik zu realisieren.
     Anschließend wird eine Schleife durchlaufen, in welcher jeder Punkt nacheinander besucht wird.
-    Anschließend wird für jeden Knoten der Menge geprüft, ob der aktuelle Punkt bereits in der Lösungsmenge $route$ vorhanden ist.
+    Dann wird für jeden Knoten der Menge geprüft, ob der aktuelle Punkt bereits in der Lösungsmenge $route$ vorhanden ist.
     Falls dies der Fall ist, wird mit dem nächsten Punkt fortgefahren.
     Andernfalls wird der Winkel zwischen den beiden zuletzt besuchten Punkten und dem aktuellen Punkt berechnet.
     Wenn entweder die Lösungsmenge $route$ leer ist, oder die Bedingung $\textit{koordinaten}[i] \notin \textit{route} \land (|\textit{route}|<2 \lor \textit{winkel} \geq 90$ erfüllt ist,
     wird der aktuelle Punkt zur Lösungsmenge hinzugefügt.
     Befinden sich nun alle Punkte in der Lösungsmenge, ist ein Hamiltonpfad gefunden und wird als wahr zurückgegeben.
     Ansonsten arbeitet der Algorithmus rekursiv, indem er sich für jeden, zur Lösungsmenge hinzugefügten Punkt, selbst aufruft.
-    Wenn alle Punkte, die sich noch nicht in der Lösungsmenge befinden, nicht unter berücksichtigung des Winkelkriteriums erreichbar sind,
+    Wenn alle Punkte, die sich noch nicht in der Lösungsmenge befinden, nicht unter Berücksichtigung des Winkelkriteriums erreichbar sind,
     wird das Backtracking eingesetzt, und der letzte Schritt wird rückgängig gemacht.
-    Die worst-case-Laufzeit des Algorithmus ist O($n!$), da im Fall,
+    Die Worst-Case-Laufzeit des Algorithmus ist O($n!$), da im Fall,
     dass keine Lösung existiert alle $n!$ Permutationen der gegebenen Punktmenge iteriert werden müssen, um eine Lösung zu finden.
 
     \begin{algorithm}[H]
@@ -227,28 +227,25 @@
     Die Menge an Außenposten kann dabei als \texttt{vector<pair<double, double> >} dargestellt werden.
     Kantenbeziehungen müssen hier nicht repräsentiert werden, da die Kantengewichte sich jeweils durch die Koordinaten der Außenposten berechnen lassen
     und das Nichtvorhandensein einer Kante ebenfalls nicht dargestellt werden muss ,da es sich immer um vollständige Graphen handelt.
-    Der Algorithmus kann in zwei Methoden implementiert werden.
-    Dabei beinhaltet die Methode \texttt{solve} die Algorithmische vorgehensweise und nutzt zur Berechnung des Winkels die Methode \texttt{cross\_angle}
-
+    Der Algorithmus kann in Form von zwei Methoden \texttt{solve} und \texttt{cross\_angle} implementiert werden.
+    \newline
+    Dabei beinhaltet die Methode \texttt{solve} die Algorithmische vorgehensweise und nutzt zur Berechnung des Winkels die Methode \texttt{cross\_angle}.
     In der Funktion \texttt{solve} wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
     Hierzu werden ebenfalls Vektoren und Paare verwendet, um die Koordinaten aller Knoten zu speichern und die aktuelle Route zu halten.
     Zunächst wird die Liste der Knoten nach der Entfernung zum letzten Knoten der aktuellen Route sortiert.
-    Dies wird durch die Verwendung von sort und einem Lambda-Ausdruck erreicht.
-    Wenn die Liste der Knoten sortiert ist, wird jeder Knoten in der Liste besucht und überprüft, ob er bereits in der Route enthalten ist oder nicht.
+    Dies wird durch die Verwendung von \texttt{std::sort} erreicht, wodurch sowohl eine hohe Effizienz garantiert ist,
+    als auch die Lesbarkeit des Codes verbessert wird.
+    Wenn die Liste der Knoten sortiert ist, wird jeder Knoten in der Liste besucht und mit der Methode \texttt{std::find} wird überprüft,
+    ob er bereits in der Route enthalten ist oder nicht.
     Wenn der Knoten noch nicht in der Route enthalten ist, wird der Winkel zwischen dem Knoten, dem vorherigen Knoten und dem vor vorherigen Knoten (falls vorhanden) berechnet.
     Wenn der Winkel zwischen den Vektoren größer oder gleich 90 Grad ist oder die Route noch leer ist, wird der Knoten zur Route hinzugefügt.
-    Wenn alle Knoten in der Lösungsmenge enthalten sind, wird true zurückgegeben, andernfalls wird das Backtracking fortgesetzt, um eine weitere mögliche Route zu finden.
-
+    Wenn alle Knoten in der Route enthalten sind, wird true zurückgegeben, andernfalls wird das Backtracking fortgesetzt, um eine weitere mögliche Route zu finden.
+    \newline
     In der Funktion \texttt{cross\_angle} werden geometrische Berechnungen durchgeführt, um den Winkel in Grad zwischen den Vektoren von drei Knoten zu bestimmen.
-    Hierbei werden die x- und y-Koordinaten jedes Knotens als double gespeichert und als \texttt{pair<double, double>}-Paar an die Funktion übergeben.
+    Hierbei werden die x- und y-Koordinaten jedes Knotens als \texttt{pair<double, double>}-Paar an die Funktion übergeben.
     Die Funktion verwendet die in C++ verfügbaren mathematischen Funktionen sqrt und pow, um die Wurzel und das Quadrat von Zahlen zu berechnen,
     sowie die trigonometrische Funktion acos, um den Arcuscosinus einer Zahl zu berechnen.
     Der berechnete Winkel wird als double zurückgegeben.
-
-    Des Weiteren wird die Methode \texttt{std::find} verwendet, womit einfach überprüft werden kann,
-    ob ein bestimmter Knoten bereits in der Route enthalten ist.
-    Eine weitere verwendete Methode ist \texttt{std::sort}, wodurch sowohl eine hohe Effizienz garantiert ist,
-    als auch die Lesbarkeit des Codes verbessert wird.
 
     Allgemein kann festgehalten werden, dass hauptsächlich Vektoren und Tupel als Datenstrukturen verwendet werden,
     da sie eine einfache und effiziente Möglichkeit bieten, eine Liste von Koordinaten und eine Liste von Knoten (in Form von Paaren von Koordinaten) zu speichern.
@@ -359,6 +356,9 @@
 
     Dieses Beispiel zeigt, wie die Nearest-Neighbour-Heuristik funktioniert.
     Die Lösung kann schnell ermittelt werden, da durch die Wahl des nächsten Nachbars eine Rekursion hier nie erforderlich ist.
+    Ohne diese Heuristik wäre die Betrachtung Knoten von der Position in der Eingabedatei abhängig,
+    wodurch unter Umständen mehrfach in der Rekursion zurückgegangen werden müsste.
+    Außerdem trägt die Heuristik dazu bei, dass eine möglichst kurze Route ermittelt wird.
 
     \subsection{viereck.txt}\label{subsec:viereck.txt}
 
@@ -442,9 +442,9 @@
     Das Beispiel backtracking.txt zeigt gut, wie der Algorithmus arbeitet, wenn er an einer Stelle nicht mehr weiter kommt.
     Nachdem er von Punkt zwei keinen Knoten mehr hat, welcher für ihn erreichbar ist, wird der Schritt rückgängig gemacht
     und mit dem nächsten gültigen Punkt, welcher am nächsten am aktuellen Punk liegt wiederholt.
-    In diesem Beispiel sind nach dem Backtracking Punkt 4,5 und 6 gleichermaßen weit von Punkt 1 entfernt
+    Hier sind nach dem Backtracking Punkt 4,5 und 6 gleichermaßen weit von Punkt 1 entfernt
     und auch alle gleichermaßen nach dem Winkelkriterium erreichbar.
-    Daher wird der Punkt 5 ausgewählt, weil er als erstes aus der Eingabedatei eingelesenen wurde und damit auch als erstes in $koordinaten$ betrachtet wird$.
+    Daher wird der Punkt 5 ausgewählt, weil er als erstes aus der Eingabedatei eingelesenen wurde und damit auch als erstes in $koordinaten$ betrachtet wird.
     \subsection{nicht\_loesbar.txt}\label{subsec:nichtloesbar.txt}
 
 
@@ -468,9 +468,9 @@
     Es konnte keine Flugstrecke durch alle Außenposten ermittelt werden.
     \end{lstlisting}
 
-    Aufgrund der Berücksichtigung des Winkelkriteriums existiert keine Flugstrecke durch die gegebenen Außenposten.
+    Aufgrund der Berücksichtigung des Winkelkriteriums existiert hier keine Flugstrecke durch die gegebenen Außenposten.
     Um zu diesem Ergebnis zu gelangen traversiert der Algorithmus alle möglichen Pfade und kommt daher auf seine
-    worst-case-Laufzeit von $O(n!)$.
+    Worst-Case-Laufzeit von $O(n!)$.
 
     \subsection{wenigerkrumm1.txt}\label{subsec:wenigerkrumm1.txt}
 
