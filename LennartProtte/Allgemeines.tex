@@ -1,51 +1,31 @@
-%! Author = leartpro
-%! Date = 04.01.23
-
 \documentclass[a4paper,10pt,ngerman]{scrartcl}
 \usepackage{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 \usepackage[a4paper,margin=2.5cm,footskip=0.5cm]{geometry}
-
-% Die nächsten drei Felder bitte anpassen:
-\newcommand{\Aufgabe}{Allgemeines} % Aufgabennummer und Aufgabennamen angeben
-\newcommand{\TeilnahmeId}{67275}                 % Teilnahme-ID angeben
-\newcommand{\Name}{Lennart Protte}               % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
-
-% Kopf- und Fußzeilen
+\newcommand{\Aufgabe}{Allgemeines}
+\newcommand{\TeilnahmeId}{67275}
+\newcommand{\Name}{Lennart Protte}
 \usepackage{scrlayer-scrpage, lastpage}
 \setkomafont{pageheadfoot}{\large\textrm}
 \lohead{\Aufgabe}
 \rohead{Teilnahme-ID: \TeilnahmeId}
-
-% Fonts
 \usepackage{listings}
 \lstset{escapeinside={<@}{@>}}
 \usepackage{color}
-
-% Position des Titels
 \usepackage{titling}
 \setlength{\droptitle}{-1.0cm}
-
-% Diese beiden Pakete müssen zuletzt geladen werden
-\usepackage{hyperref} % Anklickbare Links im Dokument
+\usepackage{hyperref}
 \usepackage{cleveref}
-
-
-% Daten für die Titelseite
 \title{\textbf{\Huge\Aufgabe}}
 \author{\LARGE Teilnahme-ID: \LARGE \TeilnahmeId \\\\
-\LARGE Bearbeiter/-in dieser Aufgabe: \\
+\LARGE Bearbeiter dieser Aufgabe: \\
 \LARGE \Name\\\\}
 \date{\LARGE\today}
-
 \begin{document}
-
     \maketitle
     \tableofcontents
-
     \vspace{0.5cm}
-
     \textbf{Vorwort:}
     Verglichen mit der ersten Runde, erscheint mir die Bearbeitung der zweiten Runde deutlich anspruchsvoller.
     Dies mag zum Teil daran liegen, dass die Bearbeitung während der Abiturvorbereitung gutes Zeitmanagement erfordert,
@@ -55,7 +35,12 @@
     Aufgaben sofort interessant erschienen ist.
     Allerdings habe ich während der Bearbeitung nicht nur eine Programmiersprache erlernt,
     sondern auch mein Wissen in außerschulischen Inhalten der theoretischen Informatik und der Algorithmik erweitern können.
-
+    \newline
+    Mein erster Ansatz für die Lösung der Aufgabe Weniger krumme Touren war ein SAT-Solver.
+    Das Ergebnis war zwar lauffähig, aber hatte eine schlechte Laufzeitkomplexität.
+    Der Algorithmus hat jede mögliche Permutation auf eine Reihe von Klauseln getestet, welche zuvor aufgestellt wurden.
+    Dieser Ansatz ist nicht in der finalen Abgabe enthalten aber dennoch eine Erwähnung wert,
+    da ich in diesen Ansatz viel Zeit investiert habe.
     \section{Verwendete Sprachen}\label{sec:verwendete-sprachen}
     Als Sprache habe ich C++ verwendet.
     Ich hatte in dieser keinerlei Vorwissen und habe daher den BWINF-41 als Gelegenheit genutzt C++ zu erlernen.
@@ -63,15 +48,12 @@
     Plattformunabhängigkeit (da ich auf mehreren verschiedenen Betriebssystemen arbeite),
     als auch Leistungsstärke und Effizienz in der Laufzeit und im Speicher (da eine geringe Laufzeit die Entwicklung vereinfacht),
     so wie Objektorientierung (da ich bereits Java Kenntnisse hatte, war der Umstieg auf C++ realistisch).
-
-
     \section{Verwendete Programme}\label{sec:verwendete-programme}
     Als Programme habe ich CLion und Texmaker verwendet.
     Texmaker habe ich für das Schreiben der Dokumentation mit LaTeX verwendet,
     da es mir bereits aus der ersten Runde vertraut war.
     CLion ist eine Jetbrains IDE und da ich bereits gut vertraut mit anderen IDE's, wie Intellij, Webstorm, Golang, etc.,
     war, hat sich der Einstieg in CLion als problemlos herausgestellt.
-
     \section{Testen}\label{sec:testen}
     Das Projekt liegt als CMake-Projekt vor und enthält insgesamt drei Quellcode-Dateien.
     Um die Quellcode-Dateien zu kompilieren, wird ein C/C++ Compiler benötigt
