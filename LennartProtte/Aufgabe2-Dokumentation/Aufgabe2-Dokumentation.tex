@@ -218,33 +218,33 @@
             \Require Die Länge $l$, Höhe $h$ und Tiefe $d$ des Käsequaders, eine Liste $S$ von Käsescheiben, eine leere Liste $O$
             \Ensure Ein boolescher Wert, der angibt, ob die Käsescheiben zu einem vollständigen Käsequader zusammengesetzt werden können,
             und eine Lösungsreihenfolge $O$, in der die Käsescheiben zusammengesetzt werden können.
-            \Function{calculate\_square}{$\textit{l},\ \textit{h},\ \textit{d},\ \textit{S},\ \textit{O}$}
+            \Function{berechne\_quader}{$\textit{l},\ \textit{h},\ \textit{d},\ \textit{S},\ \textit{O}$}
                 \If{$l$ = 0 or $h$ = 0 or $d$ = 0}
-                    \State \Return true
+                    \State \Return wahr
                 \EndIf
-                \State $R_{removed} \gets \emptyset$
+                \State $R_{entfernt} \gets \emptyset$
                 \For{$s \in S$}
-                    \State $D_{dimension} \gets \textsc{can\_remove\_slice}$
+                    \State $D_{dimension} \gets \textsc{kann\_entfernt\_werden}$
                     \If{$D_{dimension} \neq UNG\ddot ULTIG$}
-                        \State $l_{new} \gets l - (D_{dimension} = SIDE ? 1 : 0)$
-                        \State $h_{new}  \gets h - (D_{dimension} = TOP ? 1 : 0)$
-                        \State $d_{new}  \gets d - (D_{dimension} = FRONT ? 1 : 0)$
-                        \State $O \gets {slice, dimension}$
-                        \State $R_{removed} \gets s$
+                        \State $l_{neu} \gets l - (D_{dimension} = SEITE ? 1 : 0)$
+                        \State $h_{neu}  \gets h - (D_{dimension} = OBEN ? 1 : 0)$
+                        \State $d_{neu}  \gets d - (D_{dimension} = VORNE ? 1 : 0)$
+                        \State $O \gets {scheibe, dimension}$
+                        \State $R_{entfernt} \gets s$
                         \State $S \notin s$
                     \EndIf
-                    \If{$\textsc{calculate\_square}(l_{new},h_{new},d_{new},S,O)$}
-                        \State \Return true
+                    \If{$\textsc{berechne\_quader}(l_{neu},h_{neu},d_{neu},S,O)$}
+                        \State \Return wahr
                     \Else
-                        \State $O \notin last$
-                        \For{$r \in R_{removed}$}
-                            \State $slices \gets r$
+                        \State $O \notin letztes$
+                        \For{$r \in R_{entfernt}$}
+                            \State $scheiben \gets r$
                         \EndFor
-                        \State $R_{removed} \gets \emptyset$
+                        \State $R_{entfernt} \gets \emptyset$
                         \EndElse
                     \EndIf
                 \EndFor
-                \State \Return false
+                \State \Return falsch
             \EndFunction
         \end{algorithmic}\label{alg:pseudo_greedy}
     \end{algorithm}
@@ -254,7 +254,7 @@
         \caption{Bestimmung der passenden Seite des Quaders zur Scheibe}
         \label{alg:cheese2}
         \begin{algorithmic}
-        \Function{can\_remove\_slice}{$l, h, d, s$}
+            \Function{kann\_entfernt\_werden}{$l, h, d, s$}
                 \If{($s_{l} = l$ \land $s_{h} = h$) \lor ($s_{l} = h$ \land $s_{h} = l$)}
                     \State \Return $VORNE$
                 \ElsIf
@@ -282,41 +282,112 @@
     Wie bei der ersten Problemstellung ermittelt der Algorithmus für eine der Varianten entweder eine Lösung und ist damit beendet,
     sollte er allerdings für keine der Varianten eine Lösung finden, gibt er nun nicht mehr zurück, dass es keine Lösung für die Menge an Scheiben gibt,
     sondern erhöht die Anzahl der möglichen Quader um eins und wiederholt das ganze.
+    Eine Zusammensetzung von Varianten für mehrere Quader wird im folgenden Kombination genannt.
+    Eine Beispiel für eine Kombination ist:
+
+    \[
+        Kombination = \begin{Bmatrix}
+                          \begin{Bmatrix}
+                              1 & 1 & 1
+                          \end{Bmatrix} \\
+                          \begin{Bmatrix}
+                              3 & 3 & 3
+                          \end{Bmatrix} \\
+                          \begin{Bmatrix}
+                              5 & 5 & 5
+                          \end{Bmatrix} \\
+        \end{Bmatrix}
+    \]
+
+    Das Gesamtvolumen aller Varianten in einer Kombination entspricht dabei immer dem Gesamtvolumen der Menge an Scheiben.
+    In dieser Kombination können die Scheiben zu \hyperref[fig:figAB4]{drei Quadern} zusammengesetzt werden.
+
+    Alle möglichen Varianten eines Quaders lassen sich wie in \hyperref[alg:euclid2]{\textttt{finde\_dimensionen}} zu sehen ermitteln.
 
     \begin{algorithm}[H]
-        \caption{Finde alle möglichen Kombinationen von Abmessungen für beliebig viele Quader}
-        \label{alg:p}
-        \Require{Das maximale Gesamtvolumen $volume$ für jede Kombination, die Anzahl der Quader in jeder Kombination $count\_of\_squares$, die gegebene Menge an Scheiben $slices$}
-        \Ensure{Alle Kombinationen für die gegebenen Parameter}
-        \Function{find\_all\_dimensions}{$volume, slices, count\_of\_squares$}
-            \State $combinations \gets$ Liste von leeren Mengen von Tupeln
-            \State $currentCombination \gets$ leere Menge von Tupeln
-            \State $\max \gets 0$, $\min \gets volume$
-            \For{Jede Scheibe $slice$ in $slices$}
-                \State $side \gets \max(slice.length, slice.height)$
-                \If{$side > \max$}
-                    \State $\max \gets side$
-                \EndIf
-                \State $side \gets \min(slice.length, slice.height)$
-                \If{$side < \min$}
-                    \State $\min \gets side$
-                \EndIf
-            \EndFor
-            \State \textbf{find\_combinations}($volume, count_{of}_{squares}, \min, \max, combinations, currentCombination$)
-            \For{$combination$ in $combinations$}
-                \If{Die Größe von $combination$ ist nicht gleich $count_{of}_{squares}$}
-                    \State Entferne $combination$ aus $combinations$
-                \EndIf
-            \EndFor
-            \State \Return{$combinations$}\label{alg:algorithm}
-        \EndFunction
+        \caption{Ermittelt alle möglichen Varianten eines Quaders zu den gegebenen Parametern}
+        \label{alg:euclid2}
+        \begin{algorithmic}[1]
+            \Require $volumen$, die minimale Seitenlänge $min$, die maximale Seitenlänge $max$
+            \Ensure $dimensionen$
+            \Function{finde\_dimensionen}{$volumen, min, max$}
+                \State $dimensionen \gets \emptyset$
+                \For{$l \gets min$ \textbf{to} $max$}
+                    \For{$w \gets min$ \textbf{to} $max$}
+                        \For{$h \gets min$ \textbf{to} $max$}
+                            \If{$l \times w \times h \leq volumen$}
+                                \State $tupel \gets (l, w, h)$
+                                \State sortiere $tupel$ asc
+                                \State $dimensionen \gets tupel$
+                            \EndIf
+                        \EndFor
+                    \EndFor
+                \EndFor
+                \State \textbf{return} $dimensionen$
+            \EndFunction
+        \end{algorithmic}
     \end{algorithm}
 
-    Die Methode verwendet die beiden gegebenen Methoden, \textbf{find\_dimensions} und \textbf{find\_combinations}, um alle möglichen Kombinationen von Abmessungen für beliebig viele Quader zu finden.
-    Zunächst werden die maximalen und minimalen Seitenlängen der Quader berechnet, indem die Längen und Höhen der gegebenen Scheiben verglichen werden.
-    Dann wird die Methode \textbf{find\_combinations} aufgerufen, um rekursiv alle möglichen Kombinationen von Abmessungen für die gegebenen Parameter zu finden.
-    Schließlich werden die Kombinationen, die nicht der erwarteten Anzahl von Quadern entsprechen, aus der Liste entfernt und die Liste der verbleibenden Kombinationen zurückgegeben.
+    Die Menge an Kombinationen lässt sich dann ermitteln,
+    indem rekursiv hyperref[alg:euclid2]{\textttt{finde\_dimensionen}} verwendet wird um jeweils alle Varianten zu bekommen.
+    Dies ist in \hyperref[alg:euclid2]{\textttt{finde\_kombinationen}} dargestellt.
 
+    \begin{algorithm}
+        \caption{Ermittelt alle möglichen Kombinationen zu den gegebenen Parametern}\label{alg:euclid}
+        \begin{algorithmic}[1]
+            \Require $volumen, anzahl_{quader}, min, max, kombinationen, kombination_{aktuell}$
+            \Function{finde\_kombinationen}{$volumen, anzahl_{quader}, min, max, kombinationen, kombination_{aktuell}$}
+                \If{$anzahl_{quader} = 0$ \textbf{and} $volumen = 0$}
+                    \State $kombinationen \gets kombination_{aktuell}$
+                    \State \textbf{return}
+                \EndIf
+                \If{$volumen = 0$ \textbf{or} $anzahl_{quader} = 0$}
+                    \State \textbf{return}
+                \EndIf
+                \State $dimensionen_{m\ddot oglich} \gets \textsc{finde\_dimensionen}(volume, min, max)$
+                \For{$dimension \gets dimensionen_{m\ddot oglich}$}
+                    \State $kombination_{aktuell} \gets dimension$
+                    \State $volumen_{neu} = volume - dimension_{x1} \times dimension_{x2} \times dimension_{x3}$
+                    \State $\textsc{finde\_kombinationen}(volumen_{neu}, anzahl_{quader} - 1, min, max, kombinationen, kombination_{aktuell})$
+                    \State $kombination_{aktuell}$ entferne $dimension$
+                \EndFor
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    Die dafür benötigten Parameter können aus der gegebenen Menge an Scheiben und dem daraus resultierenden Volumen abgeleitet werden.
+    Nachdem alle Kombinationen gebildet wurden, ist es sinnvoll die Kombinationen zu entfernen, welche nicht die gewünschte anzahl an Quadern enthalten.
+
+    \begin{algorithm}[H]
+        \caption{Finde alle möglichen Kombinationen von Varianten für beliebig viele Quader}
+        \label{alg:p}
+        \begin{algorithmic}[1]
+            \Require{ $volumen, anzahl_{quader}, scheiben$}
+            \Ensure{Alle Kombinationen für die gegebenen Parameter}
+            \Function{find\_all\_dimensions}{$volume, scheiben, anzahl_{quader}$}
+                \State $combinations \gets$ Liste von leeren Mengen von Tupeln
+                \State $currentCombination \gets$ leere Menge von Tupeln
+                \State $max \gets 0$, $min \gets volume$
+                \For{Jede Scheibe $scheibe$ in $scheiben$}
+                    \State $side \gets \max(slice.length, slice.height)$
+                    \If{$side > \max$}
+                        \State $max \gets side$
+                    \EndIf
+                    \State $side \gets \min(slice.length, slice.height)$
+                    \If{$side < min$}
+                        \State $min \gets side$
+                    \EndIf
+                \EndFor
+                \State \textbf{find\_combinations}($volume, anzahl_{quader}, \min, \max, combinations, currentCombination$)
+                \For{$combination$ in $combinations$}
+                    \If{Die Größe von $combination$ ist nicht gleich $Anzahl_{quader}$}
+                        \State Entferne $combination$ aus $combinations$
+                    \EndIf
+                \EndFor
+                \State \Return{$combinations$}\label{alg:algorithm}
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
 
     \newpage
 
@@ -329,10 +400,10 @@
     Es gibt eine Datenstruktur, um eine Käsescheibe darzustellen, die durch Länge und Höhe beschrieben wird.
     Dann gibt es eine Enumeration, um die verschiedenen Dimensionen eines Quaders zu definieren, sowie eine Funktion, um eine Dimension in einen String zu konvertieren.
 
-    Die Hauptfunktion des Programms ist die Funktion can_build_cube, die die gegebene Menge an Scheiben und die Größe des Quaders als Parameter erhält.
+    Die Hauptfunktion des Programms ist die Funktion can\_build\_cube, die die gegebene Menge an Scheiben und die Größe des Quaders als Parameter erhält.
     Die Funktion gibt einen boolschen Wert zurück, der angibt, ob die gegebene Menge an Scheiben zu einem Quader der gegebenen Größe zusammengesetzt werden kann.
 
-    Die Implementierung der Funktion can_build_cube folgt dem in der Lösungsidee beschriebenen Algorithmus.
+    Die Implementierung der Funktion can\_build\_cube folgt dem in der Lösungsidee beschriebenen Algorithmus.
     Zunächst wird das Volumen des Quaders berechnet, indem die Länge, Höhe und Tiefe multipliziert werden.
     Anschließend wird die längste Kantenlänge aller Scheiben in der gegebenen Menge bestimmt.
 
@@ -353,11 +424,12 @@
     Der Code ist leicht verständlich und nachvollziehbar.
 
 
-    Das Programm implementiert die Lösungsidee mithilfe einer Funktion can_form_cube, welche prüft, ob die gegebene Menge an Scheiben zu einem Quader zusammengesetzt werden kann.
-    Wenn dies der Fall ist, wird true zurückgegeben und die Reihenfolge, in der die Scheiben zusammengesetzt werden können, in out_slices geschrieben.
-    Andernfalls wird false zurückgegeben und out_slices bleibt leer.
+    Das Programm implementiert die Lösungsidee mithilfe einer Funktion can\_form\_cube, welche prüft, ob die gegebene Menge an Scheiben zu einem Quader zusammengesetzt werden kann.
+    Wenn dies der Fall ist, wird true zurückgegeben und die Reihenfolge, in der die Scheiben zusammengesetzt werden können, in out\_slices geschrieben.
+    Andernfalls wird false zurückgegeben und out\_slices bleibt leer.
 
-    Die Funktion beginnt damit, das Gesamtvolumen aller Scheiben zu berechnen, um zu prüfen, ob es möglich ist, eine Größe für den Zielquader zu finden, die dieses Volumen aufnehmen kann. Wenn das Gesamtvolumen keinem ganzzahligen Quader entspricht, gibt die Funktion false zurück.
+    Die Funktion beginnt damit, das Gesamtvolumen aller Scheiben zu berechnen, um zu prüfen, ob es möglich ist, eine Größe für den Zielquader zu finden, die dieses Volumen aufnehmen kann.
+    Wenn das Gesamtvolumen keinem ganzzahligen Quader entspricht, gibt die Funktion false zurück.
 
     Anschließend wird der größte Wert einer Scheibe in der Länge oder Höhe gesucht, da diese Dimensionen für den Quader maßgeblich sind.
     Daraus können alle möglichen Quadergrößen abgeleitet werden, die das berechnete Volumen aufnehmen können.
@@ -368,14 +440,17 @@
     Dann wird eine Schleife gestartet, in der für jede Scheibe in der Liste slices versucht wird, sie in den Quader einzufügen.
 
     Dies erfolgt, indem die Scheibe in jeder möglichen Dimension des Quaders (vorne, oben und seitlich) getestet wird.
-    Wenn eine Scheibe in eine Dimension passt, wird sie entfernt, die Lösungsmenge out_slices wird um die Scheibe erweitert, und die Abmessungen des Quaders werden entsprechend aktualisiert. Wenn es keine weitere Scheibe gibt, die in den aktuellen Quader passt, wird der Algorithmus rekursiv aufgerufen, um zu versuchen, die restlichen Scheiben in den aktuellen Zustand einzufügen. Wenn dies erfolgreich ist, wird true zurückgegeben und die aktuelle Lösung wird zurückgegeben.
+    Wenn eine Scheibe in eine Dimension passt, wird sie entfernt, die Lösungsmenge out\_slices wird um die Scheibe erweitert, und die Abmessungen des Quaders werden entsprechend aktualisiert.
+    Wenn es keine weitere Scheibe gibt, die in den aktuellen Quader passt, wird der Algorithmus rekursiv aufgerufen, um zu versuchen, die restlichen Scheiben in den aktuellen Zustand einzufügen.
+    Wenn dies erfolgreich ist, wird true zurückgegeben und die aktuelle Lösung wird zurückgegeben.
 
     Wenn keine der Scheiben in den aktuellen Quader passt, wird die Funktion false zurückgeben und die Funktion wird beendet.
     Wenn die Funktion false zurückgibt, wird die Schleife über alle möglichen Quadergrößen fortgesetzt, bis alle Größen ausprobiert wurden.
     Wenn keine der Größen passt, wird die Funktion false zurückgeben und das Programm endet.
 
-    Die Funktion can_form_cube verwendet auch einige Hilfsfunktionen, um den Code übersichtlicher zu gestalten,
-    zum Beispiel find_possible_cubes, um alle möglichen Quadergrößen zu finden, die das berechnete Volumen aufnehmen können, remove_slice_from_list, um eine Scheibe aus einer Liste zu entfernen, und get_dimension_for_slice, um die Dimension des Quaders zu finden, in die eine Scheibe am besten passt.
+    Die Funktion can\_form\_cube verwendet auch einige Hilfsfunktionen, um den Code übersichtlicher zu gestalten,
+    zum Beispiel find\_possible\_cubes, um alle möglichen Quadergrößen zu finden, die das berechnete Volumen aufnehmen können, remove\_slice\_from\_list,
+    um eine Scheibe aus einer Liste zu entfernen, und get\_dimension\_for\_slice, um die Dimension des Quaders zu finden, in die eine Scheibe am besten passt.
 
     Verwendung von Strukturen: Die Lösungsidee sieht vor, dass jede Scheibe durch Länge und Höhe beschrieben wird, während der Quader durch Länge, Breite und Höhe beschrieben wird.
     Im Programm wurde dies durch Verwendung einer Struktur für jede Scheibe und einer separaten Struktur für den Quader umgesetzt.
@@ -391,24 +466,24 @@
     Verwendung von Konstanten: Einige Werte, wie die maximale Anzahl von Varianten, wurden als Konstanten definiert.
     Dadurch kann sichergestellt werden, dass sie im gesamten Code einheitlich verwendet werden und es einfach ist, sie zu ändern, wenn nötig.
 
-    Das Programm implementiert die Lösungsidee, indem es eine Funktion assemble_slices enthält, die als Eingabe eine Menge von Käsescheiben und als Ausgabe die Reihenfolge der Käsescheiben zurückgibt, die zu einem Quader zusammengesetzt werden können.
+    Das Programm implementiert die Lösungsidee, indem es eine Funktion assemble\_slices enthält, die als Eingabe eine Menge von Käsescheiben und als Ausgabe die Reihenfolge der Käsescheiben zurückgibt, die zu einem Quader zusammengesetzt werden können.
 
-    Die Implementierung der Funktion assemble_slices folgt dem Algorithmus der Lösungsidee:
+    Die Implementierung der Funktion assemble\_slices folgt dem Algorithmus der Lösungsidee:
 
     Es wird das Volumen des Zielquaders berechnet.
     Es werden alle möglichen Dimensionen des Zielquaders ermittelt, die das berechnete Volumen beinhalten.
     Für jede mögliche Dimension wird überprüft, ob die gegebenen Scheiben zu einem Quader dieser Dimension zusammengesetzt werden können.
     Wenn eine Lösung gefunden wurde, wird die Reihenfolge der Scheiben zurückgegeben.
     Wenn für keine der möglichen Dimensionen eine Lösung gefunden wurde, wird eine leere Liste zurückgegeben.
-    Die Funktion assemble_slices ruft dabei die Funktion assemble_slices_helper auf, die den eigentlichen Greedy-Algorithmus implementiert,
+    Die Funktion assemble\_slices ruft dabei die Funktion assemble\_slices\_helper auf, die den eigentlichen Greedy-Algorithmus implementiert,
     um zu prüfen, ob die gegebenen Käsescheiben zu einem Quader einer bestimmten Dimension zusammengesetzt werden können.
-    Die Funktion assemble_slices_helper prüft für jede Käsescheibe, ob sie in einer der drei Dimensionen des Quaders platziert werden kann.
+    Die Funktion assemble\_slices\_helper prüft für jede Käsescheibe, ob sie in einer der drei Dimensionen des Quaders platziert werden kann.
     Wenn dies der Fall ist, wird die Käsescheibe aus der Liste der noch nicht platzierten Käsescheiben entfernt und in die Lösungsliste aufgenommen.
     Die Größe des Quaders wird entsprechend angepasst und die Funktion wird rekursiv aufgerufen, um die verbleibenden Käsescheiben zu platzieren.
     Wenn keine der verbleibenden Käsescheiben in den verbleibenden Dimensionen des Quaders platziert werden kann, wird die letzte Käsescheibe aus der Lösungsliste entfernt, die Größe des Quaders wird wiederhergestellt und die Funktion gibt false zurück.
 
     Das Programm enthält auch die Strukturen Slice und Dimension, die jeweils eine Käsescheibe und eine Dimension des Quaders repräsentieren.
-    Die Funktion to_string gibt eine lesbare Beschreibung einer Dimension zurück, die im Programm für Debugging-Zwecke verwendet wird.
+    Die Funktion to\_string gibt eine lesbare Beschreibung einer Dimension zurück, die im Programm für Debugging-Zwecke verwendet wird.
 
     Das folgende Programm implementiert eine Funktion, die eine gegebene Menge an Scheiben auf ihre Möglichkeit prüft, zu einem Quader zusammengesetzt zu werden.
     Es verwendet Backtracking, um die Lösung zu finden.
@@ -416,10 +491,10 @@
     Zunächst gibt es eine Struktur "Slice", die eine Käsescheibe mit Länge und Höhe repräsentiert.
     Dann gibt es eine Aufzählung "Dimension", die die drei Dimensionen Vorne, Oben und Seite sowie eine ungültige Dimension enthält.
 
-    Die Funktion "can_remove_slice" prüft, ob eine Scheibe von einem Quader abgeschnitten werden kann, und gibt die Dimension zurück, in der die Scheibe entfernt werden kann.
+    Die Funktion "can\_remove\_slice" prüft, ob eine Scheibe von einem Quader abgeschnitten werden kann, und gibt die Dimension zurück, in der die Scheibe entfernt werden kann.
     Wenn die Scheibe nicht entfernt werden kann, gibt die Funktion -1 zurück.
 
-    Die Hauptfunktion "find_solution" prüft zuerst, ob es überhaupt möglich ist, einen Quader aus den gegebenen Scheiben zusammenzusetzen.
+    Die Hauptfunktion "find\_solution" prüft zuerst, ob es überhaupt möglich ist, einen Quader aus den gegebenen Scheiben zusammenzusetzen.
     Wenn dies der Fall ist, wird für jede mögliche Variante des Zielquaders geprüft, ob die gegebene Menge an Scheiben zu dieser Variante zusammengesetzt werden kann.
 
     Die möglichen Varianten des Zielquaders werden durch die Kombination der längsten Scheibenlänge und des Quadvolumens berechnet.
@@ -437,14 +512,6 @@
     Wenn eine Lösung gefunden wurde, gibt die Hauptfunktion die Liste "solution" zurück, die die Scheiben in der Reihenfolge enthält, in der sie zum Aufbau des Quaders verwendet werden sollen.
     Wenn keine Lösung gefunden wurde, gibt die Hauptfunktion eine leere Liste zurück.
 
-
-    - wie die Lösungsidee im Programm tatsächlich umgesetzt wurde
-    - auch Implementierungsdetails
-    - Transformation von Idee ins Programm
-    - Bezug zwischen der Lösungsidee und der Implementation
-    - in welchen Methoden die Algorithmen aus der Lösungsidee implementiert sind
-    - wie bestimmte Konzepte der Lösungsidee elegant im Programm modelliert wurden
-
     \subsection{Allgemein}\label{subsec:allgemein2}
 
     \subsubsection{Methoden}\label{subsubsec:methoden}
@@ -457,10 +524,27 @@
 
     \subsubsection{Methoden}\label{subsubsec:methoden_erweiterung}
 
-    \subsubsection{Transformation}\label{subsubsec:transformation_erweiterung}
+    Die Methode find\_dimensions verwendet eine Schleife, um alle möglichen Längen, Breiten und Höhen innerhalb der gegebenen Grenzen von min bis max zu durchlaufen.
+    Für jede Kombination von Länge, Breite und Höhe wird das Volumen berechnet und mit dem gegebenen Volumen verglichen.
+    Wenn das berechnete Volumen kleiner oder gleich dem gegebenen Volumen ist,
+    wird ein Tupel aus der Länge, Breite und Höhe erstellt und nach der Sortierung in die Menge dimensions eingefügt.
+    Am Ende gibt die Methode dimensions zurück.
 
-    \subsubsection{Implementationsdetails}\label{subsubsec:implementationsdetails_erweiterung}
+    Die Methode find\_combinations verwendet eine rekursive Strategie,
+    um alle möglichen Kombinationen von squares Quads mit einem gegebenen volume und min und max Längen, Breiten und Höhen zu finden.
+    Die Methode prüft zuerst, ob die aktuelle Kombination vollständig ist und fügt sie, wenn dies der Fall ist, der Vektor combinations hinzu.
+    Wenn das Volumen nicht durch die aktuelle Kombination aufgeht oder squares erreicht ist, wird die Methode abgebrochen.
+    Andernfalls werden die möglichen Dimensionen für das nächste Quad berechnet, und die Methode wird rekursiv aufgerufen,
+    indem jedes mögliche Tupel in die aktuelle Kombination eingefügt wird.
+    Wenn die rekursive Aufrufe beendet sind, wird das Tupel aus der aktuellen Kombination entfernt, um Platz für das nächste mögliche Tupel zu machen.
+    Am Ende gibt die Methode nichts zurück, da die Ergebnisse im Vektor combinations gespeichert werden.
 
+    Die Methode verwendet die beiden gegebenen Methoden, \textbf{find\_dimensions} und \textbf{find\_combinations},
+    um alle möglichen Kombinationen von Abmessungen für beliebig viele Quader zu finden.
+    Zunächst werden die maximalen und minimalen Seitenlängen der Quader berechnet, indem die Längen und Höhen der gegebenen Scheiben verglichen werden.
+    Dann wird die Methode \textbf{find\_combinations} aufgerufen, um rekursiv alle möglichen Kombinationen von Abmessungen für die gegebenen Parameter zu finden.
+    Schließlich werden die Kombinationen, die nicht der erwarteten Anzahl von Quadern entsprechen, aus der Liste entfernt
+    und die Liste der verbleibenden Kombinationen zurückgegeben.
     \newpage
 
 
@@ -589,7 +673,8 @@
             \end{tikzpicture}
             \caption{Zerschnitten}\label{fig:figB4}
         \end{subfigure}
-        \caption{Figur dreiQuader.txt}\label{fig:figAB4}
+        \caption{Figur dreiQuader.txt}
+        \label{fig:figAB4}
     \end{figure}
 
     \begin{lstlisting}[frame=single, title=Programmausgabe dreiQuader.txt, breaklines=true,label={lst:lstlisting5}]
