@@ -32,8 +32,7 @@ double cross_angle(const pair<double, double> &from_node,
  * @return true, wenn alle Knoten in der Lösungsmenge (route) enthalten sind, andernfalls false
  */
 bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &coordinates) {
-    //Sortiere nach dem nächsten Knoten
-    if (!route.empty()) {
+    if (!route.empty()) { //Wenn die Route nicht leer ist, sortiere nach dem nächsten Knoten
         const auto &last = route.back();
         sort(coordinates.begin(), coordinates.end(),
              [last](const auto &lhs, const auto &rhs) {
@@ -41,8 +40,7 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
                         < sqrt(pow((last.first - rhs.first), 2.0) + (pow((last.second - rhs.second), 2.0)));
              });
     }
-    //Für jeden Knoten
-    for (int i = 0; i < coordinates.size(); i++) {
+    for (int i = 0; i < coordinates.size(); i++) { //Für jeden Knoten
         //Wenn dieser Knoten bereits in der Lösungsmenge existiert, überspringe diesen
         if (std::find(route.begin(), route.end(), coordinates[i]) != route.end()) {
             continue;
@@ -55,23 +53,20 @@ bool solve(vector<pair<double, double> > &route, vector<pair<double, double> > &
             (std::find(route.begin(), route.end(), coordinates[i]) == route.end() &&
              (route.size() < 2 || angle >= 90))
                 ) {
-            //Füge den Knoten hinzu
-            route.push_back(coordinates[i]);
-            //Wenn alle Knoten in der Lösungsmenge sind
-            if (route.size() == coordinates.size()) {
+            route.push_back(coordinates[i]); //Füge den Knoten hinzu
+            if (route.size() == coordinates.size()) { //Wenn alle Knoten in der Lösungsmenge sind
                 return true;
             }
-            //Wenn es eine Lösung mit der aktuellen Route gibt
-            if (solve(route, coordinates)) {
+            if (solve(route, coordinates)) { //Wenn es eine Lösung mit der aktuellen Route gibt
                 return true;
             } else {
                 route.pop_back();
             }
         }
     }
-//Wenn es mit der aktuellen Route keine Lösung geben kann
-    return false;
+    return false; //Wenn es mit der aktuellen Route keine Lösung geben kann
 }
+
 
 /**
  * Liest die Eingabedateien ein und berechnet für jede Datei eine Lösung entsprechend der Aufgabenstellung.

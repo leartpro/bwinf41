@@ -175,7 +175,7 @@
 
     \section{Lösungsidee}\label{sec:losungsidee}
 
-    \subsection{Allgemein}\label{subsec:allgemein}
+    \subsection{Einleitung}\label{subsec:einleitung}
 
     Der Aufgabenstellung ist entnehmen, dass eine gegebene Menge an Scheiben, wobei zu jede Scheibe durch
     eine Länge und eine Höhe beschreiben wird, geprüft werden soll, ob diese zu einem Quader zusammengesetzt werden können.
@@ -183,11 +183,12 @@
     Dabei müssen in der Lösungsreihenfolge alle Scheiben der gegebenen Menge vorkommen.
     Die Aufgabenstellung stellt dabei keine Ansprüche, an die Form des Zielquaders, allerdings erscheint es nicht im Sinne der Aufgabenstellung,
     dass der Zielquader Lücken, beziehungsweise Hohlräume aufweist.
-
-    Beim Zusammensetzten der Scheiben zu einem Quader ist zu beachten, dass diese nicht zwangsläufig alle von der gleichen Seite des Quaders stammen müssen,
+    Beim Zusammensetzten der Scheiben zu einem Quader ist zu beachten,
+    dass diese nicht zwangsläufig alle von der gleichen Seite des Quaders stammen müssen,
     daher müssen alle Dimensionen des Quaders betrachtet werden.
-    Aufgrund der mathematischen Eigenschaften eines Quaders, ist es ausreichend, wenn nur drei der sechs Seiten betrachtet werden,
-    da parallele Seiten bei einem Quader identisch sind.
+    Aufgrund der mathematischen Eigenschaften eines Quaders, ist es allerdings ausreichend, wenn nur drei der sechs Seiten betrachtet werden.
+
+    \subsection{Lösungsverfahren}\label{subsec:losungsverfahren}
 
     Aus der Menge der gegebenen Scheiben lässt sich das Volumen des Quaders berechnen.
     Aus diesem und der längsten Seite, die eine Scheibe der gegebenen Menge besitzt, lassen sich alle möglichen Varianten des Zielquaders bilden.
@@ -208,19 +209,18 @@
     Scheibe in drei möglichen Dimensionen des Quaders (Vorne, Oben, Seite) getestet.
     Wenn eine der beiden Seitenlängen der Scheibe mit einer der Seitenlängen des Quaders übereinstimmt,
     kann die Scheibe in der entsprechenden Dimension entfernt werden.
-    Wenn dies der Fall ist, wird sie zur Lösungsmenge $O$ hinzugefügt und aus der Liste $S$ entfernt.
+    Wenn dies der Fall ist, wird sie zur Lösungsmenge $O$ hinzugefügt und aus der Menge $S$ entfernt.
     Der Quader wird aktualisiert, indem die entsprechende Seitenlänge reduziert wird.
-    Eine Lösung ist gefunden, wenn entweder die Länge, die Höhe oder die Tiefe des Quaders null ist.
-    Wenn es eine Lösung mit der aktuellen Scheibe gibt, gibt die Funktion ``true'' zurück.
-    Andernfalls werden die Änderungen rückgängig gemacht, indem die Scheibe wieder zur Liste $S$ hinzugefügt wird
+    Eine Lösung ist gefunden, wenn entweder die Länge, die Höhe oder die Tiefe des Quaders, daher das Volumen, null ist.
+    Wenn es eine Lösung mit der aktuellen Scheibe gibt, kann sich der Algorithmus beenden.
+    Andernfalls werden die Änderungen rückgängig gemacht, indem die Scheibe wieder zur Menge $S$ hinzugefügt wird
     und die letzte Scheibe aus der Lösungsmenge $O$ entfernt wird.
-    Wenn keine der noch nicht betrachteten Scheiben entfernt werden kann, gibt die Funktion ``false'' zurück.
 
     \begin{algorithm}[H]
         \caption{Berechnung eines Käsequaders aus gegebenen Käsescheiben}
         \begin{algorithmic}
-            \Require Die Länge $l$, Höhe $h$ und Tiefe $d$ des Käsequaders, eine Liste $S$ von Käsescheiben, eine leere Liste $O$
-            \Ensure Ein boolescher Wert, der angibt, ob die Käsescheiben zu einem vollständigen Käsequader zusammengesetzt werden können,
+            \Require Die Länge $l$, Höhe $h$ und Tiefe $d$ des Käsequaders, eine Menge $S$ von Käsescheiben, eine leere Menge $O$
+            \Ensure Eine boolesche, Angabe ob die Käsescheiben zu einem vollständigen Käsequader zusammengesetzt werden können,
             und eine Lösungsreihenfolge $O$, in der die Käsescheiben zusammengesetzt werden können.
             \Function{berechne\_quader}{$\textit{l},\ \textit{h},\ \textit{d},\ \textit{S},\ \textit{O}$}
                 \If{$l$ = 0 or $h$ = 0 or $d$ = 0}
@@ -253,6 +253,8 @@
         \end{algorithmic}\label{alg:pseudo_greedy}
     \end{algorithm}
 
+    Ob eine Scheibe von einem Quader abgeschnitten werden kann und wenn ja, auf welcher Seite,
+    kann wie folgt ermittelt werden:
 
     \begin{algorithm}[H]
         \caption{Bestimmung der passenden Seite des Quaders zur Scheibe}
@@ -276,16 +278,19 @@
 
     \subsection{Erweiterung}\label{subsec:erweiterung_losungsidee}
 
+    \subsubsection{Problemstellung}\label{subsubsec:problemstellung}
     Eine mögliche allgemeinere Fragestellung der Aufgabe könnte sein, dass Antje vergessen hat,
     wie vielen Käsequadern sie am Anfang hatte.
-    Daher, zu welcher minimalen Anzahl von Quadern lässt sich die gegebene Menge an Scheiben zusammensetzten.
+    Daher, zu welcher minimalen Anzahl von Quadern sich die gegebene Menge an Scheiben zusammensetzten lässt.
+
+    \subsubsection{Lösungsverfahren}\label{subsubsec:loesungsverfahren}
 
     Um diese erweiterte Problemstellung zu lösen kann der ursprüngliche Algorithmus weiterhin angewendet werden.
     Allerdings muss dieser nun für alle möglichen Varianten von $n$ Quadern ausgeführt werden.
     Dies lässt sich realisieren, indem zuerst von einem Quader ausgegangen wird, zu dem sich die Scheiben zusammen setzten lassen.
     Wie bei der ersten Problemstellung ermittelt der Algorithmus für eine der Varianten entweder eine Lösung und ist damit beendet,
-    sollte er allerdings für keine der Varianten eine Lösung finden, gibt er nun nicht mehr zurück, dass es keine Lösung für die Menge an Scheiben gibt,
-    sondern erhöht die Anzahl der möglichen Quader um eins und wiederholt das ganze.
+   oder, sollte er für keine der Varianten eine Lösung finden, wird nicht davon ausgegangen, dass es keine Lösung gibt,
+    sondern es wird die Anzahl der möglichen Quader um eins erhöht und der Algorithmus wird für die neue Menge an Varianten ausgeführt.
     Ein bedeutender Unterschied zum ursprünglichen Algorithmus ist, dass hier alle drei Seiten des Quaders variieren können,
     da es im weiteren Verlauf zu mehreren Quadern kommen kann und damit keine Seite eindeutig festgelegt werden kann.
     Eine Zusammensetzung von Varianten für mehrere Quader wird im folgenden Kombination genannt.
@@ -338,7 +343,7 @@
     indem rekursiv hyperref[alg:euclid2]{\textttt{finde\_dimensionen}} verwendet wird um jeweils alle Varianten zu bekommen.
     Dies ist in \hyperref[alg:euclid2]{\textttt{finde\_kombinationen}} dargestellt.
 
-    \begin{algorithm}
+    \begin{algorithm}[H]
         \caption{Ermittelt alle möglichen Kombinationen zu den gegebenen Parametern}\label{alg:euclid}
         \begin{algorithmic}[1]
             \Require $volumen, anzahl_{quader}, min, max, kombinationen, kombination_{aktuell}$
@@ -424,22 +429,22 @@
 
     \subsection{Erweiterung}\label{subsec:erweiterung2}
 
-    Die erweiterte Problemstellung unterscheidet sich in der Umsetzung von der ursprünglichen Aufgabenstellung in der hinsicht,
+    Die erweiterte Problemstellung unterscheidet sich in der Umsetzung von der ursprünglichen Aufgabenstellung in der Hinsicht,
     dass vor der Verwendung des Algorithmus die Varianten, für welcher dieser aufgerufen werden soll, auf andere Art und Weise ermittelt werden müssen.
-    So ist eine Lösung nach der Erweiterung erst dann gefunden, wenn alle Varianten einer Kombination gefunden wurden.
+    So ist eine Lösung nach der Erweiterung erst dann gefunden, wenn für alle Varianten einer Kombination eine Lösung gefunden wurden.
     In der Umsetzung bedeutet dies, dass die Schleifen in der Hauptmethode angepasst wurden
     und dass neue Methoden für die Generierung der Kombinationen hinzugefügt wurden.
 
     \subsubsection{Methoden}\label{subsubsec:methoden_erweiterung}
 
-    Die Methode find\_dimensions verwendet eine Schleife,
+    Die Methode \texttt{find\_dimensions} verwendet eine Schleife,
     um alle möglichen Längen, Breiten und Höhen innerhalb der gegebenen Grenzen von min bis max zu durchlaufen.
     Für jede Kombination von Länge, Breite und Höhe wird das Volumen berechnet und mit dem gegebenen Volumen verglichen.
     Wenn das berechnete Volumen kleiner oder gleich dem gegebenen Volumen ist,
     wird ein Tupel aus der Länge, Breite und Höhe erstellt und nach der Sortierung in die Menge $dimensions$ eingefügt.
     Am Ende gibt die Methode $dimensions$ zurück.
 
-    Die Methode find\_combinations verwendet eine rekursive Strategie,
+    Die Methode \texttt{find\_combinations} verwendet eine rekursive Strategie,
     um alle möglichen Kombinationen von Quadern mit einem gegebenen Volumen und min und max Längen, Breiten und Höhen zu finden.
     Die Methode prüft zuerst, ob die aktuelle Kombination vollständig ist und fügt sie, wenn dies der Fall ist, der Vektor $combinations$ hinzu.
     Wenn das Volumen nicht durch die aktuelle Kombination aufgeht oder die Anzahl der gesuchten Quader erreicht ist, wird die Methode abgebrochen.
@@ -526,7 +531,7 @@
     Während der ursprüngliche Algorithmus zu den Ergebnis kommt, dass keine Lösung existiert,
     kommt es in der Erweiterung dazu, dass die maximale Anzahl an Quadern auf zwei erhöht wird und für eine Lösung ermittelt wird.
     Daraus geht auch hervor, dass die Erweiterung in jedem Fall zu einem Ergebnis kommt.
-    Das liegt daran, dass im ``Worst-Case'' die Anzahl der möglichen Quader auf die Anzahl der Scheiben erhöht wird
+    Das liegt daran, dass im Worst-Case die Anzahl der möglichen Quader auf die Anzahl der Scheiben erhöht wird
     und somit jede Scheibe einen eigenen Quader darstellt.
 
     \newpage
@@ -654,7 +659,7 @@
     Hierbei handelt es sich um die erste gegebene Eingabedatei.
     Der ursprüngliche Algorithmus findet hier einen Würfel mit der Kantenlänge sechs als Lösung, indem es an einer Stelle zum Backtracking kommt.
     Auch die Erweiterung kann die Lösung für diese Eingabedatei ermitteln, allerdings nur mit deutlich mehr Zeit.
-    Dies liegt daran, dass beim ursprünglichen algorithmus weniger Varianten betrachtet werden müssen.
+    Dies liegt daran, dass beim ursprünglichen Algorithmus weniger Varianten betrachtet werden müssen.
 
     \begin{lstlisting}[frame=single, title=Programmausgabe kaese2.txt, breaklines=true,label={lst:lstlisting7}]
     Die Scheiben können zu einem Quader zusammengesetzt werden.

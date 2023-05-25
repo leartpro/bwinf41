@@ -1,0 +1,38 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\begin{document}
+    \begin{tikzpicture}
+        \pgfmathsetseed{11} % festlegen des Seeds (für titel seed=9)
+        \foreach \i in {1,...,30}{
+            \pgfmathsetmacro\x{rand*30}
+            \pgfmathsetmacro\y{rand*30}
+            \node[circle, draw, white] (\i) at (\x,\y) {};
+        }
+        \foreach \i in {1,...,30}{
+            \foreach \j in {\i,...,30}{
+                \ifnum\i=\j\relax\else
+                \pgfmathsetmacro\prob{rnd}
+                \ifdim\prob pt>0.5pt
+                \draw[white, thick] (\i) -- (\j);
+                \fi
+                \fi
+            }
+        }
+        \coordinate (last) at (0,0); % speichern der Position des letzten Knotens
+    \end{tikzpicture}
+
+    \begin{tikzpicture}
+        \pgfmathsetseed{9} % festlegen des Seeds
+        \foreach \i in {1,...,30}{
+            \pgfmathsetmacro\x{rand*30}
+            \pgfmathsetmacro\y{rand*30}
+            \node[circle, draw, white] (\i) at (\x,\y) {};
+        }
+        % zeichnen der roten Route
+        \draw[white, thick, ->] (1) -- (2);
+        \foreach \i [evaluate=\i as \j using int(\i+1)] in {2,...,29}{
+            \draw[white, thick, ->] (\i) -- (\j);
+        }
+        \draw[white, thick, ->] (30) -- (1);
+    \end{tikzpicture}
+\end{document}

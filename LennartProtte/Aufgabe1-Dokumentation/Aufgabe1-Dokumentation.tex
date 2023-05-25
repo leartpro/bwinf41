@@ -103,7 +103,7 @@
     Die vorliegende Aufgabe besteht darin, eine zulässige Reihenfolge zu ermitteln,
     in der Anton seine Außenstellen abfliegen kann,
     ohne dass es zu einem Innenwinkel von mehr als 90 Grad beim Abbiegen kommt.
-    Dabei darf keine Außenstelle ausgelassen werden und weiter erscheint es nicht im Sinne der Außenstellung,
+    Dabei darf keine Außenstelle ausgelassen werden und weiter erscheint es nicht im Sinne der Aufgabenstellung,
     dass eine Außenstelle mehrfach besucht wird.
     Da in dieser Aufgabe nicht die kürzeste Route gesucht wird, kann eine approximierte Lösung angestrebt werden.
 
@@ -128,7 +128,7 @@
     könnte die Laufzeit sehr hoch ausfallen.
     \subsection{Algorithmus}\label{subsec:algorithmus}
 
-    Zunächst erfolgt eine Sortierung der Koordinaten nach nicht abnehmender euklidischer Entfernung von einem Startpunkt aus,
+    Zunächst erfolgt eine Sortierung der Koordinaten absteigend nach der euklidischer Entfernung von einem Startpunkt aus,
     um die Nearest-Neighbour-Heuristik zu realisieren.
     Anschließend wird eine Schleife durchlaufen, in welcher jeder Punkt nacheinander besucht wird.
     Dann wird für jeden Knoten der Menge geprüft, ob der aktuelle Punkt bereits in der Lösungsmenge $route$ vorhanden ist.
@@ -151,11 +151,11 @@
             \Function{HamiltonianPfad}{$\textit{route},\ \textit{koordinaten}$}
                 \If {$\textit{route}$ ist nicht leer}
                     \State $p\gets \textit{letztes Element von } \textit{route}$
-                    \State $\textit{sortiere } \textit{koordinaten } \textit{nach nicht abnehmender euklidischer Entfernung zu } p$
+                    \State $\textit{sortiere } \textit{koordinaten } \textit{absteigend nach zunehmender euklidischer Entfernung zu } p$
                 \EndIf
                 \For{$i=1$ bis $n$}
                     \If {$\textit{koordinaten}[i]$ ist bereits in $\textit{route}$}
-                        \State $\textbf{continue}$
+                        \State $\textbf{wiederhole für nächstes Element}$
                     \EndIf
                     \State $\textit{winkel}\gets -1$
                     \If {$\textit{route}$ hat mindestens zwei Elemente}
@@ -206,7 +206,6 @@
     Da $\arccos\left(\frac{a^2 - b^2 - c^2}{-2bc}\right)$ den Winkel in Bogenmaß zurückgibt,
     wird das Ergebnis in Grad umgerechnet, indem es mit $\frac{180}{\pi}$ multipliziert wird.
 
-
     \begin{algorithm}[H]
         \caption{Berechnet den Winkel zwischen zwei Kanten}
         \begin{algorithmic}
@@ -228,7 +227,7 @@
     Kantenbeziehungen müssen hier nicht repräsentiert werden, da die Kantengewichte sich jeweils durch die Koordinaten der Außenposten berechnen lassen
     und das Nichtvorhandensein einer Kante ebenfalls nicht dargestellt werden muss ,da es sich immer um vollständige Graphen handelt.
     Der Algorithmus kann in Form von zwei Methoden \texttt{solve} und \texttt{cross\_angle} implementiert werden.
-    Dabei beinhaltet die Methode \texttt{solve} die Algorithmische vorgehensweise und nutzt zur Berechnung des Winkels die Methode \texttt{cross\_angle}.
+    Dabei beinhaltet die Methode \texttt{solve} die algorithmische Vorgehensweise und nutzt zur Berechnung des Winkels die Methode \texttt{cross\_angle}.
     \subsection{Methoden}\label{subsec:methoden}
     In der Funktion \texttt{solve} wird eine rekursive Backtracking-Methode verwendet, um eine möglichst kurze Route durch den Graphen zu berechnen.
     Hierzu werden ebenfalls Vektoren und Paare verwendet, um die Koordinaten aller Knoten zu speichern und die aktuelle Route zu halten.

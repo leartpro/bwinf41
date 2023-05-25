@@ -1,0 +1,41 @@
+% Preamble
+\documentclass[convert={outext=.png}]{standalone}
+\usepackage{algpseudocode}
+\usepackage{amsfonts}
+
+% Packages
+
+% Document
+\begin{document}
+        \begin{algorithmic}
+            \Require Eine Menge von $n$ Punkten in der Ebene $P={(x,y)| x,y \in \mathbb{R}}$, dargestellt als Menge von Paaren $\textit{koordinaten}=[(x_1,y_1), (x_2,y_2),\dots, (x_n,y_n)]$.
+            \Ensure Ein Hamiltonpfad im Graphen, der alle Punkte in $\textit{koordinaten}$ verbindet, oder $\textit{falsch}$, falls ein solcher Pfad nicht existiert.
+            \Function{HamiltonianPfad}{$\textit{route},\ \textit{koordinaten}$}
+                \If {$\textit{route}$ ist nicht leer}
+                    \State $p\gets \textit{letztes Element von } \textit{route}$
+                    \State $\textit{sortiere } \textit{koordinaten } \textit{absteigend nach zunehmender euklidischer Entfernung zu } p$
+                \EndIf
+                \For{$i=1$ bis $n$}
+                    \If {$\textit{koordinaten}[i]$ ist bereits in $\textit{route}$}
+                        \State $\textbf{wiederhole für nächstes Element}$
+                    \EndIf
+                    \State $\textit{winkel}\gets -1$
+                    \If {$\textit{route}$ hat mindestens zwei Elemente}
+                        \State $\textit{winkel}\gets$ \textsc{Schnittwinkel}$(\textit{route}[|\textit{route}|-1], \textit{route}[|\textit{route}|], \textit{koordinaten}[i])$
+                    \EndIf
+                    \If {$\textit{route}$ ist leer \lor ($\textit{koordinaten}[i]$ \notin $\textit{route}$ \land ($|\textit{route}|<2$ \lor $\textit{winkel} \geq 90$))}
+                        \State $\textit{füge }\textit{koordinaten}[i]\textit{ zu route hinzu}$
+                        \If {$|\textit{route}|=n$}
+                            \State \textbf{return} \textit{wahr}
+                        \EndIf
+                        \If {\textsc{HamiltonianPfad}$(\textit{route},\ \textit{koordinaten})$}
+                            \State \textbf{return} \textit{wahr}
+                        \Else
+                            \State $\textit{entferne das letzte Element aus route}$
+                        \EndIf
+                    \EndIf
+                \EndFor
+                \State \textbf{return} \textit{falsch}
+            \EndFunction
+        \end{algorithmic}\label{alg:pseudo_greedy}
+\end{document}
