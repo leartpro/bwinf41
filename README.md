@@ -1,8 +1,4 @@
-# Aufgabe 1: Weniger Krumme Touren
+Dieses Repository enthält meine Bearbeitung der zweiten Runde des Bundeswettbewerbes in Informatik (BWINF), als auch die Präsentation dieser Aufgaben im Rahmen der besonderen Lernleistung im Abitur.
 
-Zu dieser Aufgabe gibt es 7 Beispieleingaben.
 
-Jede Datei beschreibt eine Menge von Orten und enthält
-
-* in jeder Zeile zwei Zahlen _x_ und _y_ : die Positionskoordinaten eines Ortes, mit km als Maßeinheit.
 
